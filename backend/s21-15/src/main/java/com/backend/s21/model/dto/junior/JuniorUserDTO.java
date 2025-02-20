@@ -1,5 +1,6 @@
 package com.backend.s21.model.dto.junior;
 
+import com.backend.s21.model.users.JuniorStack;
 import com.backend.s21.model.users.JuniorUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class JuniorUserDTO {
     private List<CourseHistoryDTO> courseHistory;
     private List<MentorshipHistoryDTO> mentorshipHistory;
     private List<ChallengeHistoryDTO> challengeHistory;
+    private List<String> stack;
 
     // Constructor que recibe un JuniorUser y asigna los valores
     public JuniorUserDTO(JuniorUser juniorUser) {
@@ -63,6 +65,11 @@ public class JuniorUserDTO {
                     .stream()
                     .map(ChallengeHistoryDTO::new)
                     .collect(Collectors.toList());
+        }
+        if (juniorUser.getJuniorStack() != null) {
+            this.stack = juniorUser.getJuniorStack().stream()
+                    .map(JuniorStack::getProgrammingLanguage)
+                    .toList();
         }
     }
 }

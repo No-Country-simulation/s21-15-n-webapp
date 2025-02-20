@@ -37,7 +37,7 @@ public class JuniorUser extends User {
     private List<MentorshipHistory> mentorshipHistory;
 
     @OneToMany(mappedBy = "juniorUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<JuniorStack> juniorStacks;
+    private List<JuniorStack> juniorStack;
 
 }
 
