@@ -25,7 +25,7 @@ public class JuniorUser extends User {
     private Integer stackId;
 
     @OneToMany(mappedBy = "juniorUser", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ChallengeHistory> challengeHistories;
+    private List<ChallengeHistory> challengeHistory;
 
     @OneToMany(mappedBy = "juniorUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CourseHistory> courseHistory;
