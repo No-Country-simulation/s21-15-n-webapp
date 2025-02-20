@@ -1,5 +1,8 @@
-package com.backend.s21.model;
+package com.backend.s21.model.users;
 
+import com.backend.s21.model.learningPath.ChallengeHistory;
+import com.backend.s21.model.learningPath.CourseHistory;
+import com.backend.s21.model.learningPath.MentorshipHistory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

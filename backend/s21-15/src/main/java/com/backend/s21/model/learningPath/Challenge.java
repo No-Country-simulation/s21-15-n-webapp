@@ -1,16 +1,15 @@
-package com.backend.s21.model;
+package com.backend.s21.model.learningPath;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "courses")
-public class Course {
+@Table(name = "challenges")
+public class Challenge {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,15 +18,12 @@ public class Course {
     @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "instructor_id", referencedColumnName = "id")
-    private User instructor;
-
-    @Column
-    private Integer duration;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Difficulty difficulty;
 
     @Column(name = "experience_reward", columnDefinition = "INT DEFAULT 0")
     private Integer experienceReward = 0;
@@ -35,7 +31,8 @@ public class Course {
     @Column(name = "created_at", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CourseHistory> courseHistories;
+    public enum Difficulty {
+        BEGINNER, INTERMEDIATE, ADVANCED
+    }
 }
 
