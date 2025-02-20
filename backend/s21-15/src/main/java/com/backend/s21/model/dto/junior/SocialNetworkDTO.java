@@ -1,5 +1,5 @@
-package com.backend.s21.model.dto;
-import com.backend.s21.model.SocialNetwork;
+package com.backend.s21.model.dto.junior;
+import com.backend.s21.model.users.SocialNetwork;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

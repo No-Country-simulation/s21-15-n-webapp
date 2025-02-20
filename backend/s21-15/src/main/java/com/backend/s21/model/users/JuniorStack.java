@@ -1,4 +1,4 @@
-package com.backend.s21.model;
+package com.backend.s21.model.users;
 
 
 import jakarta.persistence.*;

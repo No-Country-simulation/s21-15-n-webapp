@@ -1,6 +1,6 @@
-package com.backend.s21.model.dto;
+package com.backend.s21.model.dto.junior;
 
-import com.backend.s21.model.CourseHistory;
+import com.backend.s21.model.learningPath.CourseHistory;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;

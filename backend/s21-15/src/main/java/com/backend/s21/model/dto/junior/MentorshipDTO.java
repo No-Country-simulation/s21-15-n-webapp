@@ -1,6 +1,6 @@
-package com.backend.s21.model.dto;
+package com.backend.s21.model.dto.junior;
 
-import com.backend.s21.model.Mentorship;
+import com.backend.s21.model.learningPath.Mentorship;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
