@@ -1,0 +1,30 @@
+en service implementar delete con
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.hibernate.Session;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UsuarioService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public List<Usuario> obtenerUsuariosActivos() {
+        Session session = entityManager.unwrap(Session.class);
+        session.enableFilter("deletedFilter").setParameter("isDeleted", false);
+
+        return session.createQuery("FROM Usuario", Usuario.class).getResultList();
+    }
+
+    public void eliminarUsuario(Long id) {
+        Usuario usuario = entityManager.find(Usuario.class, id);
+        if (usuario != null) {
+            usuario.setDeleted(true);
+            entityManager.merge(usuario);
+        }
+    }
+}
