@@ -12,6 +12,8 @@ class S2115ApplicationTests {
 
 	@Test
 	void getArra(){
-
+		System.out.println();
 	}
+
+
 }
