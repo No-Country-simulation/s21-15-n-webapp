@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JuniorUserRepository extends JpaRepository<JuniorUser, Long> {
 
+    JuniorUser getReferenceByNickname(String nickname);
 }
