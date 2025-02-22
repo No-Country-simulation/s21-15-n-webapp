@@ -18,7 +18,7 @@ import java.util.List;
 //@SQLDelete(sql = "UPDATE user SET deleted = true WHERE id = ?") // Borrado lógico automático
 //@FilterDef(name = "deletedFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
 //@Filter(name = "deletedFilter", condition = "deleted = :isDeleted") // Filtro dinámico
-@SQLRestriction("is_deleted = false")
+@SQLRestriction("deleted = false")
 public abstract class User {
 
     @Id
