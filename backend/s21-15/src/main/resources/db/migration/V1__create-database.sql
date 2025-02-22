@@ -21,7 +21,8 @@ CREATE TABLE users (
     avatar VARCHAR(255) NULL DEFAULT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-    role ENUM('ADMIN', 'COMPANY', 'JUNIOR', 'MENTOR') NOT NULL
+    role ENUM('ADMIN', 'COMPANY', 'JUNIOR', 'MENTOR') NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- -----------------------------------------------------
@@ -32,7 +33,7 @@ CREATE TABLE junior_users (
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     ranking DECIMAL(5,2) DEFAULT 0.00,
-    stack_id INT NULL,
+    country VARCHAR(50),
     FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -101,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `s2115n`.`junior_challenge_history` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `junior_id` INT NOT NULL,
   `challenge_id` INT NOT NULL,
-  `status` ENUM('Pending', 'In Progress', 'Completed', 'Withdrawn') NULL DEFAULT 'Pending',
+  `status` ENUM('PENDING', 'IN_PROGRES', 'COMPLETED', 'WITHDRAWN') NULL DEFAULT 'PENDING',
   `started_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `completed_at` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -121,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `s2115n`.`junior_course_history` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `junior_id` INT NOT NULL,
   `course_id` INT NOT NULL,
-  `status` ENUM('Pending', 'In Progress', 'Completed', 'Withdrawn') NULL DEFAULT 'Pending',
+  `status` ENUM('PENDING', 'IN_PROGRES', 'COMPLETED', 'WITHDRAWN') NULL DEFAULT 'PENDING',
   `started_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `completed_at` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -141,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `s2115n`.`junior_mentorship_history` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `junior_id` INT NOT NULL,
     `mentorship_id` INT NOT NULL,
-    `status` ENUM('Requested', 'Accepted', 'Completed', 'Canceled') NULL DEFAULT 'Requested',
+    `status` ENUM('REQUESTED', 'ACCEPTED', 'COMPLETED', 'CANCELED') NULL DEFAULT 'REQUESTED',
     `started_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
     `completed_at` DATETIME NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
