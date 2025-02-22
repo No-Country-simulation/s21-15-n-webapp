@@ -32,4 +32,5 @@ public class JuniorUserController {
         JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
         return ResponseEntity.ok(new JuniorUserDTO(user));
     }
+
 }
