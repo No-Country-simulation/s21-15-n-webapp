@@ -24,8 +24,8 @@ public class JuniorUser extends User {
     @Column(name = "ranking", precision = 5, scale = 2, columnDefinition = "DECIMAL(5,2) DEFAULT 0.00")
     private BigDecimal ranking = BigDecimal.valueOf(0.00);
 
-    @Column(name = "stack_id")
-    private Integer stackId;
+    @Column(name = "country")
+    private String country;
 
     @OneToMany(mappedBy = "juniorUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChallengeHistory> challengeHistory;
