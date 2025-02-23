@@ -1,21 +1,21 @@
 package com.backend.s21.controller;
 
-import com.backend.s21.model.dto.junior.ChallengeDTO;
 import com.backend.s21.model.dto.junior.CourseDTO;
-import com.backend.s21.model.learningPath.Challenge;
 import com.backend.s21.model.learningPath.Course;
 import com.backend.s21.model.users.MentorUser;
 import com.backend.s21.model.users.User;
-import com.backend.s21.repository.ChallengeRepository;
 import com.backend.s21.repository.CourseRepository;
 import com.backend.s21.repository.MentorUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/mentor")
@@ -26,9 +26,6 @@ public class MentorUserController {
 
     @Autowired
     private CourseRepository courseRepository;
-
-    @Autowired
-    private ChallengeRepository challengeRepository;
 
     //Queda pendiente la respuesta a devolver con un MentorUserDTO para mejorar la seguridad.
     @PostMapping
@@ -42,8 +39,12 @@ public class MentorUserController {
     //Pendiente devolver info como Dto por seguridad.
     @GetMapping("/{nickname}")
     public ResponseEntity<MentorUser> showUser(@PathVariable String nickname) {
-        MentorUser user = mentorRepository.getReferenceByNickname(nickname);
-        return ResponseEntity.ok(user);
+        try {
+            MentorUser user = mentorRepository.getReferenceByNickname(nickname);
+            return ResponseEntity.ok(user);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping("/{nickname}/createcourse")
@@ -56,11 +57,15 @@ public class MentorUserController {
         return ResponseEntity.created(url).body(courseDTO);
     }
 
-    @PostMapping("/{nickname}/createchallenge")
-    public ResponseEntity<ChallengeDTO> createChallenge(@RequestBody @Validated Challenge challengeinfo, @PathVariable String nickname, UriComponentsBuilder uriComponentsBuilder) {
-        Challenge challenge = challengeRepository.save(challengeinfo);
-        ChallengeDTO challengeDTO = new ChallengeDTO(challenge);
-        URI url = uriComponentsBuilder.path("/challenge/{id}").buildAndExpand(challengeDTO.getId()).toUri();
-        return ResponseEntity.created(url).body(challengeDTO);
+    @GetMapping("/{nickname}/yourcourselist")
+    public ResponseEntity<List<CourseDTO>> listCoursesFromMentor(@PathVariable String nickname) {
+        try {
+            MentorUser user = mentorRepository.getReferenceByNickname(nickname);
+            return ResponseEntity.ok(courseRepository.findAllByInstructorId(user.getId().longValue()).stream().map(CourseDTO::new).toList());
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+
     }
+
 }
