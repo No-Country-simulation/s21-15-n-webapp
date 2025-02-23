@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `s2115n`.`challenges` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
   `description` TEXT NOT NULL,
-  `difficulty` ENUM('Beginner', 'Intermediate', 'Advanced'),
+  `difficulty` ENUM('BEGINNER', 'INTERMEDIATE', 'ADVANCED'),
   `experience_reward` INT NULL DEFAULT '0',
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`));
@@ -196,7 +196,7 @@ AFTER UPDATE ON junior_challenge_history
 FOR EACH ROW
 BEGIN
     -- Verificar si el challenge se completó en esta actualización
-    IF NEW.status = 'Completed' AND OLD.status <> 'Completed' THEN
+    IF NEW.status = 'COMPLETED' AND OLD.status <> 'COMPLETED' THEN
         -- Actualizar el ranking del usuario sumando el experience_reward del challenge completado
         UPDATE junior_users j
         JOIN challenges c ON NEW.challenge_id = c.id
@@ -217,7 +217,7 @@ AFTER UPDATE ON junior_mentorship_history
 FOR EACH ROW
 BEGIN
     -- Verificar si la mentoría se completó en esta actualización
-    IF NEW.status = 'Completed' AND OLD.status <> 'Completed' THEN
+    IF NEW.status = 'COMPLETED' AND OLD.status <> 'COMPLETED' THEN
         -- Actualizar el ranking del usuario sumando el experience_reward de la mentoría completada
         UPDATE junior_users j
         JOIN mentorships m ON NEW.mentorship_id = m.id
@@ -238,7 +238,7 @@ AFTER UPDATE ON junior_course_history
 FOR EACH ROW
 BEGIN
     -- Verificar si el curso se completó en esta actualización
-    IF NEW.status = 'Completed' AND OLD.status <> 'Completed' THEN
+    IF NEW.status = 'COMPLETED' AND OLD.status <> 'COMPLETED' THEN
         -- Actualizar el ranking del usuario sumando el experience_reward del curso completado
         UPDATE junior_users j
         JOIN courses c ON NEW.course_id = c.id
