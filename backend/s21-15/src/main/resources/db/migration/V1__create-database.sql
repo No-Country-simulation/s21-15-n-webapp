@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `s2115n`.`challenges` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(255) NOT NULL,
   `description` TEXT NOT NULL,
-  `difficulty` ENUM('Beginner', 'Intermediate', 'Advanced'),
+  `difficulty` ENUM('BEGINNER', 'INTERMEDIATE', 'ADVANCED'),
   `experience_reward` INT NULL DEFAULT '0',
   `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`));
