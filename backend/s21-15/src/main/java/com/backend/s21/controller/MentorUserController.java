@@ -1,14 +1,15 @@
 package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.junior.CourseDTO;
+import com.backend.s21.model.dto.junior.MentorshipDTO;
 import com.backend.s21.model.learningPath.Course;
+import com.backend.s21.model.learningPath.Mentorship;
 import com.backend.s21.model.users.MentorUser;
 import com.backend.s21.model.users.User;
 import com.backend.s21.repository.CourseRepository;
 import com.backend.s21.repository.MentorUserRepository;
+import com.backend.s21.repository.MentorshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,9 @@ public class MentorUserController {
 
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private MentorshipRepository mentorshipRepository;
 
     //Queda pendiente la respuesta a devolver con un MentorUserDTO para mejorar la seguridad.
     @PostMapping
@@ -66,6 +70,16 @@ public class MentorUserController {
             return ResponseEntity.badRequest().build();
         }
 
+    }
+    //No funcional, falta implementar un metodo en @Service o contructor en @Entity para ligar el Usuario a la mentoría antes de persistir en BD.
+    @PostMapping("/{nickname}/creatementorship")
+    public ResponseEntity<MentorshipDTO> createMentorship(@PathVariable String nickname, Mentorship mentorshipInfo, UriComponentsBuilder uri) {
+        Mentorship mentorship = mentorshipRepository.save(mentorshipInfo);
+        MentorUser mentor = mentorRepository.getReferenceByNickname(nickname);
+        mentorship.setMentor(mentor);
+        MentorshipDTO mentorshipDTO = new MentorshipDTO(mentorship);
+        URI url = uri.path("/course/{id}").buildAndExpand(mentorshipDTO.getId()).toUri();
+        return ResponseEntity.created(url).body(mentorshipDTO);
     }
 
 }
