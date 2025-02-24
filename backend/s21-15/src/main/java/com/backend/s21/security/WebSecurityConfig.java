@@ -32,29 +32,40 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(http -> http
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
-                        .requestMatchers("/swagger-resources/**").permitAll()
-                        .requestMatchers("/swagger-ui.html").permitAll()
-                        .requestMatchers("/webjars/**").permitAll()
-                        .requestMatchers("/api/keycloud/login").permitAll()
-                        .requestMatchers("/api/keycloud/create").permitAll()
-                        .anyRequest().permitAll()
-                ).oauth2ResourceServer(oauth2 -> oauth2
+        httpSecurity
+                .csrf(AbstractHttpConfigurer::disable) // Deshabilita CSRF para API stateless
+                .authorizeHttpRequests(auth -> auth
+                        // Rutas permitidas sin autenticación
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**",
+                                "/swagger-ui.html", "/webjars/**",
+                                "/api/keycloud/login", "/api/keycloud/create").permitAll()
+                        .anyRequest().authenticated() // Todas las demás requieren autenticación
+                )
+
+                // Configuración de OAuth2 para login con redes sociales
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/oauth2/authorization/google") // Página de login con Google
+                        .defaultSuccessUrl("/api/user/info", true) // Redirección después de login exitoso
+                        .failureUrl("/login?error=true") // Redirección si falla el login
+                )
+
+                // Configuración de OAuth2 para validación con JWT (cuando ya tiene token)
+                .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter))
                 )
-                .exceptionHandling(x -> x.authenticationEntryPoint(new AuthenticationEntryPoint() {
-                    @Override
-                    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
 
-                    }
-                }))
+                // Manejo de excepciones
+                .exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint((request, response, authException) ->
+                                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
+                        )
+                )
+
+                // Deshabilita formulario de login porque usamos OAuth2 y JWT
                 .formLogin(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-//        httpSecurity.addFilterBefore(); // Add filter here if needed
+                // Define la política de sesiones como STATELESS (para JWT)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return httpSecurity.build();
     }
