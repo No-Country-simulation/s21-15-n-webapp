@@ -1,5 +1,6 @@
 package com.backend.s21.security;
 
+import com.backend.s21.security.jwt.JwtAuthenticationConverter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,10 +27,10 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-
+    private final JwtAuthenticationConverter jwtAuthenticationConverter;
 
     @Bean
-    private SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(http -> http
@@ -42,12 +43,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/keycloud/create").permitAll()
                         .anyRequest().permitAll()
                 ).oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.jwtAuthenticationConverter(new Converter<Jwt, AbstractAuthenticationToken>() {
-                            @Override
-                            public AbstractAuthenticationToken convert(Jwt source) {
-                                return null;
-                            }
-                        }))
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter))
                 )
                 .exceptionHandling(x -> x.authenticationEntryPoint(new AuthenticationEntryPoint() {
                     @Override
