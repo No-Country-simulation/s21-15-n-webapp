@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
-public class KeyCloud {
+public class KeyCloak {
 
     private Keycloak keycloakInstance;
 
