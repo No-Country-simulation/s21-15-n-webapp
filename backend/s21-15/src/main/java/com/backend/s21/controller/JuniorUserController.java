@@ -1,6 +1,7 @@
 package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.junior.*;
+import com.backend.s21.model.learningPath.MentorshipHistory;
 import com.backend.s21.model.users.JuniorUser;
 import com.backend.s21.model.users.SocialNetwork;
 import com.backend.s21.model.users.User;
@@ -33,6 +34,9 @@ public class JuniorUserController {
 
     @Autowired
     private CourseHistoryRepository courseHRepository;
+
+    @Autowired
+    private MentorshipHistoryRepository mentorshipHRepository;
 
     @PostMapping
     public ResponseEntity<JuniorUserDTO> registerJuniorUser(@RequestBody @Validated JuniorUser juniorUser, UriComponentsBuilder uriComponentsBuilder) {
@@ -70,18 +74,30 @@ public class JuniorUserController {
     @GetMapping("/{nickname}/challengehistory")
     public ResponseEntity<Page<ChallengeHistoryDTO>> listChallengeHistory(@PathVariable String nickname, Pageable pageable) {
         try {
-            return ResponseEntity.ok(challengeHRepository.findAll(pageable).map(ChallengeHistoryDTO::new));
+            JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
+            return ResponseEntity.ok(challengeHRepository.findByJuniorUserId(pageable, user.getId().longValue()).map(ChallengeHistoryDTO::new));
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.noContent().build();
         }
     }
 
     @GetMapping("/{nickname}/coursehistory")
     public ResponseEntity<Page<CourseHistoryDTO>> listCourseHistory(@PathVariable String nickname, Pageable pageable) {
         try {
-            return ResponseEntity.ok(courseHRepository.findAll(pageable).map(CourseHistoryDTO::new));
+            JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
+            return ResponseEntity.ok(courseHRepository.findByJuniorUserId(pageable, user.getId().longValue()).map(CourseHistoryDTO::new));
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("/{nickname}/mentorshiphistory")
+    public ResponseEntity<Page<MentorshipHistoryDTO>> listMentorshipHistory(@PathVariable String nickname, Pageable pageable) {
+        try {
+            JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
+            return ResponseEntity.ok(mentorshipHRepository.findByJuniorUserId(pageable, user.getId().longValue()).map(MentorshipHistoryDTO::new));
+        } catch (RuntimeException e) {
+            return ResponseEntity.noContent().build();
         }
     }
 
