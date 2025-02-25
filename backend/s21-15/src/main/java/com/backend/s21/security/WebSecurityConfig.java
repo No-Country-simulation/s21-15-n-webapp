@@ -26,17 +26,22 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**",
-                                "/swagger-ui.html", "/webjars/**",
-                                "/api/keycloud/login", "/api/keycloud/create").permitAll()
+                        .requestMatchers("/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/swagger-ui.html",
+                                "/webjars/**",
+                                "/api/keycloak/login",
+                                "/api/keycloak/**",
+                                "/api/keycloak/create").permitAll()
                         .anyRequest().authenticated() // Todas las demás requieren autenticación
                 )
 
-                .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/oauth2/authorization/google") // Página de login con Google
-                        .defaultSuccessUrl("/api/user/info", true) // Redirección después de login exitoso
-                        .failureUrl("/login?error=true") // Redirección si falla el login
-                )
+//                .oauth2Login(oauth2 -> oauth2
+//                        .loginPage("/oauth2/authorization/google") // Página de login con Google
+//                        .defaultSuccessUrl("/api/user/info", true) // Redirección después de login exitoso
+//                        .failureUrl("/login?error=true") // Redirección si falla el login
+//                )
 
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter))

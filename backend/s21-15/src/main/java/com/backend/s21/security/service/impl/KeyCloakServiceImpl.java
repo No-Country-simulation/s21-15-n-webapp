@@ -16,6 +16,7 @@ import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -23,19 +24,23 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Slf4j
+@Service
 public class KeyCloakServiceImpl implements IKeyCloakService {
 
     private final KeyCloak keyService;
     private RestTemplate restTemplate;
     private UserRecord userRecord;
-    @Value("${keycloak.client-id}")
+    @Value("${keycloak.idResource}")
     private String clientId;
     @Value("${keycloak.client-secret}")
     private String clientSecret;
-    @Value("${keycloak.token-url}")
+    @Value("${keycloak.url.token}")
     private String tokenUrl;
+
+    public KeyCloakServiceImpl(KeyCloak keyService) {
+        this.keyService = keyService;
+    }
 
     @Override
     public List<UserRepresentation> findAllUsers() {
