@@ -1,7 +1,6 @@
 package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.junior.*;
-import com.backend.s21.model.learningPath.MentorshipHistory;
 import com.backend.s21.model.users.JuniorUser;
 import com.backend.s21.model.users.SocialNetwork;
 import com.backend.s21.model.users.User;
