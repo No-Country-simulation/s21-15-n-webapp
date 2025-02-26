@@ -11,7 +11,7 @@ const LoginPage = () => {
               alt="StartPerks"
               className="w-6 h-6"
             />
-            <span>StartPerks</span>
+            <span className="text-xl">StartPerks</span>
           </a>
         </div>
         <div className="text-left w-3/4">
