@@ -80,7 +80,7 @@ const LoginPage = () => {
           {/* Link de "Regístrate aquí" */}
           <div className="text-center mt-4 text-sm text-gray-600">
             ¿No tienes cuenta?{" "}
-            <a href="/register" className="text-[#000115] font-medium hover:underline">
+            <a href="./register" className="text-[#000115] font-medium hover:underline">
               Regístrate aquí
             </a>
           </div>

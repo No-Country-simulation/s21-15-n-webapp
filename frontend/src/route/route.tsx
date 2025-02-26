@@ -4,7 +4,9 @@
  * @version 1.0.0
  */
 
+import { Home } from "../page/home/home";
 import Landing from "../page/landing/landing";
+import Layaud from "../page/layaud/layaud";
 import Login from "../page/login/login";
 import Register from "../page/login/register";
 import { createBrowserRouter } from 'react-router-dom';
@@ -23,14 +25,29 @@ const router = createBrowserRouter([
         errorElement: <div>Ups! Algo salió mal</div>
     },
     {
-        path:"login",
-        element: <Login/>,
-        errorElement: <div>Ups! Algo salió mal</div>
+        path:"/ingreso",
+        children:[
+            {
+                path:"login",
+                element: <Login/>,
+            },
+            {
+                path:"register",
+                element:<Register/>,
+            }
+        ],
+        errorElement:<div>Ups! Algo salió mal</div>
     },
     {
-        path:"register",
-        element:<Register/>,
-        errorElement: <div>Ups! Algo salió mal</div>
+        path:"/junior",
+        element:<Layaud/>,
+        children:[
+            {
+                path:"home",
+                element:<Home/>
+            }
+        ],
+        errorElement:<div>Ups! Algo salió mal</div>
     }
 ])
 

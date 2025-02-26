@@ -81,7 +81,7 @@ const Register = () => {
             {/* Link de "Ya tienes cuenta" */}
             <div className="text-center mt-4 text-sm text-gray-600">
               ¿Ya tenes tienes cuenta?{" "}
-              <a href="/login" className="text-[#000115] font-medium hover:underline">
+              <a href="./login" className="text-[#000115] font-medium hover:underline">
                 Entra aquí
               </a>
             </div>
