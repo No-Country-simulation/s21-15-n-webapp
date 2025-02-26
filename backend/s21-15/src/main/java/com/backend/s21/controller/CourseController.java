@@ -1,7 +1,6 @@
 package com.backend.s21.controller;
 
-import com.backend.s21.model.dto.junior.CourseDTO;
-import com.backend.s21.repository.ICourseRepository;
+import com.backend.s21.model.dto.CourseDTO;
 import com.backend.s21.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

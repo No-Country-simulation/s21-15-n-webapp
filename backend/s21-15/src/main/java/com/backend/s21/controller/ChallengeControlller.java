@@ -1,7 +1,6 @@
 package com.backend.s21.controller;
 
-import com.backend.s21.model.dto.junior.ChallengeDTO;
-import com.backend.s21.repository.IChallengeRepository;
+import com.backend.s21.model.dto.ChallengeDTO;
 import com.backend.s21.service.IChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

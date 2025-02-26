@@ -1,7 +1,7 @@
 package com.backend.s21.controller;
 
-import com.backend.s21.model.dto.junior.ChallengeDTO;
-import com.backend.s21.model.dto.junior.JuniorUserDTO;
+import com.backend.s21.model.dto.ChallengeDTO;
+import com.backend.s21.model.dto.JuniorUserDTO;
 import com.backend.s21.model.learningPath.Challenge;
 import com.backend.s21.model.users.AdminUser;
 import com.backend.s21.service.IAdminUserService;
