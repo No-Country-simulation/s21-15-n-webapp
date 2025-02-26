@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MentorshipHistoryRepository extends JpaRepository<MentorshipHistory, Long> {
+public interface MentorshipHistoryRepository extends IGenericRepo<MentorshipHistory, Long> {
 
     Page<MentorshipHistory> findByJuniorUserId(Pageable pageable, Long id);
 }

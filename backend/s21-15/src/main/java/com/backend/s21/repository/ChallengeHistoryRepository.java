@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ChallengeHistoryRepository extends JpaRepository<ChallengeHistory, Long> {
+public interface ChallengeHistoryRepository extends IGenericRepo<ChallengeHistory, Long> {
 
     Page<ChallengeHistory> findByJuniorUserId(Pageable pageable, long l);
 }
