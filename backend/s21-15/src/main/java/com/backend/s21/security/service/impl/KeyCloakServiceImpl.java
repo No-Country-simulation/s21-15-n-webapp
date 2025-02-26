@@ -72,23 +72,20 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
 
         try (Response response = usersResource.create(userRepresentation)) {
             int status = response.getStatus();
-
             if (status == 201) {
                 String path = response.getLocation().getPath();
                 String idUser = path.substring(path.lastIndexOf("/") + 1);
-
-                // Asignar la contraseña al usuario
+                //Assing credentials
                 CredentialRepresentation credentialRepresentation = getCredentialRepresentation(user);
                 usersResource.get(idUser)
                         .resetPassword(credentialRepresentation);
 
                 RealmResource realmResource = keyService.getRealmResource();
                 List<RoleRepresentation> rolesRepresentation = null;
-                // Asignar roles al usuario
+                // Assing roles
                 assignRoles(user, realmResource, idUser);
                 UserRepresentation representation = usersResource.get(idUser).toRepresentation();
                 log.info("Id creacion de usuario"+ representation.getId());
-
                 return "User created successfully!!";
             } else if (status == 409) {
                 log.error("User already exists!");
@@ -166,6 +163,7 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
     @Override
     public void deleteUser(String username) {
         try {
+            //change by id original
             String userId = searchUserByUsername(username).getId();
             if (userId != null) {
                 keyService.getUserResource()
@@ -183,7 +181,7 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
     @Override
     public void updateUser(UserRecord user) {
         try {
-            // Buscar usuario por nombre de usuario
+            // Find by username
             UserRepresentation existingUser = searchUserByUsername(user.username());
 //            String idUserDB = userService.findByIdKeycloak(existingUser.getId()).getIdKeycloak();
             if (existingUser == null) {
@@ -223,7 +221,6 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
 
         // Implementar lógica para cambiar el rol del usuario (In progress)
         try {
-            // Buscar usuario por nombre de usuario
             UserRepresentation user = searchUserByUsername(username);
             // Obtener el rol del realm
             RoleResource roleBasic = keyService.getRealmResource().roles().get(role);
@@ -254,7 +251,7 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
 
     @Override
     public void changeEmail(String username, String email) {
-        // Implementar lógica para cambiar el email del usuario si es necesario
+        // In process
     }
 
 }
