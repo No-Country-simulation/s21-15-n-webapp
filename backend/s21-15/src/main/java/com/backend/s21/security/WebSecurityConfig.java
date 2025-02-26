@@ -34,7 +34,7 @@ public class WebSecurityConfig {
                                 "/api/keycloak/login",
                                 "/api/keycloak/**",
                                 "/api/keycloak/create").permitAll()
-                        .anyRequest().authenticated() // Todas las demás requieren autenticación
+                        .anyRequest().permitAll() // Todas las demás requieren autenticación
                 )
 
 //                .oauth2Login(oauth2 -> oauth2
@@ -50,7 +50,7 @@ public class WebSecurityConfig {
                 .exceptionHandling(exceptions -> exceptions
                         .authenticationEntryPoint((request, response, authException) ->
                                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
-                        )
+                        ) //Implement S of Solid
                 )
 
                 .formLogin(AbstractHttpConfigurer::disable)
