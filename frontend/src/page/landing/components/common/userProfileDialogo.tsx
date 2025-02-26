@@ -47,9 +47,9 @@ export const UserProfileDialog = memo(function UserProfileDialog({ open, onOpenC
           <h4 className="text-sm font-medium text-gray-400 mb-2">Rachas de Actividad</h4>
           <ScrollArea className="h-[200px] rounded-md border border-gray-800 p-4">
             <div className="space-y-4">
-              {user.streaks.map((streak, index) => (
+              {user.streaks.map((streak) => (
                 <div
-                  key={index}
+                  key={streak.date}
                   className="flex items-center justify-between border-b border-gray-800 pb-4 last:border-0"
                 >
                   <div>
