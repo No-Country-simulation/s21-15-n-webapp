@@ -1,11 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/global.css'
-import { Landing } from './page/landing/landing'
-//import { Home } from './page/home/home'
+import { RouterProvider } from 'react-router-dom'
+import router from './router/route'
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Landing/>
+    <RouterProvider router={router}/>
   </StrictMode>,
 )
