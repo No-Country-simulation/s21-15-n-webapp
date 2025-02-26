@@ -6,9 +6,9 @@ import com.backend.s21.model.learningPath.Course;
 import com.backend.s21.model.learningPath.Mentorship;
 import com.backend.s21.model.users.MentorUser;
 import com.backend.s21.model.users.User;
-import com.backend.s21.repository.CourseRepository;
-import com.backend.s21.repository.MentorUserRepository;
-import com.backend.s21.repository.MentorshipRepository;
+import com.backend.s21.repository.ICourseRepository;
+import com.backend.s21.repository.IMentorUserRepository;
+import com.backend.s21.repository.IMentorshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,13 +23,13 @@ import java.util.List;
 public class MentorUserController {
 
     @Autowired
-    private MentorUserRepository mentorRepository;
+    private IMentorUserRepository mentorRepository;
 
     @Autowired
-    private CourseRepository courseRepository;
+    private ICourseRepository ICourseRepository;
 
     @Autowired
-    private MentorshipRepository mentorshipRepository;
+    private IMentorshipRepository IMentorshipRepository;
 
     //Queda pendiente la respuesta a devolver con un MentorUserDTO para mejorar la seguridad.
     @PostMapping
@@ -53,7 +53,7 @@ public class MentorUserController {
 
     @PostMapping("/{nickname}/createcourse")
     public ResponseEntity<CourseDTO> createCourse(@RequestBody @Validated Course courseinfo, @PathVariable String nickname, UriComponentsBuilder uriComponentsBuilder) {
-        Course course = courseRepository.save(courseinfo);
+        Course course = ICourseRepository.save(courseinfo);
         User instructor = mentorRepository.getReferenceByNickname(nickname);
         course.setInstructor(instructor);
         CourseDTO courseDTO = new CourseDTO(course);
@@ -65,7 +65,7 @@ public class MentorUserController {
     public ResponseEntity<List<CourseDTO>> listCoursesFromMentor(@PathVariable String nickname) {
         try {
             MentorUser user = mentorRepository.getReferenceByNickname(nickname);
-            return ResponseEntity.ok(courseRepository.findAllByInstructorId(user.getId().longValue()).stream().map(CourseDTO::new).toList());
+            return ResponseEntity.ok(ICourseRepository.findAllByInstructorId(user.getId().longValue()).stream().map(CourseDTO::new).toList());
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
         }
@@ -74,7 +74,7 @@ public class MentorUserController {
     //No funcional, falta implementar un metodo en @Service o contructor en @Entity para ligar el Usuario a la mentoría antes de persistir en BD.
     @PostMapping("/{nickname}/creatementorship")
     public ResponseEntity<MentorshipDTO> createMentorship(@PathVariable String nickname, Mentorship mentorshipInfo, UriComponentsBuilder uri) {
-        Mentorship mentorship = mentorshipRepository.save(mentorshipInfo);
+        Mentorship mentorship = IMentorshipRepository.save(mentorshipInfo);
         MentorUser mentor = mentorRepository.getReferenceByNickname(nickname);
         mentorship.setMentor(mentor);
         MentorshipDTO mentorshipDTO = new MentorshipDTO(mentorship);

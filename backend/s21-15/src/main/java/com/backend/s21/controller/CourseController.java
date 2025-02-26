@@ -1,7 +1,8 @@
 package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.junior.CourseDTO;
-import com.backend.s21.repository.CourseRepository;
+import com.backend.s21.repository.ICourseRepository;
+import com.backend.s21.service.ICourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CourseController {
 
     @Autowired
-    private CourseRepository courseRepository;
+    private ICourseService ICourseRepository;
 
     //Se obtiene una advertencia en el runtime.
     @GetMapping
     public ResponseEntity<Page<CourseDTO>> showCourseList(Pageable pageable) {
-        return ResponseEntity.ok(courseRepository.findAll(pageable).map(CourseDTO::new));
+        return ResponseEntity.ok(ICourseRepository.findAll(pageable).map(CourseDTO::new));
     }
 
 

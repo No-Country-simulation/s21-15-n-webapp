@@ -32,6 +32,7 @@ public class WebSecurityConfig {
                                 "/swagger-ui.html",
                                 "/webjars/**",
                                 "/api/keycloak/login",
+                                "/admin/**",
                                 "/api/keycloak/**",
                                 "/api/keycloak/create").permitAll()
                         .anyRequest().permitAll() // Todas las demás requieren autenticación

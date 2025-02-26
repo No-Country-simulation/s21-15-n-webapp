@@ -1,7 +1,8 @@
 package com.backend.s21.controller;
 
 import com.backend.s21.model.users.CompanyUser;
-import com.backend.s21.repository.CompanyUserRepository;
+import com.backend.s21.repository.ICompanyUserRepository;
+import com.backend.s21.service.ICompanyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +16,7 @@ import java.net.URI;
 public class CompanyUserController {
 
     @Autowired
-    private CompanyUserRepository companyRepository;
+    private ICompanyUserService companyRepository;
 
     @PostMapping
     public ResponseEntity<CompanyUser> registerCompanyUser(@RequestBody @Validated CompanyUser infoCompany, UriComponentsBuilder uri) {
@@ -24,17 +25,17 @@ public class CompanyUserController {
         return ResponseEntity.created(url).body(companyUser);
     }
 
-    @GetMapping("/{nickname}")
-    public ResponseEntity<CompanyUser> showCompanyUser(@PathVariable String nickname){
-        try {
-            CompanyUser user = companyRepository.getReferenceByNickname(nickname);
-            if (user != null) {
-                return ResponseEntity.ok(user);
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
+//    @GetMapping("/{nickname}")
+//    public ResponseEntity<CompanyUser> showCompanyUser(@PathVariable String nickname){
+//        try {
+//            CompanyUser user = companyRepository.getReferenceByNickname(nickname);
+//            if (user != null) {
+//                return ResponseEntity.ok(user);
+//            } else {
+//                return ResponseEntity.badRequest().build();
+//            }
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.badRequest().build();
+//        }
+//    }
 }

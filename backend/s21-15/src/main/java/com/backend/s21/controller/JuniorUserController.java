@@ -20,22 +20,22 @@ import java.net.URI;
 public class JuniorUserController {
 
     @Autowired
-    private JuniorUserRepository juniorRepository;
+    private IJuniorUserRepository juniorRepository;
 
     @Autowired
-    private ChallengeRepository challengeRepository;
+    private IChallengeRepository IChallengeRepository;
 
     @Autowired
-    private ChallengeHistoryRepository challengeHRepository;
+    private IChallengeHistoryRepository challengeHRepository;
 
     @Autowired
-    private SocialNetworkRepository socialNRepository;
+    private ISocialNetworkRepository socialNRepository;
 
     @Autowired
-    private CourseHistoryRepository courseHRepository;
+    private ICourseHistoryRepository courseHRepository;
 
     @Autowired
-    private MentorshipHistoryRepository mentorshipHRepository;
+    private IMentorshipHistoryRepository mentorshipHRepository;
 
     @PostMapping
     public ResponseEntity<JuniorUserDTO> registerJuniorUser(@RequestBody @Validated JuniorUser juniorUser, UriComponentsBuilder uriComponentsBuilder) {
@@ -74,7 +74,7 @@ public class JuniorUserController {
     public ResponseEntity<Page<ChallengeHistoryDTO>> listChallengeHistory(@PathVariable String nickname, Pageable pageable) {
         try {
             JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
-            return ResponseEntity.ok(challengeHRepository.findByJuniorUserId(pageable, user.getId().longValue()).map(ChallengeHistoryDTO::new));
+            return ResponseEntity.ok(challengeHRepository.findByJuniorUserId(pageable, user.getId()).map(ChallengeHistoryDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.noContent().build();
         }
@@ -84,7 +84,7 @@ public class JuniorUserController {
     public ResponseEntity<Page<CourseHistoryDTO>> listCourseHistory(@PathVariable String nickname, Pageable pageable) {
         try {
             JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
-            return ResponseEntity.ok(courseHRepository.findByJuniorUserId(pageable, user.getId().longValue()).map(CourseHistoryDTO::new));
+            return ResponseEntity.ok(courseHRepository.findByJuniorUserId(pageable, user.getId()).map(CourseHistoryDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.noContent().build();
         }
@@ -94,7 +94,7 @@ public class JuniorUserController {
     public ResponseEntity<Page<MentorshipHistoryDTO>> listMentorshipHistory(@PathVariable String nickname, Pageable pageable) {
         try {
             JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
-            return ResponseEntity.ok(mentorshipHRepository.findByJuniorUserId(pageable, user.getId().longValue()).map(MentorshipHistoryDTO::new));
+            return ResponseEntity.ok(mentorshipHRepository.findByJuniorUserId(pageable, user.getId()).map(MentorshipHistoryDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.noContent().build();
         }

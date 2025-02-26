@@ -15,11 +15,14 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/api/keycloak")
-@RequiredArgsConstructor
 @Slf4j
 public class KeyCloakController {
 
     private final IKeyCloakService keyCloakService;
+
+    public KeyCloakController(IKeyCloakService keyCloakService) {
+        this.keyCloakService = keyCloakService;
+    }
 
     @PreAuthorize("permitAll()")
     @GetMapping("/users")

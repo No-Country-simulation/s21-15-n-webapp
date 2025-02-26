@@ -1,7 +1,8 @@
 package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.junior.ChallengeDTO;
-import com.backend.s21.repository.ChallengeRepository;
+import com.backend.s21.repository.IChallengeRepository;
+import com.backend.s21.service.IChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChallengeControlller {
 
     @Autowired
-    private ChallengeRepository challengeRepository;
+    private IChallengeService IChallengeRepository;
 
     @GetMapping
     public ResponseEntity<Page<ChallengeDTO>> showChallengeList(Pageable pageable) {
-        return ResponseEntity.ok(challengeRepository.findAll(pageable).map(ChallengeDTO::new));
+        return ResponseEntity.ok(IChallengeRepository.findAll(pageable).map(ChallengeDTO::new));
     }
 }
