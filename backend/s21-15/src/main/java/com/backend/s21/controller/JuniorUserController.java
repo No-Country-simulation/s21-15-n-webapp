@@ -1,9 +1,13 @@
 package com.backend.s21.controller;
 
-import com.backend.s21.model.dto.JuniorUserDTO;
+import com.backend.s21.model.dto.*;
 import com.backend.s21.model.users.JuniorUser;
+import com.backend.s21.model.users.SocialNetwork;
+import com.backend.s21.model.users.User;
 import com.backend.s21.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -15,85 +19,72 @@ import java.net.URI;
 @RequestMapping("/junior")
 public class JuniorUserController {
 
-    @Autowired
-    private IJuniorUserService juniorRepository;
+    private final IJuniorUserService juniorRepository;
 
-    @Autowired
-    private IChallengeService IChallengeRepository;
+    private final IChallengeService IChallengeRepository;
 
-    @Autowired
-    private IChallengeHistoryService challengeHRepository;
+    private final IChallengeHistoryService challengeHRepository;
 
-    @Autowired
-    private ISocialNetworkService socialNRepository;
+    private final ISocialNetworkService socialNRepository;
 
-    @Autowired
-    private ICourseHistoryService courseHRepository;
+    private final ICourseHistoryService courseHRepository;
 
-    @Autowired
-    private IMentorshipHistoryService mentorshipHRepository;
+    private final IMentorshipHistoryService mentorshipHRepository;
+
+    public JuniorUserController(IJuniorUserService juniorRepository, IChallengeService IChallengeRepository,
+                                IChallengeHistoryService challengeHRepository, ISocialNetworkService socialNRepository,
+                                ICourseHistoryService courseHRepository, IMentorshipHistoryService mentorshipHRepository) {
+        this.juniorRepository = juniorRepository;
+        this.IChallengeRepository = IChallengeRepository;
+        this.challengeHRepository = challengeHRepository;
+        this.socialNRepository = socialNRepository;
+        this.courseHRepository = courseHRepository;
+        this.mentorshipHRepository = mentorshipHRepository;
+    }
 
     @PostMapping
-    public ResponseEntity<JuniorUserDTO> registerJuniorUser(@RequestBody @Validated JuniorUser juniorUser, UriComponentsBuilder uriComponentsBuilder) {
-        JuniorUser juniorUser1 = juniorRepository.save(juniorUser);
+    public ResponseEntity<JuniorUserDTO> registerJuniorUser(@RequestBody @Validated JuniorUser juniorUser,
+                                                            UriComponentsBuilder uriComponentsBuilder) {
+        JuniorUser user = juniorRepository.save(juniorUser);
         JuniorUserDTO juniorUserDto = new JuniorUserDTO(juniorUser);
-        URI url = uriComponentsBuilder.path("/junior/{nickname}").buildAndExpand(juniorUserDto.getNickname()).toUri();
+        URI url = uriComponentsBuilder.path("/junior/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(url).body(juniorUserDto);
     }
 
-    //Obtener información de un Usuario Junior a traves de una dirección PATH.
-//    @GetMapping("/{nickname}")
-//    public ResponseEntity<JuniorUserDTO> showUser(@PathVariable String nickname) {
-//        try {
-//            JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
-//            return ResponseEntity.ok(new JuniorUserDTO(user));
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<JuniorUserDTO> showUser(@PathVariable int id) {
+        JuniorUser user = juniorRepository.findById(id);
+        return ResponseEntity.ok(new JuniorUserDTO(user));
+    }
 
-//    //No funcional, falta implementar un metodo en @Service o contructor en @Entity para ligar el Usuario a la red Social antes de persistir en BD.
-//    @PostMapping("/{nickname}/socialnetworks")
-//    public ResponseEntity<SocialNetworkDTO> linkSocialNetwork(@RequestBody @Validated SocialNetwork infoSocialNet, @PathVariable String nickname) {
-//        try {
-//            User user = juniorRepository.getReferenceByNickname(nickname);
-//            SocialNetwork socialNetwork = socialNRepository.save(infoSocialNet);
-//            socialNetwork.setUser(user);
-//            return ResponseEntity.ok(new SocialNetworkDTO(socialNetwork));
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//    }
+    @PostMapping("/{id}/socialnetworks")
+    public ResponseEntity<SocialNetworkDTO> linkSocialNetwork(@RequestBody @Validated SocialNetwork socialNet,
+                                                              @PathVariable int id) {
+        User user = juniorRepository.findById(id);
+        SocialNetwork socialNetwork = socialNRepository.save(new SocialNetwork(null, user, socialNet.getName(),
+                socialNet.getUrl()));
+        return ResponseEntity.ok(new SocialNetworkDTO(socialNetwork));
+    }
 
+    @GetMapping("/{id}/challengehistory")
+    public ResponseEntity<Page<ChallengeHistoryDTO>> listChallengeHistory(@PathVariable int id) {
+        JuniorUser user = juniorRepository.findById(id);
+        return ResponseEntity.ok(new PageImpl<>(user.getChallengeHistory(), Pageable.unpaged(),
+                user.getChallengeHistory().size()).map(ChallengeHistoryDTO::new));
+    }
 
-//    @GetMapping("/{nickname}/challengehistory")
-//    public ResponseEntity<Page<ChallengeHistoryDTO>> listChallengeHistory(@PathVariable String nickname, Pageable pageable) {
-//        try {
-//            JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
-//            return ResponseEntity.ok(challengeHRepository.findByJuniorUserId(pageable, user.getId()).map(ChallengeHistoryDTO::new));
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.noContent().build();
-//        }
-//    }
+    @GetMapping("/{id}/coursehistory")
+    public ResponseEntity<Page<CourseHistoryDTO>> listCourseHistory(@PathVariable int id) {
+        JuniorUser user = juniorRepository.findById(id);
+        return ResponseEntity.ok(new PageImpl<>(user.getCourseHistory(), Pageable.unpaged(),
+                user.getCourseHistory().size()).map(CourseHistoryDTO::new));
+    }
 
-//    @GetMapping("/{nickname}/coursehistory")
-//    public ResponseEntity<Page<CourseHistoryDTO>> listCourseHistory(@PathVariable String nickname, Pageable pageable) {
-//        try {
-//            JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
-//            return ResponseEntity.ok(courseHRepository.findByJuniorUserId(pageable, user.getId()).map(CourseHistoryDTO::new));
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.noContent().build();
-//        }
-//    }
-//
-//    @GetMapping("/{nickname}/mentorshiphistory")
-//    public ResponseEntity<Page<MentorshipHistoryDTO>> listMentorshipHistory(@PathVariable String nickname, Pageable pageable) {
-//        try {
-//            JuniorUser user = juniorRepository.getReferenceByNickname(nickname);
-//            return ResponseEntity.ok(mentorshipHRepository.findByJuniorUserId(pageable, user.getId()).map(MentorshipHistoryDTO::new));
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.noContent().build();
-//        }
-//    }
+    @GetMapping("/{id}/mentorshiphistory")
+    public ResponseEntity<Page<MentorshipHistoryDTO>> listMentorshipHistory(@PathVariable int id) {
+        JuniorUser user = juniorRepository.findById(id);
+        return ResponseEntity.ok(new PageImpl<>(user.getMentorshipHistory(), Pageable.unpaged(),
+                user.getMentorshipHistory().size()).map(MentorshipHistoryDTO::new));
+    }
 
 }
