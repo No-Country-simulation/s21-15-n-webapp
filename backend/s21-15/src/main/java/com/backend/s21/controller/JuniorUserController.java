@@ -15,23 +15,28 @@ import java.net.URI;
 @RequestMapping("/junior")
 public class JuniorUserController {
 
-    @Autowired
-    private IJuniorUserService juniorRepository;
+    private final IJuniorUserService juniorRepository;
 
-    @Autowired
-    private IChallengeService IChallengeRepository;
+    private final IChallengeService IChallengeRepository;
 
-    @Autowired
-    private IChallengeHistoryService challengeHRepository;
+    private final IChallengeHistoryService challengeHRepository;
 
-    @Autowired
-    private ISocialNetworkService socialNRepository;
+    private final ISocialNetworkService socialNRepository;
 
-    @Autowired
-    private ICourseHistoryService courseHRepository;
+    private final ICourseHistoryService courseHRepository;
 
-    @Autowired
-    private IMentorshipHistoryService mentorshipHRepository;
+    private final IMentorshipHistoryService mentorshipHRepository;
+
+    public JuniorUserController(IJuniorUserService juniorRepository, IChallengeService IChallengeRepository,
+                                IChallengeHistoryService challengeHRepository, ISocialNetworkService socialNRepository,
+                                ICourseHistoryService courseHRepository, IMentorshipHistoryService mentorshipHRepository) {
+        this.juniorRepository = juniorRepository;
+        this.IChallengeRepository = IChallengeRepository;
+        this.challengeHRepository = challengeHRepository;
+        this.socialNRepository = socialNRepository;
+        this.courseHRepository = courseHRepository;
+        this.mentorshipHRepository = mentorshipHRepository;
+    }
 
     @PostMapping
     public ResponseEntity<JuniorUserDTO> registerJuniorUser(@RequestBody @Validated JuniorUser juniorUser, UriComponentsBuilder uriComponentsBuilder) {
