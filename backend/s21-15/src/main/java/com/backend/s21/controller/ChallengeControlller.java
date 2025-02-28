@@ -1,7 +1,7 @@
 package com.backend.s21.controller;
 
-import com.backend.s21.model.dto.CourseDTO;
-import com.backend.s21.service.ICourseService;
+import com.backend.s21.model.dto.ChallengeDTO;
+import com.backend.s21.service.IChallengeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,17 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/courses")
-public class CourseController {
+@RequestMapping("/challenges")
+public class ChallengeControlller {
 
     @Autowired
-    private ICourseService ICourseRepository;
+    private IChallengeService IChallengeRepository;
 
-    //Se obtiene una advertencia en el runtime.
     @GetMapping
-    public ResponseEntity<Page<CourseDTO>> showCourseList(Pageable pageable) {
-        return ResponseEntity.ok(ICourseRepository.findAll(pageable).map(CourseDTO::new));
+    public ResponseEntity<Page<ChallengeDTO>> showChallengeList(Pageable pageable) {
+        return ResponseEntity.ok(IChallengeRepository.findAll(pageable).map(ChallengeDTO::new));
     }
-
-
 }

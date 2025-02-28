@@ -2,9 +2,8 @@ package com.backend.s21.repository;
 
 
 import com.backend.s21.model.users.MentorUser;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MentorUserRepository extends JpaRepository<MentorUser, Long> {
+public interface IMentorUserRepository extends IGenericRepo<MentorUser, Integer> {
 
     MentorUser getReferenceByNickname(String nickname);
 }

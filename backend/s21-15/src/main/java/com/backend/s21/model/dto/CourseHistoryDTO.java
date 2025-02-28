@@ -1,29 +1,30 @@
-package com.backend.s21.model.dto.junior;
+package com.backend.s21.model.dto;
 
-import com.backend.s21.model.learningPath.ChallengeHistory;
+import com.backend.s21.model.learningPath.CourseHistory;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class ChallengeHistoryDTO {
+public class CourseHistoryDTO {
     private Integer id;
+    private Integer courseId;
     private String status;
     private LocalDateTime startedAt;
     private LocalDateTime completedAt;
-    private ChallengeDTO challenge; // Incluye la información completa del desafío
+    private CourseDTO course;
 
-    public ChallengeHistoryDTO(ChallengeHistory history) {
+    public CourseHistoryDTO(CourseHistory history) {
         this.id = history.getId();
+        this.courseId = history.getCourse().getId();
         this.status = history.getStatus().name();
         this.startedAt = history.getStartedAt();
         this.completedAt = history.getCompletedAt();
 
-        if (history.getChallenge() != null) {
-            this.challenge = new ChallengeDTO(history.getChallenge());
+        if (history.getCourse() != null) {
+            this.course = new CourseDTO(history.getCourse());
         }
     }
 }
-
 

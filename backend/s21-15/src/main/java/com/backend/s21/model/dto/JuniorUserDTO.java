@@ -1,4 +1,4 @@
-package com.backend.s21.model.dto.junior;
+package com.backend.s21.model.dto;
 
 import com.backend.s21.model.users.JuniorStack;
 import com.backend.s21.model.users.JuniorUser;
