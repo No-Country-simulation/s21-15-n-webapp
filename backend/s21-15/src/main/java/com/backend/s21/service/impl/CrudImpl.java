@@ -1,5 +1,6 @@
 package com.backend.s21.service.impl;
 
+import com.backend.s21.model.users.AdminUser;
 import com.backend.s21.repository.IGenericRepo;
 import com.backend.s21.service.ICRUD;
 import org.springframework.data.domain.Page;
@@ -41,7 +42,10 @@ public abstract class CrudImpl<T, ID> implements ICRUD<T,ID> {
 
     @Override
     public T save(T t) {
-
+//        Class<?> clazz = t.getClass();
+//        String nameMethod = "setKeycloakId" + clazz.getSimpleName();
+//        Method method = clazz.getMethod(nameMethod, id.getClass());
+//        method.invoke(t, id);
         return getRepository().save(t);
     }
 
@@ -50,7 +54,7 @@ public abstract class CrudImpl<T, ID> implements ICRUD<T,ID> {
 
         getRepository().findById(id).orElseThrow(() -> new RuntimeException("Id not found "+id));
         Class<?> clazz = t.getClass();
-        String nameMethod = "setId" + clazz.getSimpleName();
+        String nameMethod = "setId";
         Method method = clazz.getMethod(nameMethod, id.getClass());
         method.invoke(t, id);
         return getRepository().save(t);
