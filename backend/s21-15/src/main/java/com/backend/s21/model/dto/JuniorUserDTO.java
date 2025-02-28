@@ -19,6 +19,7 @@ public class JuniorUserDTO {
     private String email;
     private LocalDateTime createdAt;
     private String role;
+    private String pin;
 
     private String firstName;
     private String lastName;
@@ -36,6 +37,7 @@ public class JuniorUserDTO {
         this.email = juniorUser.getEmail();
         this.createdAt = juniorUser.getCreatedAt();
         this.role = juniorUser.getRole().name();
+        this.pin = juniorUser.getPin();
         this.firstName = juniorUser.getFirstName();
         this.lastName = juniorUser.getLastName();
         this.ranking = juniorUser.getRanking();

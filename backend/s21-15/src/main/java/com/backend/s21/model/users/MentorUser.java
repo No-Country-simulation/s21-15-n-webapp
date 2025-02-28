@@ -9,10 +9,10 @@ import lombok.Setter;
 @Table(name = "mentor_users")
 public class MentorUser extends User {
 
-    @Column(name = "first_name", nullable = false, length = 100)
+    @Column(name = "first_name", length = 100)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 100)
+    @Column(name = "last_name", length = 100)
     private String lastName;
 }
 
