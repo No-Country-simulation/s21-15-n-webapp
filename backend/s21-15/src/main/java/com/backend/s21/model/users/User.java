@@ -42,6 +42,9 @@ public abstract class User {
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
 
+    @Column(name = "pin")
+    private String pin;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SocialNetwork> socialNetworks;
 

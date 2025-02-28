@@ -15,10 +15,10 @@ import java.util.List;
 @Table(name = "junior_users")
 public class JuniorUser extends User {
 
-    @Column(name = "first_name", nullable = false, length = 100)
+    @Column(name = "first_name", length = 100)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 100)
+    @Column(name = "last_name", length = 100)
     private String lastName;
 
     @Column(name = "ranking", precision = 5, scale = 2, columnDefinition = "DECIMAL(5,2) DEFAULT 0.00")
