@@ -1,6 +1,7 @@
 package com.backend.s21.model.learningPath;
 
 import com.backend.s21.model.users.JuniorUser;
+import com.backend.s21.model.users.MentorUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,10 @@ public class MentorshipHistory {
     @ManyToOne
     @JoinColumn(name = "junior_id", nullable = false)
     private JuniorUser juniorUser;
+
+    @ManyToOne
+    @JoinColumn(name = "mentor_id", nullable = false)
+    private MentorUser mentorUser;
 
     @ManyToOne
     @JoinColumn(name = "mentorship_id", nullable = false)
