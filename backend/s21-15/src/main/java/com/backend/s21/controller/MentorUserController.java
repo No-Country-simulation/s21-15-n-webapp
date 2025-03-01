@@ -1,9 +1,11 @@
 package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.CourseDTO;
+import com.backend.s21.model.dto.JuniorUserDTO;
 import com.backend.s21.model.dto.MentorshipDTO;
 import com.backend.s21.model.learningPath.Course;
 import com.backend.s21.model.learningPath.Mentorship;
+import com.backend.s21.model.users.JuniorUser;
 import com.backend.s21.model.users.MentorUser;
 import com.backend.s21.model.users.User;
 import com.backend.s21.service.ICourseService;
@@ -17,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 
 @RestController
@@ -82,6 +85,24 @@ public class MentorUserController {
         IMentorshipRepository.save(mentorship);
         URI url = uri.path("/mentorship/{id}").buildAndExpand(mentorship.getId()).toUri();
         return ResponseEntity.created(url).body(new MentorshipDTO(mentorship));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MentorUser> updateUser(@RequestBody @Validated MentorUser userJson, @PathVariable int id) {
+        try {
+            MentorUser user = mentorRepository.update(userJson, id);
+            return ResponseEntity.ok(user);
+        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteUser(@PathVariable int id) {
+        MentorUser user = mentorRepository.findById(id);
+        user.setDeleted(true);
+        return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
     }
 
 }
