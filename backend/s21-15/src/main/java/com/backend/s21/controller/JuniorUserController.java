@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 
 @RestController
@@ -87,4 +88,19 @@ public class JuniorUserController {
                 user.getMentorshipHistory().size()).map(MentorshipHistoryDTO::new));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<JuniorUserDTO> updateUser(@RequestBody @Validated JuniorUser userJson, @PathVariable int id) {
+        try {
+            JuniorUser user = juniorRepository.update(userJson, id);
+            return ResponseEntity.ok(new JuniorUserDTO(user));
+        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser(@PathVariable int id) {
+        juniorRepository.deleteById(id);
+        return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
+    }
 }
