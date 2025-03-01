@@ -5,6 +5,7 @@ import com.backend.s21.model.users.JuniorUser;
 import com.backend.s21.model.users.SocialNetwork;
 import com.backend.s21.model.users.User;
 import com.backend.s21.service.*;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -99,8 +100,10 @@ public class JuniorUserController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity deleteUser(@PathVariable int id) {
-        juniorRepository.deleteById(id);
+        JuniorUser user = juniorRepository.findById(id);
+        user.setDeleted(true);
         return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
     }
 }
