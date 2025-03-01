@@ -4,11 +4,13 @@ import com.backend.s21.model.dto.ChallengeDTO;
 import com.backend.s21.model.dto.JuniorUserDTO;
 import com.backend.s21.model.learningPath.Challenge;
 import com.backend.s21.model.users.AdminUser;
+import com.backend.s21.model.users.JuniorUser;
 import com.backend.s21.service.IAdminUserService;
 import com.backend.s21.service.IChallengeService;
 import com.backend.s21.service.IJuniorUserService;
 import com.backend.s21.service.IMentorUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,47 +23,48 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminUserController {
 
-    @Autowired
-    private IAdminUserService adminService;
+    private final IAdminUserService adminService;
 
-    @Autowired
-    private IChallengeService IChallengeService;
+    private final IChallengeService IChallengeService;
 
-    @Autowired
-    private IJuniorUserService juniorService;
+    private final IJuniorUserService juniorService;
 
-    @Autowired
-    private IMentorUserService mentorService;
+    private final IMentorUserService mentorService;
+
+    public AdminUserController(IAdminUserService adminService, IMentorUserService mentorService, IJuniorUserService juniorService, IChallengeService IChallengeService) {
+        this.adminService = adminService;
+        this.mentorService = mentorService;
+        this.juniorService = juniorService;
+        this.IChallengeService = IChallengeService;
+    }
 
     @PostMapping
-    public ResponseEntity<AdminUser> registerAdminUser(@RequestBody @Validated AdminUser user, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<AdminUser> registerAdminUser(@RequestBody @Validated AdminUser user, UriComponentsBuilder uri) {
         AdminUser adminUser = adminService.save(user);
-        URI url = uriComponentsBuilder.path("/junior/{nickname}").buildAndExpand(adminUser.getNickname()).toUri();
+        URI url = uri.path("/admin/{id}").buildAndExpand(adminUser.getId()).toUri();
         return ResponseEntity.created(url).body(adminUser);
     }
 
-    @GetMapping("/{nickname}")
-    public ResponseEntity<AdminUser> showUser(@PathVariable String nickname) {
-        try {
-            AdminUser user = adminService.findByNickname(nickname);
-            return ResponseEntity.ok(user);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
-
+    @GetMapping("/{id}")
+    public ResponseEntity<AdminUser> showUser(@PathVariable int id) {
+        AdminUser user = adminService.findById(id);
+        return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/{nickname}/createchallenge")
-    public ResponseEntity<ChallengeDTO> createChallenge(@RequestBody @Validated Challenge challengeinfo, @PathVariable String nickname, UriComponentsBuilder uriComponentsBuilder) {
+    @PostMapping("/{id}/createchallenge")
+    public ResponseEntity<ChallengeDTO> createChallenge(@RequestBody @Validated Challenge challengeinfo, @PathVariable int id,
+                                                        UriComponentsBuilder uri) {
         Challenge challenge = IChallengeService.save(challengeinfo);
         ChallengeDTO challengeDTO = new ChallengeDTO(challenge);
-        URI url = uriComponentsBuilder.path("/challenge/{id}").buildAndExpand(challengeDTO.getId()).toUri();
+        URI url = uri.path("/challenge/{id}").buildAndExpand(challengeDTO.getId()).toUri();
         return ResponseEntity.created(url).body(challengeDTO);
     }
 
-    @GetMapping("/{nickname}/juniorlist")
-    public ResponseEntity<List<JuniorUserDTO>> showJuniorUserList(@PathVariable String nickname) {
-        return ResponseEntity.ok(juniorService.findAll().stream().map(JuniorUserDTO::new).toList());
+    @GetMapping("/{id}/juniorlist")
+    public ResponseEntity<Page<JuniorUserDTO>> showJuniorUserList(@PathVariable int id) {
+        List<JuniorUser> juniorList = juniorService.findAll();
+        return ResponseEntity.ok(new PageImpl<>(juniorList, org.springframework.data.domain.Pageable.unpaged(),
+                juniorList.size()).map(JuniorUserDTO::new));
     }
 
 }
