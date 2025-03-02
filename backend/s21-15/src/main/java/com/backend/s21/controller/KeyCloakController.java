@@ -2,6 +2,10 @@ package com.backend.s21.controller;
 
 import com.backend.s21.security.service.IKeyCloakService;
 import com.backend.s21.security.util.model.UserRecord;
+import com.backend.s21.service.IAdminUserService;
+import com.backend.s21.service.IJuniorUserService;
+import com.backend.s21.service.IMentorUserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -16,13 +20,16 @@ import java.net.URISyntaxException;
 @RestController
 @RequestMapping("/api/keycloak")
 @Slf4j
+@RequiredArgsConstructor
 public class KeyCloakController {
 
-    private final IKeyCloakService keyCloakService;
+    private final IAdminUserService adminService;
 
-    public KeyCloakController(IKeyCloakService keyCloakService) {
-        this.keyCloakService = keyCloakService;
-    }
+    private final IJuniorUserService juniorService;
+
+    private final IMentorUserService mentorService;
+
+    private final IKeyCloakService keyCloakService;
 
     @PreAuthorize("permitAll()")
     @GetMapping("/users")
@@ -43,9 +50,9 @@ public class KeyCloakController {
 
     @PreAuthorize("permitAll()")
     @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestBody UserRecord user) throws URISyntaxException {
+    public ResponseEntity<?> createUser(@RequestBody UserRecord user) throws URISyntaxException, JsonProcessingException {
         String response = keyCloakService.createUser(user);
-        return ResponseEntity.created(new URI("/keycloak/user/create")).body(response);
+        return ResponseEntity.created(new URI("/keycloak/user/" + user.username())).body(response);
     }
 
     //    @PreAuthorize("hasRole('${swagger.role.admin}')")
@@ -73,25 +80,14 @@ public class KeyCloakController {
 
     }
 
-    @PreAuthorize("false")
-//    @PutMapping("/user/{username}/role")
+    //    @PreAuthorize("false")
+    @PutMapping("/user/{username}/role")
     public ResponseEntity<?> changeRole(@PathVariable String username, @RequestParam String role) {
         try {
             keyCloakService.changeRole(username, role);
             return ResponseEntity.ok("Role assigned successfully");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error assigning role: " + e.getMessage());
-        }
-    }
-
-    @PreAuthorize("false")
-//    @PutMapping("update/{idUser}/{password}")
-    public ResponseEntity<?> changePassword(@PathVariable String idUser, @PathVariable String password) {
-        try {
-            keyCloakService.changePassword(idUser, password);
-            return ResponseEntity.ok("Password changed successfully");
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error changing password: " + e.getMessage());
         }
     }
 

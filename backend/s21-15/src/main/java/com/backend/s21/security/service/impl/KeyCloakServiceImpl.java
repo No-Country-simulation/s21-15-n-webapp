@@ -1,11 +1,17 @@
 package com.backend.s21.security.service.impl;
 
+import com.backend.s21.model.users.*;
+import com.backend.s21.security.factory.UserFactory;
 import com.backend.s21.security.jwt.JWTResponse;
 import com.backend.s21.security.service.IKeyCloakService;
 import com.backend.s21.security.util.KeyCloak;
 import com.backend.s21.security.util.model.UserRecord;
+import com.backend.s21.service.IAdminUserService;
+import com.backend.s21.service.ICompanyUserService;
+import com.backend.s21.service.IJuniorUserService;
+import com.backend.s21.service.IMentorUserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.ws.rs.core.Response;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.RoleResource;
@@ -23,6 +29,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -38,8 +46,17 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
     @Value("${keycloak.url.token}")
     private String tokenUrl;
 
-    public KeyCloakServiceImpl(KeyCloak keyService) {
+    private final IJuniorUserService juniorService;
+    private final IAdminUserService adminService;
+    private final IMentorUserService mentorService;
+    private final ICompanyUserService companyService;
+
+    public KeyCloakServiceImpl(KeyCloak keyService, IJuniorUserService juniorService, IAdminUserService adminService, IMentorUserService mentorService, ICompanyUserService companyService) {
         this.keyService = keyService;
+        this.juniorService = juniorService;
+        this.adminService = adminService;
+        this.mentorService = mentorService;
+        this.companyService = companyService;
     }
 
     @Override
@@ -57,7 +74,9 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
             return keyService
                     .getUserResource()
                     .search(username)
-                    .stream().findFirst()
+                    .stream()
+                    .filter(x -> x.isEnabled())
+                    .findFirst()
                     .orElseThrow(() -> new RuntimeException("User not found"));
         } catch (Exception e) {
             throw new RuntimeException("Error to get user by username");
@@ -65,66 +84,94 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
     }
 
     @Override
-    public String createUser(UserRecord user) {
-
+    @Transactional
+    public String createUser(UserRecord user) throws JsonProcessingException {
         UsersResource usersResource = keyService.getUserResource();
-        UserRepresentation userRepresentation = getUserRepresentation(user);
-
+        UserRepresentation userRepresentation = createUserRepresentation(user);
         try (Response response = usersResource.create(userRepresentation)) {
-            int status = response.getStatus();
-            if (status == 201) {
-                String path = response.getLocation().getPath();
-                String idUser = path.substring(path.lastIndexOf("/") + 1);
-                //Assing credentials
-                CredentialRepresentation credentialRepresentation = getCredentialRepresentation(user);
-                usersResource.get(idUser)
-                        .resetPassword(credentialRepresentation);
+            return userCreationWithResponse(user, response, usersResource);
+        }
+    }
 
-                RealmResource realmResource = keyService.getRealmResource();
-                List<RoleRepresentation> rolesRepresentation = null;
-                // Assing roles
-                assignRoles(user, realmResource, idUser);
-                UserRepresentation representation = usersResource.get(idUser).toRepresentation();
-                log.info("Id creacion de usuario"+ representation.getId());
-                return "User created successfully!!";
-            } else if (status == 409) {
-                log.error("User already exists!");
-                return "User already exists!";
-            } else {
-                log.error("Error creating user, please contact the administrator.");
-                return "Error creating user, please contact the administrator.";
+    @Transactional
+    @Override
+    public void deleteUser(String username) {
+        try {
+            String existingUser = searchUserByUsername(username).getId();
+            if (existingUser != null) {
+                UserResource userResource =
+                        keyService.getUserResource().get(existingUser);
+                UserRepresentation user = userResource.toRepresentation();
+                user.setEnabled(false);
+                userResource.update(user);
+                log.info("User {} deleted successfully", username);
             }
+        } catch (RuntimeException e) {
+            log.error("Error deleting user {}: {}", username, e.getMessage());
+            throw new RuntimeException("Error deleting user ID not found: " + e.getMessage());
         }
     }
 
-    private static void assignRoles(UserRecord user, RealmResource realmResource, String idUser) {
-        List<RoleRepresentation> rolesRepresentation;
-        if (user.roles() == null || user.roles().isEmpty() ) {
-            rolesRepresentation = List.of(realmResource.roles().get("user").toRepresentation()); //default role
-        } else {
-            rolesRepresentation = realmResource.roles()
-                    .list()
-                    .stream()
-                    .filter(role -> user.roles()
-                            .stream()
-                            .anyMatch(roleName -> roleName.equalsIgnoreCase(role.getName())))
-                    .toList();
+    @Override
+    public void updateUser(UserRecord user) {
+        try {
+            UserRepresentation existingUser = searchUserByUsername(user.username());
+            if (existingUser != null) {
+                UserResource usersResource =
+                        keyService.getUserResource().get(existingUser.getId());
+                UserRepresentation userRepresentation = usersResource.toRepresentation();
+                validateInfoOfUser(user, userRepresentation);
+                usersResource.update(userRepresentation);
+            }
+            log.info("User {} updated successfully", user.username());
+        } catch (RuntimeException e) {
+            log.error("Error updating user {}: {}", user.username(), e.getMessage());
+            throw new RuntimeException("Error updating user: " + e.getMessage(), e);
         }
-        realmResource.users()
-                .get(idUser)
-                .roles().realmLevel()
-                .add(rolesRepresentation);
     }
 
-    private static UserRepresentation getUserRepresentation(UserRecord user) {
-        UserRepresentation userRepresentation = new UserRepresentation();
-        userRepresentation.setFirstName(user.firstName());
-        userRepresentation.setLastName(user.lastName());
-        userRepresentation.setEmail(user.email());
-        userRepresentation.setUsername(user.username());
-        userRepresentation.setEnabled(true);
-        userRepresentation.setEmailVerified(true);
-        return userRepresentation;
+    private void validateInfoOfUser(UserRecord user, UserRepresentation userRepresentation) {
+        Optional.ofNullable(user.roles())
+                .filter(roles -> !roles.isEmpty())
+                .ifPresent(roles -> roles.stream().findFirst().ifPresent(role -> changeRole(user.username(), role)));
+
+        Optional.ofNullable(user.email())
+                .filter(email -> !email.isBlank())
+                .ifPresent(userRepresentation::setEmail);
+
+        Optional.ofNullable(user.username())
+                .filter(username -> !username.isBlank())
+                .ifPresent(userRepresentation::setUsername);
+
+        Optional.ofNullable(user.lastName())
+                .filter(lastName -> !lastName.isBlank())
+                .ifPresent(userRepresentation::setLastName);
+
+        Optional.ofNullable(user.password())
+                .filter(password -> !password.isBlank())
+                .map(this::getCredentialRepresentation)
+                .ifPresent(cred -> userRepresentation.setCredentials(List.of(cred)));
+    }
+
+    @Override
+    public void changeRole(String username, String role) {
+
+        try {
+            UserRepresentation user = searchUserByUsername(username);
+            UserResource userResource = keyService.getUserResource().get(user.getId());
+            if (user != null) {
+                List<RoleRepresentation> currentRoles = userResource.roles().realmLevel().listAll();
+                if (!currentRoles.isEmpty()) {
+                    userResource.roles().realmLevel().remove(currentRoles);
+                }
+            }
+            RoleResource newRoleResource = keyService.getRealmResource().roles().get(role.toLowerCase());
+            userResource.roles().realmLevel().add(List.of(newRoleResource.toRepresentation()));
+
+        } catch (RuntimeException e) {
+            log.error("Error assigning role {} to user {}: {}", role, username, e.getMessage());
+            throw new RuntimeException("Error assigning role to user: " + e.getMessage(), e);
+        }
     }
 
     public JWTResponse login(String username, String password) {
@@ -159,99 +206,93 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
         }
     }
 
-    @Transactional
-    @Override
-    public void deleteUser(String username) {
-        try {
-            //change by id original
-            String userId = searchUserByUsername(username).getId();
-            if (userId != null) {
-                keyService.getUserResource()
-                        .get(userId)
-                        .remove();
-//                userService.deleteByIdKeycloak(userId);
-                log.info("User {} deleted successfully", username);
-            }
-        } catch (RuntimeException e) {
-            log.error("Error deleting user {}: {}", username, e.getMessage());
-            throw new RuntimeException("Error deleting user: " + e.getMessage(), e);
+    private String userCreationWithResponse(UserRecord user, Response response, UsersResource usersResource) {
+        int status = response.getStatus();
+        response.close();
+        if (status == 201) {
+            String idUser = getIdUser(response);
+            processUserCreation(user, idUser, usersResource);
+            return "User created successfully!!";
+        } else if (status == 409) {
+            log.error("User already exists!");
+            return "User already exists!";
+        } else {
+            log.error("Error creating user, please contact the administrator.");
+            return "Error creating user, please contact the administrator.";
         }
     }
 
-    @Override
-    public void updateUser(UserRecord user) {
-        try {
-            // Find by username
-            UserRepresentation existingUser = searchUserByUsername(user.username());
-//            String idUserDB = userService.findByIdKeycloak(existingUser.getId()).getIdKeycloak();
-            if (existingUser == null) {
-                throw new RuntimeException("User not found: " + user.username());
-            }
-            CredentialRepresentation credentialRepresentation = getCredentialRepresentation(user);
-            UserRepresentation userRepresentation = getUserRepresentation(user);
-            userRepresentation.setCredentials(List.of(credentialRepresentation));
-            UserResource usersResource = keyService.getUserResource().get(existingUser.getId());
-            assignRoles(user, keyService.getRealmResource(), existingUser.getId());
-//            builders = com.back.model.entities.User.builder()
-//                    .name(user.firstName())
-//                    .email(user.email())
-//                    .idKeycloak(userRepresentation.getId())
-//                    .roles(user.roles())
-//                    .build();
-//            userService.updateUser(idUserDB, builders);
-            usersResource.update(userRepresentation);
+    private void processUserCreation(UserRecord user, String idUser, UsersResource usersResource) {
+        RealmResource realmResource = keyService.getRealmResource();
+        List<RoleRepresentation> roleRepresentations = assignRoles(user.roles(), realmResource, idUser);
+        UserRepresentation
+                representation = usersResource.get(idUser).toRepresentation();
+        saveInstanceOfClass(UserFactory.createUser(roleRepresentations, representation));
+    }
 
-            log.info("User {} updated successfully", user.username());
-        } catch (RuntimeException e) {
-            log.error("Error updating user {}: {}", user.username(), e.getMessage());
-            throw new RuntimeException("Error updating user: " + e.getMessage(), e);
+    private void saveInstanceOfClass(User newUser) {
+        if (newUser instanceof AdminUser) {
+            adminService.save((AdminUser) newUser);
+        } else if (newUser instanceof JuniorUser) {
+            juniorService.save((JuniorUser) newUser);
+        } else if (newUser instanceof MentorUser) {
+            mentorService.save((MentorUser) newUser);
+        } else if (newUser instanceof CompanyUser) {
+            companyService.save((CompanyUser) newUser);
         }
     }
 
-    private static CredentialRepresentation getCredentialRepresentation(UserRecord user) {
+    private String getIdUser(Response response) {
+        if (response.getLocation() != null) {
+            String path = response.getLocation().getPath();
+            String idUser = path.substring(path.lastIndexOf("/") + 1);
+            return idUser;
+        }
+        throw new IllegalStateException("Response does not contain a location header");
+    }
+
+    private UserRepresentation createUserRepresentation(UserRecord user) {
+        UserRepresentation userRepresentation = new UserRepresentation();
+        userRepresentation.setEmail(user.email());
+        userRepresentation.setUsername(user.username());
+        userRepresentation.setEnabled(true);
+        userRepresentation.setEmailVerified(true);
+        userRepresentation.setCredentials(List.of(getCredentialRepresentation(user.password())));
+        return userRepresentation;
+    }
+
+    private List<RoleRepresentation> assignRoles(Set<String> roles, RealmResource realmResource, String idUser) {
+        List<RoleRepresentation> rolesRepresentation;
+        if (roles == null || roles.isEmpty()) {
+            log.info("No roles assigned, assigning default role");
+            rolesRepresentation = List.of(realmResource.roles().get("junior").toRepresentation());
+        } else {
+            rolesRepresentation = realmResource.roles()
+                    .list()
+                    .stream()
+                    .filter(role -> roles.stream().anyMatch(roleName -> roleName.equalsIgnoreCase(role.getName())))
+                    .toList();
+        }
+        try {
+            realmResource.users()
+                    .get(idUser)
+                    .roles().realmLevel()
+                    .add(rolesRepresentation);
+            log.info("Roles assigned successfully to user ID: " + idUser);
+        } catch (Exception e) {
+            log.error("User ID not found in Keycloak when assigning roles: " + idUser, e);
+            throw new IllegalStateException("User ID not found in Keycloak when assigning roles: " + idUser);
+        }
+        return rolesRepresentation;
+    }
+
+    private CredentialRepresentation getCredentialRepresentation(String password) {
         CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
         credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
-        credentialRepresentation.setValue(user.password());
+        credentialRepresentation.setValue(password);
         credentialRepresentation.setTemporary(false);
         return credentialRepresentation;
     }
 
-    @Override
-    public void changeRole(String username, String role) {
-
-        // Implementar lógica para cambiar el rol del usuario (In progress)
-        try {
-            UserRepresentation user = searchUserByUsername(username);
-            // Obtener el rol del realm
-            RoleResource roleBasic = keyService.getRealmResource().roles().get(role);
-            // Asignar el rol al usuario a nivel de realm
-            keyService.getUserResource()
-                    .get(user.getId())
-                    .roles()
-                    .realmLevel()
-                    .add(List.of(roleBasic.toRepresentation()));
-        } catch (RuntimeException e) {
-            // Registrar y lanzar cualquier excepción que ocurra
-            log.error("Error assigning role {} to user {}: {}", role, username, e.getMessage());
-            throw new RuntimeException("Error assigning role to user: " + e.getMessage(), e);
-        }
-    }
-
-    @Override
-    public void changePassword(String idUser, String password) {
-
-//        UsersResource usersResource = keyService.getUserResource();
-//        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
-//        credentialRepresentation.setTemporary(false);
-//        credentialRepresentation.setType(CredentialRepresentation.PASSWORD);
-//        credentialRepresentation.setValue(password);
-//
-//        usersResource.get(idUser).resetPassword(credentialRepresentation);
-    }
-
-    @Override
-    public void changeEmail(String username, String email) {
-        // In process
-    }
 
 }
