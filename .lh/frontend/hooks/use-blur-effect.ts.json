@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-blur-effect.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740973453582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740973453582,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useEffect } from \"react\";\r\n\r\nexport function useBlurEffect(isActive: boolean) {\r\n  useEffect(() => {\r\n    const mainContent = document.getElementById(\"main-content\");\r\n    const header = document.querySelector(\"header\");\r\n\r\n    if (mainContent && header) {\r\n      if (isActive) {\r\n        mainContent.style.filter = \"blur(8px)\";\r\n        mainContent.style.transition = \"filter 0.3s ease\";\r\n        // Evitar que el header se difumine\r\n        header.style.filter = \"none\";\r\n      } else {\r\n        mainContent.style.filter = \"none\";\r\n      }\r\n    }\r\n\r\n    return () => {\r\n      if (mainContent) {\r\n        mainContent.style.filter = \"none\";\r\n      }\r\n    };\r\n  }, [isActive]);\r\n}\r\n"
+        }
+    ]
+}

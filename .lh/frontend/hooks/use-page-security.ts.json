@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-page-security.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740973897118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740973897118,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState, useEffect, useCallback } from \"react\";\r\n\r\nexport function usePageSecurity() {\r\n  const [isVisible, setIsVisible] = useState(true);\r\n  const [wasHidden, setWasHidden] = useState(false);\r\n\r\n  const handleVisibilityChange = useCallback(() => {\r\n    if (document.hidden) {\r\n      setIsVisible(false);\r\n      setWasHidden(true);\r\n      document.title = \"🔒 Página Bloqueada - Regresa para desbloquear\";\r\n    } else {\r\n      setIsVisible(true);\r\n      document.title = \"StartPerks - Transforma tu carrera\";\r\n    }\r\n  }, []);\r\n\r\n  useEffect(() => {\r\n    const originalTitle = document.title;\r\n    document.addEventListener(\"visibilitychange\", handleVisibilityChange);\r\n\r\n    return () => {\r\n      document.removeEventListener(\"visibilitychange\", handleVisibilityChange);\r\n      document.title = originalTitle;\r\n    };\r\n  }, [handleVisibilityChange]);\r\n\r\n  const handleUnlock = useCallback(() => {\r\n    setWasHidden(false);\r\n  }, []);\r\n\r\n  return { isVisible, wasHidden, handleUnlock };\r\n}\r\n"
+        }
+    ]
+}

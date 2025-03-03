@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/lib/utils/auth.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740974405000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740974405000,
+            "name": "Commit-0",
+            "content": "import Cookies from \"js-cookie\"\r\nimport type { User } from \"../types\"\r\n\r\nexport const AUTH_COOKIE_NAME = \"auth\"\r\nexport const USER_STORAGE_KEY = \"currentUser\"\r\n\r\nexport function setAuthCookie(value = \"true\", expires = 7) {\r\n  Cookies.set(AUTH_COOKIE_NAME, value, { expires })\r\n}\r\n\r\nexport function removeAuthCookie() {\r\n  Cookies.remove(AUTH_COOKIE_NAME)\r\n}\r\n\r\nexport function getStoredUser(): User | null {\r\n  try {\r\n    const userData = localStorage.getItem(USER_STORAGE_KEY)\r\n    return userData ? JSON.parse(userData) : null\r\n  } catch {\r\n    return null\r\n  }\r\n}\r\n\r\nexport function setStoredUser(user: User) {\r\n  localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))\r\n}\r\n\r\nexport function removeStoredUser() {\r\n  localStorage.removeItem(USER_STORAGE_KEY)\r\n}\r\n\r\nexport function getAllUsers(): User[] {\r\n  try {\r\n    const users = localStorage.getItem(\"users\")\r\n    return users ? JSON.parse(users) : []\r\n  } catch {\r\n    return []\r\n  }\r\n}\r\n\r\nexport function updateUser(email: string, updates: Partial<User>) {\r\n  const users = getAllUsers()\r\n  const updatedUsers = users.map((user) => {\r\n    if (user.email === email) {\r\n      return { ...user, ...updates }\r\n    }\r\n    return user\r\n  })\r\n  localStorage.setItem(\"users\", JSON.stringify(updatedUsers))\r\n}\r\n"
+        }
+    ]
+}

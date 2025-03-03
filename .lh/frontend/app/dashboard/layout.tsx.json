@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/app/dashboard/layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1740969537338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740969612619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { usePageVisibility } from \"@/hooks/use-page-visibility\"\r\n import { useEffect, useState } from \"react\"\r\n import { getStoredUser } from \"@/lib/utils/auth\"\r\n \r\n-export default function DashboardLayout({ children }: { children: ReactNode }) {\r\n+export default function DashboardLayout({ children }: { readonly children: ReactNode }) {\r\n   const [userPin, setUserPin] = useState(\"\")\r\n   const { isVisible, wasHidden, handleUnlock } = usePageVisibility({\r\n     initialTitle: \"Dashboard - StartPerks\",\r\n   })\r\n@@ -35,5 +35,4 @@\n       <Sidebar position=\"right\" />\r\n     </div>\r\n   )\r\n }\r\n-\r\n"
+                },
+                {
+                    "date": 1740975322024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n \"use client\"\r\n \r\n import type { ReactNode } from \"react\"\r\n-import { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\r\n+//import { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\r\n import { Sidebar } from \"@/components/dashboard/sidebar\"\r\n import { LockOverlay } from \"@/components/lock-overlay\"\r\n import { usePageVisibility } from \"@/hooks/use-page-visibility\"\r\n import { useEffect, useState } from \"react\"\r\n"
+                },
+                {
+                    "date": 1740975429949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n import { LockOverlay } from \"@/components/lock-overlay\"\r\n import { usePageVisibility } from \"@/hooks/use-page-visibility\"\r\n import { useEffect, useState } from \"react\"\r\n import { getStoredUser } from \"@/lib/utils/auth\"\r\n+import { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\r\n \r\n export default function DashboardLayout({ children }: { readonly children: ReactNode }) {\r\n   const [userPin, setUserPin] = useState(\"\")\r\n   const { isVisible, wasHidden, handleUnlock } = usePageVisibility({\r\n"
+                }
+            ],
+            "date": 1740969537338,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport type { ReactNode } from \"react\"\r\nimport { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\r\nimport { Sidebar } from \"@/components/dashboard/sidebar\"\r\nimport { LockOverlay } from \"@/components/lock-overlay\"\r\nimport { usePageVisibility } from \"@/hooks/use-page-visibility\"\r\nimport { useEffect, useState } from \"react\"\r\nimport { getStoredUser } from \"@/lib/utils/auth\"\r\n\r\nexport default function DashboardLayout({ children }: { children: ReactNode }) {\r\n  const [userPin, setUserPin] = useState(\"\")\r\n  const { isVisible, wasHidden, handleUnlock } = usePageVisibility({\r\n    initialTitle: \"Dashboard - StartPerks\",\r\n  })\r\n\r\n  useEffect(() => {\r\n    const currentUser = getStoredUser()\r\n    if (currentUser?.pin) {\r\n      setUserPin(currentUser.pin)\r\n    }\r\n  }, [])\r\n\r\n  return (\r\n    <div className=\"flex h-screen bg-background\">\r\n      {(!isVisible || wasHidden) && <LockOverlay onUnlock={handleUnlock} pinRequired={true} correctPin={userPin} />}\r\n\r\n      <Sidebar position=\"left\" />\r\n\r\n      <div className=\"flex flex-1 flex-col\">\r\n        <DashboardNav />\r\n        <main className=\"flex-1 overflow-auto p-6\">{children}</main>\r\n      </div>\r\n\r\n      <Sidebar position=\"right\" />\r\n    </div>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

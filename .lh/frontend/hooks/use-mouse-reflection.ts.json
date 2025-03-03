@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-mouse-reflection.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740973757664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740973757664,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState, useEffect, useCallback } from \"react\";\r\n\r\nexport interface MousePosition {\r\n  x: number;\r\n  y: number;\r\n}\r\n\r\nexport function useMouseReflection() {\r\n  const [mousePosition, setMousePosition] = useState<MousePosition>({\r\n    x: 0,\r\n    y: 0,\r\n  });\r\n  const [isMounted, setIsMounted] = useState(false);\r\n\r\n  const handleMouseMove = useCallback((e: MouseEvent) => {\r\n    setMousePosition({\r\n      x: (e.clientX / window.innerWidth) * 100,\r\n      y: (e.clientY / window.innerHeight) * 100,\r\n    });\r\n  }, []);\r\n\r\n  useEffect(() => {\r\n    setIsMounted(true);\r\n    window.addEventListener(\"mousemove\", handleMouseMove);\r\n    return () => window.removeEventListener(\"mousemove\", handleMouseMove);\r\n  }, [handleMouseMove]);\r\n\r\n  return { mousePosition, isMounted };\r\n}\r\n"
+        }
+    ]
+}

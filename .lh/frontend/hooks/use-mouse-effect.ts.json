@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/hooks/use-mouse-effect.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740973606986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740973654023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -80,10 +80,10 @@\n   useEffect(() => {\r\n     setIsMounted(true);\r\n     if (enabled) {\r\n       const element = bounds === \"element\" && target ? target : window;\r\n-      element.addEventListener(\"mousemove\", handleMouseMove);\r\n-      return () => element.removeEventListener(\"mousemove\", handleMouseMove);\r\n+      element.addEventListener(\"mousemove\", handleMouseMove as EventListener);\r\n+      return () => element.removeEventListener(\"mousemove\", handleMouseMove as EventListener);\r\n     }\r\n   }, [enabled, bounds, target, handleMouseMove]);\r\n \r\n   return {\r\n"
+                }
+            ],
+            "date": 1740973606986,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState, useEffect, useCallback } from \"react\";\r\n\r\nexport interface MousePosition {\r\n  x: number;\r\n  y: number;\r\n}\r\n\r\nexport interface MouseEffectOptions {\r\n  enabled?: boolean;\r\n  intensity?: number;\r\n  smoothing?: number;\r\n  bounds?: \"window\" | \"element\";\r\n  target?: HTMLElement | null;\r\n}\r\n\r\nexport function useMouseEffect({\r\n  enabled = true,\r\n  intensity = 1,\r\n  smoothing = 0.1,\r\n  bounds = \"window\",\r\n  target = null,\r\n}: MouseEffectOptions = {}) {\r\n  const [mousePosition, setMousePosition] = useState<MousePosition>({\r\n    x: 0,\r\n    y: 0,\r\n  });\r\n  const [targetPosition, setTargetPosition] = useState<MousePosition>({\r\n    x: 0,\r\n    y: 0,\r\n  });\r\n  const [isMounted, setIsMounted] = useState(false);\r\n\r\n  const calculatePosition = useCallback(\r\n    (e: MouseEvent) => {\r\n      if (bounds === \"element\" && target) {\r\n        const rect = target.getBoundingClientRect();\r\n        return {\r\n          x: ((e.clientX - rect.left) / rect.width) * 100 * intensity,\r\n          y: ((e.clientY - rect.top) / rect.height) * 100 * intensity,\r\n        };\r\n      }\r\n      return {\r\n        x: (e.clientX / window.innerWidth) * 100 * intensity,\r\n        y: (e.clientY / window.innerHeight) * 100 * intensity,\r\n      };\r\n    },\r\n    [bounds, target, intensity]\r\n  );\r\n\r\n  const handleMouseMove = useCallback(\r\n    (e: MouseEvent) => {\r\n      if (!enabled) return;\r\n      setTargetPosition(calculatePosition(e));\r\n    },\r\n    [enabled, calculatePosition]\r\n  );\r\n\r\n  // Efecto de suavizado\r\n  useEffect(() => {\r\n    if (!enabled) return;\r\n\r\n    let animationFrameId: number;\r\n\r\n    const animate = () => {\r\n      setMousePosition((current) => ({\r\n        x: current.x + (targetPosition.x - current.x) * smoothing,\r\n        y: current.y + (targetPosition.y - current.y) * smoothing,\r\n      }));\r\n      animationFrameId = requestAnimationFrame(animate);\r\n    };\r\n\r\n    animationFrameId = requestAnimationFrame(animate);\r\n\r\n    return () => cancelAnimationFrame(animationFrameId);\r\n  }, [enabled, smoothing, targetPosition]);\r\n\r\n  // Efecto para event listeners\r\n  useEffect(() => {\r\n    setIsMounted(true);\r\n    if (enabled) {\r\n      const element = bounds === \"element\" && target ? target : window;\r\n      element.addEventListener(\"mousemove\", handleMouseMove);\r\n      return () => element.removeEventListener(\"mousemove\", handleMouseMove);\r\n    }\r\n  }, [enabled, bounds, target, handleMouseMove]);\r\n\r\n  return {\r\n    mousePosition,\r\n    targetPosition,\r\n    isMounted,\r\n    isEnabled: enabled,\r\n  };\r\n}\r\n"
+        }
+    ]
+}

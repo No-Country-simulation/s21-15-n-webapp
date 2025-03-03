@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/components/game-function-card.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1740972565682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740972573247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import type React from \"react\"\r\n+\r\n import { Card, CardHeader, CardTitle, CardDescription } from \"@/components/ui/card\"\r\n import { memo } from \"react\"\r\n \r\n interface GameFunctionCardProps {\r\n@@ -18,5 +18,4 @@\n       </CardHeader>\r\n     </Card>\r\n   )\r\n })\r\n-\r\n"
+                },
+                {
+                    "date": 1740972579618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,11 @@\n-\r\n import { Card, CardHeader, CardTitle, CardDescription } from \"@/components/ui/card\"\r\n import { memo } from \"react\"\r\n \r\n interface GameFunctionCardProps {\r\n   title: string\r\n   description: string\r\n-  icon: React.ReactNode\r\n+  icon: ReactNode\r\n }\r\n \r\n export const GameFunctionCard = memo(function GameFunctionCard({ title, description, icon }: GameFunctionCardProps) {\r\n   return (\r\n"
+                }
+            ],
+            "date": 1740972565682,
+            "name": "Commit-0",
+            "content": "import type React from \"react\"\r\nimport { Card, CardHeader, CardTitle, CardDescription } from \"@/components/ui/card\"\r\nimport { memo } from \"react\"\r\n\r\ninterface GameFunctionCardProps {\r\n  title: string\r\n  description: string\r\n  icon: React.ReactNode\r\n}\r\n\r\nexport const GameFunctionCard = memo(function GameFunctionCard({ title, description, icon }: GameFunctionCardProps) {\r\n  return (\r\n    <Card className=\"bg-black/30 border-purple-900/20 backdrop-blur-sm\">\r\n      <CardHeader>\r\n        <div className=\"mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-900/20\">{icon}</div>\r\n        <CardTitle className=\"text-xl text-white\">{title}</CardTitle>\r\n        <CardDescription className=\"text-gray-400\">{description}</CardDescription>\r\n      </CardHeader>\r\n    </Card>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

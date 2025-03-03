@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/components/feature-grid.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740972290480,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740974387260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { memo } from \"react\"\r\n import Image from \"next/image\"\r\n-import { cn } from \"@/lib/utils\"\r\n+import { cn } from \"@/lib/utils/utils\"\r\n \r\n interface FeatureCardProps {\r\n   imageSrc: string\r\n   title: string\r\n"
+                }
+            ],
+            "date": 1740972290480,
+            "name": "Commit-0",
+            "content": "import { memo } from \"react\"\r\nimport Image from \"next/image\"\r\nimport { cn } from \"@/lib/utils\"\r\n\r\ninterface FeatureCardProps {\r\n  imageSrc: string\r\n  title: string\r\n  description: string\r\n  className?: string\r\n}\r\n\r\nconst FeatureCard = memo(function FeatureCard({ imageSrc, title, description, className }: FeatureCardProps) {\r\n  return (\r\n    <div\r\n      className={cn(\r\n        \"group relative overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/30 p-8 transition-all hover:border-gray-700\",\r\n        className,\r\n      )}\r\n    >\r\n      <div className=\"relative z-10\">\r\n        <div className=\"mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gray-800/50\">\r\n          <Image src={imageSrc || \"/placeholder.svg\"} alt={title} width={24} height={24} className=\"h-6 w-6\" />\r\n        </div>\r\n        <h3 className=\"mb-2 text-xl font-medium text-white\">{title}</h3>\r\n        <p className=\"text-gray-400\">{description}</p>\r\n      </div>\r\n      <div className=\"absolute -right-12 -top-12 h-64 w-64 rounded-full bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 blur-3xl transition-opacity group-hover:opacity-100\" />\r\n    </div>\r\n  )\r\n})\r\n\r\ninterface FeatureGridProps {\r\n  features: Array<{\r\n    imageSrc: string\r\n    title: string\r\n    description: string\r\n  }>\r\n}\r\n\r\nexport const FeatureGrid = memo(function FeatureGrid({ features }: FeatureGridProps) {\r\n  return (\r\n    <div className=\"grid gap-6 md:grid-cols-2 lg:grid-cols-3\">\r\n      {features.map((feature, index) => (\r\n        <FeatureCard key={index} {...feature} />\r\n      ))}\r\n    </div>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

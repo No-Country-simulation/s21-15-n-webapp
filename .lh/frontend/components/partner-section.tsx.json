@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/partner-section.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740972887359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740972887359,
+            "name": "Commit-0",
+            "content": "import { memo } from \"react\"\r\nimport Image from \"next/image\"\r\n\r\ninterface PartnerSectionProps {\r\n  partners: Array<{ name: string; logo: string }>\r\n}\r\n\r\nexport const PartnerSection = memo(function PartnerSection({ partners }: PartnerSectionProps) {\r\n  return (\r\n    <section className=\"py-24 border-t border-gray-800\">\r\n      <div className=\"text-center mb-12\">\r\n        <div className=\"inline-block rounded-lg bg-gray-800/30 px-3 py-1 text-sm text-gray-400 mb-6\">Partners</div>\r\n        <h2 className=\"text-3xl font-bold tracking-tight text-white\">Trusted by leading companies</h2>\r\n      </div>\r\n      <div className=\"flex flex-wrap justify-center gap-12\">\r\n        {partners.map((partner, index) => (\r\n          <div\r\n            key={index}\r\n            className=\"relative h-12 w-32 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0\"\r\n          >\r\n            <Image src={partner.logo || \"/placeholder.svg\"} alt={partner.name} fill className=\"object-contain\" />\r\n          </div>\r\n        ))}\r\n      </div>\r\n    </section>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

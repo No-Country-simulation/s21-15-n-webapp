@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/components/exceeded-aminate-dialog.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740972234097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740972247264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from \"@/components/ui/dialog\"\r\n import { AlertCircle } from \"lucide-react\"\r\n \r\n interface ExceededAttemptsDialogProps {\r\n-  isOpen: boolean\r\n-  onClose: () => void\r\n+  readonly isOpen: boolean\r\n+  readonly onClose: () => void\r\n }\r\n \r\n export function ExceededAttemptsDialog({ isOpen, onClose }: ExceededAttemptsDialogProps) {\r\n   const [countdown, setCountdown] = useState(5)\r\n@@ -44,5 +44,4 @@\n       </DialogContent>\r\n     </Dialog>\r\n   )\r\n }\r\n-\r\n"
+                }
+            ],
+            "date": 1740972234097,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { useEffect, useState } from \"react\"\r\nimport { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from \"@/components/ui/dialog\"\r\nimport { AlertCircle } from \"lucide-react\"\r\n\r\ninterface ExceededAttemptsDialogProps {\r\n  isOpen: boolean\r\n  onClose: () => void\r\n}\r\n\r\nexport function ExceededAttemptsDialog({ isOpen, onClose }: ExceededAttemptsDialogProps) {\r\n  const [countdown, setCountdown] = useState(5)\r\n\r\n  useEffect(() => {\r\n    if (isOpen) {\r\n      const timer = setInterval(() => {\r\n        setCountdown((prev) => {\r\n          if (prev <= 1) {\r\n            clearInterval(timer)\r\n            window.close()\r\n            return 0\r\n          }\r\n          return prev - 1\r\n        })\r\n      }, 1000)\r\n\r\n      return () => clearInterval(timer)\r\n    }\r\n  }, [isOpen])\r\n\r\n  return (\r\n    <Dialog open={isOpen} onOpenChange={onClose}>\r\n      <DialogContent className=\"bg-background/95 backdrop-blur-sm border-destructive/20\">\r\n        <DialogHeader>\r\n          <div className=\"mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-destructive/20 text-destructive\">\r\n            <AlertCircle className=\"h-6 w-6\" />\r\n          </div>\r\n          <DialogTitle className=\"text-center text-xl font-semibold\">Maximum Attempts Exceeded</DialogTitle>\r\n          <DialogDescription className=\"text-center\">\r\n            For security reasons, the browser will close in {countdown} seconds.\r\n          </DialogDescription>\r\n        </DialogHeader>\r\n      </DialogContent>\r\n    </Dialog>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

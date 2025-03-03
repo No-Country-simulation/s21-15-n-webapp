@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/components/layout/mobile-menu-overlay.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1740970544655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740970552397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { createPortal } from \"react-dom\"\r\n \r\n interface MobileMenuOverlayProps {\r\n   isOpen: boolean\r\n-  children: React.ReactNode\r\n+  children: ReactNode\r\n }\r\n \r\n export function MobileMenuOverlay({ isOpen, children }: MobileMenuOverlayProps) {\r\n   // Efecto para manejar el blur solo cuando el menú está abierto\r\n@@ -50,5 +50,4 @@\n     </div>,\r\n     document.body,\r\n   )\r\n }\r\n-\r\n"
+                },
+                {
+                    "date": 1740970561902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,6 @@\n \"use client\"\r\n \r\n-import type React from \"react\"\r\n-\r\n import { ReactNode, useEffect } from \"react\"\r\n import { cn } from \"@/lib/utils\"\r\n import { createPortal } from \"react-dom\"\r\n \r\n"
+                },
+                {
+                    "date": 1740974387288,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n \"use client\"\r\n \r\n import { ReactNode, useEffect } from \"react\"\r\n-import { cn } from \"@/lib/utils\"\r\n+import { cn } from \"@/lib/utils/utils\"\r\n import { createPortal } from \"react-dom\"\r\n \r\n interface MobileMenuOverlayProps {\r\n   isOpen: boolean\r\n"
+                }
+            ],
+            "date": 1740970544655,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport type React from \"react\"\r\n\r\nimport { useEffect } from \"react\"\r\nimport { cn } from \"@/lib/utils\"\r\nimport { createPortal } from \"react-dom\"\r\n\r\ninterface MobileMenuOverlayProps {\r\n  isOpen: boolean\r\n  children: React.ReactNode\r\n}\r\n\r\nexport function MobileMenuOverlay({ isOpen, children }: MobileMenuOverlayProps) {\r\n  // Efecto para manejar el blur solo cuando el menú está abierto\r\n  useEffect(() => {\r\n    const content = document.getElementById(\"app-content\")\r\n\r\n    if (content) {\r\n      if (isOpen) {\r\n        content.classList.add(\"blur-sm\")\r\n        content.classList.add(\"pointer-events-none\")\r\n      } else {\r\n        content.classList.remove(\"blur-sm\")\r\n        content.classList.remove(\"pointer-events-none\")\r\n      }\r\n    }\r\n\r\n    return () => {\r\n      if (content) {\r\n        content.classList.remove(\"blur-sm\")\r\n        content.classList.remove(\"pointer-events-none\")\r\n      }\r\n    }\r\n  }, [isOpen])\r\n\r\n  // Solo renderizamos si está abierto\r\n  if (!isOpen) return null\r\n\r\n  return createPortal(\r\n    <div\r\n      id=\"menu-overlay\"\r\n      className={cn(\r\n        \"fixed inset-0 z-30\",\r\n        \"transition-opacity duration-300\",\r\n        isOpen ? \"opacity-100\" : \"opacity-0 pointer-events-none\",\r\n      )}\r\n    >\r\n      {children}\r\n    </div>,\r\n    document.body,\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

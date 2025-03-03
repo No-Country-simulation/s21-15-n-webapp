@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/components/pin-input.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1740973120176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740973133451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,13 +4,13 @@\n \r\n import { useEffect, useRef, useState, useCallback } from \"react\"\r\n import { Input } from \"@/components/ui/input\"\r\n \r\n-interface PinInputProps {\r\n+interface PinInputProps extends Readonly<{\r\n   onComplete: (pin: string) => void\r\n   onClear?: () => void\r\n   length?: number\r\n-}\r\n+}> {}\r\n \r\n export function PinInput({ onComplete, onClear, length = 4 }: PinInputProps) {\r\n   const [values, setValues] = useState<string[]>(Array(length).fill(\"\"))\r\n   const inputRefs = useRef<(HTMLInputElement | null)[]>([])\r\n@@ -95,5 +95,4 @@\n       ))}\r\n     </div>\r\n   )\r\n }\r\n-\r\n"
+                },
+                {
+                    "date": 1740973166013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n       onComplete(newValues.join(\"\"))\r\n     }\r\n   }\r\n \r\n-  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {\r\n+  const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {\r\n     if (e.key === \"Backspace\" && !values[index] && index > 0) {\r\n       focusInput(index - 1)\r\n     }\r\n   }\r\n"
+                },
+                {
+                    "date": 1740973175246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n       focusInput(index - 1)\r\n     }\r\n   }\r\n \r\n-  const handlePaste = (e: React.ClipboardEvent) => {\r\n+  const handlePaste = (e: ClipboardEvent) => {\r\n     e.preventDefault()\r\n     const pastedData = e.clipboardData.getData(\"text\").slice(0, length)\r\n     if (!/^\\d+$/.test(pastedData)) return\r\n \r\n"
+                }
+            ],
+            "date": 1740973120176,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport type React from \"react\"\r\n\r\nimport { useEffect, useRef, useState, useCallback } from \"react\"\r\nimport { Input } from \"@/components/ui/input\"\r\n\r\ninterface PinInputProps {\r\n  onComplete: (pin: string) => void\r\n  onClear?: () => void\r\n  length?: number\r\n}\r\n\r\nexport function PinInput({ onComplete, onClear, length = 4 }: PinInputProps) {\r\n  const [values, setValues] = useState<string[]>(Array(length).fill(\"\"))\r\n  const inputRefs = useRef<(HTMLInputElement | null)[]>([])\r\n\r\n  const focusInput = useCallback(\r\n    (index: number) => {\r\n      if (index >= 0 && index < length) {\r\n        inputRefs.current[index]?.focus()\r\n      }\r\n    },\r\n    [length],\r\n  )\r\n\r\n  const handleChange = (index: number, value: string) => {\r\n    // Only allow numbers\r\n    if (!/^\\d*$/.test(value)) return\r\n\r\n    const newValues = [...values]\r\n    newValues[index] = value.slice(-1) // Only take the last digit\r\n\r\n    setValues(newValues)\r\n\r\n    if (value && index < length - 1) {\r\n      focusInput(index + 1)\r\n    }\r\n\r\n    // Check if all inputs are filled\r\n    if (newValues.every((v) => v) && newValues.join(\"\").length === length) {\r\n      onComplete(newValues.join(\"\"))\r\n    }\r\n  }\r\n\r\n  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {\r\n    if (e.key === \"Backspace\" && !values[index] && index > 0) {\r\n      focusInput(index - 1)\r\n    }\r\n  }\r\n\r\n  const handlePaste = (e: React.ClipboardEvent) => {\r\n    e.preventDefault()\r\n    const pastedData = e.clipboardData.getData(\"text\").slice(0, length)\r\n    if (!/^\\d+$/.test(pastedData)) return\r\n\r\n    const newValues = [...values]\r\n    pastedData.split(\"\").forEach((char, index) => {\r\n      if (index < length) {\r\n        newValues[index] = char\r\n      }\r\n    })\r\n    setValues(newValues)\r\n\r\n    if (pastedData.length === length) {\r\n      onComplete(pastedData)\r\n    }\r\n  }\r\n\r\n  const clearInputs = () => {\r\n    setValues(Array(length).fill(\"\"))\r\n    focusInput(0)\r\n    onClear?.()\r\n  }\r\n\r\n  useEffect(() => {\r\n    focusInput(0)\r\n  }, [focusInput])\r\n\r\n  return (\r\n    <div className=\"flex gap-2 justify-center\">\r\n      {values.map((value, index) => (\r\n        <Input\r\n          key={index}\r\n          ref={(el) => (inputRefs.current[index] = el)}\r\n          type=\"text\"\r\n          inputMode=\"numeric\"\r\n          maxLength={1}\r\n          value={value}\r\n          onChange={(e) => handleChange(index, e.target.value)}\r\n          onKeyDown={(e) => handleKeyDown(index, e)}\r\n          onPaste={handlePaste}\r\n          className=\"w-12 h-12 text-center text-2xl border-primary/20 bg-primary/10\"\r\n        />\r\n      ))}\r\n    </div>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

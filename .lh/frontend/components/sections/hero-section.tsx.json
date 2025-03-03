@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/sections/hero-section.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740971527276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740971527276,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { Button } from \"@/components/ui/button\"\r\nimport { memo } from \"react\"\r\nimport { useRandomStars } from \"@/hooks/use-random-stars\"\r\nimport { useNavigation } from \"@/hooks/use-navigation\"\r\n\r\nexport const HeroSection = memo(function HeroSection() {\r\n  const stars = useRandomStars(50)\r\n  const { navigateToPage } = useNavigation(50)\r\n\r\n  return (\r\n    <section className=\"relative flex min-h-screen items-center justify-center overflow-hidden py-32\" id=\"hero\">\r\n      {/* Stars Background */}\r\n      <div className=\"absolute inset-0 overflow-hidden\">\r\n        {stars.map((star) => (\r\n          <div\r\n            key={star.id}\r\n            className={`absolute inline-flex animate-pulse ${star.color}`}\r\n            style={{\r\n              left: `${star.x}%`,\r\n              top: `${star.y}%`,\r\n              width: `${star.size}px`,\r\n              height: `${star.size}px`,\r\n              opacity: star.opacity,\r\n              animation: `pulse ${star.duration}s infinite`,\r\n            }}\r\n          >\r\n            <span className=\"absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75\" />\r\n            <span className=\"relative inline-flex h-full w-full rounded-full bg-primary\" />\r\n          </div>\r\n        ))}\r\n      </div>\r\n\r\n      {/* Content */}\r\n      <div className=\"container relative px-4 text-center\">\r\n        <h1 className=\"mx-auto max-w-4xl text-4xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl\">\r\n          Gana{\" \"}\r\n          <span className=\"bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent\">experiencia</span>,\r\n          valida tus{\" \"}\r\n          <span className=\"bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent\">habilidades</span> y{\" \"}\r\n          <span className=\"bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent\">desbloquea</span> tu\r\n          futuro\r\n        </h1>\r\n        <p className=\"mx-auto mt-8 max-w-2xl text-lg text-gray-400\">\r\n          Regístrate como cadete en StartPerks y comienza tu aventura intergaláctica. Acumula puntos, desbloquea\r\n          mentorías y conquista cada desafío para elevar tu carrera en tecnología\r\n        </p>\r\n        <Button\r\n          size=\"lg\"\r\n          className=\"mt-10 bg-gradient-to-r from-primary to-accent text-lg text-white hover:from-primary/90 hover:to-accent/90\"\r\n          onClick={() => navigateToPage(\"/register\")}\r\n        >\r\n          Únete y empieza a ganar puntos\r\n        </Button>\r\n      </div>\r\n    </section>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

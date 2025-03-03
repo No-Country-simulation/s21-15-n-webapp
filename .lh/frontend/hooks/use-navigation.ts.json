@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/hooks/use-navigation.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740973854761,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740973864632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   const navigateToSection = useCallback((sectionId: string) => {\r\n     const element = document.getElementById(sectionId)\r\n     if (element) {\r\n       const header = document.querySelector(\"header\")\r\n-      const headerHeight = header?.offsetHeight || 0\r\n+      const headerHeight = header?.offsetHeight ?? 0\r\n       const elementPosition = element.getBoundingClientRect().top\r\n       const offsetPosition = elementPosition + window.scrollY - headerHeight\r\n \r\n       window.scrollTo({\r\n@@ -42,5 +42,4 @@\n     navigateToPage,\r\n     handleLogout,\r\n   }\r\n }\r\n-\r\n"
+                }
+            ],
+            "date": 1740973854761,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { useCallback } from \"react\"\r\nimport { useRouter } from \"next/navigation\"\r\n\r\nexport function useNavigation() {\r\n  const router = useRouter()\r\n\r\n  const navigateToSection = useCallback((sectionId: string) => {\r\n    const element = document.getElementById(sectionId)\r\n    if (element) {\r\n      const header = document.querySelector(\"header\")\r\n      const headerHeight = header?.offsetHeight || 0\r\n      const elementPosition = element.getBoundingClientRect().top\r\n      const offsetPosition = elementPosition + window.scrollY - headerHeight\r\n\r\n      window.scrollTo({\r\n        top: offsetPosition,\r\n        behavior: \"smooth\",\r\n      })\r\n    }\r\n  }, [])\r\n\r\n  const navigateToPage = useCallback(\r\n    (path: string) => {\r\n      router.push(path)\r\n    },\r\n    [router],\r\n  )\r\n\r\n  const handleLogout = useCallback(() => {\r\n    // Limpiar datos de sesión\r\n    localStorage.removeItem(\"currentUser\")\r\n    localStorage.removeItem(\"auth\")\r\n\r\n    // Redirigir a la landing page\r\n    router.push(\"/\")\r\n  }, [router])\r\n\r\n  return {\r\n    navigateToSection,\r\n    navigateToPage,\r\n    handleLogout,\r\n  }\r\n}\r\n\r\n"
+        }
+    ]
+}

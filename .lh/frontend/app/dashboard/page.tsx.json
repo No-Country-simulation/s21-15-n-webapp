@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/app/dashboard/page.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740969627959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740976684314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n import { SystemControls } from \"@/components/dashboard/system-controls\"\r\n import { TimeStatus } from \"@/components/dashboard/time-status\"\r\n import { SystemStatus } from \"@/components/dashboard/system-status\"\r\n import { useRandomStars } from \"@/hooks/use-random-stars\"\r\n-\r\n export default function DashboardPage() {\r\n   const stars = useRandomStars(50)\r\n \r\n   return (\r\n"
+                }
+            ],
+            "date": 1740969627959,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { SystemMetrics } from \"@/components/dashboard/system-metrics\"\r\nimport { NavigationControls } from \"@/components/dashboard/navigation-controls\"\r\nimport { OrbitalControls } from \"@/components/dashboard/orbital-controls\"\r\nimport { SystemControls } from \"@/components/dashboard/system-controls\"\r\nimport { TimeStatus } from \"@/components/dashboard/time-status\"\r\nimport { SystemStatus } from \"@/components/dashboard/system-status\"\r\nimport { useRandomStars } from \"@/hooks/use-random-stars\"\r\n\r\nexport default function DashboardPage() {\r\n  const stars = useRandomStars(50)\r\n\r\n  return (\r\n    <>\r\n      {/* Stars Background */}\r\n      <div className=\"fixed inset-0 -z-10 overflow-hidden\">\r\n        {stars.map((star) => (\r\n          <div\r\n            key={star.id}\r\n            className={`absolute inline-flex animate-pulse ${star.color}`}\r\n            style={{\r\n              left: `${star.x}%`,\r\n              top: `${star.y}%`,\r\n              width: `${star.size}px`,\r\n              height: `${star.size}px`,\r\n              opacity: star.opacity,\r\n              animation: `pulse ${star.duration}s infinite`,\r\n            }}\r\n          >\r\n            <span className=\"absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-400 opacity-75\" />\r\n            <span className=\"relative inline-flex h-full w-full rounded-full bg-purple-500\" />\r\n          </div>\r\n        ))}\r\n      </div>\r\n\r\n      <div className=\"grid gap-6 md:grid-cols-2 lg:grid-cols-3\">\r\n        <NavigationControls />\r\n        <SystemMetrics />\r\n        <OrbitalControls />\r\n        <SystemControls />\r\n        <TimeStatus />\r\n        <SystemStatus />\r\n      </div>\r\n    </>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

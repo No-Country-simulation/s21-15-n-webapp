@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/layout/app-layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740970505133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740970505133,
+            "name": "Commit-0",
+            "content": "import type { ReactNode } from \"react\"\r\nimport { MouseEffectLayer } from \"./mouse-effect-layer\"\r\n\r\ninterface AppLayoutProps {\r\n  children: ReactNode\r\n  showMouseEffect?: boolean\r\n}\r\n\r\nexport function AppLayout({ children, showMouseEffect = true }: AppLayoutProps) {\r\n  return (\r\n    <div className=\"relative min-h-screen bg-background\">\r\n      {showMouseEffect && <MouseEffectLayer />}\r\n      <div id=\"main-content\" className=\"relative z-10\">\r\n        {children}\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

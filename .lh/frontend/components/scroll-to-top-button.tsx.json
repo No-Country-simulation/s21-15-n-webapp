@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/components/scroll-to-top-button.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740973242329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740974387253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { memo } from \"react\"\r\n import { Button } from \"@/components/ui/button\"\r\n import { Rocket } from \"lucide-react\"\r\n import { useScrollToTop } from \"@/hooks/use-scroll-to-top\"\r\n-import { cn } from \"@/lib/utils\"\r\n+import { cn } from \"@/lib/utils/utils\"\r\n \r\n export const ScrollToTopButton = memo(function ScrollToTopButton() {\r\n   const { showButton, isAnimating, scrollToTop } = useScrollToTop()\r\n \r\n"
+                }
+            ],
+            "date": 1740973242329,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { memo } from \"react\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport { Rocket } from \"lucide-react\"\r\nimport { useScrollToTop } from \"@/hooks/use-scroll-to-top\"\r\nimport { cn } from \"@/lib/utils\"\r\n\r\nexport const ScrollToTopButton = memo(function ScrollToTopButton() {\r\n  const { showButton, isAnimating, scrollToTop } = useScrollToTop()\r\n\r\n  if (!showButton) return null\r\n\r\n  return (\r\n    <Button\r\n      onClick={scrollToTop}\r\n      className={cn(\r\n        \"fixed bottom-8 right-8 z-50 h-12 w-12 rounded-full\",\r\n        \"bg-primary p-0 opacity-90 shadow-lg transition-all\",\r\n        \"hover:opacity-100 hover:bg-primary/90 hover:shadow-primary/50\",\r\n        isAnimating && \"animate-rocket-launch\",\r\n      )}\r\n    >\r\n      <Rocket className={cn(\"h-6 w-6 transition-transform duration-300\", isAnimating ? \"-rotate-45\" : \"rotate-0\")} />\r\n      <span className=\"sr-only\">Volver arriba</span>\r\n    </Button>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

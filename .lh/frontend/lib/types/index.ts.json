@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/lib/types/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1740974322340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740974330855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,6 +30,6 @@\n \r\n export interface NavigationItem {\r\n   label: string;\r\n   href: string;\r\n-  icon?: React.ReactNode;\r\n+  icon?: ReactNode;\r\n }\r\n"
+                },
+                {
+                    "date": 1740974339591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import { ReactNode } from \"react\";\r\n+\r\n export interface User {\r\n   id?: string;\r\n   fullName: string;\r\n   email: string;\r\n"
+                }
+            ],
+            "date": 1740974322340,
+            "name": "Commit-0",
+            "content": "import type React from \"react\";\r\nexport interface User {\r\n  id?: string;\r\n  fullName: string;\r\n  email: string;\r\n  password?: string;\r\n  pin?: string;\r\n  bio?: string;\r\n  avatar?: string;\r\n  role?: string;\r\n  level?: number;\r\n  createdAt?: Date;\r\n  updatedAt?: Date;\r\n}\r\n\r\nexport interface AuthState {\r\n  isAuthenticated: boolean;\r\n  user: User | null;\r\n  loading: boolean;\r\n  error: string | null;\r\n}\r\n\r\nexport interface MouseEffect {\r\n  x: number;\r\n  y: number;\r\n  intensity: number;\r\n  color: string;\r\n  blur: number;\r\n}\r\n\r\nexport interface NavigationItem {\r\n  label: string;\r\n  href: string;\r\n  icon?: React.ReactNode;\r\n}\r\n"
+        }
+    ]
+}

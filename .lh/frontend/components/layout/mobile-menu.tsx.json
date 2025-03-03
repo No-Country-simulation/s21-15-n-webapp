@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/components/layout/mobile-menu.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740970656811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740970669807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   onClose: () => void\r\n   items?: NavigationItem[]\r\n }\r\n \r\n-export function MobileMenu({ open, onClose, items = [] }: MobileMenuProps) {\r\n+export function MobileMenu({ open, onClose, items = [] }: Readonly<MobileMenuProps>) {\r\n   useLayoutEffect({ blurEnabled: open })\r\n \r\n   return (\r\n     <Sheet open={open} onOpenChange={onClose}>\r\n@@ -41,5 +41,4 @@\n       </SheetContent>\r\n     </Sheet>\r\n   )\r\n }\r\n-\r\n"
+                }
+            ],
+            "date": 1740970656811,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { useLayoutEffect } from \"@/hooks/use-layout-effect\"\r\nimport { Sheet, SheetContent } from \"@/components/ui/sheet\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport { ScrollArea } from \"@/components/ui/scroll-area\"\r\nimport { X } from \"lucide-react\"\r\nimport type { NavigationItem } from \"@/lib/types\"\r\n\r\ninterface MobileMenuProps {\r\n  open: boolean\r\n  onClose: () => void\r\n  items?: NavigationItem[]\r\n}\r\n\r\nexport function MobileMenu({ open, onClose, items = [] }: MobileMenuProps) {\r\n  useLayoutEffect({ blurEnabled: open })\r\n\r\n  return (\r\n    <Sheet open={open} onOpenChange={onClose}>\r\n      <SheetContent side=\"left\" className=\"w-72 border-primary/20 bg-background/95 backdrop-blur-xl p-0\">\r\n        <div className=\"flex h-16 items-center justify-between border-b border-primary/20 px-4\">\r\n          <h2 className=\"text-lg font-semibold\">Navegación</h2>\r\n          <Button variant=\"ghost\" size=\"icon\" onClick={onClose}>\r\n            <X className=\"h-5 w-5\" />\r\n            <span className=\"sr-only\">Close menu</span>\r\n          </Button>\r\n        </div>\r\n        <ScrollArea className=\"h-[calc(100vh-4rem)] pb-10\">\r\n          <div className=\"p-4\">\r\n            <div className=\"space-y-2\">\r\n              {items.map((item) => (\r\n                <Button key={item.href} variant=\"ghost\" className=\"w-full justify-start\" onClick={onClose}>\r\n                  {item.icon}\r\n                  {item.label}\r\n                </Button>\r\n              ))}\r\n            </div>\r\n          </div>\r\n        </ScrollArea>\r\n      </SheetContent>\r\n    </Sheet>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

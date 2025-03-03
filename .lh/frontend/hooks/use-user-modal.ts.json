@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-user-modal.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740974253057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740974253057,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState } from \"react\";\r\n\r\ninterface UserData {\r\n  id: string;\r\n  name: string;\r\n  email: string;\r\n  role: string;\r\n  level: number;\r\n  avatar: string;\r\n}\r\n\r\nexport function useUserModal() {\r\n  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);\r\n  const [isModalOpen, setIsModalOpen] = useState(false);\r\n\r\n  const openUserModal = (user: UserData) => {\r\n    setSelectedUser(user);\r\n    setIsModalOpen(true);\r\n  };\r\n\r\n  const closeUserModal = () => {\r\n    setIsModalOpen(false);\r\n    setSelectedUser(null);\r\n  };\r\n\r\n  return {\r\n    selectedUser,\r\n    isModalOpen,\r\n    openUserModal,\r\n    closeUserModal,\r\n  };\r\n}\r\n"
+        }
+    ]
+}

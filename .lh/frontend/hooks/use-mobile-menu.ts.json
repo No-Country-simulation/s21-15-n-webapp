@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-mobile-menu.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740973530565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740973530565,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState, useCallback } from \"react\";\r\n\r\ninterface MobileMenuConfig {\r\n  onOpen?: () => void;\r\n  onClose?: () => void;\r\n}\r\n\r\nexport function useMobileMenu(config: MobileMenuConfig = {}) {\r\n  const { onOpen, onClose } = config;\r\n  const [isOpen, setIsOpen] = useState(false);\r\n\r\n  const open = useCallback(() => {\r\n    setIsOpen(true);\r\n    onOpen?.();\r\n  }, [onOpen]);\r\n\r\n  const close = useCallback(() => {\r\n    setIsOpen(false);\r\n    onClose?.();\r\n  }, [onClose]);\r\n\r\n  const toggle = useCallback(() => {\r\n    setIsOpen((prev) => !prev);\r\n    if (isOpen) {\r\n      onClose?.();\r\n    } else {\r\n      onOpen?.();\r\n    }\r\n  }, [isOpen, onOpen, onClose]);\r\n\r\n  return {\r\n    isOpen,\r\n    open,\r\n    close,\r\n    toggle,\r\n  };\r\n}\r\n"
+        }
+    ]
+}

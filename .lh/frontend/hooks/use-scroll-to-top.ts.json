@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/hooks/use-scroll-to-top.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740974035650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740974050266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   const [isAnimating, setIsAnimating] = useState(false);\r\n \r\n   const checkScrollPosition = useCallback(() => {\r\n     if (typeof window !== \"undefined\") {\r\n-      setShowButton(window.pageYOffset > 400);\r\n+      setShowButton(window.scrollY > 400);\r\n     }\r\n   }, []);\r\n \r\n   const scrollToTop = useCallback(() => {\r\n"
+                }
+            ],
+            "date": 1740974035650,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState, useEffect, useCallback } from \"react\";\r\n\r\nexport function useScrollToTop() {\r\n  const [showButton, setShowButton] = useState(false);\r\n  const [isAnimating, setIsAnimating] = useState(false);\r\n\r\n  const checkScrollPosition = useCallback(() => {\r\n    if (typeof window !== \"undefined\") {\r\n      setShowButton(window.pageYOffset > 400);\r\n    }\r\n  }, []);\r\n\r\n  const scrollToTop = useCallback(() => {\r\n    setIsAnimating(true);\r\n\r\n    // Primero iniciamos la animación del botón\r\n    setTimeout(() => {\r\n      // Después de un pequeño delay, hacemos el scroll\r\n      window.scrollTo({\r\n        top: 0,\r\n        behavior: \"smooth\",\r\n      });\r\n\r\n      // Reseteamos la animación después de que termine\r\n      setTimeout(() => {\r\n        setIsAnimating(false);\r\n      }, 1000); // Este tiempo debe coincidir con la duración de la animación\r\n    }, 100);\r\n  }, []);\r\n\r\n  useEffect(() => {\r\n    window.addEventListener(\"scroll\", checkScrollPosition);\r\n    return () => window.removeEventListener(\"scroll\", checkScrollPosition);\r\n  }, [checkScrollPosition]);\r\n\r\n  return { showButton, isAnimating, scrollToTop };\r\n}\r\n"
+        }
+    ]
+}

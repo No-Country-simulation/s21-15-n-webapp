@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-layout-effect.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740973500362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740973500362,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useEffect } from \"react\";\r\n\r\nexport interface LayoutEffectOptions {\r\n  isActive: boolean;\r\n  blurTarget?: string;\r\n  blurClass?: string;\r\n  overlayTarget?: string;\r\n  overlayClass?: string;\r\n}\r\n\r\nexport function useLayoutEffect({\r\n  isActive,\r\n  blurTarget = \"#app-content\",\r\n  blurClass = \"blur-sm\",\r\n  overlayTarget = \"#menu-overlay\",\r\n  overlayClass = \"bg-background/80\",\r\n}: LayoutEffectOptions) {\r\n  useEffect(() => {\r\n    const content = document.querySelector(blurTarget);\r\n    const overlay = document.querySelector(overlayTarget);\r\n\r\n    if (content && overlay && isActive) {\r\n      content.classList.add(blurClass);\r\n      overlay.classList.add(overlayClass);\r\n    }\r\n\r\n    return () => {\r\n      if (content && overlay) {\r\n        content.classList.remove(blurClass);\r\n        overlay.classList.remove(overlayClass);\r\n      }\r\n    };\r\n  }, [isActive, blurTarget, blurClass, overlayTarget, overlayClass]);\r\n}\r\n"
+        }
+    ]
+}

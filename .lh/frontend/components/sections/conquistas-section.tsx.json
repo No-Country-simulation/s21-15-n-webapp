@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/components/sections/conquistas-section.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740971250284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740971261342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { Card, CardContent } from \"@/components/ui/card\"\r\n import { Rocket, Star, Sparkles } from \"lucide-react\"\r\n \r\n interface ConquistaCard {\r\n-  icon: React.ReactNode\r\n+  icon: ReactNode\r\n   title: string\r\n   description: string\r\n }\r\n \r\n"
+                }
+            ],
+            "date": 1740971250284,
+            "name": "Commit-0",
+            "content": "import type React from \"react\"\r\nimport { memo } from \"react\"\r\nimport { Card, CardContent } from \"@/components/ui/card\"\r\nimport { Rocket, Star, Sparkles } from \"lucide-react\"\r\n\r\ninterface ConquistaCard {\r\n  icon: React.ReactNode\r\n  title: string\r\n  description: string\r\n}\r\n\r\nconst conquistas: ConquistaCard[] = [\r\n  {\r\n    icon: <Star className=\"h-6 w-6 text-purple-400\" />,\r\n    title: \"Explorador Cósmico\",\r\n    description: \"Desbloqueá insignias especiales al completar misiones y desafíos en diferentes tecnologías\",\r\n  },\r\n  {\r\n    icon: <Rocket className=\"h-6 w-6 text-pink-400\" />,\r\n    title: \"Piloto Intergaláctico\",\r\n    description: \"Alcanzá nuevos niveles y rangos que demuestran tu experiencia en el universo tech\",\r\n  },\r\n  {\r\n    icon: <Sparkles className=\"h-6 w-6 text-indigo-400\" />,\r\n    title: \"Y mucho más\",\r\n    description: \"Descubrí todas las sorpresas y recompensas que te esperan en tu viaje\",\r\n  },\r\n]\r\n\r\nexport const ConquistasSection = memo(function ConquistasSection() {\r\n  return (\r\n    <section className=\"py-20\" id=\"conquistas\">\r\n      <div className=\"container px-4\">\r\n        <div className=\"text-center mb-12\">\r\n          <h2 className=\"text-3xl font-bold text-white mb-4\">Tus Conquistas Estelares</h2>\r\n          <p className=\"text-gray-400 max-w-2xl mx-auto\">\r\n            Cada insignia que vas a conseguir, demuestra tu progreso y genera nuevas oportunidades\r\n          </p>\r\n        </div>\r\n        <div className=\"grid gap-8 md:grid-cols-3\">\r\n          {conquistas.map((conquista) => (\r\n            <Card\r\n              key={conquista.title}\r\n              className=\"group relative overflow-hidden border-purple-900/20 bg-purple-900/10 backdrop-blur-sm\"\r\n            >\r\n              <CardContent className=\"p-6\">\r\n                <div className=\"mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-900/20\">\r\n                  {conquista.icon}\r\n                </div>\r\n                <h3 className=\"text-xl font-medium text-white mb-2\">{conquista.title}</h3>\r\n                <p className=\"text-gray-400\">{conquista.description}</p>\r\n                <div className=\"absolute -right-12 -top-12 h-64 w-64 rounded-full bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 blur-3xl transition-opacity group-hover:opacity-100\" />\r\n              </CardContent>\r\n            </Card>\r\n          ))}\r\n        </div>\r\n      </div>\r\n    </section>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/dashboard/time-status.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740970302029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740970302029,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\"\r\nimport { Clock } from \"lucide-react\"\r\nimport { useState, useEffect } from \"react\"\r\n\r\nexport function TimeStatus() {\r\n  const [time, setTime] = useState(new Date())\r\n\r\n  useEffect(() => {\r\n    const timer = setInterval(() => {\r\n      setTime(new Date())\r\n    }, 1000)\r\n\r\n    return () => {\r\n      clearInterval(timer)\r\n    }\r\n  }, [])\r\n\r\n  return (\r\n    <Card className=\"border-primary/20 bg-black/50 backdrop-blur-sm\">\r\n      <CardHeader>\r\n        <CardTitle className=\"flex items-center gap-2 text-lg font-medium text-white\">\r\n          <Clock className=\"h-5 w-5 text-primary\" />\r\n          Time & Status\r\n        </CardTitle>\r\n      </CardHeader>\r\n      <CardContent>\r\n        <div className=\"flex flex-col items-center justify-center\">\r\n          <div className=\"h-32 w-32 rounded-full border border-primary/20 bg-primary/5 flex items-center justify-center\">\r\n            <div className=\"text-center\">\r\n              <p className=\"text-2xl font-bold text-white\">\r\n                {time.toLocaleTimeString([], { hour: \"2-digit\", minute: \"2-digit\" })}\r\n              </p>\r\n              <p className=\"text-xs text-gray-400\">{time.toLocaleDateString()}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </CardContent>\r\n    </Card>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

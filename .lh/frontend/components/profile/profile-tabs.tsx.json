@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/profile/profile-tabs.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740970980064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740970980064,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { Tabs, TabsContent, TabsList, TabsTrigger } from \"@/components/ui/tabs\"\r\nimport { PersonalInfoTab } from \"./personal-info-tab\"\r\nimport { SocialLinksTab } from \"./social-links-tab\"\r\nimport { SecurityTab } from \"./security-tab\"\r\n\r\nexport function ProfileTabs() {\r\n  return (\r\n    <Tabs defaultValue=\"personal\" className=\"w-full\">\r\n      <TabsList className=\"grid w-full grid-cols-3 bg-primary/5\">\r\n        <TabsTrigger value=\"personal\">Datos Personales</TabsTrigger>\r\n        <TabsTrigger value=\"social\">Redes Sociales</TabsTrigger>\r\n        <TabsTrigger value=\"security\">Seguridad</TabsTrigger>\r\n      </TabsList>\r\n      <TabsContent value=\"personal\">\r\n        <PersonalInfoTab />\r\n      </TabsContent>\r\n      <TabsContent value=\"social\">\r\n        <SocialLinksTab />\r\n      </TabsContent>\r\n      <TabsContent value=\"security\">\r\n        <SecurityTab />\r\n      </TabsContent>\r\n    </Tabs>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/app/layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1740968181593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740968186336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,39 @@\n+\"use client\"\n+\n+import type { ReactNode } from \"react\"\n+import { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\n+import { Sidebar } from \"@/components/dashboard/sidebar\"\n+import { LockOverlay } from \"@/components/lock-overlay\"\n+import { usePageVisibility } from \"@/hooks/use-page-visibility\"\n+import { useEffect, useState } from \"react\"\n+import { getStoredUser } from \"@/lib/utils/auth\"\n+\n+export default function DashboardLayout({ children }: { children: ReactNode }) {\n+  const [userPin, setUserPin] = useState(\"\")\n+  const { isVisible, wasHidden, handleUnlock } = usePageVisibility({\n+    initialTitle: \"Dashboard - StartPerks\",\n+  })\n+\n+  useEffect(() => {\n+    const currentUser = getStoredUser()\n+    if (currentUser?.pin) {\n+      setUserPin(currentUser.pin)\n+    }\n+  }, [])\n+\n+  return (\n+    <div className=\"flex h-screen bg-background\">\n+      {(!isVisible || wasHidden) && <LockOverlay onUnlock={handleUnlock} pinRequired={true} correctPin={userPin} />}\n+\n+      <Sidebar position=\"left\" />\n+\n+      <div className=\"flex flex-1 flex-col\">\n+        <DashboardNav />\n+        <main className=\"flex-1 overflow-auto p-6\">{children}</main>\n+      </div>\n+\n+      <Sidebar position=\"right\" />\n+    </div>\n+  )\n+}\n+\n"
+                },
+                {
+                    "date": 1740969258326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,39 +0,0 @@\n-\"use client\"\n-\n-import type { ReactNode } from \"react\"\n-import { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\n-import { Sidebar } from \"@/components/dashboard/sidebar\"\n-import { LockOverlay } from \"@/components/lock-overlay\"\n-import { usePageVisibility } from \"@/hooks/use-page-visibility\"\n-import { useEffect, useState } from \"react\"\n-import { getStoredUser } from \"@/lib/utils/auth\"\n-\n-export default function DashboardLayout({ children }: { children: ReactNode }) {\n-  const [userPin, setUserPin] = useState(\"\")\n-  const { isVisible, wasHidden, handleUnlock } = usePageVisibility({\n-    initialTitle: \"Dashboard - StartPerks\",\n-  })\n-\n-  useEffect(() => {\n-    const currentUser = getStoredUser()\n-    if (currentUser?.pin) {\n-      setUserPin(currentUser.pin)\n-    }\n-  }, [])\n-\n-  return (\n-    <div className=\"flex h-screen bg-background\">\n-      {(!isVisible || wasHidden) && <LockOverlay onUnlock={handleUnlock} pinRequired={true} correctPin={userPin} />}\n-\n-      <Sidebar position=\"left\" />\n-\n-      <div className=\"flex flex-1 flex-col\">\n-        <DashboardNav />\n-        <main className=\"flex-1 overflow-auto p-6\">{children}</main>\n-      </div>\n-\n-      <Sidebar position=\"right\" />\n-    </div>\n-  )\n-}\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740969260532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,39 @@\n+import type React from \"react\"\n+import type { Metadata } from \"next\"\n+import { Inter } from \"next/font/google\"\n+import { Providers } from \"./providers\"\n+import { MouseReflection } from \"@/components/effects/mouse-reflection\"\n+import { ScrollToTopButton } from \"@/components/scroll-to-top-button\"\n+import \"./globals.css\"\n+\n+const inter = Inter({ subsets: [\"latin\"] })\n+\n+export const metadata: Metadata = {\n+  title: \"StartPerks - Transforma tu carrera tech\",\n+  description: \"Plataforma de desarrollo profesional para el universo tech\",\n+}\n+\n+export default function RootLayout({\n+  children,\n+}: {\n+  children: React.ReactNode\n+}) {\n+  return (\n+    <html lang=\"es\" suppressHydrationWarning>\n+      <body className={inter.className}>\n+        <Providers>\n+          <MouseReflection />\n+          {/* Contenedores para portales */}\n+          <div id=\"app-header\" className=\"z-40\" /> {/* Header siempre visible */}\n+          <div id=\"menu-overlay\" className=\"z-30\" /> {/* Overlay del menú */}\n+          <div id=\"app-content\" className=\"z-20\">\n+            {children}\n+          </div>{\" \"}\n+          {/* Contenido principal */}\n+          <ScrollToTopButton />\n+        </Providers>\n+      </body>\n+    </html>\n+  )\n+}\n+\n"
+                }
+            ],
+            "date": 1740968181593,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}

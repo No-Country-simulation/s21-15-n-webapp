@@ -1,0 +1,12 @@
+"use client"
+
+import { ThemeProvider } from "next-themes"
+import { ReactNode } from "react"
+
+export function Providers({ children }: Readonly<{ children: ReactNode }>) {
+  return (
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      {children}
+    </ThemeProvider>
+  )
+}

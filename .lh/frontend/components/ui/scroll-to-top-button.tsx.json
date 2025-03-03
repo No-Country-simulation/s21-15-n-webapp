@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/ui/scroll-to-top-button.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740971934099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740971934099,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { memo } from \"react\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport { ChevronUp } from \"lucide-react\"\r\nimport { useScrollToTop } from \"@/hooks/use-scroll-to-top\"\r\n\r\nexport const ScrollToTopButton = memo(function ScrollToTopButton() {\r\n  const { showButton, scrollToTop } = useScrollToTop()\r\n\r\n  if (!showButton) return null\r\n\r\n  return (\r\n    <Button\r\n      onClick={scrollToTop}\r\n      className=\"fixed bottom-8 right-8 z-50 h-10 w-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 p-0 opacity-90 shadow-lg transition-all hover:opacity-100\"\r\n    >\r\n      <ChevronUp className=\"h-5 w-5\" />\r\n      <span className=\"sr-only\">Volver arriba</span>\r\n    </Button>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "sourceFile": "frontend/components/lock-overlay.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1740972762599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740975107121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n import { Card, CardHeader, CardTitle, CardDescription, CardContent } from \"@/components/ui/card\"\r\n import { LockIcon } from \"lucide-react\"\r\n import { memo, useState } from \"react\"\r\n-import { PinInput } from \"./pin-input\"\r\n+//import { PinInput } from \"./pin-input\"\r\n import { ExceededAttemptsDialog } from \"./exceeded-attempts-dialog\"\r\n \r\n interface LockOverlayProps {\r\n   onUnlock: () => void\r\n@@ -61,5 +61,4 @@\n       <ExceededAttemptsDialog isOpen={showExceededDialog} onClose={() => setShowExceededDialog(false)} />\r\n     </div>\r\n   )\r\n })\r\n-\r\n"
+                },
+                {
+                    "date": 1740975139817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import { LockIcon } from \"lucide-react\"\r\n import { memo, useState } from \"react\"\r\n //import { PinInput } from \"./pin-input\"\r\n import { ExceededAttemptsDialog } from \"./exceeded-attempts-dialog\"\r\n+import { PinInput } from \"./pin-input\"\r\n \r\n interface LockOverlayProps {\r\n   onUnlock: () => void\r\n   pinRequired?: boolean\r\n"
+                },
+                {
+                    "date": 1740975159817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n import { Card, CardHeader, CardTitle, CardDescription, CardContent } from \"@/components/ui/card\"\r\n import { LockIcon } from \"lucide-react\"\r\n import { memo, useState } from \"react\"\r\n-//import { PinInput } from \"./pin-input\"\r\n+\r\n import { ExceededAttemptsDialog } from \"./exceeded-attempts-dialog\"\r\n import { PinInput } from \"./pin-input\"\r\n \r\n interface LockOverlayProps {\r\n"
+                },
+                {
+                    "date": 1740975179511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,11 @@\n \r\n import { Card, CardHeader, CardTitle, CardDescription, CardContent } from \"@/components/ui/card\"\r\n import { LockIcon } from \"lucide-react\"\r\n import { memo, useState } from \"react\"\r\n-\r\n-import { ExceededAttemptsDialog } from \"./exceeded-attempts-dialog\"\r\n+//import { ExceededAttemptsDialog } from \"./exceeded-attempts-dialog\"\r\n import { PinInput } from \"./pin-input\"\r\n+import { ExceededAttemptsDialog } from \"./exceeded-aminate-dialog\"\r\n \r\n interface LockOverlayProps {\r\n   onUnlock: () => void\r\n   pinRequired?: boolean\r\n"
+                }
+            ],
+            "date": 1740972762599,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { Card, CardHeader, CardTitle, CardDescription, CardContent } from \"@/components/ui/card\"\r\nimport { LockIcon } from \"lucide-react\"\r\nimport { memo, useState } from \"react\"\r\nimport { PinInput } from \"./pin-input\"\r\nimport { ExceededAttemptsDialog } from \"./exceeded-attempts-dialog\"\r\n\r\ninterface LockOverlayProps {\r\n  onUnlock: () => void\r\n  pinRequired?: boolean\r\n  correctPin?: string\r\n}\r\n\r\nexport const LockOverlay = memo(function LockOverlay({\r\n  onUnlock,\r\n  pinRequired = false,\r\n  correctPin = \"\",\r\n}: LockOverlayProps) {\r\n  const [error, setError] = useState(\"\")\r\n  const [attempts, setAttempts] = useState(0)\r\n  const [showExceededDialog, setShowExceededDialog] = useState(false)\r\n  const MAX_ATTEMPTS = 3\r\n\r\n  const handlePinComplete = (pin: string) => {\r\n    if (pinRequired && correctPin) {\r\n      if (pin === correctPin) {\r\n        setError(\"\")\r\n        onUnlock()\r\n      } else {\r\n        const newAttempts = attempts + 1\r\n        setAttempts(newAttempts)\r\n\r\n        if (newAttempts >= MAX_ATTEMPTS) {\r\n          setShowExceededDialog(true)\r\n        } else {\r\n          setError(`Invalid PIN. ${MAX_ATTEMPTS - newAttempts} attempts remaining.`)\r\n        }\r\n      }\r\n    } else {\r\n      onUnlock()\r\n    }\r\n  }\r\n\r\n  return (\r\n    <div className=\"fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4\">\r\n      <Card className=\"w-full max-w-md bg-black/30 border-primary/20\">\r\n        <CardHeader className=\"text-center\">\r\n          <div className=\"mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/20\">\r\n            <LockIcon className=\"h-6 w-6 text-primary\" />\r\n          </div>\r\n          <CardTitle className=\"text-xl text-white\">Session Locked</CardTitle>\r\n          <CardDescription className=\"text-gray-400\">Enter your PIN to unlock the session</CardDescription>\r\n        </CardHeader>\r\n        <CardContent className=\"space-y-4\">\r\n          <PinInput onComplete={handlePinComplete} onClear={() => setError(\"\")} />\r\n          {error && <p className=\"text-sm text-center text-destructive\">{error}</p>}\r\n        </CardContent>\r\n      </Card>\r\n\r\n      <ExceededAttemptsDialog isOpen={showExceededDialog} onClose={() => setShowExceededDialog(false)} />\r\n    </div>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

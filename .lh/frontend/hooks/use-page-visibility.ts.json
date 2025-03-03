@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-page-visibility.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740973940944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740973940944,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState, useEffect, useCallback } from \"react\";\r\n\r\nexport interface VisibilityOptions {\r\n  onVisibilityChange?: (isVisible: boolean) => void;\r\n  onLock?: () => void;\r\n  onUnlock?: () => void;\r\n  initialTitle?: string;\r\n  lockedTitle?: string;\r\n  autoLock?: boolean;\r\n  lockTimeout?: number;\r\n}\r\n\r\nexport function usePageVisibility({\r\n  onVisibilityChange,\r\n  onLock,\r\n  onUnlock,\r\n  initialTitle = document.title,\r\n  lockedTitle = \"🔒 Página Bloqueada - Regresa para desbloquear\",\r\n  autoLock = true,\r\n  lockTimeout = 0,\r\n}: VisibilityOptions = {}) {\r\n  const [isVisible, setIsVisible] = useState(true);\r\n  const [wasHidden, setWasHidden] = useState(false);\r\n  const [isLocked, setIsLocked] = useState(false);\r\n\r\n  const handleVisibilityChange = useCallback(() => {\r\n    const newVisibilityState = !document.hidden;\r\n    setIsVisible(newVisibilityState);\r\n    onVisibilityChange?.(newVisibilityState);\r\n\r\n    if (document.hidden && autoLock) {\r\n      if (lockTimeout > 0) {\r\n        setTimeout(() => {\r\n          setWasHidden(true);\r\n          setIsLocked(true);\r\n          document.title = lockedTitle;\r\n          onLock?.();\r\n        }, lockTimeout);\r\n      } else {\r\n        setWasHidden(true);\r\n        setIsLocked(true);\r\n        document.title = lockedTitle;\r\n        onLock?.();\r\n      }\r\n    } else {\r\n      document.title = initialTitle;\r\n    }\r\n  }, [\r\n    autoLock,\r\n    initialTitle,\r\n    lockedTitle,\r\n    lockTimeout,\r\n    onLock,\r\n    onVisibilityChange,\r\n  ]);\r\n\r\n  const handleUnlock = useCallback(() => {\r\n    setWasHidden(false);\r\n    setIsLocked(false);\r\n    document.title = initialTitle;\r\n    onUnlock?.();\r\n  }, [initialTitle, onUnlock]);\r\n\r\n  const lockPage = useCallback(() => {\r\n    setIsLocked(true);\r\n    setWasHidden(true);\r\n    document.title = lockedTitle;\r\n    onLock?.();\r\n  }, [lockedTitle, onLock]);\r\n\r\n  useEffect(() => {\r\n    document.addEventListener(\"visibilitychange\", handleVisibilityChange);\r\n    return () => {\r\n      document.removeEventListener(\"visibilitychange\", handleVisibilityChange);\r\n      document.title = initialTitle;\r\n    };\r\n  }, [handleVisibilityChange, initialTitle]);\r\n\r\n  return {\r\n    isVisible,\r\n    wasHidden,\r\n    isLocked,\r\n    handleUnlock,\r\n    lockPage,\r\n  };\r\n}\r\n"
+        }
+    ]
+}

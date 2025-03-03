@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-random-stars.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740973988416,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740973988416,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState, useEffect } from \"react\";\r\n\r\ninterface Star {\r\n  id: number;\r\n  x: number;\r\n  y: number;\r\n  size: number;\r\n  opacity: number;\r\n  duration: number;\r\n  color: string;\r\n}\r\n\r\nexport function useRandomStars(count = 50) {\r\n  const [stars, setStars] = useState<Star[]>([]);\r\n\r\n  useEffect(() => {\r\n    const generateStars = () => {\r\n      const colors = [\r\n        \"bg-purple-400\",\r\n        \"bg-indigo-400\",\r\n        \"bg-blue-400\",\r\n        \"bg-cyan-400\",\r\n        \"bg-violet-400\",\r\n      ];\r\n\r\n      return Array.from({ length: count }, (_, i) => ({\r\n        id: i,\r\n        x: Math.random() * 100,\r\n        y: Math.random() * 100,\r\n        size: Math.random() * 2 + 1,\r\n        opacity: Math.random() * 0.5 + 0.2,\r\n        duration: Math.random() * 3 + 2,\r\n        color: colors[Math.floor(Math.random() * colors.length)],\r\n      }));\r\n    };\r\n\r\n    setStars(generateStars());\r\n\r\n    const interval = setInterval(() => {\r\n      setStars(generateStars());\r\n    }, 5000);\r\n\r\n    return () => clearInterval(interval);\r\n  }, [count]);\r\n\r\n  return stars;\r\n}\r\n"
+        }
+    ]
+}

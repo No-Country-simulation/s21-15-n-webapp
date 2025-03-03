@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/hero-section.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740972641849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740972641849,
+            "name": "Commit-0",
+            "content": "import { memo } from \"react\"\r\nimport { Button } from \"@/components/ui/button\"\r\n\r\ninterface HeroSectionProps {\r\n  title: string\r\n  description: string\r\n}\r\n\r\nexport const HeroSection = memo(function HeroSection({ title, description }: HeroSectionProps) {\r\n  return (\r\n    <section className=\"flex flex-col items-center justify-center py-20 text-center\">\r\n      <div className=\"inline-block rounded-lg bg-gray-800/30 px-3 py-1 text-sm text-gray-400 mb-6\">\r\n        Version 1.0 Release\r\n      </div>\r\n      <h1 className=\"max-w-4xl text-3xl font-bold tracking-tight text-white sm:text-5xl\">{title}</h1>\r\n      <p className=\"mt-6 max-w-2xl text-lg leading-8 text-gray-400\">{description}</p>\r\n      <div className=\"mt-10 flex items-center justify-center gap-x-6\">\r\n        <Button variant=\"default\" size=\"lg\" className=\"bg-white text-gray-900 hover:bg-gray-100\">\r\n          Get Started\r\n        </Button>\r\n        <Button variant=\"ghost\" size=\"lg\" className=\"text-white hover:bg-gray-800\">\r\n          Learn more →\r\n        </Button>\r\n      </div>\r\n    </section>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

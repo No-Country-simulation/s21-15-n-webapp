@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/dashboard/user-nav.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740970329188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740970329188,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport {\r\n  DropdownMenu,\r\n  DropdownMenuContent,\r\n  DropdownMenuGroup,\r\n  DropdownMenuItem,\r\n  DropdownMenuLabel,\r\n  DropdownMenuSeparator,\r\n  DropdownMenuTrigger,\r\n} from \"@/components/ui/dropdown-menu\"\r\nimport { useRouter } from \"next/navigation\"\r\n\r\nexport function UserNav() {\r\n  const router = useRouter()\r\n\r\n  return (\r\n    <DropdownMenu>\r\n      <DropdownMenuTrigger asChild>\r\n        <Button variant=\"ghost\" className=\"relative h-8 w-8 rounded-full\">\r\n          <Avatar className=\"h-8 w-8\">\r\n            <AvatarImage src=\"/placeholder.svg\" alt=\"@user\" />\r\n            <AvatarFallback>SC</AvatarFallback>\r\n          </Avatar>\r\n        </Button>\r\n      </DropdownMenuTrigger>\r\n      <DropdownMenuContent className=\"w-56\" align=\"end\" forceMount>\r\n        <DropdownMenuLabel className=\"font-normal\">\r\n          <div className=\"flex flex-col space-y-1\">\r\n            <p className=\"text-sm font-medium leading-none\">Space Commander</p>\r\n            <p className=\"text-xs leading-none text-muted-foreground\">admin@space.com</p>\r\n          </div>\r\n        </DropdownMenuLabel>\r\n        <DropdownMenuSeparator />\r\n        <DropdownMenuGroup>\r\n          <DropdownMenuItem>Perfil</DropdownMenuItem>\r\n          <DropdownMenuItem>Configuración</DropdownMenuItem>\r\n        </DropdownMenuGroup>\r\n        <DropdownMenuSeparator />\r\n        <DropdownMenuItem onClick={() => router.push(\"/login\")}>Cerrar sesión</DropdownMenuItem>\r\n      </DropdownMenuContent>\r\n    </DropdownMenu>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

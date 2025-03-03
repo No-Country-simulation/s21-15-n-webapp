@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/profile/social-links-tab.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740971156703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740971156703,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { useState } from \"react\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport { Input } from \"@/components/ui/input\"\r\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\r\nimport { Plus, Trash2 } from \"lucide-react\"\r\n\r\ninterface SocialLink {\r\n  id: string\r\n  platform: string\r\n  url: string\r\n}\r\n\r\nexport function SocialLinksTab() {\r\n  const [links, setLinks] = useState<SocialLink[]>([])\r\n  const [newPlatform, setNewPlatform] = useState(\"\")\r\n  const [newUrl, setNewUrl] = useState(\"\")\r\n\r\n  const handleAddLink = () => {\r\n    if (newPlatform && newUrl) {\r\n      setLinks([\r\n        ...links,\r\n        {\r\n          id: Date.now().toString(),\r\n          platform: newPlatform,\r\n          url: newUrl,\r\n        },\r\n      ])\r\n      setNewPlatform(\"\")\r\n      setNewUrl(\"\")\r\n    }\r\n  }\r\n\r\n  const handleRemoveLink = (id: string) => {\r\n    setLinks(links.filter((link) => link.id !== id))\r\n  }\r\n\r\n  return (\r\n    <Card>\r\n      <CardHeader>\r\n        <CardTitle>Redes Sociales</CardTitle>\r\n        <CardDescription>Agrega tus perfiles de redes sociales</CardDescription>\r\n      </CardHeader>\r\n      <CardContent>\r\n        <div className=\"space-y-4\">\r\n          <div className=\"flex gap-4\">\r\n            <Input\r\n              placeholder=\"Nombre de la red social\"\r\n              value={newPlatform}\r\n              onChange={(e) => setNewPlatform(e.target.value)}\r\n              className=\"flex-1\"\r\n            />\r\n            <Input\r\n              placeholder=\"URL del perfil\"\r\n              value={newUrl}\r\n              onChange={(e) => setNewUrl(e.target.value)}\r\n              className=\"flex-1\"\r\n            />\r\n            <Button onClick={handleAddLink} size=\"icon\">\r\n              <Plus className=\"h-4 w-4\" />\r\n            </Button>\r\n          </div>\r\n\r\n          <div className=\"space-y-2\">\r\n            {links.map((link) => (\r\n              <div key={link.id} className=\"flex items-center gap-4 rounded-md border border-primary/20 p-3\">\r\n                <div className=\"flex-1\">\r\n                  <p className=\"font-medium\">{link.platform}</p>\r\n                  <p className=\"text-sm text-muted-foreground\">{link.url}</p>\r\n                </div>\r\n                <Button\r\n                  variant=\"ghost\"\r\n                  size=\"icon\"\r\n                  className=\"text-destructive hover:bg-destructive/10\"\r\n                  onClick={() => handleRemoveLink(link.id)}\r\n                >\r\n                  <Trash2 className=\"h-4 w-4\" />\r\n                </Button>\r\n              </div>\r\n            ))}\r\n          </div>\r\n        </div>\r\n      </CardContent>\r\n    </Card>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

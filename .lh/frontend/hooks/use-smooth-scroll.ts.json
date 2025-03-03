@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/hooks/use-smooth-scroll.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1740974140884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740974148823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,5 +18,5 @@\n     }\r\n   }, []);\r\n \r\n   return { scrollToSection };\r\n-}\r\n\\ No newline at end of file\n+}\r\n"
+                },
+                {
+                    "date": 1740974155080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   const scrollToSection = useCallback((elementId: string) => {\r\n     const element = document.getElementById(elementId);\r\n     if (element) {\r\n       const header = document.querySelector(\"header\");\r\n-      const headerHeight = header?.offsetHeight || 0;\r\n+      const headerHeight = header?.offsetHeight ?? 0;\r\n       const elementPosition = element.getBoundingClientRect().top;\r\n       const offsetPosition = elementPosition + window.scrollY - headerHeight;\r\n \r\n       window.scrollTo({\r\n"
+                }
+            ],
+            "date": 1740974140884,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useCallback } from \"react\";\r\n\r\nexport function useSmoothScroll() {\r\n  const scrollToSection = useCallback((elementId: string) => {\r\n    const element = document.getElementById(elementId);\r\n    if (element) {\r\n      const header = document.querySelector(\"header\");\r\n      const headerHeight = header?.offsetHeight || 0;\r\n      const elementPosition = element.getBoundingClientRect().top;\r\n      const offsetPosition = elementPosition + window.scrollY - headerHeight;\r\n\r\n      window.scrollTo({\r\n        top: offsetPosition,\r\n        behavior: \"smooth\",\r\n      });\r\n    }\r\n  }, []);\r\n\r\n  return { scrollToSection };\r\n}\r\n"
+        }
+    ]
+}

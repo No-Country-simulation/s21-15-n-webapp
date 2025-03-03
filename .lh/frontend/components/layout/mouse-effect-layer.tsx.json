@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/layout/mouse-effect-layer.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740970718812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740970718812,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { useMouseEffect } from \"@/hooks/use-mouse-effect\"\r\n\r\nexport function MouseEffectLayer() {\r\n  const { mousePosition, isMounted } = useMouseEffect({ intensity: 1.2 })\r\n\r\n  if (!isMounted) return null\r\n\r\n  return (\r\n    <div className=\"fixed inset-0 z-0 overflow-hidden pointer-events-none\">\r\n      <div className=\"absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background\" />\r\n      <div\r\n        className=\"absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(76,29,149,0.2),transparent_50%)]\"\r\n        style={{\r\n          transform: `translate(${mousePosition.x - 50}%, ${mousePosition.y - 50}%)`,\r\n        }}\r\n      />\r\n    </div>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

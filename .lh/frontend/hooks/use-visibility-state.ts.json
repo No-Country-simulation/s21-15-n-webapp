@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-visibility-state.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740974289349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740974289349,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useState, useEffect, useCallback } from \"react\";\r\n\r\nexport function useVisibilityState() {\r\n  const [isVisible, setIsVisible] = useState(true);\r\n  const [wasHidden, setWasHidden] = useState(false);\r\n\r\n  const handleVisibilityChange = useCallback(() => {\r\n    if (document.hidden) {\r\n      setIsVisible(false);\r\n      setWasHidden(true);\r\n    } else {\r\n      setIsVisible(true);\r\n    }\r\n  }, []);\r\n\r\n  useEffect(() => {\r\n    document.addEventListener(\"visibilitychange\", handleVisibilityChange);\r\n    return () => {\r\n      document.removeEventListener(\"visibilitychange\", handleVisibilityChange);\r\n    };\r\n  }, [handleVisibilityChange]);\r\n\r\n  return { isVisible, wasHidden, setWasHidden };\r\n}\r\n"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/components/section-with-imagen.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1740973287663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740974387254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-import { cn } from \"@/lib/utils\"\r\n+import { cn } from \"@/lib/utils/utils\"\r\n import Image from \"next/image\"\r\n import { memo } from \"react\"\r\n \r\n interface SectionWithImageProps {\r\n"
+                }
+            ],
+            "date": 1740973287663,
+            "name": "Commit-0",
+            "content": "import { cn } from \"@/lib/utils\"\r\nimport Image from \"next/image\"\r\nimport { memo } from \"react\"\r\n\r\ninterface SectionWithImageProps {\r\n  title: string\r\n  description: string\r\n  imageSrc: string\r\n  imageAlt: string\r\n  imagePosition?: \"left\" | \"right\"\r\n  className?: string\r\n}\r\n\r\nexport const SectionWithImage = memo(function SectionWithImage({\r\n  title,\r\n  description,\r\n  imageSrc,\r\n  imageAlt,\r\n  imagePosition = \"right\",\r\n  className,\r\n}: SectionWithImageProps) {\r\n  return (\r\n    <div className={cn(\"grid gap-12 md:grid-cols-2 items-center\", className)}>\r\n      <div className={cn(imagePosition === \"right\" ? \"md:order-1\" : \"md:order-2\")}>\r\n        <div className=\"inline-block rounded-lg bg-gray-800/30 px-3 py-1 text-sm text-gray-400 mb-6\">Featured</div>\r\n        <h2 className=\"text-3xl font-bold tracking-tight text-white sm:text-4xl mb-4\">{title}</h2>\r\n        <p className=\"text-lg leading-8 text-gray-400\">{description}</p>\r\n      </div>\r\n      <div\r\n        className={cn(\r\n          \"relative aspect-video overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/30\",\r\n          imagePosition === \"right\" ? \"md:order-2\" : \"md:order-1\",\r\n        )}\r\n      >\r\n        <Image src={imageSrc || \"/placeholder.svg\"} alt={imageAlt} fill className=\"object-cover\" />\r\n        <div className=\"absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100\" />\r\n      </div>\r\n    </div>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/profile/security-tab.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740971065428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740971065428,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { useState } from \"react\"\r\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\r\nimport { PinInput } from \"@/components/pin-input\"\r\nimport { PatternLock } from \"@/components/pattern-lock\"\r\nimport { RadioGroup, RadioGroupItem } from \"@/components/ui/radio-group\"\r\nimport { Label } from \"@/components/ui/label\"\r\n\r\nexport function SecurityTab() {\r\n  const [lockMethod, setLockMethod] = useState<\"pin\" | \"pattern\">(\"pin\")\r\n  const [currentPin, setCurrentPin] = useState(\"\")\r\n  const [showChangeForm, setShowChangeForm] = useState(false)\r\n\r\n  const handleVerifyCurrentLock = (value: string | number[]) => {\r\n    // In a real app, verify against stored value\r\n    const storedPin = localStorage.getItem(\"lockPin\")\r\n    if (typeof value === \"string\" && value === storedPin) {\r\n      setShowChangeForm(true)\r\n    }\r\n  }\r\n\r\n  const handleChangeLock = (value: string | number[]) => {\r\n    if (typeof value === \"string\") {\r\n      localStorage.setItem(\"lockPin\", value)\r\n    } else {\r\n      localStorage.setItem(\"lockPattern\", JSON.stringify(value))\r\n    }\r\n    setShowChangeForm(false)\r\n  }\r\n\r\n  return (\r\n    <div className=\"space-y-6\">\r\n      <Card>\r\n        <CardHeader>\r\n          <CardTitle>Método de Bloqueo</CardTitle>\r\n          <CardDescription>Elige cómo quieres proteger tu cuenta cuando cambies de pestaña</CardDescription>\r\n        </CardHeader>\r\n        <CardContent>\r\n          <RadioGroup\r\n            value={lockMethod}\r\n            onValueChange={(value) => setLockMethod(value as \"pin\" | \"pattern\")}\r\n            className=\"space-y-4\"\r\n          >\r\n            <div className=\"flex items-center space-x-2\">\r\n              <RadioGroupItem value=\"pin\" id=\"pin\" />\r\n              <Label htmlFor=\"pin\">PIN de 4 dígitos</Label>\r\n            </div>\r\n            <div className=\"flex items-center space-x-2\">\r\n              <RadioGroupItem value=\"pattern\" id=\"pattern\" />\r\n              <Label htmlFor=\"pattern\">Patrón de desbloqueo</Label>\r\n            </div>\r\n          </RadioGroup>\r\n\r\n          {!showChangeForm ? (\r\n            <div className=\"mt-6\">\r\n              <h4 className=\"mb-4 text-sm font-medium\">Ingresa tu {lockMethod === \"pin\" ? \"PIN\" : \"patrón\"} actual:</h4>\r\n              {lockMethod === \"pin\" ? (\r\n                <PinInput onComplete={handleVerifyCurrentLock} />\r\n              ) : (\r\n                <PatternLock onComplete={handleVerifyCurrentLock} />\r\n              )}\r\n            </div>\r\n          ) : (\r\n            <div className=\"mt-6\">\r\n              <h4 className=\"mb-4 text-sm font-medium\">Ingresa tu nuevo {lockMethod === \"pin\" ? \"PIN\" : \"patrón\"}:</h4>\r\n              {lockMethod === \"pin\" ? (\r\n                <PinInput onComplete={handleChangeLock} />\r\n              ) : (\r\n                <PatternLock onComplete={handleChangeLock} />\r\n              )}\r\n            </div>\r\n          )}\r\n        </CardContent>\r\n      </Card>\r\n    </div>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

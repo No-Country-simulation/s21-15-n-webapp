@@ -1,0 +1,38 @@
+{
+    "sourceFile": "frontend/components/profile/personal-info-tab.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1740970845312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740970886431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     bio: \"\",\r\n   })\r\n \r\n   useEffect(() => {\r\n-    const currentUser = JSON.parse(localStorage.getItem(\"currentUser\") || \"{}\")\r\n+    const currentUser = JSON.parse(localStorage.getItem(\"currentUser\")  \"{}\")\r\n     if (currentUser) {\r\n       setFormData({\r\n         fullName: currentUser.name || \"\",\r\n         email: currentUser.email || \"\",\r\n"
+                },
+                {
+                    "date": 1740970889036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     bio: \"\",\r\n   })\r\n \r\n   useEffect(() => {\r\n-    const currentUser = JSON.parse(localStorage.getItem(\"currentUser\")  \"{}\")\r\n+    const currentUser = JSON.parse(localStorage.getItem(\"currentUser\") ?? \"{}\")\r\n     if (currentUser) {\r\n       setFormData({\r\n         fullName: currentUser.name || \"\",\r\n         email: currentUser.email || \"\",\r\n"
+                },
+                {
+                    "date": 1740970899037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n \"use client\"\r\n \r\n import type React from \"react\"\r\n \r\n-import { useState, useEffect } from \"react\"\r\n+import { useState, useEffect, FormEvent } from \"react\"\r\n import { Button } from \"@/components/ui/button\"\r\n import { Input } from \"@/components/ui/input\"\r\n import { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\r\n import { toast } from \"sonner\"\r\n"
+                },
+                {
+                    "date": 1740970906199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \r\n   const handleSubmit = (e: FormEvent) => {\r\n     e.preventDefault()\r\n \r\n-    const currentUser = JSON.parse(localStorage.getItem(\"currentUser\")  \"{}\")\r\n+    const currentUser = JSON.parse(localStorage.getItem(\"currentUser\") ?? \"{}\")\r\n     const updatedUser = { ...currentUser, ...formData }\r\n     localStorage.setItem(\"currentUser\", JSON.stringify(updatedUser))\r\n \r\n     // Actualizar también en el array de usuarios\r\n"
+                },
+                {
+                    "date": 1740970912677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n     const updatedUser = { ...currentUser, ...formData }\r\n     localStorage.setItem(\"currentUser\", JSON.stringify(updatedUser))\r\n \r\n     // Actualizar también en el array de usuarios\r\n-    const users = JSON.parse(localStorage.getItem(\"users\")  \"[]\")\r\n+    const users = JSON.parse(localStorage.getItem(\"users\") ?? \"[]\")\r\n     const updatedUsers = users.map((user: any) => {\r\n       if (user.email === currentUser.email) {\r\n         return { ...user, fullName: formData.fullName, bio: formData.bio }\r\n       }\r\n"
+                }
+            ],
+            "date": 1740970845312,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport type React from \"react\"\r\n\r\nimport { useState, useEffect } from \"react\"\r\nimport { Button } from \"@/components/ui/button\"\r\nimport { Input } from \"@/components/ui/input\"\r\nimport { Card, CardContent, CardDescription, CardHeader, CardTitle } from \"@/components/ui/card\"\r\nimport { toast } from \"sonner\"\r\n\r\nexport function PersonalInfoTab() {\r\n  const [formData, setFormData] = useState({\r\n    fullName: \"\",\r\n    email: \"\",\r\n    bio: \"\",\r\n  })\r\n\r\n  useEffect(() => {\r\n    const currentUser = JSON.parse(localStorage.getItem(\"currentUser\") || \"{}\")\r\n    if (currentUser) {\r\n      setFormData({\r\n        fullName: currentUser.name || \"\",\r\n        email: currentUser.email || \"\",\r\n        bio: currentUser.bio || \"\",\r\n      })\r\n    }\r\n  }, [])\r\n\r\n  const handleSubmit = (e: React.FormEvent) => {\r\n    e.preventDefault()\r\n\r\n    const currentUser = JSON.parse(localStorage.getItem(\"currentUser\") || \"{}\")\r\n    const updatedUser = { ...currentUser, ...formData }\r\n    localStorage.setItem(\"currentUser\", JSON.stringify(updatedUser))\r\n\r\n    // Actualizar también en el array de usuarios\r\n    const users = JSON.parse(localStorage.getItem(\"users\") || \"[]\")\r\n    const updatedUsers = users.map((user: any) => {\r\n      if (user.email === currentUser.email) {\r\n        return { ...user, fullName: formData.fullName, bio: formData.bio }\r\n      }\r\n      return user\r\n    })\r\n    localStorage.setItem(\"users\", JSON.stringify(updatedUsers))\r\n\r\n    toast.success(\"Perfil actualizado correctamente\")\r\n  }\r\n\r\n  return (\r\n    <Card>\r\n      <CardHeader>\r\n        <CardTitle>Información Personal</CardTitle>\r\n        <CardDescription>Actualiza tu información de perfil</CardDescription>\r\n      </CardHeader>\r\n      <CardContent>\r\n        <form onSubmit={handleSubmit} className=\"space-y-4\">\r\n          <div className=\"space-y-2\">\r\n            <label className=\"text-sm font-medium\">Nombre completo</label>\r\n            <Input\r\n              value={formData.fullName}\r\n              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}\r\n              className=\"border-primary/20 bg-primary/10\"\r\n            />\r\n          </div>\r\n          <div className=\"space-y-2\">\r\n            <label className=\"text-sm font-medium\">Email</label>\r\n            <Input value={formData.email} disabled className=\"border-primary/20 bg-primary/10 opacity-50\" />\r\n          </div>\r\n          <div className=\"space-y-2\">\r\n            <label className=\"text-sm font-medium\">Biografía</label>\r\n            <Input\r\n              value={formData.bio}\r\n              onChange={(e) => setFormData({ ...formData, bio: e.target.value })}\r\n              className=\"border-primary/20 bg-primary/10\"\r\n            />\r\n          </div>\r\n          <Button type=\"submit\" className=\"w-full\">\r\n            Guardar cambios\r\n          </Button>\r\n        </form>\r\n      </CardContent>\r\n    </Card>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

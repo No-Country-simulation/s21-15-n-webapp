@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/components/data-table.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740972167602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740972167602,
+            "name": "Commit-0",
+            "content": "import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from \"@/components/ui/table\"\r\nimport { memo } from \"react\"\r\n\r\ninterface DataTableProps {\r\n  data: Array<{\r\n    id: string\r\n    name: string\r\n    status: string\r\n    date: string\r\n    progress: number\r\n  }>\r\n}\r\n\r\nexport const DataTable = memo(function DataTable({ data }: DataTableProps) {\r\n  return (\r\n    <div className=\"rounded-lg border border-gray-800 bg-[#0A0A0A]\">\r\n      <Table>\r\n        <TableHeader>\r\n          <TableRow className=\"border-gray-800 hover:bg-gray-900/50\">\r\n            <TableHead className=\"text-gray-400\">Name</TableHead>\r\n            <TableHead className=\"text-gray-400\">Status</TableHead>\r\n            <TableHead className=\"text-gray-400\">Date</TableHead>\r\n            <TableHead className=\"text-right text-gray-400\">Progress</TableHead>\r\n          </TableRow>\r\n        </TableHeader>\r\n        <TableBody>\r\n          {data.map((row) => (\r\n            <TableRow key={row.id} className=\"border-gray-800 hover:bg-gray-900/50\">\r\n              <TableCell className=\"font-medium text-white\">{row.name}</TableCell>\r\n              <TableCell className=\"text-gray-400\">{row.status}</TableCell>\r\n              <TableCell className=\"text-gray-400\">{row.date}</TableCell>\r\n              <TableCell className=\"text-right text-gray-400\">{row.progress}%</TableCell>\r\n            </TableRow>\r\n          ))}\r\n        </TableBody>\r\n      </Table>\r\n    </div>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

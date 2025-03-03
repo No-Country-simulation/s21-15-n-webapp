@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/app/providers.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1740969311564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740969409982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,6 @@\n \"use client\"\r\n \r\n-import type React from \"react\"\r\n-\r\n import { ThemeProvider } from \"next-themes\"\r\n \r\n export function Providers({ children }: { children: React.ReactNode }) {\r\n   return (\r\n@@ -10,5 +8,4 @@\n       {children}\r\n     </ThemeProvider>\r\n   )\r\n }\r\n-\r\n"
+                },
+                {
+                    "date": 1740969418066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n \"use client\"\r\n \r\n import { ThemeProvider } from \"next-themes\"\r\n+import { ReactNode } from \"react\"\r\n \r\n export function Providers({ children }: { children: ReactNode }) {\r\n   return (\r\n     <ThemeProvider attribute=\"class\" defaultTheme=\"dark\" enableSystem>\r\n"
+                },
+                {
+                    "date": 1740969432362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n import { ThemeProvider } from \"next-themes\"\r\n import { ReactNode } from \"react\"\r\n \r\n-export function Providers({ children }: { children: ReactNode }) {\r\n+export function Providers({ children }: { children: Readonly<ReactNode> }) {\r\n   return (\r\n     <ThemeProvider attribute=\"class\" defaultTheme=\"dark\" enableSystem>\r\n       {children}\r\n     </ThemeProvider>\r\n"
+                }
+            ],
+            "date": 1740969311564,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport type React from \"react\"\r\n\r\nimport { ThemeProvider } from \"next-themes\"\r\n\r\nexport function Providers({ children }: { children: React.ReactNode }) {\r\n  return (\r\n    <ThemeProvider attribute=\"class\" defaultTheme=\"dark\" enableSystem>\r\n      {children}\r\n    </ThemeProvider>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

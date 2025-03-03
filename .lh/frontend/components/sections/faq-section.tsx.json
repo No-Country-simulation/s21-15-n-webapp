@@ -1,0 +1,42 @@
+{
+    "sourceFile": "frontend/components/sections/faq-section.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1740971302173,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740971395685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { memo } from \"react\"\r\n import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"@/components/ui/accordion\"\r\n \r\n interface FAQItem {\r\n+  is:\r\n   question: string\r\n   answer: string\r\n }\r\n \r\n@@ -52,5 +53,4 @@\n       </div>\r\n     </section>\r\n   )\r\n })\r\n-\r\n"
+                },
+                {
+                    "date": 1740971406329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,16 @@\n import { memo } from \"react\"\r\n import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"@/components/ui/accordion\"\r\n \r\n interface FAQItem {\r\n-  is:\r\n+  id: string\r\n   question: string\r\n   answer: string\r\n }\r\n \r\n const faqs: FAQItem[] = [\r\n   {\r\n+    id:\r\n     question: \"¿Qué es StartPerks?\",\r\n     answer:\r\n       \"StartPerks es una plataforma que te permite ganar experiencia práctica en tecnología a través de simulaciones laborales y desafíos, mientras acumulás puntos y desbloqueás beneficios exclusivos.\",\r\n   },\r\n"
+                },
+                {
+                    "date": 1740971412523,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n     answer:\r\n       \"StartPerks es una plataforma que te permite ganar experiencia práctica en tecnología a través de simulaciones laborales y desafíos, mientras acumulás puntos y desbloqueás beneficios exclusivos.\",\r\n   },\r\n   {\r\n+    \r\n     question: \"¿Cómo me registro?\",\r\n     answer:\r\n       \"Podés registrarte gratuitamente haciendo click en el botón 'Crear cuenta' en la parte superior de la página. Solo necesitás completar algunos datos básicos y validar tu email.\",\r\n   },\r\n"
+                },
+                {
+                    "date": 1740971416350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     answer:\r\n       \"StartPerks es una plataforma que te permite ganar experiencia práctica en tecnología a través de simulaciones laborales y desafíos, mientras acumulás puntos y desbloqueás beneficios exclusivos.\",\r\n   },\r\n   {\r\n-    \r\n+    id\r\n     question: \"¿Cómo me registro?\",\r\n     answer:\r\n       \"Podés registrarte gratuitamente haciendo click en el botón 'Crear cuenta' en la parte superior de la página. Solo necesitás completar algunos datos básicos y validar tu email.\",\r\n   },\r\n"
+                },
+                {
+                    "date": 1740971422784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     answer:\r\n       \"Podés registrarte gratuitamente haciendo click en el botón 'Crear cuenta' en la parte superior de la página. Solo necesitás completar algunos datos básicos y validar tu email.\",\r\n   },\r\n   {\r\n-    id:\r\n+    id:\"3\",\r\n     question: \"¿Cómo acumulo puntos y subo de nivel?\",\r\n     answer:\r\n       \"Acumulás puntos completando desafíos técnicos, participando en simulaciones laborales y recibiendo feedback positivo de mentores. Cada nivel requiere una cantidad específica de puntos.\",\r\n   },\r\n"
+                },
+                {
+                    "date": 1740971439381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n           </p>\r\n         </div>\r\n         <div className=\"max-w-3xl mx-auto\">\r\n           <Accordion type=\"single\" collapsible className=\"w-full\">\r\n-            {faqs.map((faq, index) => (\r\n+            {faqs.map((faq) => (\r\n               <AccordionItem key={index} value={`item-${index}`} className=\"border-purple-900/20\">\r\n                 <AccordionTrigger className=\"text-white hover:text-purple-400\">{faq.question}</AccordionTrigger>\r\n                 <AccordionContent className=\"text-gray-400\">{faq.answer}</AccordionContent>\r\n               </AccordionItem>\r\n"
+                }
+            ],
+            "date": 1740971302173,
+            "name": "Commit-0",
+            "content": "import { memo } from \"react\"\r\nimport { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from \"@/components/ui/accordion\"\r\n\r\ninterface FAQItem {\r\n  question: string\r\n  answer: string\r\n}\r\n\r\nconst faqs: FAQItem[] = [\r\n  {\r\n    question: \"¿Qué es StartPerks?\",\r\n    answer:\r\n      \"StartPerks es una plataforma que te permite ganar experiencia práctica en tecnología a través de simulaciones laborales y desafíos, mientras acumulás puntos y desbloqueás beneficios exclusivos.\",\r\n  },\r\n  {\r\n    question: \"¿Cómo me registro?\",\r\n    answer:\r\n      \"Podés registrarte gratuitamente haciendo click en el botón 'Crear cuenta' en la parte superior de la página. Solo necesitás completar algunos datos básicos y validar tu email.\",\r\n  },\r\n  {\r\n    question: \"¿Cómo acumulo puntos y subo de nivel?\",\r\n    answer:\r\n      \"Acumulás puntos completando desafíos técnicos, participando en simulaciones laborales y recibiendo feedback positivo de mentores. Cada nivel requiere una cantidad específica de puntos.\",\r\n  },\r\n  {\r\n    question: \"¿Necesito experiencia previa en tecnología?\",\r\n    answer:\r\n      \"No, StartPerks está diseñado para todos los niveles. Tenemos rutas de aprendizaje que te guían desde lo básico hasta lo avanzado.\",\r\n  },\r\n]\r\n\r\nexport const FAQSection = memo(function FAQSection() {\r\n  return (\r\n    <section className=\"py-20\" id=\"faq\">\r\n      <div className=\"container px-4\">\r\n        <div className=\"text-center mb-12\">\r\n          <h2 className=\"text-3xl font-bold text-white mb-4\">Preguntas Frecuentes sobre cómo navegar por StartPerks</h2>\r\n          <p className=\"text-gray-400 max-w-2xl mx-auto\">\r\n            Resolvemos dudas para que puedas despegar participando en la comunidad galáctica\r\n          </p>\r\n        </div>\r\n        <div className=\"max-w-3xl mx-auto\">\r\n          <Accordion type=\"single\" collapsible className=\"w-full\">\r\n            {faqs.map((faq, index) => (\r\n              <AccordionItem key={index} value={`item-${index}`} className=\"border-purple-900/20\">\r\n                <AccordionTrigger className=\"text-white hover:text-purple-400\">{faq.question}</AccordionTrigger>\r\n                <AccordionContent className=\"text-gray-400\">{faq.answer}</AccordionContent>\r\n              </AccordionItem>\r\n            ))}\r\n          </Accordion>\r\n        </div>\r\n      </div>\r\n    </section>\r\n  )\r\n})\r\n\r\n"
+        }
+    ]
+}

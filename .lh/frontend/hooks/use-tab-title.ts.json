@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/hooks/use-tab-title.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1740974221499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1740974221499,
+            "name": "Commit-0",
+            "content": "\"use client\";\r\n\r\nimport { useEffect } from \"react\";\r\n\r\nexport function useTabTitle(isLocked: boolean) {\r\n  useEffect(() => {\r\n    const originalTitle = document.title;\r\n\r\n    if (isLocked) {\r\n      document.title = \"🔒 Página Bloqueada - Regresa para desbloquear\";\r\n    }\r\n\r\n    return () => {\r\n      document.title = originalTitle;\r\n    };\r\n  }, [isLocked]);\r\n}\r\n"
+        }
+    ]
+}
