@@ -1,6 +1,7 @@
 package com.backend.s21.security;
 
 import com.backend.s21.security.jwt.JwtAuthenticationConverter;
+import com.backend.s21.security.jwt.JwtAuthorizationEntryPoint;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     private final JwtAuthenticationConverter jwtAuthenticationConverter;
+    private final JwtAuthorizationEntryPoint jwtAuthorizationEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -35,7 +37,7 @@ public class WebSecurityConfig {
                                 "/admin/**",
                                 "/api/keycloak/**",
                                 "/api/keycloak/create").permitAll()
-                        .anyRequest().permitAll() // Todas las demás requieren autenticación
+                        .anyRequest().authenticated()
                 )
 
 //                .oauth2Login(oauth2 -> oauth2
@@ -43,19 +45,11 @@ public class WebSecurityConfig {
 //                        .defaultSuccessUrl("/api/user/info", true) // Redirección después de login exitoso
 //                        .failureUrl("/login?error=true") // Redirección si falla el login
 //                )
-
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter))
                 )
-
-                .exceptionHandling(exceptions -> exceptions
-                        .authenticationEntryPoint((request, response, authException) ->
-                                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
-                        ) //Implement S of Solid
-                )
-
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthorizationEntryPoint) )
                 .formLogin(AbstractHttpConfigurer::disable)
-
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return httpSecurity.build();

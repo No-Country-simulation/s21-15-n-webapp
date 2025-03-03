@@ -2,6 +2,11 @@ package com.backend.s21.controller;
 
 import com.backend.s21.model.users.CompanyUser;
 import com.backend.s21.service.ICompanyUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +19,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/company")
+@Tag(name = "Usuarios de Compañías", description = "Operaciones relacionadas con usuarios de compañías")
 public class CompanyUserController {
 
     private final ICompanyUserService companyRepository;
@@ -23,6 +29,9 @@ public class CompanyUserController {
     }
 
     @PostMapping
+    @Operation(summary = "Registrar un usuario de compañía", description = "Crea un nuevo usuario de compañía en el sistema.")
+    @ApiResponse(responseCode = "201", description = "Usuario de compañía creado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CompanyUser.class)))
+    @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     public ResponseEntity<CompanyUser> registerCompanyUser(@RequestBody @Validated CompanyUser companyJson,
                                                            UriComponentsBuilder uri) {
         CompanyUser companyUser = companyRepository.save(companyJson);

@@ -6,6 +6,12 @@ import com.backend.s21.service.IAdminUserService;
 import com.backend.s21.service.IJuniorUserService;
 import com.backend.s21.service.IMentorUserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -21,6 +27,7 @@ import java.net.URISyntaxException;
 @RequestMapping("/api/keycloak")
 @Slf4j
 @RequiredArgsConstructor
+@Tag(name = "Administración de Usuarios Keycloak", description = "Operaciones para administrar usuarios en Keycloak")
 public class KeyCloakController {
 
     private final IAdminUserService adminService;
@@ -33,13 +40,18 @@ public class KeyCloakController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/users")
+    @Operation(summary = "Listar todos los usuarios", description = "Recupera una lista de todos los usuarios en Keycloak.")
+    @ApiResponse(responseCode = "200", description = "Lista de usuarios recuperada", content = @Content(mediaType = "application/json", schema = @Schema(type = "array", implementation = UserRepresentation.class)))
     public ResponseEntity<?> findAllUsers() {
         return ResponseEntity.ok(keyCloakService.findAllUsers());
     }
 
     @PreAuthorize("permitAll()")
     @GetMapping("/user/{username}")
-    public ResponseEntity<UserRepresentation> searchUserByUsername(@PathVariable String username) {
+    @Operation(summary = "Buscar usuario por nombre de usuario", description = "Recupera la información de un usuario específico por su nombre de usuario.")
+    @ApiResponse(responseCode = "200", description = "Usuario encontrado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserRepresentation.class)))
+    @ApiResponse(responseCode = "404", description = "Usuario no encontrado")
+    public ResponseEntity<UserRepresentation> searchUserByUsername(@Parameter(description = "Nombre de usuario", required = true) @PathVariable String username) {
         try {
             UserRepresentation user = keyCloakService.searchUserByUsername(username);
             return ResponseEntity.ok(user);
@@ -50,15 +62,21 @@ public class KeyCloakController {
 
     @PreAuthorize("permitAll()")
     @PostMapping("/create")
+    @Operation(summary = "Crear un usuario", description = "Crea un nuevo usuario en Keycloak.")
+    @ApiResponse(responseCode = "201", description = "Usuario creado", content = @Content(mediaType = "text/plain"))
+    @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     public ResponseEntity<?> createUser(@RequestBody UserRecord user) throws URISyntaxException, JsonProcessingException {
         String response = keyCloakService.createUser(user);
         return ResponseEntity.created(new URI("/keycloak/user/" + user.username())).body(response);
     }
 
     //    @PreAuthorize("hasRole('${swagger.role.admin}')")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('admin')")
     @DeleteMapping("delete/{username}")
-    public ResponseEntity<?> deleteUser(@PathVariable String username) {
+    @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario de Keycloak.")
+    @ApiResponse(responseCode = "200", description = "Usuario eliminado")
+    @ApiResponse(responseCode = "500", description = "Error al eliminar el usuario")
+    public ResponseEntity<?> deleteUser(@Parameter(description = "Nombre de usuario", required = true) @PathVariable String username) {
         try {
             keyCloakService.deleteUser(username);
             return ResponseEntity.ok("User deleted successfully");
@@ -70,6 +88,9 @@ public class KeyCloakController {
     //    @PreAuthorize("hasRole('${swagger.role.admin}')")
     @PreAuthorize("permitAll()")
     @PutMapping("update/user")
+    @Operation(summary = "Actualizar un usuario", description = "Actualiza la información de un usuario existente en Keycloak.")
+    @ApiResponse(responseCode = "200", description = "Usuario actualizado")
+    @ApiResponse(responseCode = "500", description = "Error al actualizar el usuario")
     public ResponseEntity<?> updateUser(@RequestBody UserRecord user) {
         try {
             keyCloakService.updateUser(user);
@@ -82,7 +103,10 @@ public class KeyCloakController {
 
     //    @PreAuthorize("false")
     @PutMapping("/user/{username}/role")
-    public ResponseEntity<?> changeRole(@PathVariable String username, @RequestParam String role) {
+    @Operation(summary = "Cambiar el rol de un usuario", description = "Asigna o cambia el rol de un usuario en Keycloak.")
+    @ApiResponse(responseCode = "200", description = "Rol asignado correctamente")
+    @ApiResponse(responseCode = "500", description = "Error al asignar el rol")
+    public ResponseEntity<?> changeRole(@Parameter(description = "Nombre de usuario", required = true) @PathVariable String username, @RequestParam String role) {
         try {
             keyCloakService.changeRole(username, role);
             return ResponseEntity.ok("Role assigned successfully");
