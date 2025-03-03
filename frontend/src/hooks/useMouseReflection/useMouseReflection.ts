@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
+
 export interface MousePosition {
   x: number;
   y: number;
 }
+
 export function useMouseReflection() {
   const [mousePosition, setMousePosition] = useState<MousePosition>({
     x: 0,

@@ -1,7 +1,9 @@
+"use client"
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../../../../components/ui/dialog"
+import { Button } from "../../../../components/ui/button"
 import { ScrollArea } from "../../../../components/ui/scroll-area"
 import { memo } from "react"
-import { Button } from "../../../../components/ui/button"
 
 interface Streak {
   date: string
@@ -28,7 +30,7 @@ export const UserProfileDialog = memo(function UserProfileDialog({ open, onOpenC
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px] bg-gray-900 text-white border-gray-800">
         <DialogHeader>
-            <div className="flex items-start gap-4">
+          <div className="flex items-start gap-4">
             <img
               src={user.avatar || "/placeholder.svg"}
               alt={user.name}
@@ -40,16 +42,16 @@ export const UserProfileDialog = memo(function UserProfileDialog({ open, onOpenC
               <DialogTitle className="text-xl font-bold text-white">{user.name}</DialogTitle>
               <span className="text-sm text-gray-400">{user.rank}</span>
             </div>
-            </div>
+          </div>
         </DialogHeader>
 
         <div className="mt-4">
           <h4 className="text-sm font-medium text-gray-400 mb-2">Rachas de Actividad</h4>
           <ScrollArea className="h-[200px] rounded-md border border-gray-800 p-4">
             <div className="space-y-4">
-              {user.streaks.map((streak) => (
+              {user.streaks.map((streak, index) => (
                 <div
-                  key={streak.date}
+                  key={index}
                   className="flex items-center justify-between border-b border-gray-800 pb-4 last:border-0"
                 >
                   <div>

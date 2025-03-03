@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 export function useVisibilityState() {
+
   const [isVisible, setIsVisible] = useState(true);
   const [wasHidden, setWasHidden] = useState(false);
 

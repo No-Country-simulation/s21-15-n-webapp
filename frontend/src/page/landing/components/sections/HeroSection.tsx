@@ -1,14 +1,13 @@
-
+import { Button } from "../../../../components/ui/button"
 import { memo } from "react"
 import { useRandomStars } from "../../../../hooks"
-import { Button } from "../../../../components/ui/button"
 
 
 export const HeroSection = memo(function HeroSection() {
-  const stars = useRandomStars(30)
+  const stars = useRandomStars(50)
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden py-20 text-center">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden py-32">
       {/* Stars Background */}
       <div className="absolute inset-0 overflow-hidden">
         {stars.map((star) => (
@@ -31,29 +30,29 @@ export const HeroSection = memo(function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="container relative px-4">
-        <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight text-white md:text-6xl">
-          Únete a StartPerks y{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-            transforma
+      <div className="container relative px-4 text-center">
+        <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl">
+          Ganá{" "}
+          <span className="bg-gradient-to-r from-violet-500 to-violet-300 bg-clip-text text-transparent">
+            experiencia
           </span>
-          <br />
-          tu{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">carrera</span>{" "}
-          en{" "}
-          <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-            tecnología
-          </span>
+          , validá tus{" "}
+          <span className="bg-gradient-to-r from-fuchsia-500 to-pink-400 bg-clip-text text-transparent">
+            habilidades
+          </span>{" "}
+          y{" "}
+          <span className="bg-gradient-to-r from-blue-500 to-indigo-400 bg-clip-text text-transparent">desbloqueá</span>{" "}
+          tu futuro
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-400">
-          Participa en simulaciones laborales, gana puntos y desbloquea mentorías exclusivas para impulsar tu
-          crecimiento profesional
+        <p className="mx-auto mt-8 max-w-2xl text-lg text-gray-400">
+          Registrate como cadete en StartPerks y comienza tu aventura intergaláctica. Acumulá puntos, desbloqueá
+          mentorías y conquista cada desafío para elevar tu carrera en tecnología
         </p>
         <Button
           size="lg"
-          className="mt-8 bg-gradient-to-r from-purple-600 to-purple-500 text-white hover:from-purple-500 hover:to-purple-400"
+          className="mt-10 bg-gradient-to-r from-fuchsia-600 to-blue-600 text-lg text-white hover:from-fuchsia-500 hover:to-blue-500"
         >
-          Crear y empezar a ganar puntos
+          Únete y empieza a ganar puntos
         </Button>
       </div>
     </section>

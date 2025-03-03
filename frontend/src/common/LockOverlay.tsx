@@ -1,8 +1,8 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../../../components/ui/card"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../components/ui/card"
 
 import { LockIcon } from "lucide-react"
 import { memo } from "react"
-import { Button } from "../../../../components/ui/button"
+import { Button } from "../components/ui/button"
 
 interface LockOverlayProps {
   onUnlock: () => void

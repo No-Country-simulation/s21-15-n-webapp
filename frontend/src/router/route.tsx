@@ -4,10 +4,14 @@
  * @version 1.0.0
  */
 
+import DashboardRoot from "../page/dashboard/Dashboard";
 import Landing from "../page/landing/landing";
 //import Login from "../page/login/login";
 //import Register from "../page/login/register";
 import { createBrowserRouter } from 'react-router-dom';
+import LoginPage from "../page/login/Login";
+
+
 
 /**
  * @constant
@@ -18,7 +22,17 @@ import { createBrowserRouter } from 'react-router-dom';
 const router = createBrowserRouter([
     {
         path:"/",
-        element: <Landing/>,
+        element: <Landing />,
+        errorElement: <div>Ups! Algo salió mal</div>
+    },
+    {
+        path:"/cabina",
+        element: <DashboardRoot />,
+        errorElement: <div>Ups! Algo salió mal</div>
+    },
+    {
+        path:"/ingresar",
+        element: <LoginPage />,
         errorElement: <div>Ups! Algo salió mal</div>
     },
    /* {
