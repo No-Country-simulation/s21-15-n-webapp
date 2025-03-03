@@ -44,7 +44,6 @@ public class JuniorUserController {
         this.mentorshipHRepository = mentorshipHRepository;
     }
 
-    //Falta implementar el retorno del mensaje apropiado manejado en GlobalException en cada método.
     @PostMapping
     public ResponseEntity<?> registerJuniorUser(@RequestBody @Valid JuniorUser juniorUser,
                                                             UriComponentsBuilder uri) {
