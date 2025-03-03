@@ -71,7 +71,7 @@ public class KeyCloakController {
     }
 
     //    @PreAuthorize("hasRole('${swagger.role.admin}')")
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('admin')")
     @DeleteMapping("delete/{username}")
     @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario de Keycloak.")
     @ApiResponse(responseCode = "200", description = "Usuario eliminado")

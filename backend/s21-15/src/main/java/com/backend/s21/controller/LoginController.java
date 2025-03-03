@@ -34,7 +34,7 @@ public class LoginController {
     @ApiResponse(responseCode = "401", description = "Credenciales inválidas", content = @Content(mediaType = "text/plain"))
     public ResponseEntity<?> login(@RequestBody JWTRequest request) throws Exception {
         try {
-            String name = request.username();
+            String name = request.username().toLowerCase();
             String password = request.password();
             JWTResponse jwtResponse = iKeyCloakService.login(name, password);
             return ResponseEntity.ok(jwtResponse);

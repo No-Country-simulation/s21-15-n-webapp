@@ -37,7 +37,7 @@ public class WebSecurityConfig {
                                 "/admin/**",
                                 "/api/keycloak/**",
                                 "/api/keycloak/create").permitAll()
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
 
 //                .oauth2Login(oauth2 -> oauth2

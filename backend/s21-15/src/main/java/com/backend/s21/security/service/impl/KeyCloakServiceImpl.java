@@ -255,6 +255,16 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setEmail(user.email());
         userRepresentation.setUsername(user.username());
+        userRepresentation.setFirstName(
+                Optional.ofNullable(user.firstName())
+                        .filter(name -> !name.isBlank())
+                        .orElse(user.username())
+        );
+        userRepresentation.setLastName(
+                Optional.ofNullable(user.lastName())
+                        .filter(name -> !name.isBlank())
+                        .orElse(user.username())
+        );
         userRepresentation.setEnabled(true);
         userRepresentation.setEmailVerified(true);
         userRepresentation.setCredentials(List.of(getCredentialRepresentation(user.password())));
