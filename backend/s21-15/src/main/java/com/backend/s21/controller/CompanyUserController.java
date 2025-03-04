@@ -7,18 +7,16 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/company")
+@RequestMapping("/companies")
 @Tag(name = "Usuarios de Compañías", description = "Operaciones relacionadas con usuarios de compañías")
 public class CompanyUserController {
 
@@ -32,24 +30,46 @@ public class CompanyUserController {
     @Operation(summary = "Registrar un usuario de compañía", description = "Crea un nuevo usuario de compañía en el sistema.")
     @ApiResponse(responseCode = "201", description = "Usuario de compañía creado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CompanyUser.class)))
     @ApiResponse(responseCode = "400", description = "Solicitud inválida")
-    public ResponseEntity<CompanyUser> registerCompanyUser(@RequestBody @Validated CompanyUser companyJson,
+    public ResponseEntity<?> registerCompanyUser(@RequestBody @Valid CompanyUser companyJson,
                                                            UriComponentsBuilder uri) {
-        CompanyUser companyUser = companyRepository.save(companyJson);
-        URI url = uri.path("/company/{nickname}").buildAndExpand(companyUser.getNickname()).toUri();
-        return ResponseEntity.created(url).body(companyUser);
+        try {
+            CompanyUser companyUser = companyRepository.save(companyJson);
+            URI url = uri.path("/{id}").buildAndExpand(companyUser.getId()).toUri();
+            return ResponseEntity.created(url).body(companyUser);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
-//    @GetMapping("/{nickname}")
-//    public ResponseEntity<CompanyUser> showCompanyUser(@PathVariable String nickname){
-//        try {
-//            CompanyUser user = companyRepository.getReferenceByNickname(nickname);
-//            if (user != null) {
-//                return ResponseEntity.ok(user);
-//            } else {
-//                return ResponseEntity.badRequest().build();
-//            }
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.badRequest().build();
-//        }
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> showCompanyUser(@PathVariable int id){
+        try {
+            CompanyUser user = companyRepository.findById(id);
+            return ResponseEntity.ok(user);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCompanyUser(@PathVariable int id, CompanyUser userJson) {
+        try {
+            CompanyUser user = companyRepository.update(userJson, id);
+            return ResponseEntity.ok(user);
+        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException | RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCompanyUser(@PathVariable int id) {
+        try {
+            CompanyUser user = companyRepository.findById(id);
+            user.setDeleted(true);
+            return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }
