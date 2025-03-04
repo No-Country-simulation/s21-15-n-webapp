@@ -93,8 +93,7 @@ public class MentorUserController {
                                                           UriComponentsBuilder uri) {
         try {
             MentorUser mentor = mentorRepository.findById(id);
-            Mentorship mentorship = new Mentorship(null, mentor, mentorshipJson.getTitle(),
-                    mentorshipJson.getDescription(), null, null);
+            Mentorship mentorship = new Mentorship(mentor, mentorshipJson);
             mentorshipRepository.save(mentorship);
             URI url = uri.path("/mentorship/{id}").buildAndExpand(mentorship.getId()).toUri();
             return ResponseEntity.created(url).body(new MentorshipDTO(mentorship));
