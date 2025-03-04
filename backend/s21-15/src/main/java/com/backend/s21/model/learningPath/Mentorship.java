@@ -36,5 +36,11 @@ public class Mentorship {
 
     @Column(name = "experience_reward")
     private Integer experienceReward;
+
+    public Mentorship(MentorUser mentor, Mentorship mentorship) {
+        this.mentor = mentor;
+        this.title = mentorship.getTitle();
+        this.description = mentorship.getDescription();
+    }
 }
 
