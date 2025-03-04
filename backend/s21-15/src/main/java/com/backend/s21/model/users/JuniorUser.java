@@ -27,6 +27,9 @@ public class JuniorUser extends User {
     @Column(name = "country")
     private String country;
 
+    @Column(name = "streak")
+    private int streak;
+
     @OneToMany(mappedBy = "juniorUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChallengeHistory> challengeHistory;
 

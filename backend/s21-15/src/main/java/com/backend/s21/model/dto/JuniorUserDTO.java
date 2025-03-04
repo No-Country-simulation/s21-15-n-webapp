@@ -24,6 +24,8 @@ public class JuniorUserDTO {
     private String firstName;
     private String lastName;
     private BigDecimal ranking;
+    private String country;
+    private int streak;
     private List<SocialNetworkDTO> socialNetworks;
     private List<CourseHistoryDTO> courseHistory;
     private List<MentorshipHistoryDTO> mentorshipHistory;
@@ -41,6 +43,8 @@ public class JuniorUserDTO {
         this.firstName = juniorUser.getFirstName();
         this.lastName = juniorUser.getLastName();
         this.ranking = juniorUser.getRanking();
+        this.country = juniorUser.getCountry();
+        this.streak = juniorUser.getStreak();
 
         if (juniorUser.getSocialNetworks() != null) {
             this.socialNetworks = juniorUser.getSocialNetworks()
