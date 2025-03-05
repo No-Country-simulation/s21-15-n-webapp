@@ -2,7 +2,9 @@ package com.backend.s21.model.learningPath;
 
 import com.backend.s21.model.users.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "courses")
 public class Course {
 
@@ -38,5 +42,11 @@ public class Course {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CourseHistory> courseHistories;
+
+    public Course(User instructor, Course course) {
+        this.instructor = instructor;
+        this.title = course.getTitle();
+        this.description = course.getDescription();
+    }
 }
 

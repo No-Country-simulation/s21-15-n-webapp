@@ -46,6 +46,7 @@ public class MentorUserController {
     }
 
     @PostMapping
+    //@PreAuthorize("hasRole('admin')")
     public ResponseEntity<?> registerMentorUser(@RequestBody @Validated MentorUser userJson,
                                                          UriComponentsBuilder uri) {
         try {
@@ -69,15 +70,14 @@ public class MentorUserController {
 
     @PostMapping("/{id}/createcourse")
     @Transactional
-    public ResponseEntity<?> createCourse(@RequestBody @Validated Course courseJson, @PathVariable int id,
+    public ResponseEntity<?> createCourse( @PathVariable int id, @RequestBody @Valid Course courseJson,
                                                   UriComponentsBuilder uri) {
         try {
-            Course course = courseRepository.save(courseJson);
             User instructor = mentorRepository.findById(id);
-            course.setInstructor(instructor);
-            CourseDTO courseDTO = new CourseDTO(course);
-            URI url = uri.path("/course/{id}").buildAndExpand(courseDTO.getId()).toUri();
-            return ResponseEntity.created(url).body(courseDTO);
+            Course course = new Course(instructor, courseJson);
+            courseRepository.save(course);
+            URI url = uri.path("/course/{id}").buildAndExpand(course.getId()).toUri();
+            return ResponseEntity.created(url).body(new CourseDTO(course));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -97,7 +97,7 @@ public class MentorUserController {
     @PostMapping("/{id}/creatementorship")
     @Transactional
     public ResponseEntity<?> createMentorship(@PathVariable int id,
-                                                          @RequestBody @Validated Mentorship mentorshipJson,
+                                                          @RequestBody @Valid Mentorship mentorshipJson,
                                                           UriComponentsBuilder uri) {
         try {
             MentorUser mentor = mentorRepository.findById(id);
@@ -106,6 +106,17 @@ public class MentorUserController {
             URI url = uri.path("/mentorship/{id}").buildAndExpand(mentorship.getId()).toUri();
             return ResponseEntity.created(url).body(new MentorshipDTO(mentorship));
         } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{idm}/yourmentorship/{id}")
+    @Transactional
+    public ResponseEntity<?> updateMentorship(@PathVariable Integer id, @RequestBody @Valid Mentorship mentorshipJson) {
+        try {
+            Mentorship mentorship = mentorshipRepository.update(mentorshipJson, id);
+            return ResponseEntity.ok(new MentorshipDTO(mentorship));
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException | RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -121,7 +132,6 @@ public class MentorUserController {
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
     public ResponseEntity deleteUser(@PathVariable int id) {
         MentorUser user = mentorRepository.findById(id);
         user.setDeleted(true);

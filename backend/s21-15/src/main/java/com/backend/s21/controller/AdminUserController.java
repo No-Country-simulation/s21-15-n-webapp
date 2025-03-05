@@ -6,7 +6,6 @@ import com.backend.s21.model.dto.JuniorUserDTO;
 import com.backend.s21.model.dto.SocialNetworkDTO;
 import com.backend.s21.model.learningPath.Challenge;
 import com.backend.s21.model.users.AdminUser;
-import com.backend.s21.model.users.JuniorUser;
 import com.backend.s21.model.users.SocialNetwork;
 import com.backend.s21.model.users.User;
 import com.backend.s21.service.IAdminUserService;
@@ -21,14 +20,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -96,12 +95,10 @@ public class AdminUserController {
     @GetMapping("/{id}/juniorlist")
     @Operation(summary = "Listar usuarios junior de un administrador", description = "Recupera la lista de usuarios junior asociados a un administrador específico.")
     @ApiResponse(responseCode = "200", description = "Lista de usuarios junior recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = JuniorUserDTO.class)))
-    @ApiResponse(responseCode = "404", description = "Usuario administrador no encontrado")
-    public ResponseEntity<Page<JuniorUserDTO>> showJuniorUserList(@Parameter(description = "ID del usuario administrador", required = true) @PathVariable int id) {
+    @ApiResponse(responseCode = "404", description = "Lista usuarios junior no encontrado")
+    public ResponseEntity<Page<JuniorUserDTO>> showJuniorUserList(Pageable pageable) {
         try {
-            List<JuniorUser> juniorList = juniorService.findAll();
-            return ResponseEntity.ok(new PageImpl<>(juniorList, org.springframework.data.domain.Pageable.unpaged(),
-                    juniorList.size()).map(JuniorUserDTO::new));
+            return ResponseEntity.ok(juniorService.findAll(pageable).map(JuniorUserDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
         }
@@ -115,6 +112,27 @@ public class AdminUserController {
             SocialNetwork socialNetwork = socialNetworkService.save(new SocialNetwork(null, user, socialNet.getName(),
                     socialNet.getUrl()));
             return ResponseEntity.ok(new SocialNetworkDTO(socialNetwork));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUser(@RequestBody @Valid AdminUser userJson, @PathVariable int id) {
+        try {
+            AdminUser user = adminService.update(userJson, id);
+            return ResponseEntity.ok(new AdminUserDTO(user));
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException | RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable int id) {
+        try {
+            AdminUser user = adminService.findById(id);
+            user.setDeleted(true);
+            return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

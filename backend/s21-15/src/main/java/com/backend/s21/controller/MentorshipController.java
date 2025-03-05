@@ -2,8 +2,6 @@ package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.MentorshipDTO;
 import com.backend.s21.model.learningPath.Mentorship;
-import com.backend.s21.model.users.MentorUser;
-import com.backend.s21.service.IMentorUserService;
 import com.backend.s21.service.IMentorshipService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,24 +19,21 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/mentorship")
+@RequestMapping("/mentorships")
 @Tag(name = "Mentorías", description = "Operaciones relacionadas con mentorías")
 public class MentorshipController {
 
     private final IMentorshipService mentorshipRepository;
 
-    private final IMentorUserService mentorRepository;
-
-    public MentorshipController(IMentorshipService mentorshipRepository, IMentorUserService mentorRepository) {
+    public MentorshipController(IMentorshipService mentorshipRepository) {
         this.mentorshipRepository = mentorshipRepository;
-        this.mentorRepository = mentorRepository;
     }
 
     @GetMapping
     @Operation(summary = "Listar mentorías", description = "Recupera una lista paginada de todas las mentorías disponibles.")
     @ApiResponse(responseCode = "200", description = "Lista de mentorías recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MentorshipDTO.class)))
     @ApiResponse(responseCode = "400", description = "Solicitud inválida")
-    public ResponseEntity<Page<MentorshipDTO>> showCourseList(Pageable pageable) {
+    public ResponseEntity<Page<MentorshipDTO>> showMentorshipList(Pageable pageable) {
         try {
             return ResponseEntity.ok(mentorshipRepository.findAll(pageable).map(MentorshipDTO::new));
         } catch (RuntimeException e) {
@@ -46,12 +41,11 @@ public class MentorshipController {
         }
     }
 
-    @PostMapping("/create/{id}")
-    public ResponseEntity<?> createMentorship(@RequestBody @Valid Mentorship mentorshipJson, @PathVariable int id,
+    @PostMapping("/create")
+    public ResponseEntity<?> createMentorship(@RequestBody @Valid Mentorship mentorshipJson,
                                               UriComponentsBuilder uri) {
         try {
-            MentorUser mentor = mentorRepository.findById(id);
-            Mentorship mentorship = mentorshipRepository.save(new Mentorship(mentor, mentorshipJson));
+            Mentorship mentorship = mentorshipRepository.save(mentorshipJson);
             URI url = uri.path("/{id}").buildAndExpand(mentorship.getId()).toUri();
             return ResponseEntity.created(url).body(new MentorshipDTO(mentorship));
         } catch (RuntimeException e) {

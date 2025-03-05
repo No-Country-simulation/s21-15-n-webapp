@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,11 +32,18 @@ public class CourseController {
     @GetMapping
     @Operation(summary = "Listar cursos", description = "Recupera una lista paginada de todos los cursos disponibles.")
     @ApiResponse(responseCode = "200", description = "Lista de cursos recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CourseDTO.class)))
+    @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     public ResponseEntity<Page<CourseDTO>> showCourseList(Pageable pageable) {
-        return ResponseEntity.ok(courseRepository.findAll(pageable).map(CourseDTO::new));
+        try {
+            return ResponseEntity.ok(courseRepository.findAll(pageable).map(CourseDTO::new));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
     @PostMapping("/create")
+    @Transactional
     public ResponseEntity<?> createCourse(@RequestBody @Valid Course courseJson, UriComponentsBuilder uri) {
         try {
             Course course = courseRepository.save(courseJson);
@@ -55,7 +63,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCourse(@PathVariable int id, Course courseJson) {
+    public ResponseEntity<?> updateCourse(@PathVariable int id, @RequestBody @Valid Course courseJson) {
         try {
             Course course = courseRepository.update(courseJson, id);
             return ResponseEntity.ok(new CourseDTO(course));

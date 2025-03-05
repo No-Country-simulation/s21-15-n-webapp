@@ -60,7 +60,7 @@ public class CompanyUserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCompanyUser(@PathVariable int id, CompanyUser userJson) {
+    public ResponseEntity<?> updateCompanyUser(@PathVariable int id, @RequestBody @Valid CompanyUser userJson) {
         try {
             CompanyUser user = companyRepository.update(userJson, id);
             return ResponseEntity.ok(new CompanyUserDTO(user));
