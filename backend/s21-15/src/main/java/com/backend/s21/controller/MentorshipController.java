@@ -2,7 +2,6 @@ package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.MentorshipDTO;
 import com.backend.s21.model.learningPath.Mentorship;
-import com.backend.s21.model.users.JuniorUser;
 import com.backend.s21.model.users.MentorUser;
 import com.backend.s21.service.IMentorUserService;
 import com.backend.s21.service.IMentorshipService;
