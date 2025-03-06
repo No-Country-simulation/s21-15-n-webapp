@@ -76,19 +76,78 @@ public class AdminUserController {
         }
     }
 
-    @PostMapping("/{id}/createchallenge")
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUser(@RequestBody @Valid AdminUser userJson, @PathVariable int id) {
+        try {
+            AdminUser user = adminService.update(userJson, id);
+            return ResponseEntity.ok(new AdminUserDTO(user));
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException | RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable int id) {
+        try {
+            AdminUser user = adminService.findById(id);
+            user.setDeleted(true);
+            return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/{ida}/challengelist/createchallenge")
     @Operation(summary = "Crear un desafío para un administrador", description = "Crea un nuevo desafío asociado a un administrador específico.")
     @ApiResponse(responseCode = "201", description = "Desafío creado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ChallengeDTO.class)))
     @ApiResponse(responseCode = "400", description = "Solicitud inválida")
-    public ResponseEntity<?> createChallenge(@RequestBody @Validated Challenge challengeinfo, @Parameter(description = "ID del usuario administrador", required = true) @PathVariable int id,
+    public ResponseEntity<?> createChallenge(@RequestBody @Validated Challenge challengeinfo, @Parameter(description = "ID del usuario administrador", required = true) @PathVariable int ida,
                                                         UriComponentsBuilder uri) {
         try {
             Challenge challenge = challengeService.save(challengeinfo);
             ChallengeDTO challengeDTO = new ChallengeDTO(challenge);
-            URI url = uri.path("/challenge/{id}").buildAndExpand(challengeDTO.getId()).toUri();
+            URI url = uri.path("/{ida}/challengelist/{id}").buildAndExpand(ida, challengeDTO.getId()).toUri();
             return ResponseEntity.created(url).body(challengeDTO);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{ida}/challengelist/{id}")
+    public ResponseEntity<?> showChallenge(@PathVariable int id) {
+        try {
+            return ResponseEntity.ok(new ChallengeDTO(challengeService.findById(id)));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{ida}/challengelist/{id}")
+    public ResponseEntity<?> updateChallenge(@PathVariable int id, @RequestBody @Valid Challenge challengeJson) {
+        try {
+            Challenge challenge = challengeService.update(challengeJson, id);
+            return ResponseEntity.ok(new ChallengeDTO(challenge));
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException | RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{ida}/challengelist/{id}")
+    public ResponseEntity<?> deleteChallenge(@PathVariable int id) {
+        try {
+            String challengeName = challengeService.findById(id).getTitle();
+            return ResponseEntity.ok("El reto "+challengeName+", ha sido eliminado con exito.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}/challengelist")
+    public ResponseEntity<Page<ChallengeDTO>> showChallengeList(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(challengeService.findAll(pageable).map(ChallengeDTO::new));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 
@@ -116,26 +175,4 @@ public class AdminUserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody @Valid AdminUser userJson, @PathVariable int id) {
-        try {
-            AdminUser user = adminService.update(userJson, id);
-            return ResponseEntity.ok(new AdminUserDTO(user));
-        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException | RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable int id) {
-        try {
-            AdminUser user = adminService.findById(id);
-            user.setDeleted(true);
-            return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
 }
