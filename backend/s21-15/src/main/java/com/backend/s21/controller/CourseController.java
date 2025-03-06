@@ -2,6 +2,8 @@ package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.CourseDTO;
 import com.backend.s21.model.learningPath.Course;
+import com.backend.s21.model.users.User;
+import com.backend.s21.repository.IUserRepository;
 import com.backend.s21.service.ICourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/courses")
@@ -25,8 +28,11 @@ public class CourseController {
 
     private final ICourseService courseRepository;
 
-    public CourseController(ICourseService courseRepository) {
+    private final IUserRepository userRepository;
+
+    public CourseController(ICourseService courseRepository, IUserRepository userRepository) {
         this.courseRepository = courseRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -42,11 +48,13 @@ public class CourseController {
 
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create/{id}") //Se envía el Id al que se ligará el curso como parametro.
     @Transactional
-    public ResponseEntity<?> createCourse(@RequestBody @Valid Course courseJson, UriComponentsBuilder uri) {
+    public ResponseEntity<?> createCourse(@RequestBody @Valid Course courseJson, @PathVariable int id, UriComponentsBuilder uri) {
         try {
-            Course course = courseRepository.save(courseJson);
+            Optional<User> instructor = userRepository.findById(id); //Utilizado Optional mientras se implementa UserService.
+            Course course = new Course(instructor.get(), courseJson);
+            courseRepository.save(course);
             return ResponseEntity.ok(new CourseDTO(course));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -75,8 +83,9 @@ public class CourseController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCourse(@PathVariable int id) {
         try {
+            String courseName = courseRepository.findById(id).getTitle();
             courseRepository.deleteById(id);
-            return ResponseEntity.ok("El curso ha sido elimado con exito.");
+            return ResponseEntity.ok("El curso "+courseName+", ha sido elimado con exito.");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
