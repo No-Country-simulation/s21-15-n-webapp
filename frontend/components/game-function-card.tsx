@@ -1,10 +1,11 @@
+import type React from "react"
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { memo, ReactNode } from "react"
+import { memo } from "react"
 
 interface GameFunctionCardProps {
   title: string
   description: string
-  icon: ReactNode
+  icon: React.ReactNode
 }
 
 export const GameFunctionCard = memo(function GameFunctionCard({ title, description, icon }: GameFunctionCardProps) {
@@ -18,3 +19,4 @@ export const GameFunctionCard = memo(function GameFunctionCard({ title, descript
     </Card>
   )
 })
+

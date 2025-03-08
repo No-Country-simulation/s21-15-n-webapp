@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1740974405000,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741068714310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,66 @@\n import type { User } from \"../types\"\r\n \r\n export const AUTH_COOKIE_NAME = \"auth\"\r\n export const USER_STORAGE_KEY = \"currentUser\"\r\n+export const DEFAULT_USERS_KEY = \"defaultUsers\"\r\n \r\n+// Usuarios predeterminados del sistema\r\n+const defaultUsers = [\r\n+  {\r\n+    fullName: \"Admin User\",\r\n+    email: \"admin@startperks.com\",\r\n+    password: \"admin123\",\r\n+    role: \"admin\",\r\n+    level: 99,\r\n+    experience: 9999,\r\n+    streakDays: 365,\r\n+    badges: [\"admin\"],\r\n+    createdAt: new Date().toISOString(),\r\n+  },\r\n+  {\r\n+    fullName: \"Mentor User\",\r\n+    email: \"mentor@startperks.com\",\r\n+    password: \"mentor123\",\r\n+    role: \"mentor\",\r\n+    level: 50,\r\n+    experience: 5000,\r\n+    streakDays: 180,\r\n+    badges: [\"mentor\"],\r\n+    createdAt: new Date().toISOString(),\r\n+  },\r\n+  {\r\n+    fullName: \"Company User\",\r\n+    email: \"company@startperks.com\",\r\n+    password: \"company123\",\r\n+    role: \"company\",\r\n+    level: 30,\r\n+    experience: 3000,\r\n+    streakDays: 90,\r\n+    badges: [\"company\"],\r\n+    createdAt: new Date().toISOString(),\r\n+  },\r\n+  {\r\n+    fullName: \"Junior User\",\r\n+    email: \"junior@startperks.com\",\r\n+    password: \"junior123\",\r\n+    role: \"junior\",\r\n+    level: 1,\r\n+    experience: 0,\r\n+    streakDays: 0,\r\n+    badges: [],\r\n+    createdAt: new Date().toISOString(),\r\n+  },\r\n+]\r\n+\r\n+// Inicializar usuarios predeterminados si no existen\r\n+export function initializeDefaultUsers() {\r\n+  const storedUsers = localStorage.getItem(\"users\")\r\n+  if (!storedUsers) {\r\n+    localStorage.setItem(\"users\", JSON.stringify(defaultUsers))\r\n+  }\r\n+}\r\n+\r\n export function setAuthCookie(value = \"true\", expires = 7) {\r\n   Cookies.set(AUTH_COOKIE_NAME, value, { expires })\r\n }\r\n \r\n@@ -46,5 +103,16 @@\n     }\r\n     return user\r\n   })\r\n   localStorage.setItem(\"users\", JSON.stringify(updatedUsers))\r\n+\r\n+  // Si el usuario actualizado es el actual, actualizar también en currentUser\r\n+  const currentUser = getStoredUser()\r\n+  if (currentUser && currentUser.email === email) {\r\n+    setStoredUser({ ...currentUser, ...updates })\r\n+  }\r\n }\r\n+\r\n+export function updateUserRole(email: string, newRole: User[\"role\"]) {\r\n+  updateUser(email, { role: newRole })\r\n+}\r\n+\r\n"
+                },
+                {
+                    "date": 1741317555709,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,13 @@\n \n export function removeAuthCookie() {\n   Cookies.remove(AUTH_CONFIG.cookieName)\n   Cookies.remove(\"user_role\") // También eliminar la cookie de rol\n+\n+  // Asegurarse de eliminar cualquier otra cookie relacionada con la autenticación\n+  // que pueda estar causando problemas\n+  Cookies.remove(\"auth\")\n+  Cookies.remove(\"role\")\n }\n \n export function getStoredUser(): User | null {\n   try {\n@@ -37,8 +42,11 @@\n \n export function removeStoredUser() {\n   localStorage.removeItem(AUTH_CONFIG.userStorageKey)\n   Cookies.remove(\"user_role\") // También eliminar la cookie de rol\n+\n+  // Limpiar cualquier otro dato de usuario en localStorage\n+  localStorage.removeItem(\"currentUser\")\n }\n \n export function getAllUsers(): User[] {\n   try {\n"
                 }
             ],
             "date": 1740974405000,

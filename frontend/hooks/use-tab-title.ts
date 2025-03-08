@@ -1,17 +1,18 @@
-"use client";
+"use client"
 
-import { useEffect } from "react";
+import { useEffect } from "react"
 
 export function useTabTitle(isLocked: boolean) {
   useEffect(() => {
-    const originalTitle = document.title;
+    const originalTitle = document.title
 
     if (isLocked) {
-      document.title = "🔒 Página Bloqueada - Regresa para desbloquear";
+      document.title = "🔒 Página Bloqueada - Regresa para desbloquear"
     }
 
     return () => {
-      document.title = originalTitle;
-    };
-  }, [isLocked]);
+      document.title = originalTitle
+    }
+  }, [isLocked])
 }
+

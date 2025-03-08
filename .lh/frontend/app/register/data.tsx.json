@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/app/register/data.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741063412780,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741063412780,
+            "name": "Commit-0",
+            "content": "export const cardTitleText = \"Crear cuenta\"\r\nexport const cardDescriptionText = \"Introduce tus datos para crear una cuenta\"\r\nexport const fullNamePlaceholder = \"Nombre completo\"\r\nexport const emailPlaceholder = \"Correo electrónico\"\r\nexport const passwordPlaceholder = \"Contraseña\"\r\nexport const confirmPasswordPlaceholder = \"Confirmar contraseña\"\r\nexport const pinInstructionText = \"Introduce un PIN de 4 dígitos para el bloqueo de la aplicación\"\r\nexport const creatingAccountText = \"Creando cuenta...\"\r\nexport const createAccountButtonText = \"Crear cuenta\"\r\nexport const alreadyHaveAccountText = \"¿Ya tienes una cuenta?\"\r\nexport const signInLinkText = \"Iniciar sesión\"\r\nexport const passwordsDoNotMatchText = \"Las contraseñas no coinciden\"\r\nexport const enterPinText = \"Por favor, introduce un PIN de 4 dígitos\"\r\nexport const emailAlreadyRegisteredText = \"Correo electrónico ya registrado\"\r\nexport const errorRegisteringUserText = \"Error al registrar el usuario\"\r\n"
+        }
+    ]
+}

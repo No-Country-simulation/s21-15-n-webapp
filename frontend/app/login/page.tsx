@@ -1,26 +1,39 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
-import { Rocket } from "lucide-react"
-import { useRandomStars } from "@/hooks/use-random-stars"
 import Cookies from "js-cookie"
 import Link from "next/link"
+import { initializeDefaultUsers, setStoredUser, removeAuthCookie, removeStoredUser } from "@/lib/utils/auth"
+import { AUTH_TEXT } from "@/lib/constants/ui-text"
+import { ROUTES } from "@/lib/constants/routes"
+import { AUTH_CONFIG } from "@/lib/constants/app-config"
+import { AppLogo } from "@/components/ui/app-logo"
+import { StarsBackground } from "@/components/ui/stars-background"
 
 export default function LoginPage() {
   const router = useRouter()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const stars = useRandomStars(50)
 
+  // Inicializar usuarios predeterminados si no existen
+  useEffect(() => {
+    initializeDefaultUsers()
+  }, [])
+
+  // Modificar la función handleSubmit para establecer la cookie de rol
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError("")
     setLoading(true)
+
+    // Asegurar que cualquier sesión previa se cierre
+    removeAuthCookie()
+    removeStoredUser()
 
     const formData = new FormData(e.currentTarget)
     const email = formData.get("email") as string
@@ -30,26 +43,35 @@ export default function LoginPage() {
       // Simulate API delay
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      const storedUsers = JSON.parse(localStorage.getItem("users") ?? "[]")
+      const storedUsers = JSON.parse(localStorage.getItem(AUTH_CONFIG.defaultUsersKey) || "[]")
       const user = storedUsers.find((u: any) => u.email === email)
 
       if (user && user.password === password) {
         // Save session
-        Cookies.set("auth", "true", { expires: 7 })
-        localStorage.setItem(
-          "currentUser",
-          JSON.stringify({
-            name: user.fullName,
-            email: user.email,
-            pin: user.pin,
-          }),
-        )
-        router.push("/dashboard")
+        Cookies.set(AUTH_CONFIG.cookieName, "true", { expires: 7 })
+        // Establecer cookie de rol para el middleware
+        Cookies.set("user_role", user.role, { expires: 7 })
+        setStoredUser(user)
+
+        // Redirigir según rol
+        switch (user.role) {
+          case "admin":
+            router.push(ROUTES.ADMIN)
+            break
+          case "mentor":
+            router.push(ROUTES.MENTOR)
+            break
+          case "company":
+            router.push(ROUTES.COMPANY)
+            break
+          default:
+            router.push(ROUTES.JUNIOR)
+        }
       } else {
-        setError("Invalid credentials")
+        setError(AUTH_TEXT.login.error)
       }
     } catch (err) {
-      setError("Error signing in")
+      setError(AUTH_TEXT.login.error)
     } finally {
       setLoading(false)
     }
@@ -58,45 +80,27 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       {/* Stars Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className={`absolute inline-flex animate-pulse ${star.color}`}
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              opacity: star.opacity,
-              animation: `pulse ${star.duration}s infinite`,
-            }}
-          >
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
-          </div>
-        ))}
-      </div>
+      <StarsBackground />
 
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background" />
 
       <Card className="relative w-full max-w-md border-primary/20 bg-background/60 backdrop-blur-xl">
         <CardHeader className="space-y-4">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-            <Rocket className="h-6 w-6 text-primary" />
+          <div className="flex justify-center">
+            <AppLogo size="lg" asLink={true} />
           </div>
-          <CardTitle className="text-center text-2xl font-bold">Welcome Back</CardTitle>
-          <CardDescription className="text-center">Sign in to your account</CardDescription>
+          <CardTitle className="text-center text-2xl font-bold">{AUTH_TEXT.login.title}</CardTitle>
+          <CardDescription className="text-center">{AUTH_TEXT.login.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form id="loginForm" onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Input
                 type="email"
                 name="email"
                 placeholder="Email"
                 required
-                className="border-primary/20 bg-primary/10 placeholder:text-muted-foreground"
+                className="border-primary/20 bg-primary/10 placeholder:text-muted-foreground focus:bg-primary/10"
               />
             </div>
             <div className="space-y-2">
@@ -105,24 +109,30 @@ export default function LoginPage() {
                 name="password"
                 placeholder="Password"
                 required
-                className="border-primary/20 bg-primary/10 placeholder:text-muted-foreground"
+                className="border-primary/20 bg-primary/10 placeholder:text-muted-foreground focus:bg-primary/10"
               />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button
-              type="submit"
-              className="w-full bg-gradient-to-r from-primary to-accent text-white transition-all hover:opacity-90"
-              disabled={loading}
-            >
-              {loading ? "Signing in..." : "Sign in"}
-            </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-center">
-          <p className="text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-primary hover:underline">
-              Create account
+        <CardFooter className="flex flex-col space-y-4">
+          <div className="flex w-full space-x-4">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full btn-gradient-border"
+              onClick={() => router.push("/")}
+            >
+              Cancelar
+            </Button>
+            <Button type="submit" form="loginForm" className="w-full btn-magenta" disabled={loading}>
+              {loading ? AUTH_TEXT.login.loading : AUTH_TEXT.login.button}
+            </Button>
+          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            {AUTH_TEXT.login.noAccount}{" "}
+            <Link href={ROUTES.REGISTER} className="text-primary hover:underline">
+              {AUTH_TEXT.login.createAccount}
             </Link>
           </p>
         </CardFooter>
@@ -130,3 +140,4 @@ export default function LoginPage() {
     </div>
   )
 }
+

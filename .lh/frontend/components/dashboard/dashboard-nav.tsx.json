@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1740969688402,
@@ -36,6 +36,10 @@
                 {
                     "date": 1740976633816,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   const [userName, setUserName] = useState(\"\")\r\n \r\n   useEffect(() => {\r\n     const currentUser = JSON.parse(localStorage.getItem(\"currentUser\") ?? \"{}\")\r\n-    if (currentUser?.name !== undefined) {\r\n+    if (currentUser && currentUser.name) {\r\n       setUserName(currentUser.name)\r\n     }\r\n   }, [])\r\n \r\n"
+                },
+                {
+                    "date": 1740977353356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,5 +90,8 @@\n           </DropdownMenu>\r\n         </div>\r\n       </header>\r\n \r\n-      <MobileNav open={showMobileMenu} onClose={() => setShowMobil\n\\ No newline at end of file\n+      <MobileNav open={showMobileMenu} onClose={() => setShowMobileMenu(false)} />\r\n+    </>\r\n+  )\r\n+}\r\n"
                 }
             ],
             "date": 1740969688402,

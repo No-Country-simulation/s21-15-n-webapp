@@ -1,82 +1,18 @@
 "use client"
-
-import { memo } from "react"
 import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import useEmblaCarousel from "embla-carousel-react"
+import { LANDING_CONFIG } from "@/lib/config/landing.config"
 import Autoplay from "embla-carousel-autoplay"
 
-interface Testimonial {
-  id: string
-  name: string
-  role: string
-  company: string
-  avatar: string
-  quote: string
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: "1",
-    name: "Luciano Martínez",
-    role: "Frontend Developer",
-    company: "TechCorp",
-    avatar: "/placeholder.svg?height=100&width=100",
-    quote: "StartPerks me ayudó a validar mis habilidades y conseguir mi primer trabajo en tecnología.",
-  },
-  {
-    id: "2",
-    name: "Jorge González",
-    role: "Backend Developer",
-    company: "InnovaSoft",
-    avatar: "/placeholder.svg?height=100&width=100",
-    quote: "La plataforma me permitió crecer profesionalmente y conectar con grandes mentores.",
-  },
-  {
-    id: "3",
-    name: "Ana Silva",
-    role: "Full Stack Developer",
-    company: "DevStudio",
-    avatar: "/placeholder.svg?height=100&width=100",
-    quote: "Las simulaciones laborales me prepararon para enfrentar desafíos reales en mi carrera.",
-  },
-  {
-    id: "1",
-    name: "Luciano Martínez",
-    role: "Frontend Developer",
-    company: "TechCorp",
-    avatar: "/placeholder.svg?height=100&width=100",
-    quote: "StartPerks me ayudó a validar mis habilidades y conseguir mi primer trabajo en tecnología.",
-  },
-  {
-    id: "2",
-    name: "Jorge González",
-    role: "Backend Developer",
-    company: "InnovaSoft",
-    avatar: "/placeholder.svg?height=100&width=100",
-    quote: "La plataforma me permitió crecer profesionalmente y conectar con grandes mentores.",
-  },
-  {
-    id: "3",
-    name: "Ana Silva",
-    role: "Full Stack Developer",
-    company: "DevStudio",
-    avatar: "/placeholder.svg?height=100&width=100",
-    quote: "Las simulaciones laborales me prepararon para enfrentar desafíos reales en mi carrera.",
-  },
-]
-
-export const TestimonialsSection = memo(function TestimonialsSection() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
-
+export function TestimonialsSection() {
   return (
-    <section className="py-24" id="testimonios">
+    <section className="py-24 bg-background" id="testimonios">
       <div className="container px-4">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">Voces de la Flota</h2>
-          <p className="mx-auto max-w-2xl text-gray-400">
-            Descubrí las historias de éxito de quienes ya están navegando en el universo tech
+          <p className="mx-auto max-w-2xl text-muted-foreground">
+            Descubre cómo StartPerks ha impulsado las carreras de nuestros usuarios
           </p>
         </div>
 
@@ -93,37 +29,41 @@ export const TestimonialsSection = memo(function TestimonialsSection() {
             ]}
           >
             <CarouselContent>
-              {testimonials.map((testimonial) => (
+              {LANDING_CONFIG.testimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id} className="md:basis-1/2 lg:basis-1/3">
-                  <Card className="border-none bg-[#13102B]">
-                    <CardContent className="p-6">
-                      <div className="mb-4 flex items-center gap-4">
-                        <Image
-                          src={testimonial.avatar || "/placeholder.svg"}
-                          alt={testimonial.name}
-                          width={48}
-                          height={48}
-                          className="rounded-full"
-                        />
-                        <div>
-                          <h3 className="font-medium text-white">{testimonial.name}</h3>
-                          <p className="text-sm text-gray-400">
-                            {testimonial.role} @ {testimonial.company}
-                          </p>
+                  <Card className="glass-card p-8 text-center h-full">
+                    <div className="flex flex-col items-center">
+                      <div className="relative mb-6">
+                        {/* Círculo de fondo con gradiente */}
+                        <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-white/10 to-transparent blur-sm" />
+                        {/* Borde del avatar */}
+                        <div className="absolute -inset-0.5 rounded-full bg-white/10" />
+                        {/* Contenedor del avatar */}
+                        <div className="relative h-24 w-24 overflow-hidden rounded-full ring-2 ring-white/10">
+                          <Image
+                            src={testimonial.avatar || "/placeholder.svg"}
+                            alt={testimonial.name}
+                            fill
+                            className="object-cover"
+                          />
                         </div>
                       </div>
-                      <blockquote className="text-gray-400">"{testimonial.quote}"</blockquote>
-                    </CardContent>
+
+                      <h3 className="mb-1 text-xl font-semibold text-white">{testimonial.name}</h3>
+                      <p className="mb-6 text-sm font-medium text-primary">{testimonial.role}</p>
+
+                      <blockquote className="text-muted-foreground">"{testimonial.quote}"</blockquote>
+                    </div>
                   </Card>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="border-primary/20 bg-background/80 text-primary hover:bg-primary/20" />
+            <CarouselNext className="border-primary/20 bg-background/80 text-primary hover:bg-primary/20" />
           </Carousel>
         </div>
       </div>
     </section>
   )
-})
+}
 

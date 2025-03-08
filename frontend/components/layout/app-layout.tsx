@@ -16,3 +16,4 @@ export function AppLayout({ children, showMouseEffect = true }: AppLayoutProps) 
     </div>
   )
 }
+

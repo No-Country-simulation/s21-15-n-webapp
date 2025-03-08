@@ -2,14 +2,14 @@
 
 import type React from "react"
 
-import { useEffect, useRef, useState, useCallback, KeyboardEvent, ClipboardEvent } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { Input } from "@/components/ui/input"
 
-interface PinInputProps extends Readonly<{
+interface PinInputProps {
   onComplete: (pin: string) => void
   onClear?: () => void
   length?: number
-}> {}
+}
 
 export function PinInput({ onComplete, onClear, length = 4 }: PinInputProps) {
   const [values, setValues] = useState<string[]>(Array(length).fill(""))
@@ -43,13 +43,13 @@ export function PinInput({ onComplete, onClear, length = 4 }: PinInputProps) {
     }
   }
 
-  const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Backspace" && !values[index] && index > 0) {
       focusInput(index - 1)
     }
   }
 
-  const handlePaste = (e: ClipboardEvent) => {
+  const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault()
     const pastedData = e.clipboardData.getData("text").slice(0, length)
     if (!/^\d+$/.test(pastedData)) return
@@ -96,3 +96,4 @@ export function PinInput({ onComplete, onClear, length = 4 }: PinInputProps) {
     </div>
   )
 }
+

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/app/generate-certificate/layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741328026540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741328026540,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { useRouter } from \"next/navigation\"\nimport { ROUTES } from \"@/lib/constants/routes\"\nimport { CertificatesSubTopNav } from \"@/components/certificate/certificates-sub-top-nav\"\nimport { StarsBackground } from \"@/components/ui/stars-background\"\nimport { type ReactNode, useEffect } from \"react\"\nimport { useAuth } from \"@/hooks/use-auth\"\n\ninterface GenerateCertificateLayoutProps {\n  children: ReactNode\n}\n\nexport default function GenerateCertificateLayout({ children }: Readonly<GenerateCertificateLayoutProps>) {\n  const router = useRouter()\n  const { user } = useAuth()\n  const isAdmin = user?.role === \"admin\"\n\n  useEffect(() => {\n    // If user is not admin, redirect immediately to certificates page\n    if (!isAdmin) {\n      router.push(ROUTES.CERTIFICATES)\n    }\n  }, [isAdmin, router])\n\n  return (\n    <div className=\"min-h-screen bg-background\">\n      {/* Stars Background */}\n      <StarsBackground />\n      {/* Sub Nav Bar */}\n      <CertificatesSubTopNav />\n      {isAdmin ? (\n        <main className=\"container mx-auto px-4 pt-24 pb-16\">\n          <div className=\"mb-8\">\n            <h1 className=\"text-3xl font-bold text-white mb-2\">Generador de Certificados</h1>\n            <p className=\"text-muted-foreground\">\n              Crea certificados personalizados para tus estudiantes o participantes\n            </p>\n          </div>\n          {children}\n        </main>\n      ) : null}\n    </div>\n  )\n}\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/app/access-denied/page.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741326651792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741326651792,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { useEffect } from \"react\"\nimport { Card, CardContent, CardHeader, CardTitle, CardDescription } from \"@/components/ui/card\"\nimport { AlertTriangle } from \"lucide-react\"\nimport { removeAuthCookie, removeStoredUser } from \"@/lib/utils/auth\"\nimport { useRandomStars } from \"@/hooks/use-random-stars\"\nimport { UI_CONFIG } from \"@/lib/constants/app-config\"\nimport { AutoCloseCountdown } from \"@/components/auto-close-countdown\"\n\n// Textos locales para la página de acceso denegado\nconst ACCESS_DENIED_TEXT = {\n  title: \"Acceso Denegado\",\n  description: \"No tienes permiso para acceder a esta página. Su sesión ha sido cerrada por seguridad.\",\n  redirectMessage: \"Esta ventana se cerrará automáticamente en\",\n}\n\nexport default function AccessDeniedPage() {\n  const stars = useRandomStars(UI_CONFIG.maxStars)\n\n  useEffect(() => {\n    removeAuthCookie()\n    removeStoredUser()\n  }, [])\n\n  return (\n    <div className=\"flex min-h-screen items-center justify-center bg-background p-4\">\n      {/* Stars Background */}\n      <div className=\"absolute inset-0 overflow-hidden\">\n        {stars.map((star) => (\n          <div\n            key={star.id}\n            className={`absolute inline-flex animate-pulse ${star.color}`}\n            style={{\n              left: `${star.x}%`,\n              top: `${star.y}%`,\n              width: `${star.size}px`,\n              height: `${star.size}px`,\n              opacity: star.opacity,\n              animation: `pulse ${star.duration}s infinite`,\n            }}\n          >\n            <span className=\"absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75\" />\n            <span className=\"relative inline-flex h-full w-full rounded-full bg-primary\" />\n          </div>\n        ))}\n      </div>\n\n      <div className=\"absolute inset-0 bg-gradient-to-br from-destructive/10 via-background to-background\" />\n\n      <Card className=\"relative w-full max-w-md border-destructive/20 bg-background/60 backdrop-blur-xl\">\n        <CardHeader className=\"space-y-4\">\n          <div className=\"mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-destructive/20\">\n            <AlertTriangle className=\"h-6 w-6 text-destructive\" />\n          </div>\n          <CardTitle className=\"text-center text-2xl font-bold text-destructive\">{ACCESS_DENIED_TEXT.title}</CardTitle>\n          <CardDescription className=\"text-center\">{ACCESS_DENIED_TEXT.description}</CardDescription>\n        </CardHeader>\n        <CardContent className=\"space-y-4\">\n          <AutoCloseCountdown\n            seconds={5}\n            message={ACCESS_DENIED_TEXT.redirectMessage}\n            variant=\"destructive\"\n            showCloseButton={false}\n          />\n        </CardContent>\n      </Card>\n    </div>\n  )\n}\n"
+        }
+    ]
+}

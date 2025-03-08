@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1740969537338,
@@ -20,6 +20,14 @@
                 {
                     "date": 1740975429949,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n import { LockOverlay } from \"@/components/lock-overlay\"\r\n import { usePageVisibility } from \"@/hooks/use-page-visibility\"\r\n import { useEffect, useState } from \"react\"\r\n import { getStoredUser } from \"@/lib/utils/auth\"\r\n+import { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\r\n \r\n export default function DashboardLayout({ children }: { readonly children: ReactNode }) {\r\n   const [userPin, setUserPin] = useState(\"\")\r\n   const { isVisible, wasHidden, handleUnlock } = usePageVisibility({\r\n"
+                },
+                {
+                    "date": 1740979148763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n \"use client\"\r\n \r\n import type { ReactNode } from \"react\"\r\n import { Sidebar } from \"@/components/dashboard/sidebar\"\r\n-import { LockOverlay } from \"@/components/lock-overlay\"\r\n+import { LockOverlay } from \"@/components/security/lock-overlay\"\r\n import { usePageVisibility } from \"@/hooks/use-page-visibility\"\r\n import { useEffect, useState } from \"react\"\r\n import { getStoredUser } from \"@/lib/utils/auth\"\r\n import { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\r\n"
+                },
+                {
+                    "date": 1741062760945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n import type { ReactNode } from \"react\"\r\n import { DashboardNav } from \"@/components/dashboard/dashboard-nav\"\r\n import { Sidebar } from \"@/components/dashboard/sidebar\"\r\n-import { LockOverlay } from \"@/components/se/lock-overlay\"\r\n+import { LockOverlay } from \"@/components/secur/lock-overlay\"\r\n import { usePageVisibility } from \"@/hooks/use-page-visibility\"\r\n import { useEffect, useState } from \"react\"\r\n import { getStoredUser } from \"@/lib/utils/auth\"\r\n import { useRouter, usePathname } from \"next/navigation\"\r\n"
                 }
             ],
             "date": 1740969537338,

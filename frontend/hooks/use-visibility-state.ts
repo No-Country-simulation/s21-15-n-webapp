@@ -1,26 +1,27 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react"
 
 export function useVisibilityState() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [wasHidden, setWasHidden] = useState(false);
+  const [isVisible, setIsVisible] = useState(true)
+  const [wasHidden, setWasHidden] = useState(false)
 
   const handleVisibilityChange = useCallback(() => {
     if (document.hidden) {
-      setIsVisible(false);
-      setWasHidden(true);
+      setIsVisible(false)
+      setWasHidden(true)
     } else {
-      setIsVisible(true);
+      setIsVisible(true)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange)
     return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, [handleVisibilityChange]);
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
+    }
+  }, [handleVisibilityChange])
 
-  return { isVisible, wasHidden, setWasHidden };
+  return { isVisible, wasHidden, setWasHidden }
 }
+

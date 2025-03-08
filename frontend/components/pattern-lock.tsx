@@ -1,7 +1,9 @@
 "use client"
 
-import { useState, useRef, useEffect, MouseEvent } from "react"
-import { cn } from "@/lib/utils/utils"
+import type React from "react"
+
+import { useState, useRef, useEffect } from "react"
+import { cn } from "@/lib/utils"
 
 interface Point {
   x: number
@@ -10,11 +12,11 @@ interface Point {
 }
 
 interface PatternLockProps {
-  readonly size?: number
-  readonly onComplete: (pattern: number[]) => void
+  size?: number
+  onComplete: (pattern: number[]) => void
 }
 
-export function PatternLock({ size = 3, onComplete }: Readonly<PatternLockProps>) {
+export function PatternLock({ size = 3, onComplete }: PatternLockProps) {
   const [pattern, setPattern] = useState<number[]>([])
   const [isDrawing, setIsDrawing] = useState(false)
   const [currentPoint, setCurrentPoint] = useState<Point | null>(null)
@@ -45,7 +47,7 @@ export function PatternLock({ size = 3, onComplete }: Readonly<PatternLockProps>
     if (point) setCurrentPoint(point)
   }
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDrawing || !containerRef.current) return
 
     const containerRect = containerRef.current.getBoundingClientRect()
@@ -124,3 +126,4 @@ export function PatternLock({ size = 3, onComplete }: Readonly<PatternLockProps>
     </div>
   )
 }
+

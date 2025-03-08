@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741394448912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741394457689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,9 @@\n     \"@types/node\": \"^22.13.9\",\n     \"@types/react\": \"^19.0.10\",\n     \"@types/react-dom\": \"^19.0.4\",\n     \"autoprefixer\": \"^10.4.20\",\n-    \"eslint\": \"^9.21.0\",\n+    \"eslint\": \"^9.22.0\",\n     \"eslint-config-next\": \"15.2.1\",\n     \"postcss\": \"^8.5.3\",\n     \"tailwindcss\": \"^3.4.17\",\n     \"typescript\": \"^5.8.2\"\n"
+                },
+                {
+                    "date": 1741394471090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n     \"zustand\": \"5.0.3\"\n   },\n   \"devDependencies\": {\n     \"@eslint/eslintrc\": \"^3.3.0\",\n-    \"@tailwindcss/postcss\": \"^4.0.11\",\n+    \"@tailwindcss/postcss\": \"^4.0.12\",\n     \"@types/js-cookie\": \"^3.0.6\",\n     \"@types/node\": \"^22.13.9\",\n     \"@types/react\": \"^19.0.10\",\n     \"@types/react-dom\": \"^19.0.4\",\n"
+                }
+            ],
+            "date": 1741394448912,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"frontend\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"build\": \"next build\",\n    \"start\": \"next start\",\n    \"lint\": \"next lint\"\n  },\n  \"dependencies\": {\n    \"@emotion/is-prop-valid\": \"1.3.1\",\n    \"@hookform/resolvers\": \"^4.1.3\",\n    \"@radix-ui/react-accordion\": \"1.2.3\",\n    \"@radix-ui/react-alert-dialog\": \"1.1.6\",\n    \"@radix-ui/react-aspect-ratio\": \"^1.1.2\",\n    \"@radix-ui/react-avatar\": \"^1.1.3\",\n    \"@radix-ui/react-checkbox\": \"^1.1.4\",\n    \"@radix-ui/react-collapsible\": \"^1.1.3\",\n    \"@radix-ui/react-context-menu\": \"^2.2.6\",\n    \"@radix-ui/react-dialog\": \"1.1.6\",\n    \"@radix-ui/react-dropdown-menu\": \"^2.1.6\",\n    \"@radix-ui/react-hover-card\": \"^1.1.6\",\n    \"@radix-ui/react-label\": \"^2.1.2\",\n    \"@radix-ui/react-menubar\": \"^1.1.6\",\n    \"@radix-ui/react-navigation-menu\": \"^1.2.5\",\n    \"@radix-ui/react-popover\": \"^1.1.6\",\n    \"@radix-ui/react-progress\": \"^1.1.2\",\n    \"@radix-ui/react-radio-group\": \"^1.2.3\",\n    \"@radix-ui/react-scroll-area\": \"1.2.3\",\n    \"@radix-ui/react-select\": \"^2.1.6\",\n    \"@radix-ui/react-separator\": \"^1.1.2\",\n    \"@radix-ui/react-slider\": \"^1.2.3\",\n    \"@radix-ui/react-slot\": \"1.1.2\",\n    \"@radix-ui/react-switch\": \"^1.1.3\",\n    \"@radix-ui/react-tabs\": \"^1.1.3\",\n    \"@radix-ui/react-toast\": \"^1.2.6\",\n    \"@radix-ui/react-toggle\": \"^1.1.2\",\n    \"@radix-ui/react-toggle-group\": \"^1.1.2\",\n    \"@radix-ui/react-tooltip\": \"^1.1.8\",\n    \"class-variance-authority\": \"^0.7.1\",\n    \"clsx\": \"^2.1.1\",\n    \"cmdk\": \"1.0.4\",\n    \"date-fns\": \"4.1.0\",\n    \"embla-carousel\": \"8.5.2\",\n    \"embla-carousel-autoplay\": \"8.5.2\",\n    \"embla-carousel-react\": \"^8.5.2\",\n    \"framer-motion\": \"12.4.10\",\n    \"html2canvas\": \"1.4.1\",\n    \"immer\": \"10.1.1\",\n    \"input-otp\": \"1.4.2\",\n    \"js-cookie\": \"3.0.5\",\n    \"jspdf\": \"3.0.0\",\n    \"lucide-react\": \"^0.479.0\",\n    \"next\": \"15.2.1\",\n    \"next-themes\": \"0.4.4\",\n    \"qrcode.react\": \"4.2.0\",\n    \"react\": \"^19.0.0\",\n    \"react-day-picker\": \"9.5.1\",\n    \"react-dom\": \"^19.0.0\",\n    \"react-hook-form\": \"^7.54.2\",\n    \"react-resizable-panels\": \"^2.1.7\",\n    \"recharts\": \"2.15.1\",\n    \"sonner\": \"2.0.1\",\n    \"tailwind-merge\": \"^3.0.2\",\n    \"tailwindcss-animate\": \"^1.0.7\",\n    \"use-sync-external-store\": \"1.4.0\",\n    \"vaul\": \"^1.1.2\",\n    \"zod\": \"^3.24.2\",\n    \"zustand\": \"5.0.3\"\n  },\n  \"devDependencies\": {\n    \"@eslint/eslintrc\": \"^3.3.0\",\n    \"@tailwindcss/postcss\": \"^4.0.11\",\n    \"@types/js-cookie\": \"^3.0.6\",\n    \"@types/node\": \"^22.13.9\",\n    \"@types/react\": \"^19.0.10\",\n    \"@types/react-dom\": \"^19.0.4\",\n    \"autoprefixer\": \"^10.4.20\",\n    \"eslint\": \"^9.21.0\",\n    \"eslint-config-next\": \"15.2.1\",\n    \"postcss\": \"^8.5.3\",\n    \"tailwindcss\": \"^3.4.17\",\n    \"typescript\": \"^5.8.2\"\n  }\n}\n"
+        }
+    ]
+}

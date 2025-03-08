@@ -1,6 +1,6 @@
 import { memo } from "react"
 import Image from "next/image"
-import { cn } from "@/lib/utils/utils"
+import { cn } from "@/lib/utils"
 
 interface FeatureCardProps {
   imageSrc: string
@@ -46,3 +46,4 @@ export const FeatureGrid = memo(function FeatureGrid({ features }: FeatureGridPr
     </div>
   )
 })
+

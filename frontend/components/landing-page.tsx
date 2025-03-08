@@ -24,9 +24,9 @@ export function LandingPage() {
     <div className="min-h-screen bg-[#030303]">
       {/* Interactive Background */}
       <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
         <div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(76,29,149,0.2),transparent_50%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.2),transparent_50%)]"
           style={{
             transform: `translate(${mousePosition.x - 50}%, ${mousePosition.y - 50}%)`,
           }}
@@ -93,7 +93,7 @@ export function LandingPage() {
                     </div>
                     <h3 className="mt-4 text-lg font-medium text-white">Game Functions</h3>
                     <p className="mt-2 text-gray-400">Advanced gaming features powered by AI technology.</p>
-                    <div className="absolute -right-12 -top-12 h-64 w-64 rounded-full bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 blur-3xl transition-opacity group-hover:opacity-100" />
+                    <div className="absolute -right-12 -top-12 h-64 w-64 rounded-full bg-gradient-to-br from-primary/20 to-transparent opacity-0 blur-3xl transition-opacity group-hover:opacity-100" />
                   </div>
                   {/* Repeat similar cards for other features */}
                 </div>
@@ -108,7 +108,7 @@ export function LandingPage() {
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                   </div>
                   <div className="flex flex-col justify-center">
                     <span className="rounded-lg bg-gray-800/30 px-3 py-1 text-sm text-gray-400 w-fit">GameAI Core</span>

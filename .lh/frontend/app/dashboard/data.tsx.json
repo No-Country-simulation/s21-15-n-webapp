@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/app/dashboard/data.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741063092062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741063092062,
+            "name": "Commit-0",
+            "content": "export const redirectingText = \"Redirigiendo al dashboard correspondiente...\"\r\n"
+        }
+    ]
+}

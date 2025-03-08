@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1740970980064,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741066729981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,15 +4,21 @@\n import { PersonalInfoTab } from \"./personal-info-tab\"\r\n import { SocialLinksTab } from \"./social-links-tab\"\r\n import { SecurityTab } from \"./security-tab\"\r\n \r\n+const config = {\r\n+  personalTab: \"Datos Personales\",\r\n+  socialTab: \"Redes Sociales\",\r\n+  securityTab: \"Seguridad\",\r\n+}\r\n+\r\n export function ProfileTabs() {\r\n   return (\r\n     <Tabs defaultValue=\"personal\" className=\"w-full\">\r\n       <TabsList className=\"grid w-full grid-cols-3 bg-primary/5\">\r\n-        <TabsTrigger value=\"personal\">Datos Personales</TabsTrigger>\r\n-        <TabsTrigger value=\"social\">Redes Sociales</TabsTrigger>\r\n-        <TabsTrigger value=\"security\">Seguridad</TabsTrigger>\r\n+        <TabsTrigger value=\"personal\">{config.personalTab}</TabsTrigger>\r\n+        <TabsTrigger value=\"social\">{config.socialTab}</TabsTrigger>\r\n+        <TabsTrigger value=\"security\">{config.securityTab}</TabsTrigger>\r\n       </TabsList>\r\n       <TabsContent value=\"personal\">\r\n         <PersonalInfoTab />\r\n       </TabsContent>\r\n@@ -24,5 +30,4 @@\n       </TabsContent>\r\n     </Tabs>\r\n   )\r\n }\r\n-\r\n"
                 }
             ],
             "date": 1740970980064,

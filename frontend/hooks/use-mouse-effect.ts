@@ -1,95 +1,78 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react"
 
 export interface MousePosition {
-  x: number;
-  y: number;
+  x: number
+  y: number
 }
 
 export interface MouseEffectOptions {
-  enabled?: boolean;
-  intensity?: number;
-  smoothing?: number;
-  bounds?: "window" | "element";
-  target?: HTMLElement | null;
+  enabled?: boolean
+  intensity?: number
+  smoothing?: number
+  maxDistance?: number
 }
 
 export function useMouseEffect({
   enabled = true,
-  intensity = 1,
+  intensity = 0.3,
   smoothing = 0.1,
-  bounds = "window",
-  target = null,
+  maxDistance = 100,
 }: MouseEffectOptions = {}) {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({
-    x: 0,
-    y: 0,
-  });
-  const [targetPosition, setTargetPosition] = useState<MousePosition>({
-    x: 0,
-    y: 0,
-  });
-  const [isMounted, setIsMounted] = useState(false);
-
-  const calculatePosition = useCallback(
-    (e: MouseEvent) => {
-      if (bounds === "element" && target) {
-        const rect = target.getBoundingClientRect();
-        return {
-          x: ((e.clientX - rect.left) / rect.width) * 100 * intensity,
-          y: ((e.clientY - rect.top) / rect.height) * 100 * intensity,
-        };
-      }
-      return {
-        x: (e.clientX / window.innerWidth) * 100 * intensity,
-        y: (e.clientY / window.innerHeight) * 100 * intensity,
-      };
-    },
-    [bounds, target, intensity]
-  );
+  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 })
+  const [targetPosition, setTargetPosition] = useState<MousePosition>({ x: 0, y: 0 })
+  const [isMounted, setIsMounted] = useState(false)
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
-      if (!enabled) return;
-      setTargetPosition(calculatePosition(e));
+      if (!enabled) return
+
+      const rect = document.documentElement.getBoundingClientRect()
+      const x = (e.clientX / rect.width) * maxDistance
+      const y = (e.clientY / rect.height) * maxDistance
+
+      setTargetPosition({ x, y })
     },
-    [enabled, calculatePosition]
-  );
+    [enabled, maxDistance],
+  )
 
   // Efecto de suavizado
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled) return
 
-    let animationFrameId: number;
+    let animationFrameId: number
 
     const animate = () => {
       setMousePosition((current) => ({
         x: current.x + (targetPosition.x - current.x) * smoothing,
         y: current.y + (targetPosition.y - current.y) * smoothing,
-      }));
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [enabled, smoothing, targetPosition]);
-
-  // Efecto para event listeners
-  useEffect(() => {
-    setIsMounted(true);
-    if (enabled) {
-      const element = bounds === "element" && target ? target : window;
-      element.addEventListener("mousemove", handleMouseMove as EventListener);
-      return () => element.removeEventListener("mousemove", handleMouseMove as EventListener);
+      }))
+      animationFrameId = requestAnimationFrame(animate)
     }
-  }, [enabled, bounds, target, handleMouseMove]);
+
+    animationFrameId = requestAnimationFrame(animate)
+
+    return () => cancelAnimationFrame(animationFrameId)
+  }, [enabled, smoothing, targetPosition])
+
+  // Event listeners
+  useEffect(() => {
+    setIsMounted(true)
+    if (enabled) {
+      window.addEventListener("mousemove", handleMouseMove)
+      return () => window.removeEventListener("mousemove", handleMouseMove)
+    }
+  }, [enabled, handleMouseMove])
+
+  const transformStyle = {
+    transform: `translate(${mousePosition.x * intensity}px, ${mousePosition.y * intensity}px)`,
+  }
 
   return {
     mousePosition,
-    targetPosition,
+    transformStyle,
     isMounted,
-    isEnabled: enabled,
-  };
+  }
 }
+

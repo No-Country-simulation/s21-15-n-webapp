@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/app/dashboard/admin/data.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741057927364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741057947469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-export const texts = {\r\n+export const  = {\r\n   adminPanelTitle: \"Panel de Administración\",\r\n   totalUsers: \"Total Usuarios\",\r\n   activeUsers: \"Usuarios Activos\",\r\n   newUsersToday: \"Nuevos Usuarios (Hoy)\",\r\n"
+                },
+                {
+                    "date": 1741058754892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,1 @@\n-export const texts = {\r\n-  adminPanelTitle: \"Panel de Administración\",\r\n-  totalUsers: \"Total Usuarios\",\r\n-  activeUsers: \"Usuarios Activos\",\r\n-  newUsersToday: \"Nuevos Usuarios (Hoy)\",\r\n-  systemStatsTitle: \"Estadísticas del Sistema\",\r\n-  name: \"Nombre\",\r\n-  email: \"Email\",\r\n-  role: \"Rol\",\r\n-  level: \"Nivel\",\r\n-  actions: \"Acciones\",\r\n-  viewDetails: \"Ver detalles\",\r\n-}\r\n+\r\n"
+                }
+            ],
+            "date": 1741057927364,
+            "name": "Commit-0",
+            "content": "export const texts = {\r\n  adminPanelTitle: \"Panel de Administración\",\r\n  totalUsers: \"Total Usuarios\",\r\n  activeUsers: \"Usuarios Activos\",\r\n  newUsersToday: \"Nuevos Usuarios (Hoy)\",\r\n  systemStatsTitle: \"Estadísticas del Sistema\",\r\n  name: \"Nombre\",\r\n  email: \"Email\",\r\n  role: \"Rol\",\r\n  level: \"Nivel\",\r\n  actions: \"Acciones\",\r\n  viewDetails: \"Ver detalles\",\r\n}"
+        }
+    ]
+}

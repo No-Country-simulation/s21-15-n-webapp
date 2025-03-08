@@ -1,92 +1,93 @@
-import { memo } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Twitter, Linkedin } from "lucide-react"
+import { LANDING_CONFIG } from "@/lib/config/landing.config"
+import { AppLogo } from "@/components/ui/app-logo" // Import the AppLogo component
 
-const footerLinks = {
-  product: [
-    { label: "Características", href: "#caracteristicas" },
-    { label: "Precios", href: "#precios" },
-    { label: "Recursos", href: "#recursos" },
-  ],
-  company: [
-    { label: "Sobre nosotros", href: "#sobre-nosotros" },
-    { label: "Blog", href: "#blog" },
-    { label: "Carreras", href: "#carreras" },
-  ],
-  legal: [
-    { label: "Términos", href: "#terminos" },
-    { label: "Privacidad", href: "#privacidad" },
-    { label: "Cookies", href: "#cookies" },
-  ],
-}
+export function Footer() {
+  // Función para obtener el ícono correcto basado en el nombre
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Github":
+        return <Github className="h-5 w-5" />
+      case "Twitter":
+        return <Twitter className="h-5 w-5" />
+      case "Linkedin":
+        return <Linkedin className="h-5 w-5" />
+      default:
+        return <Github className="h-5 w-5" />
+    }
+  }
 
-const socialLinks = [
-  { icon: <Github className="h-5 w-5" />, href: "https://github.com" },
-  { icon: <Twitter className="h-5 w-5" />, href: "https://twitter.com" },
-  { icon: <Linkedin className="h-5 w-5" />, href: "https://linkedin.com" },
-]
-
-export const Footer = memo(function Footer() {
   return (
-    <footer className="border-t border-purple-900/20 bg-black/50 backdrop-blur-sm">
+    <footer className="border-t border-white/10 bg-background backdrop-blur-sm">
       <div className="container px-4 py-12">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">StartPerks</h3>
-            <p className="text-gray-400 mb-4">Transformando carreras en el universo tech</p>
+            {/* Replace the manual logo with the AppLogo component */}
+            <div className="mb-4">
+              <AppLogo size="md" />
+            </div>
+            <p className="text-muted-foreground mb-4">Transformando carreras en el universo tech</p>
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <Button key={index} variant="ghost" size="icon" asChild className="text-gray-400 hover:text-white">
+              {LANDING_CONFIG.footer.social.map((social, index) => (
+                <Button
+                  key={index}
+                  variant="ghost"
+                  size="icon"
+                  asChild
+                  className="text-muted-foreground hover:text-white"
+                >
                   <Link href={social.href} target="_blank" rel="noopener noreferrer">
-                    {social.icon}
+                    {getIcon(social.icon)}
                   </Link>
                 </Button>
               ))}
             </div>
           </div>
+
+          {LANDING_CONFIG.footer.sections.map((section, index) => (
+            <div key={index}>
+              <h3 className="text-lg font-semibold text-white mb-4">{section.title}</h3>
+              <ul className="space-y-2">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <Link href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* Nueva sección para Recursos */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Producto</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">Recursos</h3>
             <ul className="space-y-2">
-              {footerLinks.product.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-gray-400 hover:text-purple-400 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Compañía</h3>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-gray-400 hover:text-purple-400 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Legal</h3>
-            <ul className="space-y-2">
-              {footerLinks.legal.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-gray-400 hover:text-purple-400 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href="/certificates" className="text-muted-foreground hover:text-primary transition-colors">
+                  Certificados
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                  Tutoriales
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+                  Documentación
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-purple-900/20 text-center text-gray-400">
+        <div className="mt-12 pt-8 border-t border-white/10 text-center text-muted-foreground">
           <p>© {new Date().getFullYear()} StartPerks. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
   )
-})
+}
 

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/app/dashboard/profile/page.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1741062596759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741063023819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \r\n import { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\"\r\n import { ProfileTabs } from \"@/components/profile/profile-tabs\"\r\n import { useRandomStars } from \"@/hooks/use-random-stars\"\r\n+import { cardTitleText } from \"./data\"\r\n \r\n export default function ProfilePage() {\r\n   const stars = useRandomStars(50)\r\n \r\n@@ -32,9 +33,9 @@\n \r\n       <div className=\"container mx-auto max-w-4xl py-8\">\r\n         <Card className=\"border-primary/20 bg-background/60 backdrop-blur-xl\">\r\n           <CardHeader>\r\n-            <CardTitle className=\"text-2xl\">Perfil de Usuario</CardTitle>\r\n+            <CardTitle className=\"text-2xl\">{cardTitleText}</CardTitle>\r\n           </CardHeader>\r\n           <CardContent>\r\n             <ProfileTabs />\r\n           </CardContent>\r\n@@ -42,5 +43,4 @@\n       </div>\r\n     </div>\r\n   )\r\n }\r\n-\r\n"
+                }
+            ],
+            "date": 1741062596759,
+            "name": "Commit-0",
+            "content": "\"use client\"\r\n\r\nimport { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\"\r\nimport { ProfileTabs } from \"@/components/profile/profile-tabs\"\r\nimport { useRandomStars } from \"@/hooks/use-random-stars\"\r\n\r\nexport default function ProfilePage() {\r\n  const stars = useRandomStars(50)\r\n\r\n  return (\r\n    <div className=\"relative\">\r\n      {/* Stars Background */}\r\n      <div className=\"fixed inset-0 -z-10 overflow-hidden\">\r\n        {stars.map((star) => (\r\n          <div\r\n            key={star.id}\r\n            className={`absolute inline-flex animate-pulse ${star.color}`}\r\n            style={{\r\n              left: `${star.x}%`,\r\n              top: `${star.y}%`,\r\n              width: `${star.size}px`,\r\n              height: `${star.size}px`,\r\n              opacity: star.opacity,\r\n              animation: `pulse ${star.duration}s infinite`,\r\n            }}\r\n          >\r\n            <span className=\"absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75\" />\r\n            <span className=\"relative inline-flex h-full w-full rounded-full bg-primary\" />\r\n          </div>\r\n        ))}\r\n      </div>\r\n\r\n      <div className=\"container mx-auto max-w-4xl py-8\">\r\n        <Card className=\"border-primary/20 bg-background/60 backdrop-blur-xl\">\r\n          <CardHeader>\r\n            <CardTitle className=\"text-2xl\">Perfil de Usuario</CardTitle>\r\n          </CardHeader>\r\n          <CardContent>\r\n            <ProfileTabs />\r\n          </CardContent>\r\n        </Card>\r\n      </div>\r\n    </div>\r\n  )\r\n}\r\n\r\n"
+        }
+    ]
+}

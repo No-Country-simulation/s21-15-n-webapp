@@ -1,0 +1,22 @@
+{
+    "sourceFile": ".gitignore",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1741322625549,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741322632732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-vercel\r\n+.vercel\r\n"
+                }
+            ],
+            "date": 1741322625549,
+            "name": "Commit-0",
+            "content": "vercel\r\n"
+        }
+    ]
+}

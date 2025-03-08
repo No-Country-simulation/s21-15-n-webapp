@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1740971156703,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741067085246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,15 @@\n   platform: string\r\n   url: string\r\n }\r\n \r\n+const config = {\r\n+  cardTitle: \"Redes Sociales\",\r\n+  cardDescription: \"Agrega tus perfiles de redes sociales\",\r\n+  platformPlaceholder: \"Nombre de la red social\",\r\n+  urlPlaceholder: \"URL del perfil\",\r\n+}\r\n+\r\n export function SocialLinksTab() {\r\n   const [links, setLinks] = useState<SocialLink[]>([])\r\n   const [newPlatform, setNewPlatform] = useState(\"\")\r\n   const [newUrl, setNewUrl] = useState(\"\")\r\n@@ -38,22 +45,22 @@\n \r\n   return (\r\n     <Card>\r\n       <CardHeader>\r\n-        <CardTitle>Redes Sociales</CardTitle>\r\n-        <CardDescription>Agrega tus perfiles de redes sociales</CardDescription>\r\n+        <CardTitle>{config.cardTitle}</CardTitle>\r\n+        <CardDescription>{config.cardDescription}</CardDescription>\r\n       </CardHeader>\r\n       <CardContent>\r\n         <div className=\"space-y-4\">\r\n           <div className=\"flex gap-4\">\r\n             <Input\r\n-              placeholder=\"Nombre de la red social\"\r\n+              placeholder={config.platformPlaceholder}\r\n               value={newPlatform}\r\n               onChange={(e) => setNewPlatform(e.target.value)}\r\n               className=\"flex-1\"\r\n             />\r\n             <Input\r\n-              placeholder=\"URL del perfil\"\r\n+              placeholder={config.urlPlaceholder}\r\n               value={newUrl}\r\n               onChange={(e) => setNewUrl(e.target.value)}\r\n               className=\"flex-1\"\r\n             />\r\n@@ -84,5 +91,4 @@\n       </CardContent>\r\n     </Card>\r\n   )\r\n }\r\n-\r\n"
                 }
             ],
             "date": 1740971156703,

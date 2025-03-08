@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1740970329188,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741065718662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,36 +12,45 @@\n   DropdownMenuTrigger,\r\n } from \"@/components/ui/dropdown-menu\"\r\n import { useRouter } from \"next/navigation\"\r\n \r\n+const config = {\r\n+  avatarAlt: \"@user\",\r\n+  userName: \"Space Commander\",\r\n+  userEmail: \"admin@space.com\",\r\n+  profileText: \"Perfil\",\r\n+  settingsText: \"Configuración\",\r\n+  logoutText: \"Cerrar sesión\",\r\n+  loginRoute: \"/login\",\r\n+}\r\n+\r\n export function UserNav() {\r\n   const router = useRouter()\r\n \r\n   return (\r\n     <DropdownMenu>\r\n       <DropdownMenuTrigger asChild>\r\n         <Button variant=\"ghost\" className=\"relative h-8 w-8 rounded-full\">\r\n           <Avatar className=\"h-8 w-8\">\r\n-            <AvatarImage src=\"/placeholder.svg\" alt=\"@user\" />\r\n+            <AvatarImage src=\"/placeholder.svg\" alt={config.avatarAlt} />\r\n             <AvatarFallback>SC</AvatarFallback>\r\n           </Avatar>\r\n         </Button>\r\n       </DropdownMenuTrigger>\r\n       <DropdownMenuContent className=\"w-56\" align=\"end\" forceMount>\r\n         <DropdownMenuLabel className=\"font-normal\">\r\n           <div className=\"flex flex-col space-y-1\">\r\n-            <p className=\"text-sm font-medium leading-none\">Space Commander</p>\r\n-            <p className=\"text-xs leading-none text-muted-foreground\">admin@space.com</p>\r\n+            <p className=\"text-sm font-medium leading-none\">{config.userName}</p>\r\n+            <p className=\"text-xs leading-none text-muted-foreground\">{config.userEmail}</p>\r\n           </div>\r\n         </DropdownMenuLabel>\r\n         <DropdownMenuSeparator />\r\n         <DropdownMenuGroup>\r\n-          <DropdownMenuItem>Perfil</DropdownMenuItem>\r\n-          <DropdownMenuItem>Configuración</DropdownMenuItem>\r\n+          <DropdownMenuItem>{config.profileText}</DropdownMenuItem>\r\n+          <DropdownMenuItem>{config.settingsText}</DropdownMenuItem>\r\n         </DropdownMenuGroup>\r\n         <DropdownMenuSeparator />\r\n-        <DropdownMenuItem onClick={() => router.push(\"/login\")}>Cerrar sesión</DropdownMenuItem>\r\n+        <DropdownMenuItem onClick={() => router.push(config.loginRoute)}>{config.logoutText}</DropdownMenuItem>\r\n       </DropdownMenuContent>\r\n     </DropdownMenu>\r\n   )\r\n }\r\n-\r\n"
                 }
             ],
             "date": 1740970329188,

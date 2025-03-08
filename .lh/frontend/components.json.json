@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/components.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1741323863946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741323870663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   \"style\": \"new-york\",\n   \"rsc\": true,\n   \"tsx\": true,\n   \"tailwind\": {\n-    \"config\": \"\"tailwind.config.ts\"\",\n+    \"config\": \"tailwind.config.ts\",\n     \"css\": \"app/globals.css\",\n     \"baseColor\": \"neutral\",\n     \"cssVariables\": true,\n     \"prefix\": \"\"\n"
+                }
+            ],
+            "date": 1741323863946,
+            "name": "Commit-0",
+            "content": "{\n  \"$schema\": \"https://ui.shadcn.com/schema.json\",\n  \"style\": \"new-york\",\n  \"rsc\": true,\n  \"tsx\": true,\n  \"tailwind\": {\n    \"config\": \"\"tailwind.config.ts\"\",\n    \"css\": \"app/globals.css\",\n    \"baseColor\": \"neutral\",\n    \"cssVariables\": true,\n    \"prefix\": \"\"\n  },\n  \"aliases\": {\n    \"components\": \"@/components\",\n    \"utils\": \"@/lib/utils\",\n    \"ui\": \"@/components/ui\",\n    \"lib\": \"@/lib\",\n    \"hooks\": \"@/hooks\"\n  },\n  \"iconLibrary\": \"lucide\"\n}\n"
+        }
+    ]
+}

@@ -10,7 +10,7 @@ export function useNavigation() {
     const element = document.getElementById(sectionId)
     if (element) {
       const header = document.querySelector("header")
-      const headerHeight = header?.offsetHeight ?? 0
+      const headerHeight = header?.offsetHeight || 0
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.scrollY - headerHeight
 
@@ -43,3 +43,4 @@ export function useNavigation() {
     handleLogout,
   }
 }
+

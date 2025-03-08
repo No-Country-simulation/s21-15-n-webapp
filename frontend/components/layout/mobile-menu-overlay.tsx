@@ -1,12 +1,14 @@
 "use client"
 
-import { ReactNode, useEffect } from "react"
-import { cn } from "@/lib/utils/utils"
+import type React from "react"
+
+import { useEffect } from "react"
+import { cn } from "@/lib/utils"
 import { createPortal } from "react-dom"
 
 interface MobileMenuOverlayProps {
   isOpen: boolean
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export function MobileMenuOverlay({ isOpen, children }: MobileMenuOverlayProps) {
@@ -49,3 +51,4 @@ export function MobileMenuOverlay({ isOpen, children }: MobileMenuOverlayProps) 
     document.body,
   )
 }
+

@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/components/sections/benefils/data.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741057054271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741057060006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-exprort const benefits = [\r\n+export const benefits = [\r\n   {\r\n     title: \"Para Cadetes (Juniors)\",\r\n     description:\r\n       \"Inicia tu entrenamiento intergaláctico. Adquiere habilidades, arma tu portafolio y desbloquea mentorías exclusivas para navegar el universo tecnológico.\",\r\n"
+                },
+                {
+                    "date": 1741057150291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n export const benefits = [\r\n   {\r\n+    id\r\n     title: \"Para Cadetes (Juniors)\",\r\n     description:\r\n       \"Inicia tu entrenamiento intergaláctico. Adquiere habilidades, arma tu portafolio y desbloquea mentorías exclusivas para navegar el universo tecnológico.\",\r\n     image: \"/placeholder.svg?height=400&width=600\",\r\n"
+                }
+            ],
+            "date": 1741057054271,
+            "name": "Commit-0",
+            "content": "const benefits = [\r\n  {\r\n    title: \"Para Cadetes (Juniors)\",\r\n    description:\r\n      \"Inicia tu entrenamiento intergaláctico. Adquiere habilidades, arma tu portafolio y desbloquea mentorías exclusivas para navegar el universo tecnológico.\",\r\n    image: \"/placeholder.svg?height=400&width=600\",\r\n    imagePosition: \"right\",\r\n  },\r\n  {\r\n    title: \"Para Espaciales (Startups)\",\r\n    description:\r\n      \"Descubre cadetes con talento probado. Identifica a futuros líderes que ya han demostrado su capacidad en cada misión.\",\r\n    image: \"/placeholder.svg?height=400&width=600\",\r\n    imagePosition: \"left\",\r\n  },\r\n  {\r\n    title: \"Para Comandantes (Mentores)\",\r\n    description:\r\n      \"Guía a la próxima generación de exploradores. Comparte tu experiencia, obtén reconocimiento y accede a beneficios exclusivos.\",\r\n    image: \"/placeholder.svg?height=400&width=600\",\r\n    imagePosition: \"right\",\r\n  },\r\n]\r\n"
+        }
+    ]
+}

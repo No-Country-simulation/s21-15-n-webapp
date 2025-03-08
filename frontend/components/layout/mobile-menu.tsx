@@ -13,8 +13,9 @@ interface MobileMenuProps {
   items?: NavigationItem[]
 }
 
-export function MobileMenu({ open, onClose, items = [] }: Readonly<MobileMenuProps>) {
+export function MobileMenu({ open, onClose, items = [] }: MobileMenuProps) {
   useLayoutEffect({ blurEnabled: open })
+
   return (
     <Sheet open={open} onOpenChange={onClose}>
       <SheetContent side="left" className="w-72 border-primary/20 bg-background/95 backdrop-blur-xl p-0">
@@ -41,3 +42,4 @@ export function MobileMenu({ open, onClose, items = [] }: Readonly<MobileMenuPro
     </Sheet>
   )
 }
+

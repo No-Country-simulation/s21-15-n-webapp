@@ -1,45 +1,46 @@
 "use client"
 
-import { useMouseEffect } from "@/hooks/use-mouse-effect"
-import { cn } from "@/lib/utils/utils"
+import { useEffect, useRef, useState } from "react"
 
 interface MouseReflectionProps {
-  className?: string
+  enabled?: boolean
   intensity?: number
-  color?: string
-  blur?: number
-  opacity?: number
 }
 
-export function MouseReflection({
-  className,
-  intensity = 1, // Aumentado de 1.2 a 2
-  color = "rgba(139, 92, 246, 0.4)", // Color púrpura más intenso
-  blur = 150, // Aumentado de 100 a 150
-  opacity = 0.5, // Mantenido en 0.5
-}: MouseReflectionProps) {
-  const { mousePosition, isMounted } = useMouseEffect({
-    intensity,
-    smoothing: 0.1, // Suavizado ligeramente aumentado
-  })
+export function MouseReflection({ enabled = true, intensity = 1 }: MouseReflectionProps) {
+  const [mousePosition, setMousePosition] = useState({ x: "50%", y: "50%" })
+  const [isVisible, setIsVisible] = useState(false)
+  const effectRef = useRef<HTMLDivElement>(null)
 
-  if (!isMounted) return null
+  useEffect(() => {
+    if (!enabled) return
 
-  return (
-    <div className={cn("fixed inset-0 pointer-events-none z-0", className)}>
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-background" />
-      <div
-        className="absolute inset-0 transition-transform duration-200 ease-out"
-        style={{
-          background: `radial-gradient(
-            circle at ${mousePosition.x}% ${mousePosition.y}%,
-            ${color} 0%,
-            transparent ${blur}%
-          )`,
-          opacity,
-          transform: `translate(${(mousePosition.x - 50) * 0.08}%, ${(mousePosition.y - 50) * 0.08}%)`,
-        }}
-      />
-    </div>
-  )
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 100
+      const y = (e.clientY / window.innerHeight) * 100
+
+      document.documentElement.style.setProperty("--mouse-x", `${x}%`)
+      document.documentElement.style.setProperty("--mouse-y", `${y}%`)
+
+      setMousePosition({ x: `${x}%`, y: `${y}%` })
+      setIsVisible(true)
+    }
+
+    const handleMouseLeave = () => {
+      setIsVisible(false)
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener("mouseleave", handleMouseLeave)
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener("mouseleave", handleMouseLeave)
+    }
+  }, [enabled])
+
+  if (!enabled) return null
+
+  return <div ref={effectRef} className="mouse-effect" data-visible={isVisible} />
 }
+

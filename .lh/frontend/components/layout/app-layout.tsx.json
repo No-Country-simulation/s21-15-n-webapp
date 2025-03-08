@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1740970505133,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741065948958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import type { ReactNode } from \"react\"\r\n import { MouseEffectLayer } from \"./mouse-effect-layer\"\r\n \r\n interface AppLayoutProps {\r\n-  children: ReactNode\r\n-  showMouseEffect?: boolean\r\n+  readonly children: ReactNode\r\n+  readonly showMouseEffect?: boolean\r\n }\r\n \r\n export function AppLayout({ children, showMouseEffect = true }: AppLayoutProps) {\r\n   return (\r\n@@ -15,5 +15,4 @@\n       </div>\r\n     </div>\r\n   )\r\n }\r\n-\r\n"
                 }
             ],
             "date": 1740970505133,

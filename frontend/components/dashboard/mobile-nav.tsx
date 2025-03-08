@@ -4,8 +4,8 @@ import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { X } from "lucide-react"
 
 interface MobileNavProps {
-  readonly open: boolean
-  readonly onClose: () => void
+  open: boolean
+  onClose: () => void
 }
 
 export function MobileNav({ open, onClose }: MobileNavProps) {
@@ -41,3 +41,4 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
     </Sheet>
   )
 }
+

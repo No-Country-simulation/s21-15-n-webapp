@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/app/dashboard/company/data.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741058205472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741058205472,
+            "name": "Commit-0",
+            "content": "export const PROJECTS = [\r\n  {\r\n    id: \"1\",\r\n    name: \"Proyecto Alpha\",\r\n    description: \"Desarrollo de UI/UX para aplicación móvil\",\r\n    progress: 75,\r\n    team: 4,\r\n    status: \"En progreso\",\r\n  },\r\n  {\r\n    id: \"2\",\r\n    name: \"Proyecto Beta\",\r\n    description: \"Diseño de sistema de diseño\",\r\n    progress: 45,\r\n    team: 3,\r\n    status: \"En revisión\",\r\n  },\r\n  {\r\n    id: \"3\",\r\n    name: \"Proyecto Gamma\",\r\n    description: \"Prototipado de nueva plataforma\",\r\n    progress: 90,\r\n    team: 5,\r\n    status: \"Casi completo\",\r\n  },\r\n];\r\n\r\nexport const DASHBOARD_TEXTS = {\r\n  title: \"Panel Empresarial\",\r\n  activeProjects: \"Proyectos Activos\",\r\n  activeProjectsCount: 12,\r\n  highlightedTalents: \"Talentos Destacados\",\r\n  highlightedTalentsCount: 24,\r\n  successRate: \"Tasa de Éxito\",\r\n  successRatePercentage: \"92%\",\r\n  progress: \"Progreso\",\r\n  teamMembers: \"miembros\",\r\n  viewDetails: \"Ver detalles\",\r\n};"
+        }
+    ]
+}

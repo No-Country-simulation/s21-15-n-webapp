@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/app/verify-certificate/layout.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741328556163,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741328556163,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { CertificatesSubTopNav } from \"@/components/certificate/certificates-sub-top-nav\"\nimport { StarsBackground } from \"@/components/ui/stars-background\"\nimport type { ReactNode } from \"react\"\n\ninterface VerifyCertificateLayoutProps {\n  children: ReactNode\n}\n\nexport default function VerifyCertificateLayout({ children }: Readonly<VerifyCertificateLayoutProps>) {\n  return (\n    <div className=\"min-h-screen bg-background\">\n          {/* Stars Background */}\n      <StarsBackground />\n      {/* Sub Nav Bar */}\n      <CertificatesSubTopNav />\n      <main className=\"container mx-auto px-4 pt-24 pb-16\">\n        {children}\n      </main>\n    </div>\n  )\n}\n"
+        }
+    ]
+}

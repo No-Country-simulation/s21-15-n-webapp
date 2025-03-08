@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1740972707630,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1740979148762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { useCallback } from \"react\"\r\n import { useVisibilityState } from \"@/hooks/use-visibility-state\"\r\n import { useMousePosition } from \"@/hooks/use-mouse-position\"\r\n import { useTabTitle } from \"@/hooks/use-tab-title\"\r\n-import { LockOverlay } from \"@/components/lock-overlay\"\r\n+import { LockOverlay } from \"@/components/security/lock-overlay\"\r\n import { Button } from \"@/components/ui/button\"\r\n import { ArrowRight } from \"lucide-react\"\r\n import Image from \"next/image\"\r\n \r\n"
                 }
             ],
             "date": 1740972707630,

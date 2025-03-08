@@ -3,9 +3,17 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { LockIcon } from "lucide-react"
 import { memo, useState } from "react"
-//import { ExceededAttemptsDialog } from "./exceeded-attempts-dialog"
 import { PinInput } from "./pin-input"
-import { ExceededAttemptsDialog } from "./exceeded-aminate-dialog"
+import { ExceededAttemptsDialog } from "./exceeded-attempts-dialog"
+import { AUTH_CONFIG } from "@/lib/constants/app-config"
+
+// Textos locales para el overlay de bloqueo
+const LOCK_OVERLAY_TEXT = {
+  title: "Sesión Bloqueada",
+  description: "Ingresa tu PIN para desbloquear la sesión",
+  invalidPin: "PIN inválido",
+  attemptsRemaining: "intentos restantes",
+}
 
 interface LockOverlayProps {
   onUnlock: () => void
@@ -21,7 +29,7 @@ export const LockOverlay = memo(function LockOverlay({
   const [error, setError] = useState("")
   const [attempts, setAttempts] = useState(0)
   const [showExceededDialog, setShowExceededDialog] = useState(false)
-  const MAX_ATTEMPTS = 3
+  const MAX_ATTEMPTS = AUTH_CONFIG.maxLoginAttempts
 
   const handlePinComplete = (pin: string) => {
     if (pinRequired && correctPin) {
@@ -35,7 +43,9 @@ export const LockOverlay = memo(function LockOverlay({
         if (newAttempts >= MAX_ATTEMPTS) {
           setShowExceededDialog(true)
         } else {
-          setError(`Invalid PIN. ${MAX_ATTEMPTS - newAttempts} attempts remaining.`)
+          setError(
+            `${LOCK_OVERLAY_TEXT.invalidPin}. ${MAX_ATTEMPTS - newAttempts} ${LOCK_OVERLAY_TEXT.attemptsRemaining}.`,
+          )
         }
       }
     } else {
@@ -50,8 +60,8 @@ export const LockOverlay = memo(function LockOverlay({
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
             <LockIcon className="h-6 w-6 text-primary" />
           </div>
-          <CardTitle className="text-xl text-white">Session Locked</CardTitle>
-          <CardDescription className="text-gray-400">Enter your PIN to unlock the session</CardDescription>
+          <CardTitle className="text-xl text-white">{LOCK_OVERLAY_TEXT.title}</CardTitle>
+          <CardDescription className="text-gray-400">{LOCK_OVERLAY_TEXT.description}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <PinInput onComplete={handlePinComplete} onClear={() => setError("")} />
@@ -63,3 +73,4 @@ export const LockOverlay = memo(function LockOverlay({
     </div>
   )
 })
+

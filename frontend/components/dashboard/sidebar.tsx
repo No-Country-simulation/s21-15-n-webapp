@@ -1,63 +1,95 @@
+"use client"
+
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Bell, Activity } from "lucide-react"
-import { Card } from "@/components/ui/card"
+import { Home, Trophy, Rocket, Zap, MessageSquare, User, LogOut } from "lucide-react"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { usePathname, useRouter } from "next/navigation"
+import { useAuth } from "@/hooks/use-auth"
+
+// Textos locales para el componente
+const SIDEBAR_TEXT = {
+  startPerks: "StartPerks",
+  inicio: "Inicio",
+  ranking: "Ranking",
+  lorem: "Lorem",
+  perfil: "Perfil",
+  cerrarSesion: "Cerrar sesión",
+}
+
+// Elementos de navegación
+const NAV_ITEMS = [
+  { icon: <Home className="h-5 w-5" />, label: SIDEBAR_TEXT.inicio, href: "/dashboard/junior" },
+  { icon: <Trophy className="h-5 w-5" />, label: SIDEBAR_TEXT.ranking, href: "/dashboard/ranking" },
+  { icon: <Rocket className="h-5 w-5" />, label: SIDEBAR_TEXT.lorem, href: "/dashboard/lorem1" },
+  { icon: <Zap className="h-5 w-5" />, label: SIDEBAR_TEXT.lorem, href: "/dashboard/lorem2" },
+  { icon: <MessageSquare className="h-5 w-5" />, label: SIDEBAR_TEXT.lorem, href: "/dashboard/lorem3" },
+  { icon: <User className="h-5 w-5" />, label: SIDEBAR_TEXT.perfil, href: "/dashboard/profile" },
+]
 
 interface SidebarProps {
-  readonly position: "left" | "right"
+  position: "left" | "right"
 }
 
 export function Sidebar({ position }: SidebarProps) {
-  const notifications = [
-    { id: 1, title: "Sistema actualizado", time: "Hace 5 min" },
-    { id: 2, title: "Alerta de combustible", time: "Hace 10 min" },
-    { id: 3, title: "Nuevo mensaje", time: "Hace 15 min" },
-  ]
+  const pathname = usePathname()
+  const router = useRouter()
+  const { logout } = useAuth()
 
-  const progress = [
-    { id: 1, title: "Test de navegación", progress: 75 },
-    { id: 2, title: "Calibración de sensores", progress: 90 },
-    { id: 3, title: "Diagnóstico de sistemas", progress: 60 },
-  ]
+  const handleLogout = () => {
+    logout()
+    router.push("/")
+  }
+
+  // Solo mostrar la barra lateral izquierda
+  if (position === "right") return null
 
   return (
-    <div className="hidden border-primary/20 bg-background/60 backdrop-blur-xl lg:block lg:w-72">
+    <div className="fixed left-0 top-0 hidden h-screen w-64 border-r border-primary/20 bg-[#0a0b1e] lg:block">
       <div className="flex h-full flex-col">
+        {/* Logo */}
         <div className="flex h-16 items-center border-b border-primary/20 px-4">
-          <h2 className="text-lg font-semibold">{position === "left" ? "Notificaciones" : "Progreso"}</h2>
+          <Link href="/dashboard/junior" className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-indigo-900/30">
+              <Rocket className="h-5 w-5 text-indigo-400" />
+            </div>
+            <span className="text-lg font-semibold text-white">{SIDEBAR_TEXT.startPerks}</span>
+          </Link>
         </div>
-        <ScrollArea className="flex-1 px-4 py-6">
-          <div className="space-y-4">
-            {position === "left"
-              ? notifications.map((item) => (
-                  <Card key={item.id} className="p-4 border-primary/20 bg-primary/10">
-                    <div className="flex items-start gap-3">
-                      <Bell className="h-5 w-5 text-primary" />
-                      <div>
-                        <p className="font-medium">{item.title}</p>
-                        <p className="text-sm text-muted-foreground">{item.time}</p>
-                      </div>
-                    </div>
-                  </Card>
-                ))
-              : progress.map((item) => (
-                  <Card key={item.id} className="p-4 border-primary/20 bg-primary/10">
-                    <div className="flex items-start gap-3">
-                      <Activity className="h-5 w-5 text-secondary" />
-                      <div className="flex-1">
-                        <p className="font-medium">{item.title}</p>
-                        <div className="mt-2 h-2 overflow-hidden rounded-full bg-muted">
-                          <div
-                            className="h-full bg-gradient-to-r from-secondary to-accent"
-                            style={{ width: `${item.progress}%` }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-          </div>
+
+        {/* Navegación */}
+        <ScrollArea className="flex-1 px-2 py-4">
+          <nav className="space-y-1">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+                  pathname === item.href
+                    ? "bg-indigo-900/30 text-indigo-400"
+                    : "text-gray-400 hover:bg-indigo-900/20 hover:text-indigo-400",
+                )}
+              >
+                {item.icon}
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </ScrollArea>
+
+        {/* Cerrar sesión */}
+        <div className="border-t border-primary/20 p-4">
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-gray-400 transition-colors hover:bg-indigo-900/20 hover:text-indigo-400"
+          >
+            <LogOut className="h-5 w-5" />
+            {SIDEBAR_TEXT.cerrarSesion}
+          </button>
+        </div>
       </div>
     </div>
   )
 }
+

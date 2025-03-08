@@ -1,6 +1,8 @@
 "use client"
 
-import { useState, useEffect, FormEvent } from "react"
+import type React from "react"
+
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -14,7 +16,7 @@ export function PersonalInfoTab() {
   })
 
   useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser") ?? "{}")
+    const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}")
     if (currentUser) {
       setFormData({
         fullName: currentUser.name || "",
@@ -24,15 +26,15 @@ export function PersonalInfoTab() {
     }
   }, [])
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser") ?? "{}")
+    const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}")
     const updatedUser = { ...currentUser, ...formData }
     localStorage.setItem("currentUser", JSON.stringify(updatedUser))
 
     // Actualizar también en el array de usuarios
-    const users = JSON.parse(localStorage.getItem("users") ?? "[]")
+    const users = JSON.parse(localStorage.getItem("users") || "[]")
     const updatedUsers = users.map((user: any) => {
       if (user.email === currentUser.email) {
         return { ...user, fullName: formData.fullName, bio: formData.bio }
@@ -80,3 +82,4 @@ export function PersonalInfoTab() {
     </Card>
   )
 }
+

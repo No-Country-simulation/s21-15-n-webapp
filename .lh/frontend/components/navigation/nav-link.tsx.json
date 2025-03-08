@@ -1,0 +1,50 @@
+{
+    "sourceFile": "frontend/components/navigation/nav-link.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1741310387875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741310397817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         href={href}\n         onClick={handleClick}\n         className={cn(\n           \"relative px-1 py-2 text-sm font-medium transition-colors\",\n-          isActive ? \"text-secundary font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n+          isActive ? \"text-secondary font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n           className,\n         )}\n         {...props}\n       >\n"
+                },
+                {
+                    "date": 1741310451120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         href={href}\n         onClick={handleClick}\n         className={cn(\n           \"relative px-1 py-2 text-sm font-medium transition-colors\",\n-          isActive ? \"text-secondary font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n+          isActive ? \"text-[#f80497] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n           className,\n         )}\n         {...props}\n       >\n"
+                },
+                {
+                    "date": 1741310462467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         href={href}\n         onClick={handleClick}\n         className={cn(\n           \"relative px-1 py-2 text-sm font-medium transition-colors\",\n-          isActive ? \"text-[#f80497] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n+          isActive ? \"text-[#] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n           className,\n         )}\n         {...props}\n       >\n"
+                },
+                {
+                    "date": 1741310472558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         href={href}\n         onClick={handleClick}\n         className={cn(\n           \"relative px-1 py-2 text-sm font-medium transition-colors\",\n-          isActive ? \"text-[#] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n+          isActive ? \"text-[#BB86FC] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n           className,\n         )}\n         {...props}\n       >\n"
+                },
+                {
+                    "date": 1741310528419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         href={href}\n         onClick={handleClick}\n         className={cn(\n           \"relative px-1 py-2 text-sm font-medium transition-colors\",\n-          isActive ? \"text-[#BB86FC] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n+          isActive ? \"text-secondary font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n           className,\n         )}\n         {...props}\n       >\n"
+                },
+                {
+                    "date": 1741310561187,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         href={href}\n         onClick={handleClick}\n         className={cn(\n           \"relative px-1 py-2 text-sm font-medium transition-colors\",\n-          isActive ? \"text-secondary font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n+          isActive ? \"text- font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n           className,\n         )}\n         {...props}\n       >\n"
+                },
+                {
+                    "date": 1741310571315,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         href={href}\n         onClick={handleClick}\n         className={cn(\n           \"relative px-1 py-2 text-sm font-medium transition-colors\",\n-          isActive ? \"text-[\"\"] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n+          isActive ? \"text-[\"#\"] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n           className,\n         )}\n         {...props}\n       >\n"
+                },
+                {
+                    "date": 1741310571443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         href={href}\n         onClick={handleClick}\n         className={cn(\n           \"relative px-1 py-2 text-sm font-medium transition-colors\",\n-          isActive ? \"text-[\"\"] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n+          isActive ? \"text-[\"#\"] font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n           className,\n         )}\n         {...props}\n       >\n"
+                }
+            ],
+            "date": 1741310387875,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport type React from \"react\"\nimport { forwardRef } from \"react\"\nimport Link from \"next/link\"\nimport { cn } from \"@/lib/utils\"\n\ninterface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {\n  href: string\n  isActive?: boolean\n  children: React.ReactNode\n}\n\nexport const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(\n  ({ href, isActive, className, children, ...props }, ref) => {\n    // Determinar si el enlace es para una sección en la misma página\n    const isSectionLink = href.startsWith(\"#\")\n\n    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {\n      if (isSectionLink) {\n        e.preventDefault()\n        const targetId = href.substring(1)\n        const targetElement = document.getElementById(targetId)\n\n        if (targetElement) {\n          window.scrollTo({\n            top: targetElement.offsetTop - 80, // Ajustar para el header fijo\n            behavior: \"smooth\",\n          })\n        }\n      }\n\n      // Ejecutar el onClick original si existe\n      if (props.onClick) {\n        props.onClick(e)\n      }\n    }\n\n    return (\n      <Link\n        ref={ref}\n        href={href}\n        onClick={handleClick}\n        className={cn(\n          \"relative px-1 py-2 text-sm font-medium transition-colors\",\n          isActive ? \"text-secundary font-semibold\" : \"text-muted-foreground hover:text-foreground\",\n          className,\n        )}\n        {...props}\n      >\n        {children}\n      </Link>\n    )\n  },\n)\n\nNavLink.displayName = \"NavLink\"\n"
+        }
+    ]
+}

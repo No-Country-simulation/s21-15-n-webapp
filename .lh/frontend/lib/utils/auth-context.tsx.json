@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/lib/utils/auth-context.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741326570210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741326608484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,10 +50,18 @@\n     const dashboardRoute = getDashboardRouteByRole(user.role)\n     router.push(dashboardRoute)\n   }\n \n+  const contextValue = useMemo(() => ({\n+    user,\n+    isAuthenticated: !!user,\n+    isLoading,\n+    logout,\n+    navigateToDashboard\n+  }), [user, isLoading])\n+\n   return (\n-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, isLoading, logout, navigateToDashboard }}>\n+    <AuthContext.Provider value={contextValue}>\n       {children}\n     </AuthContext.Provider>\n   )\n }\n"
+                },
+                {
+                    "date": 1741326620558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n \"use client\"\n \n-import { createContext, useContext, useState, useEffect, type ReactNode } from \"react\"\n+import { createContext, useContext, useState, useEffect, type ReactNode, useMemo } from \"react\"\n import { getStoredUser, removeAuthCookie, removeStoredUser } from \"@/lib/utils/auth\"\n import { useRouter } from \"next/navigation\"\n import { ROUTES } from \"@/lib/constants/routes\"\n import type { User } from \"@/lib/types\"\n"
+                }
+            ],
+            "date": 1741326570210,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { createContext, useContext, useState, useEffect, type ReactNode } from \"react\"\nimport { getStoredUser, removeAuthCookie, removeStoredUser } from \"@/lib/utils/auth\"\nimport { useRouter } from \"next/navigation\"\nimport { ROUTES } from \"@/lib/constants/routes\"\nimport type { User } from \"@/lib/types\"\n\n// Definir el tipo para el contexto\ninterface AuthContextType {\n  user: User | null\n  isAuthenticated: boolean\n  isLoading: boolean\n  logout: () => void\n  navigateToDashboard: () => void\n}\n\n// Crear el contexto\nconst AuthContext = createContext<AuthContextType>({\n  user: null,\n  isAuthenticated: false,\n  isLoading: true,\n  logout: () => {},\n  navigateToDashboard: () => {},\n})\n\n// Proveedor del contexto\nexport function AuthProvider({ children }: { readonly children: ReactNode }) {\n  const [user, setUser] = useState<User | null>(null)\n  const [isLoading, setIsLoading] = useState(true)\n  const router = useRouter()\n\n  useEffect(() => {\n    // Verificar si hay un usuario almacenado\n    const storedUser = getStoredUser()\n    setUser(storedUser)\n    setIsLoading(false)\n  }, [])\n\n  const logout = () => {\n    removeAuthCookie()\n    removeStoredUser()\n    setUser(null)\n    router.push(ROUTES.HOME)\n  }\n\n  const navigateToDashboard = () => {\n    if (!user) return\n\n    const dashboardRoute = getDashboardRouteByRole(user.role)\n    router.push(dashboardRoute)\n  }\n\n  return (\n    <AuthContext.Provider value={{ user, isAuthenticated: !!user, isLoading, logout, navigateToDashboard }}>\n      {children}\n    </AuthContext.Provider>\n  )\n}\n\n// Hook personalizado para usar el contexto\nexport function useAuth() {\n  return useContext(AuthContext)\n}\n\n// Función auxiliar para obtener la ruta del dashboard según el rol\nexport function getDashboardRouteByRole(role: User[\"role\"]): string {\n  switch (role) {\n    case \"admin\":\n      return ROUTES.ADMIN\n    case \"mentor\":\n      return ROUTES.MENTOR\n    case \"company\":\n      return ROUTES.COMPANY\n    case \"junior\":\n    default:\n      return ROUTES.JUNIOR\n  }\n}\n"
+        }
+    ]
+}

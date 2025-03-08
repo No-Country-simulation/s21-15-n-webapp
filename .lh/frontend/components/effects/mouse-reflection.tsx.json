@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1740970442954,
@@ -16,6 +16,18 @@
                 {
                     "date": 1740976766412,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n }\r\n \r\n export function MouseReflection({\r\n   className,\r\n-  intensity = 2, // Aumentado de 1.2 a 2\r\n+  intensity = 1, // Aumentado de 1.2 a 2\r\n   color = \"rgba(139, 92, 246, 0.4)\", // Color púrpura más intenso\r\n   blur = 150, // Aumentado de 100 a 150\r\n   opacity = 0.5, // Mantenido en 0.5\r\n }: MouseReflectionProps) {\r\n@@ -42,5 +42,4 @@\n       />\r\n     </div>\r\n   )\r\n }\r\n-\r\n"
+                },
+                {
+                    "date": 1740977102031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,45 +0,0 @@\n-\"use client\"\r\n-\r\n-import { useMouseEffect } from \"@/hooks/use-mouse-effect\"\r\n-import { cn } from \"@/lib/utils/utils\"\r\n-\r\n-interface MouseReflectionProps {\r\n-  className?: string\r\n-  intensity?: number\r\n-  color?: string\r\n-  blur?: number\r\n-  opacity?: number\r\n-}\r\n-\r\n-export function MouseReflection({\r\n-  className,\r\n-  intensity = 1, // Aumentado de 1.2 a 2\r\n-  color = \"rgba(139, 92, 246, 0.4)\", // Color púrpura más intenso\r\n-  blur = 150, // Aumentado de 100 a 150\r\n-  opacity = 0.5, // Mantenido en 0.5\r\n-}: MouseReflectionProps) {\r\n-  const { mousePosition, isMounted } = useMouseEffect({\r\n-    intensity,\r\n-    smoothing: 0.1, // Suavizado ligeramente aumentado\r\n-  })\r\n-\r\n-  if (!isMounted) return null\r\n-\r\n-  return (\r\n-    <div className={cn(\"fixed inset-0 pointer-events-none z-0\", className)}>\r\n-      <div className=\"absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-background\" />\r\n-      <div\r\n-        className=\"absolute inset-0 transition-transform duration-200 ease-out\"\r\n-        style={{\r\n-          background: `radial-gradient(\r\n-            circle at ${mousePosition.x}% ${mousePosition.y}%,\r\n-            ${color} 0%,\r\n-            transparent ${blur}%\r\n-          )`,\r\n-          opacity,\r\n-          transform: `translate(${(mousePosition.x - 50) * 0.08}%, ${(mousePosition.y - 50) * 0.08}%)`,\r\n-        }}\r\n-      />\r\n-    </div>\r\n-  )\r\n-}\r\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1740977240596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1741065910365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,44 @@\n-\n+\"use client\"\r\n+\r\n+import { useMouseEffect } from \"@/hooks/use-mouse-effect\"\r\n+import { cn } from \"@/lib/utils/utils\"\r\n+\r\n+interface MouseReflectionProps {\r\n+  readonly className?: string\r\n+  readonly intensity?: number\r\n+  readonly color?: string\r\n+  readonly blur?: number\r\n+  readonly opacity?: number\r\n+}\r\n+\r\n+export function MouseReflection({\r\n+  className,\r\n+  intensity = 1,\r\n+  color = \"rgba(139, 92, 246, 0.4)\",\r\n+  blur = 150,\r\n+  opacity = 0.5,\r\n+}: MouseReflectionProps) {\r\n+  const { mousePosition, isMounted } = useMouseEffect({\r\n+    intensity,\r\n+    smoothing: 0.1,\r\n+  })\r\n+\r\n+  if (!isMounted) return null\r\n+\r\n+  const gradientStyle = {\r\n+    background: `radial-gradient(\r\n+      circle at ${mousePosition.x}% ${mousePosition.y}%,\r\n+      ${color} 0%,\r\n+      transparent ${blur}%\r\n+    )`,\r\n+    opacity,\r\n+    transform: `translate(${(mousePosition.x - 50) * 0.08}%, ${(mousePosition.y - 50) * 0.08}%)`,\r\n+  }\r\n+\r\n+  return (\r\n+    <div className={cn(\"fixed inset-0 pointer-events-none z-0\", className)}>\r\n+      <div className=\"absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-background\" />\r\n+      <div className=\"absolute inset-0 transition-transform duration-200 ease-out\" style={gradientStyle} />\r\n+    </div>\r\n+  )\r\n+}\r\n"
                 }
             ],
             "date": 1740970442954,

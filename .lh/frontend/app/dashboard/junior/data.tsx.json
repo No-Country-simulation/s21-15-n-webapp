@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/app/dashboard/junior/data.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1741061140447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741061141461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,5 +43,5 @@\n     className: \"border-primary/20 text-primary\",\r\n     icon: Globe,\r\n     text: \"12 misiones\",\r\n   },\r\n-]\n\\ No newline at end of file\n+]\r\n"
+                }
+            ],
+            "date": 1741061140447,
+            "name": "Commit-0",
+            "content": "import { Globe, Star } from \"lucide-react\"\r\n\r\nexport const weekDays = [\"L\", \"M\", \"M\", \"J\", \"V\", \"S\", \"D\"]\r\n\r\nexport const courses = [\r\n  {\r\n    id: 1,\r\n    title: \"Curso avanzado de figma\",\r\n    progress: 55,\r\n    image: \"/placeholder.svg?height=40&width=40\",\r\n  },\r\n  {\r\n    id: 2,\r\n    title: \"Fundamentos de UI/UX\",\r\n    progress: 30,\r\n    image: \"/placeholder.svg?height=40&width=40\",\r\n  },\r\n]\r\n\r\nexport const feedback = [\r\n  {\r\n    id: 1,\r\n    mentor: \"Eduardo Romero\",\r\n    role: \"Diseñador UI\",\r\n    avatar: \"/placeholder.svg?height=40&width=40\",\r\n    message:\r\n      \"Excelente progreso en el desarrollo del MVP. Las iteraciones basadas en feedback de usuarios muestran gran capacidad de adaptación.\",\r\n    date: \"Hace 4 días\",\r\n  },\r\n]\r\n\r\nexport const badges = [\r\n  {\r\n    id: 1,\r\n    variant: \"outline\",\r\n    className: \"border-primary/20 text-primary\",\r\n    icon: Star,\r\n    text: \"Explorador\",\r\n  },\r\n  {\r\n    id: 2,\r\n    variant: \"outline\",\r\n    className: \"border-primary/20 text-primary\",\r\n    icon: Globe,\r\n    text: \"12 misiones\",\r\n  },\r\n]"
+        }
+    ]
+}

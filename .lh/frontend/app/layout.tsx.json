@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1740968181593,
@@ -20,6 +20,14 @@
                 {
                     "date": 1740969260532,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,39 @@\n+import type React from \"react\"\n+import type { Metadata } from \"next\"\n+import { Inter } from \"next/font/google\"\n+import { Providers } from \"./providers\"\n+import { MouseReflection } from \"@/components/effects/mouse-reflection\"\n+import { ScrollToTopButton } from \"@/components/scroll-to-top-button\"\n+import \"./globals.css\"\n+\n+const inter = Inter({ subsets: [\"latin\"] })\n+\n+export const metadata: Metadata = {\n+  title: \"StartPerks - Transforma tu carrera tech\",\n+  description: \"Plataforma de desarrollo profesional para el universo tech\",\n+}\n+\n+export default function RootLayout({\n+  children,\n+}: {\n+  children: React.ReactNode\n+}) {\n+  return (\n+    <html lang=\"es\" suppressHydrationWarning>\n+      <body className={inter.className}>\n+        <Providers>\n+          <MouseReflection />\n+          {/* Contenedores para portales */}\n+          <div id=\"app-header\" className=\"z-40\" /> {/* Header siempre visible */}\n+          <div id=\"menu-overlay\" className=\"z-30\" /> {/* Overlay del menú */}\n+          <div id=\"app-content\" className=\"z-20\">\n+            {children}\n+          </div>{\" \"}\n+          {/* Contenido principal */}\n+          <ScrollToTopButton />\n+        </Providers>\n+      </body>\n+    </html>\n+  )\n+}\n+\n"
+                },
+                {
+                    "date": 1741312324799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import type React from \"react\"\n import type { Metadata } from \"next\"\n import { Inter } from \"next/font/google\"\n import { ScrollToTopButton } from \"@/components/scroll-to-top-button\"\n-import \"./globals.css\"\n+// import \"./globals.css\"\n \n const inter = Inter({ subsets: [\"latin\"] })\n \n export const metadata: Metadata = {\n"
+                },
+                {
+                    "date": 1741312422330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n \n export default function RootLayout({\n   children,\n }: {\n-  children: React.ReactNode\n+  children: ReactNode\n }) {\n   return (\n     <html lang=\"es\" suppressHydrationWarning>\n       <body className={inter.className}>\n"
                 }
             ],
             "date": 1740968181593,

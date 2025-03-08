@@ -1,0 +1,22 @@
+{
+    "sourceFile": "frontend/postcss.config.mjs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1741309255069,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741323775796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n /** @type {import('postcss-load-config').Config} */\n const config = {\n   plugins: {\n     tailwindcss: {},\n-    autoprefixer: {},\n   },\n };\n export default config;\n"
+                }
+            ],
+            "date": 1741309255069,
+            "name": "Commit-0",
+            "content": "/** @type {import('postcss-load-config').Config} */\nconst config = {\n  plugins: {\n    tailwindcss: {},\n    autoprefixer: {},\n  },\n};\nexport default config;\n"
+        }
+    ]
+}

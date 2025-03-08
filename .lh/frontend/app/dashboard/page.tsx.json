@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1740969627959,
@@ -12,6 +12,18 @@
                 {
                     "date": 1740976684314,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n import { SystemControls } from \"@/components/dashboard/system-controls\"\r\n import { TimeStatus } from \"@/components/dashboard/time-status\"\r\n import { SystemStatus } from \"@/components/dashboard/system-status\"\r\n import { useRandomStars } from \"@/hooks/use-random-stars\"\r\n-\r\n export default function DashboardPage() {\r\n   const stars = useRandomStars(50)\r\n \r\n   return (\r\n"
+                },
+                {
+                    "date": 1741062810551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,47 +1,26 @@\n \"use client\"\r\n \r\n-import { SystemMetrics } from \"@/components/dashboard/system-metrics\"\r\n-import { NavigationControls } from \"@/components/dashboard/navigation-controls\"\r\n-import { OrbitalControls } from \"@/components/dashboard/orbital-controls\"\r\n-import { SystemControls } from \"@/components/dashboard/system-controls\"\r\n-import { TimeStatus } from \"@/components/dashboard/time-status\"\r\n-import { SystemStatus } from \"@/components/dashboard/system-status\"\r\n-import { useRandomStars } from \"@/hooks/use-random-stars\"\r\n+import { useEffect } from \"react\"\r\n+import { useRouter } from \"next/navigation\"\r\n+import { getStoredUser } from \"@/lib/utils/auth\"\r\n+\r\n export default function DashboardPage() {\r\n-  const stars = useRandomStars(50)\r\n+  const router = useRouter()\r\n \r\n+  useEffect(() => {\r\n+    const currentUser = getStoredUser()\r\n+    if (currentUser) {\r\n+      const role = currentUser.role || \"junior\"\r\n+      router.push(`/dashboard/${role}`)\r\n+    } else {\r\n+      router.push(\"/login\")\r\n+    }\r\n+  }, [router])\r\n+\r\n   return (\r\n-    <>\r\n-      {/* Stars Background */}\r\n-      <div className=\"fixed inset-0 -z-10 overflow-hidden\">\r\n-        {stars.map((star) => (\r\n-          <div\r\n-            key={star.id}\r\n-            className={`absolute inline-flex animate-pulse ${star.color}`}\r\n-            style={{\r\n-              left: `${star.x}%`,\r\n-              top: `${star.y}%`,\r\n-              width: `${star.size}px`,\r\n-              height: `${star.size}px`,\r\n-              opacity: star.opacity,\r\n-              animation: `pulse ${star.duration}s infinite`,\r\n-            }}\r\n-          >\r\n-            <span className=\"absolute inline-flex h-full w-full animate-ping rounded-full bg-purple-400 opacity-75\" />\r\n-            <span className=\"relative inline-flex h-full w-full rounded-full bg-purple-500\" />\r\n-          </div>\r\n-        ))}\r\n-      </div>\r\n-\r\n-      <div className=\"grid gap-6 md:grid-cols-2 lg:grid-cols-3\">\r\n-        <NavigationControls />\r\n-        <SystemMetrics />\r\n-        <OrbitalControls />\r\n-        <SystemControls />\r\n-        <TimeStatus />\r\n-        <SystemStatus />\r\n-      </div>\r\n-    </>\r\n+    <div className=\"flex h-full items-center justify-center\">\r\n+      <p className=\"text-lg text-white\">Redirigiendo al dashboard correspondiente...</p>\r\n+    </div>\r\n   )\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1741062818496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \r\n   useEffect(() => {\r\n     const currentUser = getStoredUser()\r\n     if (currentUser) {\r\n-      const role = currentUser.role || \"junior\"\r\n+      const role = currentUser.role ?? \"junior\"\r\n       router.push(`/dashboard/${role}`)\r\n     } else {\r\n       router.push(\"/login\")\r\n     }\r\n@@ -22,5 +22,4 @@\n       <p className=\"text-lg text-white\">Redirigiendo al dashboard correspondiente...</p>\r\n     </div>\r\n   )\r\n }\r\n-\r\n"
+                },
+                {
+                    "date": 1741063099498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \r\n import { useEffect } from \"react\"\r\n import { useRouter } from \"next/navigation\"\r\n import { getStoredUser } from \"@/lib/utils/auth\"\r\n+import { redirectingText } from \"./data\"\r\n \r\n export default function DashboardPage() {\r\n   const router = useRouter()\r\n \r\n@@ -18,8 +19,8 @@\n   }, [router])\r\n \r\n   return (\r\n     <div className=\"flex h-full items-center justify-center\">\r\n-      <p className=\"text-lg text-white\">Redirigiendo al dashboard correspondiente...</p>\r\n+      <p className=\"text-lg text-white\">{redirectingText}</p>\r\n     </div>\r\n   )\r\n }\r\n"
                 }
             ],
             "date": 1740969627959,

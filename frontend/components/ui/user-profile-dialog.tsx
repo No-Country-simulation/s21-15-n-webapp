@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Image from "next/image"
 import { memo } from "react"
+import { useRouter } from "next/navigation"
 
 interface Streak {
   date: string
@@ -42,7 +43,14 @@ const mockStreaks: Streak[] = [
 ]
 
 export const UserProfileDialog = memo(function UserProfileDialog({ open, onOpenChange, user }: UserProfileDialogProps) {
+  const router = useRouter()
+
   if (!user) return null
+
+  const handleLogin = () => {
+    onOpenChange(false)
+    router.push("/login")
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -84,13 +92,12 @@ export const UserProfileDialog = memo(function UserProfileDialog({ open, onOpenC
           </ScrollArea>
         </div>
 
-        <div className="mt-6 flex justify-end">
-          <Button
-            variant="outline"
-            className="border-primary/20 text-white hover:bg-primary/20"
-            onClick={() => onOpenChange(false)}
-          >
+        <div className="mt-6 flex justify-end gap-3">
+          <Button variant="outline" className="btn-gradient-border" onClick={() => onOpenChange(false)}>
             Cerrar
+          </Button>
+          <Button variant="default" className="btn-magenta" onClick={handleLogin}>
+            Ingresar
           </Button>
         </div>
       </DialogContent>

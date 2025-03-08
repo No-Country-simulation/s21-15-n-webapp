@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1740970044246,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741065415876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,23 +1,26 @@\n import { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\"\r\n import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from \"recharts\"\r\n \r\n-const data = [\r\n-  { name: \"Ene\", value: 400 },\r\n-  { name: \"Feb\", value: 300 },\r\n-  { name: \"Mar\", value: 600 },\r\n-  { name: \"Abr\", value: 200 },\r\n-]\r\n+const config = {\r\n+  cardTitle: \"Métricas del Sistema\",\r\n+  data: [\r\n+    { name: \"Ene\", value: 400 },\r\n+    { name: \"Feb\", value: 300 },\r\n+    { name: \"Mar\", value: 600 },\r\n+    { name: \"Abr\", value: 200 },\r\n+  ],\r\n+}\r\n \r\n export function SystemMetrics() {\r\n   return (\r\n     <Card className=\"border-primary/20 bg-black/50 backdrop-blur-sm\">\r\n       <CardHeader>\r\n-        <CardTitle className=\"text-lg font-medium text-white\">System Metrics</CardTitle>\r\n+        <CardTitle className=\"text-lg font-medium text-white\">{config.cardTitle}</CardTitle>\r\n       </CardHeader>\r\n       <CardContent>\r\n         <ResponsiveContainer width=\"100%\" height={200}>\r\n-          <BarChart data={data}>\r\n+          <BarChart data={config.data}>\r\n             <XAxis dataKey=\"name\" stroke=\"#94a3b8\" fontSize={12} tickLine={false} axisLine={false} />\r\n             <YAxis\r\n               stroke=\"#94a3b8\"\r\n               fontSize={12}\r\n@@ -31,5 +34,4 @@\n       </CardContent>\r\n     </Card>\r\n   )\r\n }\r\n-\r\n"
                 }
             ],
             "date": 1740970044246,
