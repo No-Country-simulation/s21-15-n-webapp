@@ -81,10 +81,10 @@ public class JuniorUserController {
     }
 
     @GetMapping("/{id}/challengehistory")
-    public ResponseEntity<Page<ChallengeHistoryDTO>> listChallengeHistory(@PathVariable int id) {
+    public ResponseEntity<Page<ChallengeHistoryDTO>> listChallengeHistory(@PathVariable int id, Pageable pageable) {
         try {
             JuniorUser user = juniorRepository.findById(id);
-            return ResponseEntity.ok(new PageImpl<>(user.getChallengeHistory(), Pageable.unpaged(),
+            return ResponseEntity.ok(new PageImpl<>(user.getChallengeHistory(), pageable,
                     user.getChallengeHistory().size()).map(ChallengeHistoryDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
@@ -92,10 +92,10 @@ public class JuniorUserController {
     }
 
     @GetMapping("/{id}/coursehistory")
-    public ResponseEntity<Page<CourseHistoryDTO>> listCourseHistory(@PathVariable int id) {
+    public ResponseEntity<Page<CourseHistoryDTO>> listCourseHistory(@PathVariable int id, Pageable pageable) {
         try {
             JuniorUser user = juniorRepository.findById(id);
-            return ResponseEntity.ok(new PageImpl<>(user.getCourseHistory(), Pageable.unpaged(),
+            return ResponseEntity.ok(new PageImpl<>(user.getCourseHistory(), pageable,
                     user.getCourseHistory().size()).map(CourseHistoryDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
@@ -103,10 +103,10 @@ public class JuniorUserController {
     }
 
     @GetMapping("/{id}/mentorshiphistory")
-    public ResponseEntity<Page<MentorshipHistoryDTO>> listMentorshipHistory(@PathVariable int id) {
+    public ResponseEntity<Page<MentorshipHistoryDTO>> listMentorshipHistory(@PathVariable int id, Pageable pageable) {
         try {
             JuniorUser user = juniorRepository.findById(id);
-            return ResponseEntity.ok(new PageImpl<>(user.getMentorshipHistory(), Pageable.unpaged(),
+            return ResponseEntity.ok(new PageImpl<>(user.getMentorshipHistory(), pageable,
                     user.getMentorshipHistory().size()).map(MentorshipHistoryDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
@@ -114,6 +114,7 @@ public class JuniorUserController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> updateUser(@RequestBody @Valid JuniorUser userJson, @PathVariable int id) {
         try {
             JuniorUser user = juniorRepository.update(userJson, id);
@@ -124,7 +125,6 @@ public class JuniorUserController {
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
     public ResponseEntity<?> deleteUser(@PathVariable int id) {
         try {
             JuniorUser user = juniorRepository.findById(id);

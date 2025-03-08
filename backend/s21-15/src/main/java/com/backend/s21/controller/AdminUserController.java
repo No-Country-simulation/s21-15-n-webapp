@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -77,6 +78,7 @@ public class AdminUserController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> updateUser(@RequestBody @Valid AdminUser userJson, @PathVariable int id) {
         try {
             AdminUser user = adminService.update(userJson, id);
@@ -123,6 +125,7 @@ public class AdminUserController {
     }
 
     @PutMapping("/{ida}/challengelist/{id}")
+    @Transactional
     public ResponseEntity<?> updateChallenge(@PathVariable int id, @RequestBody @Valid Challenge challengeJson) {
         try {
             Challenge challenge = challengeService.update(challengeJson, id);
@@ -133,7 +136,7 @@ public class AdminUserController {
     }
 
     @DeleteMapping("/{ida}/challengelist/{id}")
-    public ResponseEntity<?> deleteChallenge(@PathVariable int id) {
+    public ResponseEntity<String> deleteChallenge(@PathVariable int id) {
         try {
             String challengeName = challengeService.findById(id).getTitle();
             return ResponseEntity.ok("El reto "+challengeName+", ha sido eliminado con exito.");

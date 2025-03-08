@@ -78,14 +78,13 @@ public class MentorUserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteUser(@PathVariable int id) {
         MentorUser user = mentorRepository.findById(id);
         user.setDeleted(true);
         return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
     }
 
     @PostMapping("/{id}/yourcourselist/createcourse")
-    @Transactional
     public ResponseEntity<?> createCourse( @PathVariable int id, @RequestBody @Valid Course courseJson,
                                                   UriComponentsBuilder uri) {
         try {
@@ -109,6 +108,7 @@ public class MentorUserController {
     }
 
     @PutMapping("/{idm}/yourcourselist/{id}")
+    @Transactional
     public ResponseEntity<?> updateCourse(@PathVariable int id, @RequestBody @Valid Course courseJson) {
         try {
             Course course = courseRepository.update(courseJson, id);
@@ -130,10 +130,10 @@ public class MentorUserController {
     }
 
     @GetMapping("/{id}/yourcourselist")
-    public ResponseEntity<Page<CourseDTO>> listCoursesFromMentor(@PathVariable int id) {
+    public ResponseEntity<Page<CourseDTO>> listCoursesFromMentor(@PathVariable int id, Pageable pageable) {
         try {
             User user = mentorRepository.findById(id);
-            Page<Course> listCourses = courseRepository.findByInstructorId(Pageable.unpaged(), user.getId());
+            Page<Course> listCourses = courseRepository.findByInstructorId(pageable, user.getId());
             return ResponseEntity.ok(listCourses.map(CourseDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
@@ -141,7 +141,6 @@ public class MentorUserController {
     }
 
     @PostMapping("/{id}/yourmentorshiplist/creatementorship")
-    @Transactional
     public ResponseEntity<?> createMentorship(@PathVariable int id,
                                                           @RequestBody @Valid Mentorship mentorshipJson,
                                                           UriComponentsBuilder uri) {

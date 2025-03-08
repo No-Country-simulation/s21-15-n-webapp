@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +61,7 @@ public class CompanyUserController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> updateCompanyUser(@PathVariable int id, @RequestBody @Valid CompanyUser userJson) {
         try {
             CompanyUser user = companyRepository.update(userJson, id);
@@ -70,7 +72,7 @@ public class CompanyUserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCompanyUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteCompanyUser(@PathVariable int id) {
         try {
             CompanyUser user = companyRepository.findById(id);
             user.setDeleted(true);

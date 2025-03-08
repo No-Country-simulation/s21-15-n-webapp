@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,6 +64,7 @@ public class MentorshipController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> updateMentoship(@PathVariable int id, @RequestBody @Valid Mentorship mentorshipJson) {
         try {
             Mentorship mentorship = mentorshipRepository.update(mentorshipJson, id);
@@ -73,10 +75,11 @@ public class MentorshipController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteMentorship(@PathVariable int id) {
+    public ResponseEntity<String> deleteMentorship(@PathVariable int id) {
         try {
+            String mentorshipName = mentorshipRepository.findById(id).getTitle();
             mentorshipRepository.deleteById(id);
-            return ResponseEntity.ok("La mentoría ha sido eliminada con exito.");
+            return ResponseEntity.ok("La mentoría "+mentorshipName+" ha sido eliminada con exito.");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

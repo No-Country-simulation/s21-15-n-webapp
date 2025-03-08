@@ -48,8 +48,7 @@ public class CourseController {
 
     }
 
-    @PostMapping("/create/{id}") //Se envía el Id al que se ligará el curso como parametro.
-    @Transactional
+    @PostMapping("/create/{id}")
     public ResponseEntity<?> createCourse(@RequestBody @Valid Course courseJson, @PathVariable int id, UriComponentsBuilder uri) {
         try {
             Optional<User> instructor = userRepository.findById(id); //Utilizado Optional mientras se implementa UserService.
@@ -71,6 +70,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> updateCourse(@PathVariable int id, @RequestBody @Valid Course courseJson) {
         try {
             Course course = courseRepository.update(courseJson, id);
@@ -81,11 +81,11 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCourse(@PathVariable int id) {
+    public ResponseEntity<String> deleteCourse(@PathVariable int id) {
         try {
             String courseName = courseRepository.findById(id).getTitle();
             courseRepository.deleteById(id);
-            return ResponseEntity.ok("El curso "+courseName+", ha sido elimado con exito.");
+            return ResponseEntity.ok("El curso "+courseName+" ha sido elimado con exito.");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
