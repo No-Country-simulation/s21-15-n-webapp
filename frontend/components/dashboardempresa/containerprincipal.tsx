@@ -1,6 +1,30 @@
 
-import { Search, SlidersHorizontal } from "lucide-react";
-import { Table } from "./table";
+import { Search, Plus } from "lucide-react";
+import Tablas from "./table";
+
+const columns = [
+  {key:"nombre", label:"Nombre"},
+  {key:"uactualizacion", label:"Última Actualización"},
+  {key:"rol", label:"Rol"},
+  {key:"accion", label:""},
+];
+const data = [
+  {nombre:"Juan Carlos", uactualizaciones:"10/03/2023", rol:"Diseñador", accion:"..."},
+  {nombre:"Alexa", uactualizaciones:"10/03/2023", rol:"Front End", accion:"..."},
+  {nombre:"Marisol", uactualizaciones:"10/03/2023", rol:"Diseñador", accion:"..."},
+  {nombre:"Daniel ", uactualizaciones:"10/03/2023", rol:"Diseñador", accion:"..."},
+  {nombre:"Daniel", uactualizaciones:"10/03/2023", rol:"Diseñador", accion:"..."},
+  {nombre:"Marcela", uactualizaciones:"10/03/2023", rol:"Diseñador", accion:"..."},
+  {nombre:"Laura", uactualizaciones:"10/03/2023", rol:"Front End", accion:"..."},
+  {nombre:"Norma", uactualizaciones:"10/03/2023", rol:"Front End", accion:"..."},
+  {nombre:"Patricia", uactualizaciones:"10/03/2023", rol:"Back end", accion:"..."},
+  {nombre:"Daniel ", uactualizaciones:"10/03/2023", rol:"Diseñador", accion:"..."},
+  {nombre:"Daniel", uactualizaciones:"10/03/2023", rol:"Diseñador", accion:"..."},
+  {nombre:"Marcela", uactualizaciones:"10/03/2023", rol:"Diseñador", accion:"..."},
+  {nombre:"Laura", uactualizaciones:"10/03/2023", rol:"Front End", accion:"..."},
+  {nombre:"Norma", uactualizaciones:"10/03/2023", rol:"Front End", accion:"..."},
+  {nombre:"Patricia", uactualizaciones:"10/03/2023", rol:"Back end", accion:"..."},
+];
 
 export function ContainerPrincipal() {
   return (
@@ -9,7 +33,7 @@ export function ContainerPrincipal() {
         <div className="border border-[#4F46E5] rounded-lg h-full w-[25%] mr-5"></div>
         <div className="border border-[#4F46E5] rounded-lg h-full w-[80%]"></div>
       </div>
-      <div className="border border-[#4F46E5] rounded-lg h-[75%] p-4">
+      <div className="border border-[#4F46E5] rounded-lg h-[85%] p-4">
         <div className="h-10 mb-4 flex flex-row">
           <div className="border border-[#4F46E5] rounded-lg h-full w-104 mr-3">
             <input type="text" className="w-full h-full p-2 rounded-lg border-none outline-none" placeholder="Escribe para buscar aquí..."/>
@@ -20,12 +44,12 @@ export function ContainerPrincipal() {
           <div className="border border-[#4F46E5] rounded-lg h-full w-50">
             <button className="w-full h-full text-[#4F46E5] hover:bg-[#4F46E5] hover:text-white rounded-lg flex items-center justify-center space-x-2">
               <span>Filtros</span> 
-              <SlidersHorizontal/>
+              <Plus/>
             </button>
           </div>
         </div>
-        <div className="border border-[#4F46E5] rounded-lg h-[90%]">
-          <Table/>
+        <div className="border border-[#4F46E5] rounded-lg h-[550px]">
+          <Tablas columns={columns} data={data}/>
         </div>
       </div>
     </div>

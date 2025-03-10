@@ -11,7 +11,7 @@ const menuItems = [
 
 export function SideBar(){
   return (
-    <div className="bg-[#0A0B1E] h-full w-[250px] p-5 flex flex-col">
+    <div className="bg-[#0A0B1E] h-full w-[250px] p-5 flex flex-col space-y-4">
       <h2 className="text-xl font-bold mb-5 text-white flex items-center">
         <img
           src="https://raw.githubusercontent.com/No-Country-simulation/s21-15-n-webapp/1857a87229a6361b345560c4be845b64247ec09b/frontend/src/assets/rocket.png"

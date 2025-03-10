@@ -7,14 +7,15 @@ import { SideBar } from "@/components/dashboardempresa/sidebar";
 
 export default function DashboardPage() {
   return (
-    <div className="flex h-screen bg-[#0A082B] backdrop-blur-sm text-white">
-      {/* Sidebar */}
-      <aside className="col-span-2 rounded-lg flex flex-col gap-4">
-        <SideBar/>
+    <div className="flex bg-[#0A082B] min-h-screen text-white">
+      {/* Sidebar fijo */}
+      <aside className="fixed top-0 left-0 h-screen w-64 bg-[#0A082B] backdrop-blur-sm">
+        <SideBar />
       </aside>
-      {/* Main Content */}
-      <main className="flex-1 rounded-lg flex flex-col gap-4">
-        <ContainerPrincipal/>
+
+      {/* Contenido principal con margen a la izquierda */}
+      <main className="flex-1 ml-64 p-4 bg-[#0A082B] backdrop-blur-sm">
+        <ContainerPrincipal />
       </main>
     </div>
   );

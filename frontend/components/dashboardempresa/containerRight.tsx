@@ -3,7 +3,7 @@ import { Mail, Phone, Linkedin } from "lucide-react";
 
 export function ContainerRight(){
     return(
-        <div className="h-screen w-[350px] bg-[#000115] backdrop-blur-sm p-4 rounded-l-lg mr-0 items-center">
+        <div className="h-screen w-[350px] bg-[#000115] backdrop-blur-sm p-4 rounded-l-lg items-center mr-4">
             <div className="border border-gray-600 backdrop-blur-sm rounded-lg h-40 w-40 mb-4 ml-20">
                 <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tYnJlJTIwYXJhbmF8ZW58MHx8MHx8fDA%3D" alt="avatar" className="w-full h-full rounded-lg"/>
             </div>
