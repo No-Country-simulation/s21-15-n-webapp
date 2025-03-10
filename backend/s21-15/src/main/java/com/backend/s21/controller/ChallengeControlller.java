@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,16 +54,18 @@ public class ChallengeControlller {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteChallenge(@PathVariable int id) {
+    public ResponseEntity<String> deleteChallenge(@PathVariable int id) {
         try {
+            String challengeName = challengeRepository.findById(id).getTitle();
             challengeRepository.deleteById(id);
-            return ResponseEntity.ok("El reto ha sido eliminado con exito.");
+            return ResponseEntity.ok("El reto "+challengeName+" ha sido eliminado con exito.");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping("/{id}")
+    @Transactional
     public ResponseEntity<?> updateChallenge(@PathVariable int id, @RequestBody @Valid Challenge challengeJson) {
         try {
             Challenge challenge = challengeRepository.update(challengeJson, id);
