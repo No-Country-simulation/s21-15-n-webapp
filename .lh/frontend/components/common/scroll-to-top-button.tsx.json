@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/components/common/scroll-to-top-button.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741572370870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741572381481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n \n import { Rocket } from \"lucide-react\"\n import { useScrollToTop } from \"@/hooks/use-scroll-to-top\"\n import { cn } from \"@/lib/utils\"\n+import { Button } from \"../ui/button\"\n \n // Textos locales para el botón de scroll-to-top\n const SCROLL_BUTTON_TEXT = {\n   ariaLabel: \"Volver arriba\",\n"
+                },
+                {
+                    "date": 1741572387990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n import { Rocket } from \"lucide-react\"\n import { useScrollToTop } from \"@/hooks/use-scroll-to-top\"\n import { cn } from \"@/lib/utils\"\n-import { Button } from \"../ui/button\"\n+import { Button } from \"@/ui/button\"\n \n // Textos locales para el botón de scroll-to-top\n const SCROLL_BUTTON_TEXT = {\n   ariaLabel: \"Volver arriba\",\n"
+                }
+            ],
+            "date": 1741572370870,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { memo } from \"react\"\n\nimport { Rocket } from \"lucide-react\"\nimport { useScrollToTop } from \"@/hooks/use-scroll-to-top\"\nimport { cn } from \"@/lib/utils\"\n\n// Textos locales para el botón de scroll-to-top\nconst SCROLL_BUTTON_TEXT = {\n  ariaLabel: \"Volver arriba\",\n}\n\nexport const ScrollToTopButton = memo(function ScrollToTopButton() {\n  const { showButton, isAnimating, isFlying, scrollToTop } = useScrollToTop()\n\n  if (!showButton) return null\n\n  return (\n    <Button\n      onClick={scrollToTop}\n      className={cn(\n        \"fixed bottom-8 right-8 z-30 h-12 w-12 rounded-full\",\n        \"bg-[#0a082b] p-0 opacity-90 shadow-lg transition-all overflow-hidden\",\n        \"hover:opacity-100 hover:shadow-[#2b00eb]/30\",\n        isAnimating && \"pointer-events-none\", // Prevenir clics durante la animación\n        isFlying && \"animate-fly-away\",\n      )}\n    >\n      <Rocket\n        className={cn(\n          \"h-6 w-6 transition-transform duration-300 text-[#2b00eb]\",\n          \"drop-shadow-[0_0_10px_rgba(43,0,235,0.5)]\", // Resplandor del color del Figma\n          isFlying ? \"animate-rocket-fly\" : \"-rotate-45\",\n        )}\n        strokeWidth={2.5} // Aumentar el grosor del trazo para mejor visibilidad\n      />\n      <span className=\"sr-only\">{SCROLL_BUTTON_TEXT.ariaLabel}</span>\n    </Button>\n  )\n})\n"
+        }
+    ]
+}

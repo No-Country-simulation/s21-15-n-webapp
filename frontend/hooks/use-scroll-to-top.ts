@@ -9,7 +9,7 @@ export function useScrollToTop() {
 
   const checkScrollPosition = useCallback(() => {
     if (typeof window !== "undefined") {
-      setShowButton(window.pageYOffset > 400)
+      setShowButton(window.scrollY > 400)
     }
   }, [])
 
@@ -44,4 +44,3 @@ export function useScrollToTop() {
 
   return { showButton, isAnimating, isFlying, scrollToTop }
 }
-

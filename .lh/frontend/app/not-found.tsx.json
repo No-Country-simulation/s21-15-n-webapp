@@ -1,0 +1,18 @@
+{
+    "sourceFile": "frontend/app/not-found.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1741572576635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1741572576635,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport { Card, CardContent, CardHeader, CardTitle, CardDescription } from \"@/components/ui/card\"\nimport { useRouter } from \"next/navigation\"\nimport { ROUTES } from \"@/lib/constants/routes\"\nimport { MapPin } from \"lucide-react/stars-background\"\n\n// Textos locales para la página 404\nconst NOT_FOUND_TEXT = {\n  title: \"Página no encontrada\",\n  description: \"La ruta que estás buscando no existe o ha sido movida.\",\n  redirectMessage: \"Serás redirigido a la página principal en\",\n}\n\nexport default function NotFoundPage() {\n  const router = useRouter()\n  const [countdown, setCountdown] = useState(5)\n\n  useEffect(() => {\n    const timer = setInterval(() => {\n      setCountdown((prev) => {\n        if (prev <= 1) {\n          clearInterval(timer)\n          router.push(ROUTES.HOME)\n          return 0\n        }\n        return prev - 1\n      })\n    }, 1000)\n\n    return () => clearInterval(timer)\n  }, [router])\n\n  return (\n    <div className=\"flex min-h-screen items-center justify-center bg-background p-4\">\n      {/* Stars Background */}\n      <StarsBackground colors={[\"primary\", \"accent\"]} />\n\n      <div className=\"absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background\" />\n\n      <Card className=\"relative w-full max-w-md border-primary/20 bg-background/60 backdrop-blur-xl\">\n        <CardHeader className=\"space-y-4\">\n          <div className=\"mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/20\">\n            <MapPin className=\"h-6 w-6 text-primary\" />\n          </div>\n          <CardTitle className=\"text-center text-2xl font-bold text-primary\">{NOT_FOUND_TEXT.title}</CardTitle>\n          <CardDescription className=\"text-center\">{NOT_FOUND_TEXT.description}</CardDescription>\n        </CardHeader>\n        <CardContent className=\"space-y-4\">\n          <p className=\"text-center text-muted-foreground\">\n            {NOT_FOUND_TEXT.redirectMessage} <span className=\"font-bold text-primary\">{countdown}</span> segundos.\n          </p>\n        </CardContent>\n      </Card>\n    </div>\n  )\n}\n"
+        }
+    ]
+}

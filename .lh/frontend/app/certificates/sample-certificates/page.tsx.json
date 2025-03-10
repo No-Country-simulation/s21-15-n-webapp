@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1741326754566,
@@ -28,6 +28,14 @@
                 {
                     "date": 1741326807831,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n                 </ol>\n                 <Button\n                   className=\"w-full mt-4\"\n                   variant=\"outline\"\n-                  onClick={() => router.push(`${ROUTES.CERTIFICATES}/verify`}/CERT-2024-012-UXD-MARI-ABC456`)}\n+                  onClick={() => router.push(`${ROUTES.CERTIFICATES}/verify/CERT-2024-012-UXD-MARI-ABC456`)}\n                 >\n                   Probar verificación\n                 </Button>\n               </CardContent>\n"
+                },
+                {
+                    "date": 1741546603635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,8 @@\n         <div className=\"mb-8 text-center\">\n           <h1 className=\"text-3xl font-bold text-white mb-2\">Certificados de Muestra</h1>\n           <p className=\"text-muted-foreground\">Explora ejemplos de certificados emitidos por StartPerks</p>\n         </div>\n-\n         <div className=\"grid grid-cols-1 lg:grid-cols-3 gap-8\">\n           <div className=\"lg:col-span-2\">\n             <SampleCertificates className=\"max-w-4xl mx-auto\" />\n           </div>\n"
+                },
+                {
+                    "date": 1741546612463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n         <div className=\"mb-8 text-center\">\n           <h1 className=\"text-3xl font-bold text-white mb-2\">Certificados de Muestra</h1>\n           <p className=\"text-muted-foreground\">Explora ejemplos de certificados emitidos por StartPerks</p>\n         </div>\n+\n         <div className=\"grid grid-cols-1 lg:grid-cols-3 gap-8\">\n           <div className=\"lg:col-span-2\">\n             <SampleCertificates className=\"max-w-4xl mx-auto\" />\n           </div>\n"
                 }
             ],
             "date": 1741326754566,

@@ -1,10 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getStoredUser, removeAuthCookie, removeStoredUser } from "@/lib/utils/auth"
+import { getStoredUser, removeAuthCookie, removeStoredUser } from "@/config/auth/auth"
 import { useRouter } from "next/navigation"
-import { ROUTES } from "@/lib/constants/routes"
-import type { User } from "@/lib/types"
+import { ROUTES } from "@/config/constants/routes"
+import type { User } from "@/config/types"
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null)
@@ -12,10 +12,27 @@ export function useAuth() {
   const router = useRouter()
 
   useEffect(() => {
-    // Verificar si hay un usuario almacenado
-    const storedUser = getStoredUser()
-    setUser(storedUser)
-    setIsLoading(false)
+    // Función para verificar el estado de autenticación
+    const checkAuthStatus = () => {
+      const storedUser = getStoredUser()
+      setUser(storedUser)
+      setIsLoading(false)
+    }
+
+    // Verificar al montar el componente
+    checkAuthStatus()
+
+    // Escuchar eventos de storage para sincronizar entre pestañas
+    const handleStorageChange = () => {
+      checkAuthStatus()
+    }
+
+    window.addEventListener("storage", handleStorageChange)
+
+    // Limpiar el listener al desmontar
+    return () => {
+      window.removeEventListener("storage", handleStorageChange)
+    }
   }, [])
 
   // Mejorar la función logout para asegurar que se eliminen todas las cookies
@@ -56,8 +73,8 @@ export function getDashboardRouteByRole(role: User["role"]): string {
     case "company":
       return ROUTES.COMPANY
     case "junior":
-    default:
       return ROUTES.JUNIOR
+    default:
+      return ROUTES.HOME
   }
 }
-

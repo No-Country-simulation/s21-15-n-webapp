@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss"
-import { fontFamily } from "tailwindcss/defaultTheme"
 
 const config = {
   darkMode: ["class"],
@@ -19,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        nunito: ["var(--font-nunito)"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -55,7 +57,6 @@ const config = {
         },
         // Agregar colores personalizados para los botones
         magenta: "#E20B8C",
-        active: "#BB86FC",
         "gradient-start": "#FF1B8D",
         "gradient-end": "#1B8DFF",
       },
@@ -63,9 +64,6 @@ const config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-      },
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
@@ -87,3 +85,4 @@ const config = {
 } satisfies Config
 
 export default config
+

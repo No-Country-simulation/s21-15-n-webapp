@@ -1,10 +1,13 @@
 import { ReactNode } from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import { ScrollToTopButton } from "@/components/scroll-to-top-button"
+import { Nunito } from "next/font/google"
+import { ScrollToTopButton } from "@/components/common/navigation/scroll-to-top-button"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] })
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-nunito",
+})
 
 export const metadata: Metadata = {
   title: "StartPerks - Transforma tu carrera tech",
@@ -19,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={nunito.className}>
         <div id="app-content" className="relative z-20">
           {children}
         </div>
