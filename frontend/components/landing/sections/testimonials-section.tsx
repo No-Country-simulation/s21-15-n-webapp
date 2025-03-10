@@ -15,6 +15,7 @@ const TestimonialAvatar = ({ avatar, name }: { avatar?: string; name: string }) 
   return (
     <div className="relative h-24 w-24 overflow-hidden rounded-full ring-2 ring-white/10">
       <Image
+        loading = 'lazy'
         src={avatarSrc || "/placeholder.svg"}
         alt={name}
         fill

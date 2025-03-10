@@ -42,7 +42,7 @@ export const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
         onClick={handleClick}
         className={cn(
           "relative px-1 py-2 text-sm font-medium transition-colors",
-          isActive ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground",
+          isActive ? "text-magenta font-semibold" : "text-muted-foreground hover:text-foreground",
           className,
         )}
         {...props}

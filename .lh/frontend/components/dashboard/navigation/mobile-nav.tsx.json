@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/components/dashboard/navigation/mobile-nav.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741632076585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741632097028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { usePathname, useRouter } from \"next/navigation\"\n import { cn } from \"@/lib/utils\"\n import { NAVIGATION_TEXT } from \"@/config/constants/ui-text\"\n import { useAuth } from \"@/hooks/use-auth\"\n-import { AppLogo } from \"@/components/ui/app-logo\"\n+import { AppLogo } from \"@/components/common/ui/app-logo\"\n \n // Elementos de navegación\n const NAV_ITEMS = [\n   { icon: <Home className=\"h-5 w-5\" />, label: NAVIGATION_TEXT.inicio, href: \"/dashboard/junior\" },\n"
+                },
+                {
+                    "date": 1741632108821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,10 +20,10 @@\n   { icon: <User className=\"h-5 w-5\" />, label: NAVIGATION_TEXT.perfil, href: \"/dashboard/profile\" },\n ]\n \n interface MobileNavProps {\n-  open: boolean\n-  onClose: () => void\n+  readonly open: boolean\n+  readonly onClose: () => void\n }\n \n export function MobileNav({ open, onClose }: MobileNavProps) {\n   const pathname = usePathname()\n"
+                }
+            ],
+            "date": 1741632076584,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { Sheet, SheetContent } from \"@/components/ui/sheet\"\nimport { ScrollArea } from \"@/components/ui/scroll-area\"\nimport { Home, Trophy, Rocket, Zap, MessageSquare, User, LogOut } from \"lucide-react\"\nimport Link from \"next/link\"\nimport { usePathname, useRouter } from \"next/navigation\"\nimport { cn } from \"@/lib/utils\"\nimport { NAVIGATION_TEXT } from \"@/config/constants/ui-text\"\nimport { useAuth } from \"@/hooks/use-auth\"\nimport { AppLogo } from \"@/components/ui/app-logo\"\n\n// Elementos de navegación\nconst NAV_ITEMS = [\n  { icon: <Home className=\"h-5 w-5\" />, label: NAVIGATION_TEXT.inicio, href: \"/dashboard/junior\" },\n  { icon: <Trophy className=\"h-5 w-5\" />, label: NAVIGATION_TEXT.ranking, href: \"/dashboard/ranking\" },\n  { icon: <Rocket className=\"h-5 w-5\" />, label: NAVIGATION_TEXT.lorem, href: \"/dashboard/lorem1\" },\n  { icon: <Zap className=\"h-5 w-5\" />, label: NAVIGATION_TEXT.lorem, href: \"/dashboard/lorem2\" },\n  { icon: <MessageSquare className=\"h-5 w-5\" />, label: NAVIGATION_TEXT.lorem, href: \"/dashboard/lorem3\" },\n  { icon: <User className=\"h-5 w-5\" />, label: NAVIGATION_TEXT.perfil, href: \"/dashboard/profile\" },\n]\n\ninterface MobileNavProps {\n  open: boolean\n  onClose: () => void\n}\n\nexport function MobileNav({ open, onClose }: MobileNavProps) {\n  const pathname = usePathname()\n  const router = useRouter()\n  const { logout } = useAuth()\n\n  const handleLogout = () => {\n    logout()\n    router.push(\"/\")\n    onClose()\n  }\n\n  return (\n    <Sheet open={open} onOpenChange={onClose}>\n      <SheetContent\n        side=\"left\"\n        className=\"w-72 border-accent-primary/20 bg-background-secondary/95 backdrop-blur-xl p-0 flex flex-col\"\n      >\n        <div className=\"flex h-16 items-center justify-between border-b border-accent-primary/20 px-4\">\n          <AppLogo size=\"sm\" className=\"text-foreground\" />\n          {/* Eliminado el botón de cierre personalizado, usando solo el nativo de SheetContent */}\n        </div>\n\n        <ScrollArea className=\"flex-1\">\n          <div className=\"p-4\">\n            <nav className=\"space-y-2\">\n              {NAV_ITEMS.map((item) => (\n                <Link\n                  key={item.href}\n                  href={item.href}\n                  onClick={onClose}\n                  className={cn(\n                    \"flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors w-full\",\n                    pathname === item.href\n                      ? \"bg-accent-primary/20 text-accent-primary\"\n                      : \"text-text-secondary hover:bg-accent-primary/10 hover:text-accent-primary\",\n                  )}\n                >\n                  {item.icon}\n                  {item.label}\n                </Link>\n              ))}\n            </nav>\n          </div>\n        </ScrollArea>\n\n        {/* Footer con botón de cerrar sesión */}\n        <div className=\"mt-auto border-t border-accent-primary/20 p-4\">\n          <button\n            onClick={handleLogout}\n            className=\"flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors w-full text-text-secondary hover:bg-accent-primary/10 hover:text-accent-primary\"\n          >\n            <LogOut className=\"h-5 w-5\" />\n            {NAVIGATION_TEXT.cerrarSesion}\n          </button>\n        </div>\n      </SheetContent>\n    </Sheet>\n  )\n}\n"
+        }
+    ]
+}

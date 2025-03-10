@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/components/dashboard/navigation/top-bar.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741632331680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741632342880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n import Link from \"next/link\"\n import { Menu } from \"lucide-react\"\n import { Button } from \"@/components/ui/button\"\n-import { AppLogo } from \"@/components/ui/app-logo\"\n+import { AppLogo } from \"@/components/common/ui/app-logo\"\n import { UserMenu } from \"@/components/dashboard/navigation/user-menu\"\n \n interface TopBarProps {\n   onMenuClick: () => void\n"
+                },
+                {
+                    "date": 1741632362016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n \"use client\"\n \n import Link from \"next/link\"\n import { Menu } from \"lucide-react\"\n+import { AppLogo } from \"@/components/common/ui/app-logo\"\n import { Button } from \"@/components/ui/button\"\n-import { AppLogo } from \"@/components/common/ui/app-logo\"\n import { UserMenu } from \"@/components/dashboard/navigation/user-menu\"\n \n interface TopBarProps {\n-  onMenuClick: () => void\n+  readonly onMenuClick: () => void\n }\n \n export function TopBar({ onMenuClick }: TopBarProps) {\n   return (\n"
+                }
+            ],
+            "date": 1741632331680,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport Link from \"next/link\"\nimport { Menu } from \"lucide-react\"\nimport { Button } from \"@/components/ui/button\"\nimport { AppLogo } from \"@/components/ui/app-logo\"\nimport { UserMenu } from \"@/components/dashboard/navigation/user-menu\"\n\ninterface TopBarProps {\n  onMenuClick: () => void\n}\n\nexport function TopBar({ onMenuClick }: TopBarProps) {\n  return (\n    <div className=\"fixed top-0 left-0 right-0 z-30 h-16 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 lg:hidden\">\n      <div className=\"flex h-full items-center justify-between px-4\">\n        {/* Botón de menú a la izquierda */}\n        <Button variant=\"ghost\" size=\"icon\" onClick={onMenuClick} className=\"flex items-center justify-center\">\n          <Menu className=\"h-5 w-5\" />\n          <span className=\"sr-only\">Abrir menú</span>\n        </Button>\n\n        {/* Logo centrado */}\n        <div className=\"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2\">\n          <Link href=\"/\" className=\"flex items-center\">\n            <AppLogo size=\"sm\" className=\"text-foreground\" />\n          </Link>\n        </div>\n\n        {/* UserMenu a la derecha */}\n        <div className=\"flex items-center justify-center\">\n          <UserMenu />\n        </div>\n      </div>\n    </div>\n  )\n}\n"
+        }
+    ]
+}

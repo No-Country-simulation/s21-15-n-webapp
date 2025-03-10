@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/components/dashboard/admin/certificate-generator-card.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1741632870284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741632974550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { FilePlus } from \"lucide-react\"\n import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\"\n import { Button } from \"@/components/ui/button\"\n // Modificar la importación para asegurarnos de que estamos usando las rutas correctas\n-import { ROUTES } from \"@/lib/routes\"\n+import { ROUTES } from \"@/config/routes\"\n \n export function CertificateGeneratorCard() {\n   const router = useRouter()\n \n"
+                },
+                {
+                    "date": 1741632986435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n \"use client\"\n \n import { useRouter } from \"next/navigation\"\n import { FilePlus } from \"lucide-react\"\n+import { ROUTES } from \"@/config/constants/routes\"\n import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\"\n import { Button } from \"@/components/ui/button\"\n // Modificar la importación para asegurarnos de que estamos usando las rutas correctas\n-import { ROUTES } from \"@/config/routes\"\n \n export function CertificateGeneratorCard() {\n   const router = useRouter()\n \n"
+                },
+                {
+                    "date": 1741632994769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n import { FilePlus } from \"lucide-react\"\n import { ROUTES } from \"@/config/constants/routes\"\n import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\"\n import { Button } from \"@/components/ui/button\"\n-// Modificar la importación para asegurarnos de que estamos usando las rutas correctas\n \n export function CertificateGeneratorCard() {\n   const router = useRouter()\n \n"
+                }
+            ],
+            "date": 1741632870284,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { useRouter } from \"next/navigation\"\nimport { FilePlus } from \"lucide-react\"\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from \"@/components/ui/card\"\nimport { Button } from \"@/components/ui/button\"\n// Modificar la importación para asegurarnos de que estamos usando las rutas correctas\nimport { ROUTES } from \"@/lib/routes\"\n\nexport function CertificateGeneratorCard() {\n  const router = useRouter()\n\n  return (\n    <Card className=\"border-primary/20 bg-background/60 backdrop-blur-xl\">\n      <CardHeader>\n        <div className=\"flex items-center gap-2\">\n          <div className=\"w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center\">\n            <FilePlus className=\"h-5 w-5 text-primary\" />\n          </div>\n          <div>\n            <CardTitle>Generador de Certificados</CardTitle>\n            <CardDescription>Herramienta administrativa</CardDescription>\n          </div>\n        </div>\n      </CardHeader>\n      <CardContent>\n        <p className=\"text-muted-foreground\">\n          Crea y emite certificados personalizados para los usuarios de la plataforma. Esta herramienta es exclusiva\n          para administradores.\n        </p>\n      </CardContent>\n      <CardFooter>\n        {/* Alternativamente, si queremos mantener la importación original, modificar el onClick para manejar el caso undefined */}\n        <Button\n          className=\"w-full btn-magenta\"\n          onClick={() => {\n            // Verificar que la ruta existe antes de intentar navegar\n            if (ROUTES.GENERATE_CERTIFICATE) {\n              router.push(ROUTES.GENERATE_CERTIFICATE)\n            } else {\n              // Ruta de respaldo si la constante no está definida\n              router.push(\"/generate-certificate\")\n            }\n          }}\n        >\n          <FilePlus className=\"mr-2 h-4 w-4\" />\n          Generar Certificado\n        </Button>\n      </CardFooter>\n    </Card>\n  )\n}\n"
+        }
+    ]
+}

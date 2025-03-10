@@ -1,0 +1,38 @@
+{
+    "sourceFile": "frontend/config/constants/routes.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1741631860702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741631869541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   MENTOR: \"/dashboard/mentor\",\n   COMPANY: \"/dashboard/company\",\n   JUNIOR: \"/dashboard/junior\",\n   PROFILE: \"/dashboard/profile\",\n-  Cu\n+  CURSE: \n   SETTINGS: \"/dashboard\",//settings\",// -> cuando este la page\n \n   // Secciones de la landing\n   SECTIONS: {\n"
+                },
+                {
+                    "date": 1741631903937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n   MENTOR: \"/dashboard/mentor\",\n   COMPANY: \"/dashboard/company\",\n   JUNIOR: \"/dashboard/junior\",\n   PROFILE: \"/dashboard/profile\",\n-  CURSE: \n+  COURSE: \"/dashboard/courses\",\n   SETTINGS: \"/dashboard\",//settings\",// -> cuando este la page\n \n   // Secciones de la landing\n   SECTIONS: {\n"
+                },
+                {
+                    "date": 1741632906136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,5 +23,32 @@\n     RANKING: \"ranking\",\n     TESTIMONIALS: \"testimonios\",\n     FAQ: \"faq\",\n   },\n+    HOME: \"/\",\n+  LOGIN: \"/login\",\n+  REGISTER: \"/register\",\n+  CERTIFICATES: \"/certificates\",\n+  VERIFY_CERTIFICATE: \"/verify-certificate\",\n+  GENERATE_CERTIFICATE: \"/generate-certificate\",\n+  SAMPLE_CERTIFICATES: \"/certificates/sample-certificates\",\n+  EXPLORE_CERTIFICATES: \"/certificates/explore\",\n+\n+  // Rutas de dashboard\n+  DASHBOARD: \"/dashboard\",\n+  ADMIN: \"/dashboard/admin\",\n+  MENTOR: \"/dashboard/mentor\",\n+  COMPANY: \"/dashboard/company\",\n+  JUNIOR: \"/dashboard/junior\",\n+  PROFILE: \"/dashboard/profile\",\n+\n+  // Secciones de la landing\n+  SECTIONS: {\n+    HERO: \"hero\",\n+    HOW_IT_WORKS: \"como-funciona\",\n+    BENEFITS: \"beneficios\",\n+    RANKING: \"ranking\",\n+    TESTIMONIALS: \"testimonios\",\n+    FAQ: \"faq\",\n+  },\n }\n+}\n"
+                },
+                {
+                    "date": 1741632925399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,17 +23,11 @@\n     RANKING: \"ranking\",\n     TESTIMONIALS: \"testimonios\",\n     FAQ: \"faq\",\n   },\n-    HOME: \"/\",\n-  LOGIN: \"/login\",\n-  REGISTER: \"/register\",\n-  CERTIFICATES: \"/certificates\",\n-  VERIFY_CERTIFICATE: \"/verify-certificate\",\n-  GENERATE_CERTIFICATE: \"/generate-certificate\",\n-  SAMPLE_CERTIFICATES: \"/certificates/sample-certificates\",\n-  EXPLORE_CERTIFICATES: \"/certificates/explore\",\n \n+\n+\n   // Rutas de dashboard\n   DASHBOARD: \"/dashboard\",\n   ADMIN: \"/dashboard/admin\",\n   MENTOR: \"/dashboard/mentor\",\n@@ -50,5 +44,4 @@\n     TESTIMONIALS: \"testimonios\",\n     FAQ: \"faq\",\n   },\n }\n-}\n"
+                },
+                {
+                    "date": 1741632930703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   HOME: \"/\",\n   LOGIN: \"/login\",\n   REGISTER: \"/register\",\n   CERTIFICATES: \"/certificates\",\n-    VERIFY_CERTIFICATE: \"/verify-certificate\",\n+  VERIFY_CERTIFICATE: \"/verify-certificate\",\n   GENERATE_CERTIFICATE: \"/generate-certificate\",\n   SAMPLE_CERTIFICATES: \"/certificates/sample-certificates\",\n   EXPLORE_CERTIFICATES: \"/certificates/explore\",\n \n"
+                }
+            ],
+            "date": 1741631860702,
+            "name": "Commit-0",
+            "content": "export const ROUTES = {\n  // Rutas públicas\n  HOME: \"/\",\n  LOGIN: \"/login\",\n  REGISTER: \"/register\",\n  CERTIFICATES: \"/certificates\",\n\n  // Rutas de dashboard\n  DASHBOARD: \"/dashboard\",\n  ADMIN: \"/dashboard/admin\",\n  MENTOR: \"/dashboard/mentor\",\n  COMPANY: \"/dashboard/company\",\n  JUNIOR: \"/dashboard/junior\",\n  PROFILE: \"/dashboard/profile\",\n  Cu\n  SETTINGS: \"/dashboard\",//settings\",// -> cuando este la page\n\n  // Secciones de la landing\n  SECTIONS: {\n    HERO: \"hero\",\n    HOW_IT_WORKS: \"como-funciona\",\n    BENEFITS: \"beneficios\",\n    RANKING: \"ranking\",\n    TESTIMONIALS: \"testimonios\",\n    FAQ: \"faq\",\n  },\n}\n"
+        }
+    ]
+}

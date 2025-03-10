@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1740968248146,
@@ -24,6 +24,18 @@
                 {
                     "date": 1741063253420,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n     try {\r\n       // Simulate API delay\r\n       await new Promise((resolve) => setTimeout(resolve, 1000))\r\n \r\n-      const storedUsers = JSON.parse(localStorage.getItem(\"users\") || \"[]\")\r\n+      const storedUsers = JSON.parse(localStorage.getItem(\"users\") ?? \"[]\")\r\n       const user = storedUsers.find((u: any) => u.email === email)\r\n \r\n       if (user && user.password === password) {\r\n         // Save session\r\n"
+                },
+                {
+                    "date": 1741623954393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -140,5 +140,4 @@\n       </Card>\n     </div>\n   )\n }\n-\n"
+                },
+                {
+                    "date": 1741623964697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n import { Input } from \"@/components/ui/input\"\n import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from \"@/components/ui/card\"\n import Cookies from \"js-cookie\"\n import Link from \"next/link\"\n-import { initializeDefaultUsers, setStoredUser, removeAuthCookie, removeStoredUser } from \"@/lib/utils/auth\"\n+import { initializeDefaultUsers, setStoredUser, removeAuthCookie, removeStoredUser } from \"@/config/autjh/auth\"\n import { AUTH_TEXT } from \"@/lib/constants/ui-text\"\n import { ROUTES } from \"@/lib/constants/routes\"\n import { AUTH_CONFIG } from \"@/lib/constants/app-config\"\n import { AppLogo } from \"@/components/ui/app-logo\"\n"
+                },
+                {
+                    "date": 1741623987070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from \"@/components/ui/card\"\n import Cookies from \"js-cookie\"\n import Link from \"next/link\"\n import { initializeDefaultUsers, setStoredUser, removeAuthCookie, removeStoredUser } from \"@/config/auth/auth\"\n-import { AUTH_TEXT } from \"@/li/constants/ui-text\"\n+import { AUTH_TEXT } from \"@/config/constants/ui-text\"\n import { ROUTES } from \"@/lib/constants/routes\"\n import { AUTH_CONFIG } from \"@/lib/constants/app-config\"\n import { AppLogo } from \"@/components/ui/app-logo\"\n import { StarsBackground } from \"@/components/ui/stars-background\"\n"
                 }
             ],
             "date": 1740968248146,

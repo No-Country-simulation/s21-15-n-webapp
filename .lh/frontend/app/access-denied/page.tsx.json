@@ -3,11 +3,19 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1741326651792,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741622364748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n import { useEffect } from \"react\"\n import { Card, CardContent, CardHeader, CardTitle, CardDescription } from \"@/components/ui/card\"\n import { AlertTriangle } from \"lucide-react\"\n-import { removeAuthCookie, removeStoredUser } from \"@/lib/utils/auth\"\n+import { removeAuthCookie, removeStoredUser } from \"@/config/auth/auth\"\n import { AutoCloseCountdown } from \"@/components/auto-close-countdown\"\n import { StarsBackground } from \"@/components/ui/stars-background\"\n import { MouseReflection } from \"@/components/effects/mouse-reflection\"\n \n"
+                },
+                {
+                    "date": 1741623140876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import { useEffect } from \"react\"\n import { Card, CardContent, CardHeader, CardTitle, CardDescription } from \"@/components/ui/card\"\n import { AlertTriangle } from \"lucide-react\"\n import { removeAuthCookie, removeStoredUser } from \"@/config/auth/auth\"\n-import { AutoCloseCountdown } from \"@/components/common/auto-close-countdown\"\n+import { AutoCloseCountdown } from \"@/components/common/navigation/auto-close-countdown\"\n import { StarsBackground } from \"@/components/ui/stars-background\"\n import { MouseReflection } from \"@/components/effects/mouse-reflection\"\n \n // Textos locales para la página de acceso denegado\n"
                 }
             ],
             "date": 1741326651792,

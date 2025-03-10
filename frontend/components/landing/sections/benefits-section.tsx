@@ -10,7 +10,7 @@ const BENEFITS: Benefit[] = [
     description:
       "Inicia tu entrenamiento intergalactico. Adquirí habilidades, arma tu portafolio y desbloquea mentorias exclusivas para navegar el universo tecnologico.",
     image:
-      "/bene1.png",
+      "https://res.cloudinary.com/dcdevcd/image/upload/v1741592154/startperks/ben1_xra1gp.png",
     imagePosition: "right",
   },
   {
@@ -19,7 +19,7 @@ const BENEFITS: Benefit[] = [
     description:
       "Descubri cadetes con talento probado. Identifica a futuros lideres que ya han demostrado su capacidad en cada misión.",
     image:
-      "/bene2.png",
+      "https://res.cloudinary.com/dcdevcd/image/upload/v1741592163/startperks/bene2_zqzeof.png",
     imagePosition: "left",
   },
   {
@@ -28,7 +28,7 @@ const BENEFITS: Benefit[] = [
     description:
       "Guia a la próxima generación de exploradores. Compartí tu experiencia, obtene reconocimiento y accede a beneficios exclusivos.",
     image:
-      "/bene3.png",
+      "https://res.cloudinary.com/dcdevcd/image/upload/v1741592172/startperks/bene3_okakpx.png",
     imagePosition: "right",
   },
 ]
@@ -54,6 +54,7 @@ export const BenefitsSection = memo(function Benefits() {
                 )}
               >
                 <Image
+                loading = 'lazy'
                   src={benefit.image || "/placeholder.svg"}
                   alt={benefit.title}
                   fill

@@ -1,8 +1,13 @@
-export const DEFAULT_USERS = [
+import { User } from "../types"
+
+export const DEFAULT_USERS : User[] = [
   {
-    fullName: "Admin User",
+    id: "1",
+    name: "Admin",
+    lastName: "User",
     email: "admin@startperks.com",
     password: "admin123",
+    pin: "1234",
     role: "admin",
     level: 99,
     experience: 9999,
@@ -11,9 +16,12 @@ export const DEFAULT_USERS = [
     createdAt: new Date().toISOString(),
   },
   {
-    fullName: "Mentor User",
+    id: "2",
+    name: "Mentor",
+    lastName: "User",
     email: "mentor@startperks.com",
     password: "mentor123",
+    pin: "1234",
     role: "mentor",
     level: 50,
     experience: 5000,
@@ -22,9 +30,12 @@ export const DEFAULT_USERS = [
     createdAt: new Date().toISOString(),
   },
   {
-    fullName: "Company User",
+    id: "3",
+    name: "Company",
+    lastName: "User",
     email: "company@startperks.com",
     password: "company123",
+    pin: "1234",
     role: "company",
     level: 30,
     experience: 3000,
@@ -33,9 +44,12 @@ export const DEFAULT_USERS = [
     createdAt: new Date().toISOString(),
   },
   {
-    fullName: "Junior User",
+    id: "4",
+    name: "Junior",
+    lastName: "User",
     email: "junior@startperks.com",
     password: "junior123",
+    pin:"1234",
     role: "junior",
     level: 1,
     experience: 0,
@@ -49,11 +63,13 @@ export const WEEK_DAYS = ["L", "M", "M", "J", "V", "S", "D"]
 
 export const DEFAULT_COURSES = [
   {
+    id:"1",
     title: "Curso avanzado de figma",
     progress: 55,
     image: "/placeholder.svg?height=40&width=40",
   },
   {
+    id: "2",
     title: "Fundamentos de UI/UX",
     progress: 30,
     image: "/placeholder.svg?height=40&width=40",
@@ -62,6 +78,7 @@ export const DEFAULT_COURSES = [
 
 export const DEFAULT_FEEDBACK = [
   {
+    id:"1",
     mentor: "Eduardo Romero",
     role: "Diseñador UI",
     avatar: "/placeholder.svg?height=40&width=40",
@@ -73,6 +90,7 @@ export const DEFAULT_FEEDBACK = [
 
 export const DEFAULT_PROJECTS = [
   {
+    id:"1",
     name: "Proyecto Alpha",
     description: "Desarrollo de UI/UX para aplicación móvil",
     progress: 75,
@@ -80,6 +98,7 @@ export const DEFAULT_PROJECTS = [
     status: "En progreso",
   },
   {
+    id: "2",
     name: "Proyecto Beta",
     description: "Diseño de sistema de diseño",
     progress: 45,
@@ -87,6 +106,7 @@ export const DEFAULT_PROJECTS = [
     status: "En revisión",
   },
   {
+    id: "3",
     name: "Proyecto Gamma",
     description: "Prototipado de nueva plataforma",
     progress: 90,
@@ -94,4 +114,3 @@ export const DEFAULT_PROJECTS = [
     status: "Casi completo",
   },
 ]
-

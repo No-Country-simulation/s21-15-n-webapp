@@ -1,0 +1,30 @@
+{
+    "sourceFile": "frontend/components/dashboard/navigation/sidebar.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1741632266443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741632285347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n \"use client\"\n \n+import Link from \"next/link\"\n+import { usePathname, useRouter } from \"next/navigation\"\n import { ScrollArea } from \"@/components/ui/scroll-area\"\n import { Home, Trophy, Rocket, Zap, MessageSquare, User, LogOut } from \"lucide-react\"\n-import Link from \"next/link\"\n+import { useAuth } from \"@/hooks/use-auth\"\n import { cn } from \"@/lib/utils\"\n-import { usePathname, useRouter } from \"next/navigation\"\n-import { useAuth } from \"@/hooks/use-auth\"\n import { AppLogo } from \"@/components/common/ui/app-logo\"\n \n const NAV_ITEMS = [\n   { icon: <Home className=\"h-5 w-5\" />, label: \"Inicio\", href: \"/dashboard/junior\" },\n"
+                },
+                {
+                    "date": 1741632307414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n \"use client\"\n \n import Link from \"next/link\"\n import { usePathname, useRouter } from \"next/navigation\"\n-import { ScrollArea } from \"@/components/ui/scroll-area\"\n import { Home, Trophy, Rocket, Zap, MessageSquare, User, LogOut } from \"lucide-react\"\n import { useAuth } from \"@/hooks/use-auth\"\n+import { ScrollArea } from \"@/components/ui/scroll-area\"\n import { cn } from \"@/lib/utils\"\n import { AppLogo } from \"@/components/common/ui/app-logo\"\n \n const NAV_ITEMS = [\n"
+                },
+                {
+                    "date": 1741632313114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,11 @@\n import Link from \"next/link\"\n import { usePathname, useRouter } from \"next/navigation\"\n import { Home, Trophy, Rocket, Zap, MessageSquare, User, LogOut } from \"lucide-react\"\n import { useAuth } from \"@/hooks/use-auth\"\n+import { cn } from \"@/lib/utils\"\n import { ScrollArea } from \"@/components/ui/scroll-area\"\n import { AppLogo } from \"@/components/common/ui/app-logo\"\n-import { cn } from \"@/lib/utils\"\n \n const NAV_ITEMS = [\n   { icon: <Home className=\"h-5 w-5\" />, label: \"Inicio\", href: \"/dashboard/junior\" },\n   { icon: <Trophy className=\"h-5 w-5\" />, label: \"Ranking\", href: \"/dashboard/ranking\" },\n"
+                }
+            ],
+            "date": 1741632266443,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { ScrollArea } from \"@/components/ui/scroll-area\"\nimport { Home, Trophy, Rocket, Zap, MessageSquare, User, LogOut } from \"lucide-react\"\nimport Link from \"next/link\"\nimport { cn } from \"@/lib/utils\"\nimport { usePathname, useRouter } from \"next/navigation\"\nimport { useAuth } from \"@/hooks/use-auth\"\nimport { AppLogo } from \"@/components/common/ui/app-logo\"\n\nconst NAV_ITEMS = [\n  { icon: <Home className=\"h-5 w-5\" />, label: \"Inicio\", href: \"/dashboard/junior\" },\n  { icon: <Trophy className=\"h-5 w-5\" />, label: \"Ranking\", href: \"/dashboard/ranking\" },\n  { icon: <Rocket className=\"h-5 w-5\" />, label: \"Lorem\", href: \"/dashboard/lorem1\" },\n  { icon: <Zap className=\"h-5 w-5\" />, label: \"Lorem\", href: \"/dashboard/lorem2\" },\n  { icon: <MessageSquare className=\"h-5 w-5\" />, label: \"Lorem\", href: \"/dashboard/lorem3\" },\n  { icon: <User className=\"h-5 w-5\" />, label: \"Perfil\", href: \"/dashboard/profile\" },\n]\n\nexport function Sidebar() {\n  const pathname = usePathname()\n  const router = useRouter()\n  const { logout } = useAuth()\n\n  const handleLogout = () => {\n    logout()\n    router.push(\"/\")\n  }\n\n  return (\n    <div className=\"fixed left-0 top-0 hidden h-screen w-64 border-r border-primary/20 bg-[#0a0b1e] lg:block\">\n      <div className=\"flex h-full flex-col\">\n        <div className=\"flex h-16 items-center border-b border-primary/20 px-4\">\n          <AppLogo />\n        </div>\n\n        <ScrollArea className=\"flex-1 px-2 py-4\">\n          <nav className=\"space-y-1\">\n            {NAV_ITEMS.map((item) => (\n              <Link\n                key={item.href}\n                href={item.href}\n                className={cn(\n                  \"flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors\",\n                  pathname === item.href\n                    ? \"bg-indigo-900/30 text-indigo-400\"\n                    : \"text-gray-400 hover:bg-indigo-900/20 hover:text-indigo-400\",\n                )}\n              >\n                {item.icon}\n                {item.label}\n              </Link>\n            ))}\n          </nav>\n        </ScrollArea>\n\n        <div className=\"border-t border-primary/20 p-4\">\n          <button\n            onClick={handleLogout}\n            className=\"flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-gray-400 transition-colors hover:bg-indigo-900/20 hover:text-indigo-400\"\n          >\n            <LogOut className=\"h-5 w-5\" />\n            Cerrar sesión\n          </button>\n        </div>\n      </div>\n    </div>\n  )\n}\n"
+        }
+    ]
+}

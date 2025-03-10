@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/config/constants/default-data.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741633332429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741633334821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n export const DEFAULT_USERS = [\n   {\n-    name: \"Admin User\",\n+    name: \"Admin\",\n     email: \"admin@startperks.com\",\n     password: \"admin123\",\n     role: \"admin\",\n     level: 99,\n"
+                },
+                {
+                    "date": 1741633363270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n export const DEFAULT_USERS = [\n   {\n-    id:\n     name: \"Admin\",\n     lastName: \"User\",\n     email: \"admin@startperks.com\",\n     password: \"admin123\",\n"
+                }
+            ],
+            "date": 1741633332429,
+            "name": "Commit-0",
+            "content": "export const DEFAULT_USERS = [\n  {\n    name: \"Adminr\",\n    email: \"admin@startperks.com\",\n    password: \"admin123\",\n    role: \"admin\",\n    level: 99,\n    experience: 9999,\n    streakDays: 365,\n    badges: [\"admin\"],\n    createdAt: new Date().toISOString(),\n  },\n  {\n    fullName: \"Mentor User\",\n    email: \"mentor@startperks.com\",\n    password: \"mentor123\",\n    role: \"mentor\",\n    level: 50,\n    experience: 5000,\n    streakDays: 180,\n    badges: [\"mentor\"],\n    createdAt: new Date().toISOString(),\n  },\n  {\n    fullName: \"Company User\",\n    email: \"company@startperks.com\",\n    password: \"company123\",\n    role: \"company\",\n    level: 30,\n    experience: 3000,\n    streakDays: 90,\n    badges: [\"company\"],\n    createdAt: new Date().toISOString(),\n  },\n  {\n    fullName: \"Junior User\",\n    email: \"junior@startperks.com\",\n    password: \"junior123\",\n    role: \"junior\",\n    level: 1,\n    experience: 0,\n    streakDays: 0,\n    badges: [],\n    createdAt: new Date().toISOString(),\n  },\n]\n\nexport const WEEK_DAYS = [\"L\", \"M\", \"M\", \"J\", \"V\", \"S\", \"D\"]\n\nexport const DEFAULT_COURSES = [\n  {\n    title: \"Curso avanzado de figma\",\n    progress: 55,\n    image: \"/placeholder.svg?height=40&width=40\",\n  },\n  {\n    title: \"Fundamentos de UI/UX\",\n    progress: 30,\n    image: \"/placeholder.svg?height=40&width=40\",\n  },\n]\n\nexport const DEFAULT_FEEDBACK = [\n  {\n    mentor: \"Eduardo Romero\",\n    role: \"Diseñador UI\",\n    avatar: \"/placeholder.svg?height=40&width=40\",\n    message:\n      \"Excelente progreso en el desarrollo del MVP. Las iteraciones basadas en feedback de usuarios muestran gran capacidad de adaptación.\",\n    date: \"Hace 4 días\",\n  },\n]\n\nexport const DEFAULT_PROJECTS = [\n  {\n    name: \"Proyecto Alpha\",\n    description: \"Desarrollo de UI/UX para aplicación móvil\",\n    progress: 75,\n    team: 4,\n    status: \"En progreso\",\n  },\n  {\n    name: \"Proyecto Beta\",\n    description: \"Diseño de sistema de diseño\",\n    progress: 45,\n    team: 3,\n    status: \"En revisión\",\n  },\n  {\n    name: \"Proyecto Gamma\",\n    description: \"Prototipado de nueva plataforma\",\n    progress: 90,\n    team: 5,\n    status: \"Casi completo\",\n  },\n]\n"
+        }
+    ]
+}

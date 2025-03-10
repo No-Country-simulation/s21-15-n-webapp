@@ -1,0 +1,26 @@
+{
+    "sourceFile": "frontend/components/dashboard/navigation/user-menu.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1741632407358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1741632429249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n \"use client\"\n \n import { useRouter } from \"next/navigation\"\n+import { User, Settings, LogOut } from \"lucide-react\"\n+import { useAvatarMock } from \"@/hooks/use-avatar-mock\"\n import {\n   DropdownMenu,\n   DropdownMenuContent,\n   DropdownMenuItem,\n@@ -9,13 +11,11 @@\n   DropdownMenuSeparator,\n   DropdownMenuTrigger,\n } from \"@/components/ui/dropdown-menu\"\n import { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\n-import { User, Settings, LogOut } from \"lucide-react\"\n import { useAuth } from \"@/hooks/use-auth\"\n import { NAVIGATION_TEXT } from \"@/config/constants/ui-text\"\n import { Button } from \"@/components/ui/button\"\n-import { useAvatarMock } from \"@/hooks/use-avatar-mock\"\n // Importar el hook useAvatarMock\n \n export function UserMenu() {\n   const router = useRouter()\n"
+                },
+                {
+                    "date": 1741632498895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <Button variant=\"ghost\" size=\"icon\" className=\"relative h-8 w-8 rounded-full\" asChild>\n         <DropdownMenuTrigger>\n           <Avatar className=\"h-8 w-8\">\n             {/* Modificar la línea del AvatarImage para usar el avatarMock cuando no hay avatar: */}\n-            <AvatarImage src={user.avatar || avatarMock} alt={`Avatar de ${`user.fullName} />\n+            <AvatarImage src={user.avatar || avatarMock} alt={`Avatar de ${`user.nane} {} />\n             <AvatarFallback className=\"bg-primary/20 text-primary\">{getInitials(user.fullName)}</AvatarFallback>\n           </Avatar>\n         </DropdownMenuTrigger>\n       </Button>\n"
+                }
+            ],
+            "date": 1741632407358,
+            "name": "Commit-0",
+            "content": "\"use client\"\n\nimport { useRouter } from \"next/navigation\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger,\n} from \"@/components/ui/dropdown-menu\"\nimport { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\nimport { User, Settings, LogOut } from \"lucide-react\"\nimport { useAuth } from \"@/hooks/use-auth\"\nimport { NAVIGATION_TEXT } from \"@/config/constants/ui-text\"\nimport { Button } from \"@/components/ui/button\"\n// Importar el hook useAvatarMock\nimport { useAvatarMock } from \"@/hooks/use-avatar-mock\"\n\nexport function UserMenu() {\n  const router = useRouter()\n  const { user, logout } = useAuth()\n\n  // Dentro de la función UserMenu, añadir:\n  const avatarMock = useAvatarMock()\n\n  if (!user) return null\n\n  const getInitials = (name: string) => {\n    return name\n      .split(\" \")\n      .map((part) => part[0])\n      .join(\"\")\n      .toUpperCase()\n      .slice(0, 2)\n  }\n\n  return (\n    <DropdownMenu>\n      <Button variant=\"ghost\" size=\"icon\" className=\"relative h-8 w-8 rounded-full\" asChild>\n        <DropdownMenuTrigger>\n          <Avatar className=\"h-8 w-8\">\n            {/* Modificar la línea del AvatarImage para usar el avatarMock cuando no hay avatar: */}\n            <AvatarImage src={user.avatar || avatarMock} alt={user.fullName} />\n            <AvatarFallback className=\"bg-primary/20 text-primary\">{getInitials(user.fullName)}</AvatarFallback>\n          </Avatar>\n        </DropdownMenuTrigger>\n      </Button>\n      <DropdownMenuContent className=\"w-56\" align=\"end\">\n        <DropdownMenuLabel className=\"font-normal\">\n          <div className=\"flex flex-col space-y-1\">\n            <p className=\"text-sm font-medium text-text-primary\">{user.fullName}</p>\n            <p className=\"text-xs text-text-secondary capitalize\">{user.role}</p>\n          </div>\n        </DropdownMenuLabel>\n\n        <DropdownMenuSeparator />\n\n        <DropdownMenuItem onClick={() => router.push(\"/dashboard/profile\")}>\n          <User className=\"mr-2 h-4 w-4\" />\n          <span>{NAVIGATION_TEXT.perfil}</span>\n        </DropdownMenuItem>\n\n        <DropdownMenuItem>\n          <Settings className=\"mr-2 h-4 w-4\" />\n          <span>{NAVIGATION_TEXT.configuracion}</span>\n        </DropdownMenuItem>\n\n        <DropdownMenuSeparator />\n\n        <DropdownMenuItem onClick={logout}>\n          <LogOut className=\"mr-2 h-4 w-4\" />\n          <span>{NAVIGATION_TEXT.cerrarSesion}</span>\n        </DropdownMenuItem>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n"
+        }
+    ]
+}

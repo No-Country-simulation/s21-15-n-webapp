@@ -4,6 +4,10 @@ export const ROUTES = {
   LOGIN: "/login",
   REGISTER: "/register",
   CERTIFICATES: "/certificates",
+  VERIFY_CERTIFICATE: "/verify-certificate",
+  GENERATE_CERTIFICATE: "/generate-certificate",
+  SAMPLE_CERTIFICATES: "/certificates/sample-certificates",
+  EXPLORE_CERTIFICATES: "/certificates/explore",
 
   // Rutas de dashboard
   DASHBOARD: "/dashboard",
@@ -12,6 +16,7 @@ export const ROUTES = {
   COMPANY: "/dashboard/company",
   JUNIOR: "/dashboard/junior",
   PROFILE: "/dashboard/profile",
+  COURSE: "/dashboard/courses",
   SETTINGS: "/dashboard",//settings",// -> cuando este la page
 
   // Secciones de la landing
