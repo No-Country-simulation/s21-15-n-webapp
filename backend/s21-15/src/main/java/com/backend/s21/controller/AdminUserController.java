@@ -1,17 +1,11 @@
 package com.backend.s21.controller;
 
-import com.backend.s21.model.dto.AdminUserDTO;
-import com.backend.s21.model.dto.ChallengeDTO;
-import com.backend.s21.model.dto.JuniorUserDTO;
-import com.backend.s21.model.dto.SocialNetworkDTO;
+import com.backend.s21.model.dto.*;
 import com.backend.s21.model.learningPath.Challenge;
 import com.backend.s21.model.users.AdminUser;
 import com.backend.s21.model.users.SocialNetwork;
 import com.backend.s21.model.users.User;
-import com.backend.s21.service.IAdminUserService;
-import com.backend.s21.service.IChallengeService;
-import com.backend.s21.service.IJuniorUserService;
-import com.backend.s21.service.ISocialNetworkService;
+import com.backend.s21.service.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -43,11 +37,18 @@ public class AdminUserController {
 
     private final ISocialNetworkService socialNetworkService;
 
-    public AdminUserController(IAdminUserService adminService, IJuniorUserService juniorService, IChallengeService challengeService, ISocialNetworkService socialNetworkService) {
+    private final IMentorUserService mentorRepository;
+
+    private final ICompanyUserService companyRepository;
+
+    public AdminUserController(IAdminUserService adminService, IChallengeService challengeService, IJuniorUserService juniorService,
+                               ISocialNetworkService socialNetworkService, IMentorUserService mentorRepository, ICompanyUserService companyRepository) {
         this.adminService = adminService;
-        this.juniorService = juniorService;
         this.challengeService = challengeService;
+        this.juniorService = juniorService;
         this.socialNetworkService = socialNetworkService;
+        this.mentorRepository = mentorRepository;
+        this.companyRepository = companyRepository;
     }
 
     @PostMapping
@@ -180,6 +181,42 @@ public class AdminUserController {
     public ResponseEntity<Page<JuniorUserDTO>> showJuniorUserList(Pageable pageable) {
         try {
             return ResponseEntity.ok(juniorService.findAll(pageable).map(JuniorUserDTO::new));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/{id}/mentorlist")
+    @Operation(summary = "Listar usuarios mentor", description = "Recupera la lista de usuarios mentor desde un administrador específico.")
+    @ApiResponse(responseCode = "200", description = "Lista de usuarios mentor recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MentorUserDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Lista usuarios mentor no encontrado")
+    public ResponseEntity<Page<MentorUserDTO>> showMentorUserList(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(mentorRepository.findAll(pageable).map(MentorUserDTO::new));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/{id}/companylist")
+    @Operation(summary = "Listar usuarios company", description = "Recupera la lista de usuarios company desde un administrador específico.")
+    @ApiResponse(responseCode = "200", description = "Lista de usuarios company recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = CompanyUserDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Lista usuarios company no encontrado")
+    public ResponseEntity<Page<CompanyUserDTO>> showCompanyUserList(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(companyRepository.findAll(pageable).map(CompanyUserDTO::new));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/{id}/adminlist")
+    @Operation(summary = "Listar usuarios admin", description = "Recupera la lista de usuarios admin desde un administrador específico.")
+    @ApiResponse(responseCode = "200", description = "Lista de usuarios admin recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AdminUserDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Lista usuarios admin no encontrado")
+    public ResponseEntity<Page<AdminUserDTO>> showAdminUserList(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(adminService.findAll(pageable).map(AdminUserDTO::new));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
         }
