@@ -1,11 +1,13 @@
 package com.backend.s21.controller;
 
 import com.backend.s21.model.dto.CompanyUserDTO;
+import com.backend.s21.model.dto.JuniorUserDTO;
 import com.backend.s21.model.dto.SocialNetworkDTO;
 import com.backend.s21.model.users.CompanyUser;
 import com.backend.s21.model.users.SocialNetwork;
 import com.backend.s21.model.users.User;
 import com.backend.s21.service.ICompanyUserService;
+import com.backend.s21.service.IJuniorUserService;
 import com.backend.s21.service.ISocialNetworkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,6 +16,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -30,9 +34,13 @@ public class CompanyUserController {
 
     private final ISocialNetworkService socialNetworkService;
 
-    public CompanyUserController(ICompanyUserService companyRepository, ISocialNetworkService socialNetworkService) {
+    private final IJuniorUserService userRepository;
+
+    public CompanyUserController(ICompanyUserService companyRepository, ISocialNetworkService socialNetworkService,
+                                 IJuniorUserService userRepository) {
         this.companyRepository = companyRepository;
         this.socialNetworkService = socialNetworkService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping
@@ -79,6 +87,15 @@ public class CompanyUserController {
             return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}/juniorlist")
+    public ResponseEntity<Page<JuniorUserDTO>> showJuniorList(@PathVariable int id, Pageable pageable) {
+        try {
+            return ResponseEntity.ok(userRepository.findAll(pageable).map(JuniorUserDTO::new));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 
