@@ -52,7 +52,7 @@ public class AdminUserController {
 
     @PostMapping
     @Operation(summary = "Registrar un usuario administrador", description = "Crea un nuevo usuario administrador en el sistema.")
-    @ApiResponse(responseCode = "201", description = "Usuario administrador creado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AdminUser.class)))
+    @ApiResponse(responseCode = "201", description = "Usuario administrador creado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AdminUserDTO.class)))
     @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     public ResponseEntity<?> registerAdminUser(@RequestBody @Validated AdminUser user, UriComponentsBuilder uri) {
         try {
@@ -66,7 +66,7 @@ public class AdminUserController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtener un usuario administrador por ID", description = "Recupera la información de un usuario administrador específico por su ID.")
-    @ApiResponse(responseCode = "200", description = "Usuario administrador encontrado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AdminUser.class)))
+    @ApiResponse(responseCode = "200", description = "Usuario administrador encontrado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AdminUserDTO.class)))
     @ApiResponse(responseCode = "404", description = "Usuario administrador no encontrado")
     public ResponseEntity<?> showUser(@Parameter(description = "ID del usuario administrador", required = true) @PathVariable int id) {
         try {
@@ -77,8 +77,12 @@ public class AdminUserController {
         }
     }
 
+
     @PutMapping("/{id}")
     @Transactional
+    @Operation(summary = "Actualizar un usuario administrador por ID", description = "Actualiza la información de un usuario administrador específico por su ID.")
+    @ApiResponse(responseCode = "200", description = "Usuario administrador actualizado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AdminUserDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Usuario administrador no encontrado")
     public ResponseEntity<?> updateUser(@RequestBody @Valid AdminUser userJson, @PathVariable int id) {
         try {
             AdminUser user = adminService.update(userJson, id);
@@ -88,7 +92,10 @@ public class AdminUserController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
+    @Operation(summary = "Elimina un usuario administrador por ID", description = "Elimina a un usuario administrador específico por su ID.")
+    @ApiResponse(responseCode = "200", description = "Usuario administrador eliminado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AdminUserDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Usuario administrador no encontrado")
     public ResponseEntity<?> deleteUser(@PathVariable int id) {
         try {
             AdminUser user = adminService.findById(id);
@@ -100,7 +107,7 @@ public class AdminUserController {
     }
 
     @PostMapping("/{ida}/challengelist/createchallenge")
-    @Operation(summary = "Crear un desafío para un administrador", description = "Crea un nuevo desafío asociado a un administrador específico.")
+    @Operation(summary = "Crear un desafío por un administrador", description = "Crea un nuevo desafío asociado a un administrador específico.")
     @ApiResponse(responseCode = "201", description = "Desafío creado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ChallengeDTO.class)))
     @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     public ResponseEntity<?> createChallenge(@RequestBody @Validated Challenge challengeinfo, @Parameter(description = "ID del usuario administrador", required = true) @PathVariable int ida,
@@ -116,6 +123,9 @@ public class AdminUserController {
     }
 
     @GetMapping("/{ida}/challengelist/{id}")
+    @Operation(summary = "Muestra un desafío desde la pagina de administrador", description = "Muestra la información de un desafío por su ID desde de un usuario administrador específico.")
+    @ApiResponse(responseCode = "200", description = "Desafío encontrado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ChallengeDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Desafío no encontrado")
     public ResponseEntity<?> showChallenge(@PathVariable int id) {
         try {
             return ResponseEntity.ok(new ChallengeDTO(challengeService.findById(id)));
@@ -126,6 +136,9 @@ public class AdminUserController {
 
     @PutMapping("/{ida}/challengelist/{id}")
     @Transactional
+    @Operation(summary = "Actualiza un desafío desde la pagina de administrador", description = "Actualiza la información de un desafío por su ID desde de un usuario administrador específico.")
+    @ApiResponse(responseCode = "200", description = "Desafío actualizado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ChallengeDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Solicitud inválida")
     public ResponseEntity<?> updateChallenge(@PathVariable int id, @RequestBody @Valid Challenge challengeJson) {
         try {
             Challenge challenge = challengeService.update(challengeJson, id);
@@ -136,6 +149,9 @@ public class AdminUserController {
     }
 
     @DeleteMapping("/{ida}/challengelist/{id}")
+    @Operation(summary = "Elimina un desafío desde la pagina de administrador", description = "Elimina la información de un desafío por su ID desde de un usuario administrador específico.")
+    @ApiResponse(responseCode = "200", description = "Desafío eliminado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ChallengeDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Desafío no encontrado")
     public ResponseEntity<String> deleteChallenge(@PathVariable int id) {
         try {
             String challengeName = challengeService.findById(id).getTitle();
@@ -146,6 +162,9 @@ public class AdminUserController {
     }
 
     @GetMapping("/{id}/challengelist")
+    @Operation(summary = "Listar desafíos", description = "Recupera la lista de desafíos asociados a un administrador específico.")
+    @ApiResponse(responseCode = "200", description = "Lista de desafíos recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ChallengeDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Lista de desafíos no encontrado")
     public ResponseEntity<Page<ChallengeDTO>> showChallengeList(Pageable pageable) {
         try {
             return ResponseEntity.ok(challengeService.findAll(pageable).map(ChallengeDTO::new));
@@ -155,7 +174,7 @@ public class AdminUserController {
     }
 
     @GetMapping("/{id}/juniorlist")
-    @Operation(summary = "Listar usuarios junior de un administrador", description = "Recupera la lista de usuarios junior asociados a un administrador específico.")
+    @Operation(summary = "Listar usuarios junior", description = "Recupera la lista de usuarios junior desde un administrador específico.")
     @ApiResponse(responseCode = "200", description = "Lista de usuarios junior recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = JuniorUserDTO.class)))
     @ApiResponse(responseCode = "404", description = "Lista usuarios junior no encontrado")
     public ResponseEntity<Page<JuniorUserDTO>> showJuniorUserList(Pageable pageable) {
@@ -167,6 +186,9 @@ public class AdminUserController {
     }
 
     @PostMapping("/{id}/socialnetworks")
+    @Operation(summary = "Ligar Red Social a usuario administrador", description = "Liga una red social a un administrador específico.")
+    @ApiResponse(responseCode = "200", description = "Red Social asociada con exito", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SocialNetworkDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Solicitud inváldia")
     public ResponseEntity<?> linkSocialNetwork(@RequestBody @Valid SocialNetwork socialNet,
                                                @PathVariable int id) {
         try {
