@@ -227,7 +227,7 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
         List<RoleRepresentation> roleRepresentations = assignRoles(user.roles(), realmResource, idUser);
         UserRepresentation
                 representation = usersResource.get(idUser).toRepresentation();
-        saveInstanceOfClass(UserFactory.createUser(roleRepresentations, representation));
+        saveInstanceOfClass(UserFactory.createUser(roleRepresentations, representation,user.pin()));
     }
 
     private void saveInstanceOfClass(User newUser) {

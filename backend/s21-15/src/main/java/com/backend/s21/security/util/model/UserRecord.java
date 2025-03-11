@@ -8,5 +8,6 @@ public record UserRecord(String username,
                          String firstName,
                          String lastName,
                          String password,
+                         String pin,
                          Set<String> roles) implements Serializable {
 }

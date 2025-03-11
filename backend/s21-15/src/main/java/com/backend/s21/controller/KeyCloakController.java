@@ -61,7 +61,7 @@ public class KeyCloakController {
     }
 
     @PreAuthorize("permitAll()")
-    @PostMapping("/create")
+    @PostMapping("/user")
     @Operation(summary = "Crear un usuario", description = "Crea un nuevo usuario en Keycloak.")
     @ApiResponse(responseCode = "201", description = "Usuario creado", content = @Content(mediaType = "text/plain"))
     @ApiResponse(responseCode = "400", description = "Solicitud inválida")
@@ -72,7 +72,7 @@ public class KeyCloakController {
 
     //    @PreAuthorize("hasRole('${swagger.role.admin}')")
     @PreAuthorize("hasRole('admin')")
-    @DeleteMapping("delete/{username}")
+    @DeleteMapping("user/{username}")
     @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario de Keycloak.")
     @ApiResponse(responseCode = "200", description = "Usuario eliminado")
     @ApiResponse(responseCode = "500", description = "Error al eliminar el usuario")
@@ -87,7 +87,7 @@ public class KeyCloakController {
 
     //    @PreAuthorize("hasRole('${swagger.role.admin}')")
     @PreAuthorize("permitAll()")
-    @PutMapping("update/user")
+    @PutMapping("/user")
     @Operation(summary = "Actualizar un usuario", description = "Actualiza la información de un usuario existente en Keycloak.")
     @ApiResponse(responseCode = "200", description = "Usuario actualizado")
     @ApiResponse(responseCode = "500", description = "Error al actualizar el usuario")
@@ -102,17 +102,17 @@ public class KeyCloakController {
     }
 
     //    @PreAuthorize("false")
-    @PutMapping("/user/{username}/role")
-    @Operation(summary = "Cambiar el rol de un usuario", description = "Asigna o cambia el rol de un usuario en Keycloak.")
-    @ApiResponse(responseCode = "200", description = "Rol asignado correctamente")
-    @ApiResponse(responseCode = "500", description = "Error al asignar el rol")
-    public ResponseEntity<?> changeRole(@Parameter(description = "Nombre de usuario", required = true) @PathVariable String username, @RequestParam String role) {
-        try {
-            keyCloakService.changeRole(username, role);
-            return ResponseEntity.ok("Role assigned successfully");
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error assigning role: " + e.getMessage());
-        }
-    }
+//    @PutMapping("/user/{username}/role")
+//    @Operation(summary = "Cambiar el rol de un usuario", description = "Asigna o cambia el rol de un usuario en Keycloak.")
+//    @ApiResponse(responseCode = "200", description = "Rol asignado correctamente")
+//    @ApiResponse(responseCode = "500", description = "Error al asignar el rol")
+//    public ResponseEntity<?> changeRole(@Parameter(description = "Nombre de usuario", required = true) @PathVariable String username, @RequestParam String role) {
+//        try {
+//            keyCloakService.changeRole(username, role);
+//            return ResponseEntity.ok("Role assigned successfully");
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error assigning role: " + e.getMessage());
+//        }
+//    }
 
 }

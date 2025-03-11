@@ -34,5 +34,12 @@ public class SecurityContextValidator implements HandlerInterceptor {
 
         return true;
     }
+    public String userContext() {
+
+        return SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+    }
 }
 

@@ -1,30 +1,38 @@
 package com.backend.s21.controller;
 
-import com.backend.s21.model.users.User;
 import com.backend.s21.repository.IUserRepository;
+import com.backend.s21.security.SecurityContextValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
+@Slf4j
 @RestController
 @RequestMapping("/locked")
 public class PinValidatorController {
 
     public final IUserRepository userRepository;
+    private final SecurityContextValidator validator;
 
-    public PinValidatorController(IUserRepository userRepository) {
+    public PinValidatorController(IUserRepository userRepository, SecurityContextValidator validator) {
         this.userRepository = userRepository;
+        this.validator = validator;
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<String> unlockScreen(@RequestBody String pin, @PathVariable int id) {
+    @PostMapping("/{pin}")
+    public ResponseEntity<String> unlockScreen(@PathVariable String pin) {
         try {
-            String userPin = userRepository.findById(id).get().getPin();
-            //Metodo que compara PIN ingresado con PIN en BD.
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body("El PIN es incorrecto.");
+            String userPin = userRepository
+                    .findByNickname(validator.userContext()).get().getPin();
+            if (!userPin.equalsIgnoreCase(pin)) {
+                return ResponseEntity.badRequest().body("The Pin is incorrect.");
+            }else {
+                return ResponseEntity.ok("The Pin is correct.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.ok("Please contact with the admins.");
         }
-        return null; //implementación de llamado a metodo que verificará el PIN.
     }
 }
