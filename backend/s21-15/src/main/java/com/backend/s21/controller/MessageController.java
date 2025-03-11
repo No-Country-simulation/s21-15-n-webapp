@@ -25,8 +25,8 @@ public class MessageController {
         return ResponseEntity.ok(message);
     }
     @GetMapping("/sent")
-    public ResponseEntity<List<Message>> getSentMessages(@Validated String user) {
-        return ResponseEntity.ok(messageService.getSentMessages(user));
+    public ResponseEntity<List<Message>> getSentMessages() {
+        return ResponseEntity.ok(messageService.getSentMessages());
     }
 
     @GetMapping("/received")
