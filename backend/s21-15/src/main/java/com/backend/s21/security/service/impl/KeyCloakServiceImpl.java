@@ -73,7 +73,7 @@ public class KeyCloakServiceImpl implements IKeyCloakService {
         try {
             return keyService
                     .getUserResource()
-                    .search(username)
+                    .search(username.toLowerCase())
                     .stream()
                     .filter(x -> x.isEnabled())
                     .findFirst()

@@ -37,7 +37,7 @@ public class UserFactory {
         this.companyService = companyService;
     }
 
-    public static User createUser(List<RoleRepresentation> role, UserRepresentation users) {
+    public static User createUser(List<RoleRepresentation> role, UserRepresentation users, String pin) {
         String roleUser = role.stream().toList().get(0).getName().toUpperCase(Locale.ROOT);
         Supplier<User> supplier = userMap.get(roleUser.toLowerCase());
 
@@ -49,6 +49,7 @@ public class UserFactory {
         user.setEmail(users.getEmail());
         user.setNickname(users.getUsername());
         user.setRole(User.Role.valueOf(roleUser));
+        user.setPin(pin);
         return user;
     }
 

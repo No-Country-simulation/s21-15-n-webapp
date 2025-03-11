@@ -18,11 +18,10 @@ public class MessageController {
 
     @PostMapping("/send")
     public ResponseEntity<Message> sendMessage(
-            String user,
             @RequestParam String receiverUsername,
             @RequestParam String content) {
 
-        Message message = messageService.sendMessage(user, receiverUsername, content);
+        Message message = messageService.sendMessage(receiverUsername, content);
         return ResponseEntity.ok(message);
     }
     @GetMapping("/sent")
