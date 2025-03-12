@@ -4,7 +4,12 @@ import com.backend.s21.model.dto.*;
 import com.backend.s21.model.users.JuniorUser;
 import com.backend.s21.model.users.SocialNetwork;
 import com.backend.s21.model.users.User;
+import com.backend.s21.repository.IUserRepository;
 import com.backend.s21.service.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -23,25 +28,14 @@ public class JuniorUserController {
 
     private final IJuniorUserService juniorRepository;
 
-    private final IChallengeService IChallengeRepository;
-
-    private final IChallengeHistoryService challengeHRepository;
-
     private final ISocialNetworkService socialNRepository;
 
-    private final ICourseHistoryService courseHRepository;
+    private final IUserService userRepository;
 
-    private final IMentorshipHistoryService mentorshipHRepository;
-
-    public JuniorUserController(IJuniorUserService juniorRepository, IChallengeService IChallengeRepository,
-                                IChallengeHistoryService challengeHRepository, ISocialNetworkService socialNRepository,
-                                ICourseHistoryService courseHRepository, IMentorshipHistoryService mentorshipHRepository) {
+    public JuniorUserController(IJuniorUserService juniorRepository, ISocialNetworkService socialNRepository, IUserService userRepository) {
         this.juniorRepository = juniorRepository;
-        this.IChallengeRepository = IChallengeRepository;
-        this.challengeHRepository = challengeHRepository;
         this.socialNRepository = socialNRepository;
-        this.courseHRepository = courseHRepository;
-        this.mentorshipHRepository = mentorshipHRepository;
+        this.userRepository = userRepository;
     }
 
     @PostMapping
@@ -132,6 +126,18 @@ public class JuniorUserController {
             return ResponseEntity.ok("El usuario ha sido eliminado con exito.");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}/userslist")
+    @Operation(summary = "Listar usuarios", description = "Recupera la lista de usuarios.")
+    @ApiResponse(responseCode = "200", description = "Lista de usuarios recuperada", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserDTO.class)))
+    @ApiResponse(responseCode = "404", description = "Lista usuarios no encontrado")
+    public ResponseEntity<Page<UserDTO>> showAllUsers(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(userRepository.findAll(pageable).map(UserDTO::new));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 }
