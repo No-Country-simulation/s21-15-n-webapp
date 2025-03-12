@@ -21,7 +21,7 @@ export default function RootLayout({
   readonly children: ReactNode
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning className="!scroll-smooth  md:scroll-auto">
       <body className={nunito.className}>
         <div id="app-content" className="relative z-20">
           {children}

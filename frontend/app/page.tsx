@@ -2,13 +2,13 @@ import { NavBar } from "@/components/landing/navigation/nav-bar"
 import { MouseReflection } from "@/components/common/effects/mouse-reflection"
 import { HeroSection } from "@/components/landing/sections/hero-section"
 import { StatsSection } from "@/components/landing/sections/stats-section"
-import { FeaturesSection } from "@/components/landing/sections/features-section"
 import { BenefitsSection } from "@/components/landing/sections/benefits-section"
 import { RankingSection } from "@/components/landing/sections/ranking-section"
-import { ConquistasSection } from "@/components/landing/sections/conquistas-section"
+import { StellarConquestsSection } from "@/components/landing/sections/stellar-conquests"
 import { TestimonialsSection } from "@/components/landing/sections/testimonials-section"
 import { FAQSection } from "@/components/landing/sections/faq-section"
 import { Footer } from "@/components/landing/sections/footer"
+import { HowItWorksSection } from "@/components/landing/sections/how-it-works"
 
 export default function LandingPage() {
   return (
@@ -18,11 +18,11 @@ export default function LandingPage() {
         <NavBar />
         <main>
           <HeroSection />
+          <HowItWorksSection />
           <StatsSection />
-          <FeaturesSection />
           <BenefitsSection />
           <RankingSection />
-          <ConquistasSection />
+          <StellarConquestsSection />
           <TestimonialsSection />
           <FAQSection />
         </main>

@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useRef, useState, useCallback, KeyboardEvent, ClipboardEvent } from "react"
 import { Input } from "@/components/ui/input"
 
@@ -42,7 +40,7 @@ export function PinInput({ onComplete, onClear, length = 4, isValidPin = true }:
     }
   }
 
-  const shouldFocusPreviousInput = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+  const shouldFocusPreviousInput = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
     return e.key === "Backspace" && !values[index] && index > 0
   }
 
@@ -70,11 +68,11 @@ export function PinInput({ onComplete, onClear, length = 4, isValidPin = true }:
     }
   }
 
-  const clearInputs = () => {
+  const clearInputs = useCallback(() => {
     setValues(Array(length).fill(""))
     focusInput(0)
     onClear?.()
-  }
+  }, [length, focusInput, onClear])
 
   useEffect(() => {
     focusInput(0)

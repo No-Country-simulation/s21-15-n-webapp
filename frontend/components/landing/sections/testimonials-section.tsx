@@ -35,9 +35,9 @@ export function TestimonialsSection() {
     <section className="py-24 bg-background" id="testimonios">
       <div className="container px-4">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">Voces de la Flota</h2>
+          <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">{ LANDING_CONFIG.testimonials.title }</h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            Descubre cómo StartPerks ha impulsado las carreras de nuestros usuarios
+            { LANDING_CONFIG.testimonials.description }
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export function TestimonialsSection() {
             ]}
           >
             <CarouselContent>
-              {LANDING_CONFIG.testimonials.map((testimonial) => (
+              {LANDING_CONFIG.testimonials.items.map((testimonial) => (
                 <CarouselItem key={testimonial.id} className="md:basis-1/2 lg:basis-1/3">
                   <Card className="glass-card p-8 text-center h-full">
                     <div className="flex flex-col items-center">

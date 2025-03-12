@@ -57,8 +57,8 @@ const config = {
         },
         // Agregar colores personalizados para los botones
         magenta: "#E20B8C",
-        "gradient-start": "#FF1B8D",
-        "gradient-end": "#1B8DFF",
+        "gradient-start": "#f80497",
+        "gradient-end": "#231c96",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -85,4 +85,3 @@ const config = {
 } satisfies Config
 
 export default config
-

@@ -3,6 +3,7 @@ import { User } from "../types"
 export const DEFAULT_USERS : User[] = [
   {
     id: "1",
+    avatar: "",
     name: "Admin",
     lastName: "User",
     email: "admin@startperks.com",
@@ -17,6 +18,7 @@ export const DEFAULT_USERS : User[] = [
   },
   {
     id: "2",
+    avatar: "",
     name: "Mentor",
     lastName: "User",
     email: "mentor@startperks.com",
@@ -31,6 +33,7 @@ export const DEFAULT_USERS : User[] = [
   },
   {
     id: "3",
+    avatar: "",
     name: "Company",
     lastName: "User",
     email: "company@startperks.com",
@@ -45,6 +48,7 @@ export const DEFAULT_USERS : User[] = [
   },
   {
     id: "4",
+    avatar: "",
     name: "Junior",
     lastName: "User",
     email: "junior@startperks.com",

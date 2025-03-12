@@ -4,20 +4,31 @@ export interface NavItem {
   href: string;
 }
 
-export interface HeroSection {
-  title: string;
-  description: string;
-  ctaText: string;
+export interface HeroTitle {
+  section1: string;
+  section2: string;
+  section3: string;
+  section4: string;
+  section5: string;
+  section6: string;
+  section7: string;
 }
 
-export interface Feature {
+export interface StatItem {
   id: string;
-  title: string;
-  description: string;
-  icon: string;
+  value: string;
+  label: string;
+  subLabel: string;
 }
 
-export interface Benefit {
+export interface HowItWorkItem {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface BenefitItem {
   id: string;
   title: string;
   description: string;
@@ -25,7 +36,30 @@ export interface Benefit {
   imagePosition: "left" | "right";
 }
 
-export interface Testimonial {
+export interface TableTitleItem {
+  id: string;
+  title: string;
+  align: string;
+}
+
+export interface RankItem {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  level: number;
+  experience: number;
+  active: boolean;
+}
+
+export interface ConquestItem {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface TestimonialItem {
   id: string;
   name: string;
   role: string;
@@ -33,7 +67,7 @@ export interface Testimonial {
   quote: string;
 }
 
-export interface FAQ {
+export interface FAQItem {
   id: string;
   question: string;
   answer: string;
@@ -58,26 +92,50 @@ export interface SocialLink {
   icon: string;
 }
 
-export interface StatsItem {
-  id: string;
-  value: string;
-  label: string;
-  sublabel: string;
-}
-
 export interface LandingPageData {
   navigation: {
     items: NavItem[];
   };
-  stats: {
-    items: StatsItem[];
+  hero: {
+    title: HeroTitle;
+    description: string;
+    ctaText: string;
   };
-  hero: HeroSection;
-  features: Feature[];
-  benefits: Benefit[];
-  testimonials: Testimonial[];
-  faqs: FAQ[];
+  stats: {
+    title: string;
+    items: StatItem[];
+  };
+  howItWorks: {
+    title: string;
+    items: HowItWorkItem[];
+  };
+  benefits: {
+    title: string;
+    items: BenefitItem[];
+  }
+  ranking: {
+    title: string;
+    tableTitle: TableTitleItem[];
+    description: string;
+    items: RankItem[]
+  };
+  stellarConquests: {
+    title: string;
+    description: string;
+    items: ConquestItem[]
+  };
+  testimonials: {
+    title: string;
+    description: string;
+    items: TestimonialItem[]
+  };
+  faqs: {
+    title: string;
+    description: string;
+    items: FAQItem[]
+  };
   footer: {
+    description: string;
     social: SocialLink[];
     sections: FooterSection[];
   };

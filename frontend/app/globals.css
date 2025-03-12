@@ -108,7 +108,12 @@
   /* Actualizar la clase text-gradient con el nuevo degradado */
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(90deg, #f80497 5%, #231c96 57%);
+    background-image: linear-gradient(90deg, #f80497 40%, #231c96 99%);
+  }
+
+  .text-gradient-2 {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, #f80497 5%, #231c96 50%);
   }
 
   .mouse-effect {

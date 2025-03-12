@@ -1,171 +1,426 @@
-import type { LandingPageData } from "@/config/types/landing"
+import type { LandingPageData } from "@/config/types/landing";
 
 export const LANDING_CONFIG: LandingPageData = {
   navigation: {
     items: [
-      {id: "1", label: "Inicio", href: "#inicio" },
-      {id: "2", label: "Cómo funciona", href: "#como-funciona" },
-      {id: "3", label: "Beneficios", href: "#beneficios" },
-      {id: "4", label: "Ranking", href: "#ranking" },
-      {id: "5", label: "Conquistas", href: "#conquistas" },
-      {id: "6", label: "Testimonios", href: "#testimonios" },
-      {id: "7", label: "Preguntas y Respuestas", href: "#faq" },
+      { id: "1", label: "Inicio", href: "#inicio" },
+      { id: "2", label: "Funcionamiento", href: "#como-funciona" },
+      { id: "3", label: "Beneficios", href: "#beneficios" },
+      { id: "4", label: "Ranking", href: "#ranking" },
+      { id: "5", label: "Conquistas", href: "#conquistas" },
+      { id: "6", label: "Testimonios", href: "#testimonios" },
+      { id: "7", label: "Preguntas frecuentes", href: "#faq" },
     ],
   },
-  stats: {
-    items: [
-      {id: "1", value: "100+", label: "Tecnologías", sublabel: "enseñadas" },
-      {id: "2", value: "50+", label: "Empresas", sublabel: "aliadas" },
-      {id: "3", value: "1k+", label: "Exploradores", sublabel: "activos" },
-      {id: "4", value: "200+", label: "Mentorías", sublabel: "completadas" },
-    ],
-  },
+  /*Textos de la lLanding Page*/
   hero: {
-    title: "Gana experiencia, valida tus habilidades y desbloquea tu futuro",
+    title: {
+      section1: "Gana ",
+      section2: "conocimientos",
+      section3: ", valida tus ",
+      section4: "habilidades",
+      section5: " y ",
+      section6: "desbloquea",
+      section7: " tu futuro.",
+    },
     description:
-      "Regístrate como cadete en StartPerks y comienza tu aventura intergaláctica. Acumula puntos, desbloquea mentorías y conquista cada desafío para elevar tu carrera en tecnología",
+      "Regístrate como cadete en StartPerks y prepárate para vivir una aventura galáctica llena de desafíos y recompensas. Cada misión te lleva un paso más cerca de dominar nuevas habilidades, cada logro te acerca a tus metas, y cada mentor te acompaña en tu camino hacia el éxito. Es hora de encender los motores y trazar tu ruta hacia las estrellas.",
     ctaText: "Únete y empieza a ganar puntos",
   },
-  features: [
-    {
-      id: "1",
-      title: "Gana puntos de experiencia",
-      description: "Completa tareas, colabora con otros y recibe evaluaciones para acumular puntos",
-      icon: "Rocket",
-    },
-    {
-      id: "2",
-      title: "Participa en desafíos",
-      description: "Desaf��a tus límites completando misiones y acumulando puntos en cada travesía",
-      icon: "Target",
-    },
-    {
-      id: "3",
-      title: "Avanza en tu carrera",
-      description: "Accede a mentorías exclusivas y conviértete en un explorador galáctico en el universo tech",
-      icon: "Award",
-    },
-  ],
-  benefits: [
-    {
-      id: "1",
-      title: "Aprende habilidades demandadas",
-      description:
-        "Accede a cursos y recursos diseñados para desarrollar las habilidades que las empresas están buscando.",
-      image: "/placeholder.svg?height=400&width=600",
-      imagePosition: "right",
-    },
-    {
-      id: "2",
-      title: "Conecta con mentores expertos",
-      description: "Recibe guía y apoyo de profesionales experimentados que te ayudarán a alcanzar tus metas.",
-      image: "/placeholder.svg?height=400&width=600",
-      imagePosition: "left",
-    },
-  ],
-  testimonials: [
-    {
-      id: "1",
-      name: "Elena Rodriguez",
-      role: "Desarrolladora Frontend",
-      avatar: "/placeholder.svg?height=80&width=80",
-      quote:
-        "StartPerks me ha dado las herramientas y el apoyo que necesitaba para conseguir mi primer trabajo como desarrolladora.",
-    },
-    {
-      id: "2",
-      name: "Javier Pérez",
-      role: "Diseñador UX/UI",
-      avatar: "/placeholder.svg?height=80&width=80",
-      quote:
-        "Las mentorías de StartPerks me han ayudado a mejorar mis habilidades de diseño y a crear un portafolio impresionante.",
-    },
-    {
-      id: "3",
-      name: "Ana Martínez",
-      role: "Data Scientist",
-      avatar: "/placeholder.svg?height=80&width=80",
-      quote: "La comunidad de StartPerks es increíble. He aprendido tanto de mis compañeros como de los mentores.",
-    },
-    {
-      id: "4",
-      name: "Carlos González",
-      role: "Backend Developer",
-      avatar: "/placeholder.svg?height=80&width=80",
-      quote:
-        "Los desafíos técnicos y proyectos prácticos me ayudaron a consolidar mis conocimientos de manera efectiva.",
-    },
-    {
-      id: "5",
-      name: "María Sánchez",
-      role: "Product Manager",
-      avatar: "/placeholder.svg?height=80&width=80",
-      quote: "StartPerks me dio la confianza y las habilidades necesarias para liderar equipos técnicos exitosamente.",
-    },
-    {
-      id: "6",
-      name: "Luis Torres",
-      role: "DevOps Engineer",
-      avatar: "/placeholder.svg?height=80&width=80",
-      quote: "La plataforma me permitió aprender a mi propio ritmo mientras construía proyectos del mundo real.",
-    },
-  ],
-  faqs: [
-    {
-      id: "1",
-      question: "¿Qué es StartPerks?",
-      answer:
-        "StartPerks es una plataforma de desarrollo profesional para el universo tech. Ofrecemos cursos, mentorías y herramientas para ayudarte a impulsar tu carrera.",
-    },
-    {
-      id: "2",
-      question: "¿Cómo puedo unirme?",
-      answer: "Simplemente regístrate en nuestra página web y comienza tu aventura intergaláctica.",
-    },
-    {
-      id: "3",
-      question: "¿Qué tipo de recursos ofrece StartPerks?",
-      answer:
-        "Ofrecemos cursos, mentorías, insignias, certificaciones y una comunidad de profesionales apasionados por la tecnología.",
-    },
-    {
-      id: "4",
-      question: "¿Cómo funciona el sistema de puntos?",
-      answer:
-        "Ganarás puntos al completar cursos, participar en desafíos, recibir evaluaciones positivas y colaborar con otros miembros de la comunidad.",
-    },
-    {
-      id: "5",
-      question: "¿Puedo acceder desde cualquier dispositivo?",
-      answer:
-        "Sí, nuestra plataforma es completamente responsive y puedes acceder desde cualquier dispositivo con conexión a internet.",
-    },
-  ],
+  stats: {
+    title: "Nuestro viaje intergaláctico está redefiniendo el universo tech",
+    items: [
+      { id: "1", value: "100+", label: "Tecnologías", subLabel: "enseñadas" },
+      { id: "2", value: "50+", label: "Empresas", subLabel: "aliadas" },
+      { id: "3", value: "1k+", label: "Junior's", subLabel: "activos" },
+      { id: "4", value: "200+", label: "Mentorías", subLabel: "completadas" },
+    ],
+  },
+  howItWorks: {
+    title: "Cómo Funciona.",
+    items: [
+      {
+        id: "1",
+        icon: "Rocket",
+        title: "Conviértete en cadete",
+        description:
+          "Supera el entrenamiento inicial y asciende de cadete a explorador. Tu mayor objetivo será conquistar tu próximo rango y obtener apoyo del Alto Mando",
+      },
+      {
+        id: "2",
+        icon: "Target",
+        title: "Asciende al rango de Explorador",
+        description:
+          "Desbloquea misiones estratégicas del Alto Mando, colabora con El Consejo de Exploradores en objetivos mayores y avanza hacia el rango superior donde te esperan beneficios exclusivos",
+      },
+      {
+        id: "3",
+        icon: "Award",
+        title: "Lidera como Comandante Galáctico",
+        description:
+          "Enfrenta desafíos críticos junto a tu equipo y destaca ante las tripulaciones galácticas. Como Comandante, podrás ser reclutado por empresas emergentes en busca de talento validado y listo para brillar",
+      },
+    ],
+  },
+  benefits: {
+    title: "Beneficios.",
+    items: [
+      {
+        id: "1",
+        title: "Juniors",
+        description:
+          "Inicia tu entrenamiento y desarrolla las habilidades clave para trabajar en equipo. Aprende a coordinar misiones, compartir conocimientos y liderar proyectos que te llevarán al éxito en el cosmos tech",
+        image:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741592154/startperks/ben1_xra1gp.png",
+        imagePosition: "right",
+      },
+      {
+        id: "2",
+        title: "Startups",
+        description:
+          "Accede a un pool de talentos que han demostrado habilidades excepcionales en misiones críticas. Identifica futuros líderes listos para impulsar tu startup hacia nuevas galaxias",
+        image:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741592163/startperks/bene2_zqzeof.png",
+        imagePosition: "left",
+      },
+      {
+        id: "3",
+        title: "Mentores",
+        description:
+          "Conviértete en uno de los Generales Galácticos de los Altos Mandos y ayuda a nuestros exploradores a alcanzar las estrellas. Comparte tu sabiduría, gana reconocimiento en el universo tech y accede a recompensas exclusivas por tu liderazgo",
+        image:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741592172/startperks/bene3_okakpx.png",
+        imagePosition: "right",
+      },
+    ],
+  },
+  ranking: {
+    title: "Ranking Galáctico",
+    tableTitle: [
+      {
+        id: "1",
+        title: "Nombre",
+        align: "text-left",
+      },
+      {
+        id: "2",
+        title: "Rol",
+        align: "text-left",
+      },
+      {
+        id: "3",
+        title: "Nivel",
+        align: "text-center",
+      },
+      {
+        id: "5",
+        title: "Experiencia",
+        align: "text-right",
+      },
+    ],
+    description:
+      "Compara tu progreso con otros cadetes y mantén viva la competencia interplanetaria",
+    items: [
+      {
+        id: "1",
+        name: "Matias Badano",
+        role: "Team Leader",
+        avatar:
+          "https://ca.slack-edge.com/T02KS88FB0E-U06GHUXGWMB-0e3dd8d5df7d-512",
+        level: 90,
+        experience: 894,
+        active: true,
+      },
+      {
+        id: "2",
+        name: "Noemí Zalazar",
+        role: "Project Manager",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741706559/dc%20dev/1518502426283_nnhmny.jpg",
+        level: 85,
+        experience: 787,
+        active: true,
+      },
+      {
+        id: "3",
+        name: "Sandro Borga",
+        role: "Diseñador UX/UI",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741706799/dc%20dev/1703885238963_xdwwil.jpg",
+        level: 85,
+        experience: 640,
+        active: true,
+      },
+      {
+        id: "4",
+        name: "Gianella Achetoni",
+        role: "Desarrollador Front End",
+        avatar:
+          "https://ca.slack-edge.com/T02KS88FB0E-U0803CH9LJC-2fba0364855e-512",
+        level: 85,
+        experience: 645,
+        active: true,
+      },
+      {
+        id: "5",
+        name: "David Caycedo",
+        role: "Desarrollador Front End",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741673288/dc%20dev/Avata-info-10-removebg-preview_kxxlui.png",
+        level: 85,
+        experience: 650,
+        active: true,
+      },
+      {
+        id: "6",
+        name: "Wilson Osorio",
+        role: "Desarrollador Back End",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741707291/dc%20dev/1718213640869_hp8dx5.jpg",
+        level: 85,
+        experience: 648,
+        active: true,
+      },
+      {
+        id: "7",
+        name: "José lambrechts ",
+        role: "Desarrollador Back End",
+        avatar:
+          "https://ca.slack-edge.com/T02KS88FB0E-U041L9PCUQ3-705b1f66b8ab-512",
+        level: 85,
+        experience: 621,
+        active: true,
+      },
+      {
+        id: "8",
+        name: "Omar Alvarado",
+        role: "Desarrollador Back End",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741707497/dc%20dev/1738773720336_ufhx3d.jpg",
+        level: 85,
+        experience: 619,
+        active: true,
+      },
+    ],
+  },
+  stellarConquests: {
+    title: "Tus Conquistas Estelares",
+    description:
+      "Cada insignia que conseguirás, demostrará tu progreso y generará nuevas oportunidades",
+    items: [
+      {
+        id: "1",
+        title: "Explorador Cósmico.",
+        description:
+          "Gana reconocimiento al completar misiones críticas y superar desafíos en diversas tecnologías. Cada aventura es un paso hacia tu legado tecnológico.",
+        icon: "Star",
+      },
+      {
+        id: "2",
+        title: "Piloto Intergaláctico",
+        description:
+          " Demuestra tu dominio del cosmos tech alcanzando rangos adicionales. Cada nivel validado refleja tu experiencia y compromiso con la excelencia",
+        icon: "Rocket",
+      },
+      {
+        id: "3",
+        title: "Y mucho más",
+        description:
+          "Además de insignias y rangos, encuentra recompensas exclusivas y sorpresas diseñadas para potenciar tu viaje digital",
+        icon: "Sparkles",
+      },
+    ],
+  },
+  testimonials: {
+    title: "Voces de la flota",
+    description:
+      "Descubre cómo StartPerks ha impulsado las carreras de nuestros usuarios",
+    items: [
+      {
+        id: "1",
+        name: "David Caycedo",
+        role: "Desarrollador Front End",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741673288/dc%20dev/Avata-info-10-removebg-preview_kxxlui.png",
+        quote:
+          "StartPerks me ha dado las herramientas y habilidades tanto técnicas como blandas para mejorar mi carrera profesional.",
+      },
+      {
+        id: "2",
+        name: "Sandro Borga",
+        role: "Diseñador UX/UI",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741706799/dc%20dev/1703885238963_xdwwil.jpg",
+        quote:
+          "Las mentorias de StartPerks me han ayudado a mejorar mis habilidades de diseño y a crear un portafolio impresionante.",
+      },
+      {
+        id: "3",
+        name: "Wilson Osorio",
+        role: "Desarrollador Back End",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741707291/dc%20dev/1718213640869_hp8dx5.jpg",
+        quote:
+          "La comunidad de StartPerks es increíble. He aprendido tanto de mis compañeros como de los mentores.",
+      },
+      {
+        id: "4",
+        name: "Gianella Achetoni",
+        role: "Desarrolladora Front End",
+        avatar:
+          "https://ca.slack-edge.com/T02KS88FB0E-U0803CH9LJC-2fba0364855e-512",
+        quote:
+          "StartPerks me ha dado las herramientas y el apoyo que necesitaba para conseguir mi primer trabajo como desarrolladora.",
+      },
+      {
+        id: "5",
+        name: "José lambrechts",
+        role: "Desarrollador Back End",
+        avatar:
+          "https://ca.slack-edge.com/T02KS88FB0E-U041L9PCUQ3-705b1f66b8ab-512",
+        quote:
+          "Los desafíos técnicos y proyectos prácticos me ayudaron a consolidar mis conocimientos de manera efectiva.",
+      },
+      {
+        id: "6",
+        name: "Noemí Zalazar",
+        role: "Product Manager",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741706559/dc%20dev/1518502426283_nnhmny.jpg",
+        quote:
+          "StartPerks me dio la confianza y las habilidades necesarias para liderar equipos técnicos exitosamente.",
+      },
+      {
+        id: "7",
+        name: "Omar Alvarado",
+        role: "Desarrollador Back End",
+        avatar:
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741707497/dc%20dev/1738773720336_ufhx3d.jpg",
+        quote:
+          "Los desafíos técnicos y proyectos prácticos me ayudaron a consolidar mis conocimientos de manera efectiva.",
+      },
+      {
+        id: "8",
+        name: "Matias Badano",
+        role: "Team Leader",
+        avatar:
+          "https://ca.slack-edge.com/T02KS88FB0E-U06GHUXGWMB-0e3dd8d5df7d-512",
+        quote:
+          "StartPerks me dio la confianza y las habilidades necesarias para liderar equipos técnicos exitosamente.",
+      },
+    ],
+  },
+  faqs: {
+    title: "Preguntas frecuentes",
+    description:
+      "Resolvemos tus dudas para ayudarte en tu viaje a través del universo StartPerks",
+    items: [
+      {
+        id: "1",
+        question: "¿Qué es StartPerks?",
+        answer:
+          "StartPerks es una plataforma gamificada donde puedes validar tus habilidades, ganar puntos, desbloquear mentorías y conectarte con oportunidades en el universo tech. Nuestro objetivo es impulsar tu crecimiento profesional a través de misiones y logros reconocidos",
+      },
+      {
+        id: "2",
+        question: "¿Cómo puedo unirme?",
+        answer:
+          "Simplemente haz clic en el botón ‘Únete a la Misión’ y completa el formulario.",
+      },
+      {
+        id: "3",
+        question: "¿Qué tipo de recursos ofrece StartPerks?",
+        answer:
+          "Ofrecemos cursos, mentorías, insignias, certificaciones y una comunidad de profesionales apasionados por la tecnología",
+      },
+      {
+        id: "4",
+        question: "¿Qué tipo de recursos ofrece StartPerks?",
+        answer:
+          "Cada vez que completes misiones, superás desafíos o recibís feedback positivo de mentores, sumás puntos. Al alcanzar ciertos hitos, desbloqueás insignias que reflejan tu dominio en distintas áreas",
+      },
+      {
+        id: "5",
+        question: "¿Cómo funciona el sistema de puntos?",
+        answer:
+          "Ganarás puntos al completar cursos, participar en desafíos, recibir evaluaciones positivas y colaborar con otros miembros de la comunidad",
+      },
+      {
+        id: "6",
+        question: "¿Puedo acceder desde cualquier dispositivo?",
+        answer:
+          "Sí, nuestra plataforma es completamente responsive y puedes acceder desde cualquier dispositivo con conexión a internet",
+      },
+      {
+        id: "7",
+        question: "¿Necesito experiencia previa en tecnología?",
+        answer:
+          "No necesariamente. StartPerks está diseñado para que tanto principiantes como profesionales en desarrollo puedan avanzar a su propio ritmo y aprender en el proceso",
+      },
+      {
+        id: "8",
+        question: "¿Puedo ser mentor y cadete a la vez?",
+        answer:
+          "Sí, puedes registrarte con un rol principal y, más adelante, postularte como mentor si cumples los requisitos de experiencia. De esta forma, seguirás aprendiendo mientras compartes tus conocimientos",
+      },
+    ],
+  },
   footer: {
+    description: "Transformando carreras en el universo tech.",
     social: [
-      {id: "1", platform: "GitHub", href: "https://github.com/startperks", icon: "Github" },
-      {id: "2", platform: "Twitter", href: "https://twitter.com/startperks", icon: "Twitter" },
-      {id: "3", platform: "LinkedIn", href: "https://linkedin.com/company/startperks", icon: "Linkedin" },
+      {
+        id: "1",
+        platform: "GitHub",
+        href: "https://github.com/No-Country-simulation/s21-15-n-webapp",
+        icon: "Github",
+      },
+      {
+        id: "2",
+        platform: "Twitter",
+        href: "https://x.com",
+        icon: "Twitter",
+      },
+      {
+        id: "3",
+        platform: "LinkedIn",
+        href: "https://linkedin.com",
+        icon: "Linkedin",
+      },
+      {
+        id: "4",
+        platform: "Discrod",
+        href: "https://discord.com",
+        icon: "Discord",
+      },
     ],
     sections: [
       {
         id: "1",
         title: "Producto",
         links: [
-          {id: "1", label: "Características", href: "#" },
-          {id: "2", label: "Precios", href: "#" },
-          {id: "3", label: "Recursos", href: "#" },
+          { id: "1", label: "Simulaciones", href: "#" },
+          { id: "2", label: "Características", href: "#" },
+          { id: "3", label: "Precios", href: "#" },
         ],
       },
       {
         id: "2",
         title: "Compañía",
         links: [
-          {id: "1",  label: "Acerca de", href: "#" },
-          {id: "2",  label: "Blog", href: "#" },
-          {id: "3",  label: "Carreras", href: "#" },
+          { id: "1", label: "Nosotros", href: "#" },
+          { id: "2", label: "Misión", href: "#" },
+          { id: "3", label: "Visión", href: "#" },
+        ],
+      },
+      {
+        id: "3",
+        title: "Recursos",
+        links: [
+          { id: "1", label: "Certificados", href: "#" },
+          { id: "2", label: "Tutoriales", href: "#" },
+          { id: "3", label: "Documentación", href: "#" },
         ],
       },
     ],
   },
-}
+};

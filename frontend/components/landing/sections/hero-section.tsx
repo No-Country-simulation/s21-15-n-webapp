@@ -1,10 +1,10 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
-import { LANDING_CONFIG } from "@/config/constants/landing.config"
-import { useRandomStars } from "@/hooks/use-random-stars"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { useRandomStars } from "@/hooks/use-random-stars"
+import { LANDING_CONFIG } from "@/config/constants/landing.config"
+import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
   const router = useRouter()
@@ -64,6 +64,7 @@ export function HeroSection() {
               height: `${star.size}px`,
               opacity: starOpacities[star.id] || star.opacity,
               transition: "opacity 1.5s ease-in-out",
+              color: star.color,
             }}
           >
             <span className="relative inline-flex h-full w-full rounded-full bg-primary" />
@@ -72,11 +73,10 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="container relative px-4 text-center">
-        <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl">
-          Ganá <span className="text-gradient">experiencia</span>, validá tus{" "}
-          <span className="text-gradient-end">habilidades</span> y <span className="text-gradient">desbloquea</span> tu
-          futuro
+      <div className="container relative px-4 text-center justify-center">
+        <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
+          {LANDING_CONFIG.hero.title.section1}<span className="text-gradient-2"> {LANDING_CONFIG.hero.title.section2}</span>{LANDING_CONFIG.hero.title.section3}
+          <span className="text-gradient"> {LANDING_CONFIG.hero.title.section4}</span> {LANDING_CONFIG.hero.title.section5}<span className="text-gradient-end"> {LANDING_CONFIG.hero.title.section6}</span>{LANDING_CONFIG.hero.title.section7}
         </h1>
         <p className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground text-pretty">{description}</p>
         <Button size="lg" className="btn-magenta mt-10 text-lg" onClick={() => router.push("/register")}>

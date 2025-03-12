@@ -43,7 +43,11 @@ export function AutoCloseCountdown({
   const [countdown, setCountdown] = useState(seconds)
 
   const handleCloseWindow = useCallback(() => {
-    window.close()
+    if (window.opener) {
+      window.close()
+    } else {
+      alert("Por favor, cierre esta ventana manualmente.")
+    }
     onComplete?.()
   }, [onComplete])
 

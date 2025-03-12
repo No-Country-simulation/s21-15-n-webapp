@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Github, Twitter, Linkedin } from "lucide-react"
+import { ExternalLink } from "lucide-react"
 import { LANDING_CONFIG } from "@/config/constants/landing.config"
 import { AppLogo } from "@/components/common/ui/app-logo" // Import the AppLogo component
 
@@ -9,13 +9,16 @@ export function Footer() {
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case "Github":
-        return <Github className="h-5 w-5" />
+        return <ExternalLink className="h-5 w-5" />
+        break;
       case "Twitter":
-        return <Twitter className="h-5 w-5" />
+        return <ExternalLink className="h-5 w-5" />
+        break;
       case "Linkedin":
-        return <Linkedin className="h-5 w-5" />
+        return <ExternalLink className="h-5 w-5" />
+        break;
       default:
-        return <Github className="h-5 w-5" />
+        return <ExternalLink className="h-5 w-5" />
     }
   }
 
@@ -60,29 +63,7 @@ export function Footer() {
               </ul>
             </div>
           ))}
-
-          {/* Nueva sección para Recursos */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Recursos</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/certificates" className="text-muted-foreground hover:text-primary transition-colors">
-                  Certificados
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Tutoriales
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Documentación
-                </Link>
-              </li>
-            </ul>
           </div>
-        </div>
         <div className="mt-12 pt-8 border-t border-white/10 text-center text-muted-foreground">
           <p>© {new Date().getFullYear()} StartPerks. Todos los derechos reservados.</p>
         </div>

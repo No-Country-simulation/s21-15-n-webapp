@@ -27,7 +27,6 @@ export function AdventureSection() {
             <div className="relative h-48">
               {/* Línea conectora */}
               <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/50 via-primary/30 to-primary/10" />
-
               {/* Planetas */}
               <div className="relative z-10 flex justify-between px-8">
                 {[0, 1, 2, 3, 4].map((index) => (
@@ -52,7 +51,6 @@ export function AdventureSection() {
                         <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background" />
                       )}
                     </div>
-
                     {/* Estrellas decorativas */}
                     <motion.div
                       className="absolute -top-4 -right-2 w-2 h-2 bg-yellow-400 rounded-full"
@@ -81,7 +79,6 @@ export function AdventureSection() {
                   </motion.div>
                 ))}
               </div>
-
               {/* Estrellas de fondo */}
               {Array.from({ length: 20 }).map((_, i) => (
                 <motion.div
