@@ -28,7 +28,7 @@ public class MessageService {
     @Autowired
     private SecurityContextValidator validator;
 
-    public List<Message> getSentMessages(String user) {
+    public List<Message> getSentMessages() {
         User sender = userRepository.findByNickname(validator.userContext())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         return messageRepository.findBySender(sender);
