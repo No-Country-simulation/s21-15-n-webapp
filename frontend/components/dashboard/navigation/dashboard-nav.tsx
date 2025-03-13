@@ -3,7 +3,7 @@
 import { ReactNode, useState } from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { Home, User, Settings, LogOut, Award, BookOpen, Users, Building, X } from "lucide-react"
+import { Home, User, Settings, LogOut, Award, BookOpen, Users, Building, X, MessageSquareText } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/hooks/use-auth"
 import { Button } from "@/components/ui/button"
@@ -99,6 +99,11 @@ export function DashboardNav({ isOpen, onClose }: DashboardNavProps) {
       href: ROUTES.PROFILE,
       icon: <User className="h-4 w-4" />,
       label: "Mi Perfil",
+    })
+    links.push({
+      href: ROUTES.MESSAGE,
+      icon: <MessageSquareText className="h-4 w-4" />,
+      label: "Mis mensajes",
     })
 
     return links

@@ -44,6 +44,7 @@ function DashboardLayoutInner({ children }: { readonly children: ReactNode }) {
         pathname.startsWith("/dashboard/") &&
         !pathname.startsWith(correctPath) &&
         pathname !== "/dashboard/profile" &&
+        pathname !== "/dashboard/messager" &&
         pathname !== ROUTES.DASHBOARD
       )
     }

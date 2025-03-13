@@ -17,6 +17,7 @@ export const ROUTES = {
   JUNIOR: "/dashboard/junior",
   PROFILE: "/dashboard/profile",
   COURSE: "/dashboard/courses",
+  MESSAGE:"/dashboard/messager",
   SETTINGS: "/dashboard",//settings",// -> cuando este la page
 
   // Secciones de la landing

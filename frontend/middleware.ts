@@ -52,7 +52,7 @@ function isDashboardRoute(path: string): boolean {
 }
 
 function handleDashboardRoute(path: string, userRole: string, request: NextRequest) {
-  if (path === ROUTES.PROFILE) {
+  if (path === ROUTES.PROFILE || path === ROUTES.MESSAGE) {
     return NextResponse.next()
   }
 
