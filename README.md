@@ -283,13 +283,20 @@ Redefinir cómo las empresas encuentran y desarrollan talento, haciendo que el p
 
 ## 🎥 Video Demo <a id="video-demo"></a>
 
-[Ver Video Demo](#)
+
+https://github.com/user-attachments/assets/31467dbf-37f6-4fab-ba6d-925216aa0944
+
 
 ---
 
 ## 🖼 Capturas de Pantalla <a id="capturas-de-pantalla"></a>
 
 
+![captura home](https://github.com/user-attachments/assets/49f4bda0-cfd8-4948-8d18-142391d09a92)
+
+
+![funcionamiento](https://github.com/user-attachments/assets/d3ec366e-fd98-4ee2-8e88-738fd9a6ce1f)
+![conquistas](https://github.com/user-attachments/assets/a8f91780-c207-4fbc-99cf-319c5c133b5f)
 
 
 ---
@@ -298,7 +305,7 @@ Redefinir cómo las empresas encuentran y desarrollan talento, haciendo que el p
 
 
 ### 🎨 Frontend
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
@@ -308,8 +315,11 @@ Redefinir cómo las empresas encuentran y desarrollan talento, haciendo que el p
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white)
+![Keycloak](https://img.shields.io/badge/Keycloak-000000?style=for-the-badge&logo=keycloak&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 ### 🖌️ UX/UI
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
@@ -336,20 +346,34 @@ Redefinir cómo las empresas encuentran y desarrollan talento, haciendo que el p
 
 ---
 
-## 🌐 Estructura del Equipo <a id="estructura-del-equipo"></a>
+### 🚀 Acceso a Deploy
+
+#### Frontend
+- **URL**: [https://startperks.vercel.app/](https://startperks.vercel.app/)  
+- **Plataforma**: Vercel  
+
+#### Backend
+- **URL**: [https://s21-15-production.up.railway.app/](https://s21-15-production.up.railway.app/)  
+- **Plataforma**: Railway  
+
+#### Seguridad (Keycloak)
+- **URL**: [Keycloak Admin Console](https://keycloak-production-4993.up.railway.app/admin/master/console/)  
+- **Nota:** Las credenciales para acceder al panel de administración de Keycloak deben solicitarse al equipo de desarrollo o al administrador del proyecto.
+
+  ---
+
+## 🌐 Estructura del Equipo-h4-03-vocaltech <a id="estructura-del-equipo"></a>
 
 | Nombre                 | Rol              | LinkedIn                                                                 |
 |------------------------|------------------|--------------------------------------------------------------------------|
-| David Caycedo          | Frontend         | [David Caycedo](#)   |
-| Gianella Achetoni      | Frontend         | [Gianella Achetoni](#)            |
-| Sandro Borga           | UX/UI            | [Sandro Borga](#)|
-| Wilson Osorio          | Backend          | [Wilson Osorio](#)  
-| José Lambrechts        | Backend          | [José Lambrechts](#) 
-| Omar J. Alvarado Mendoza | Backend        | [Omar J. Alvarado Mendoza](#)
-| Eugenio Bricio Martínez  | Backend        | [Eugenio Bricio Martínez](#) 
-| Noemí Zalazar          | Project Manager  | [Noemí Zalazar](#)               |
-| Matías Badano          | Team Leader      | [Matías Badano](#)                                                     |
-
+| David Caycedo          | Frontend         | [David Caycedo](https://www.linkedin.com/in/davidcoachdev/)              |
+| Gianella Achetoni      | Frontend         | [Gianella Achetoni](https://www.linkedin.com/in/gianella-ariadna-achetoni-997025254/) |
+| Sandro Borga           | UX/UI            | [Sandro Borga](https://www.linkedin.com/in/sandro-borga-065936246)       |
+| Wilson Osorio          | Backend          | [Wilson Osorio](http://www.linkedin.com/in/wilson-osorio-)               |
+| José Lambrechts        | Backend          | [José Lambrechts](https://www.linkedin.com/in/jose-lambrechts)           |
+| Omar J. Alvarado Mendoza | Backend        | [Omar J. Alvarado Mendoza](https://www.linkedin.com/in/omar3636/)        |
+| Noemí Zalazar          | Project Manager  | [Noemí Zalazar](http://www.linkedin.com/in/noemizalazar)                 |
+| Matías Badano          | Team Leader      | [Matías Badano](https://www.linkedin.com/in/matias-badano-495407229)      |
 
 
 ---
@@ -384,7 +408,7 @@ mvn spring-boot:run
 
 ## Soporte <a id="soporte"></a>
 
-Para cualquier consulta o soporte, por favor contacta a: [soporte@gmail.com](mailto:#)
+Para cualquier consulta o soporte, por favor contacta a: [startperksstudio@gmail.com](mailto:#)
 
 ---
 
