@@ -21,10 +21,10 @@ export const LANDING_CONFIG: LandingPageData = {
       section4: "habilidades",
       section5: " y ",
       section6: "desbloquea",
-      section7: " tu futuro.",
+      section7: " tu futuro",
     },
     description:
-      "Regístrate como cadete en StartPerks y prepárate para vivir una aventura galáctica llena de desafíos y recompensas. Cada misión te lleva un paso más cerca de dominar nuevas habilidades, cada logro te acerca a tus metas, y cada mentor te acompaña en tu camino hacia el éxito. Es hora de encender los motores y trazar tu ruta hacia las estrellas.",
+      "Regístrate como cadete en StartPerks y prepárate para vivir una aventura galáctica llena de desafíos y recompensas. Cada misión te lleva un paso más cerca de dominar nuevas habilidades, cada logro te acerca a tus metas, y cada mentor te acompaña en tu camino hacia el éxito. Es hora de encender los motores y trazar tu ruta hacia las estrellas",
     ctaText: "Únete y empieza a ganar puntos",
   },
   stats: {
@@ -37,7 +37,7 @@ export const LANDING_CONFIG: LandingPageData = {
     ],
   },
   howItWorks: {
-    title: "Cómo Funciona.",
+    title: "Cómo Funciona",
     items: [
       {
         id: "1",
@@ -63,7 +63,7 @@ export const LANDING_CONFIG: LandingPageData = {
     ],
   },
   benefits: {
-    title: "Beneficios.",
+    title: "Beneficios",
     items: [
       {
         id: "1",
@@ -126,7 +126,7 @@ export const LANDING_CONFIG: LandingPageData = {
         name: "Matias Badano",
         role: "Team Leader",
         avatar:
-          "https://ca.slack-edge.com/T02KS88FB0E-U06GHUXGWMB-0e3dd8d5df7d-512",
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741736812/dc%20dev/T02KS88FB0E-U06GHUXGWMB-0e3dd8d5df7d-512_w9fxfc.jpg",
         level: 90,
         experience: 894,
         active: true,
@@ -156,7 +156,7 @@ export const LANDING_CONFIG: LandingPageData = {
         name: "Gianella Achetoni",
         role: "Desarrollador Front End",
         avatar:
-          "https://ca.slack-edge.com/T02KS88FB0E-U0803CH9LJC-2fba0364855e-512",
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741737098/dc%20dev/T02KS88FB0E-U0803CH9LJC-2fba0364855e-512_eouahd-Square_ub6poh.jpg",
         level: 85,
         experience: 645,
         active: true,
@@ -183,10 +183,10 @@ export const LANDING_CONFIG: LandingPageData = {
       },
       {
         id: "7",
-        name: "José lambrechts ",
+        name: "José lambrechts",
         role: "Desarrollador Back End",
         avatar:
-          "https://ca.slack-edge.com/T02KS88FB0E-U041L9PCUQ3-705b1f66b8ab-512",
+          "https://res.cloudinary.com/dcdevcd/image/upload/v1741753525/dc%20dev/T02KS88FB0E-U041L9PCUQ3-705b1f66b8ab-512_toukec.jpg",
         level: 85,
         experience: 621,
         active: true,
@@ -206,13 +206,13 @@ export const LANDING_CONFIG: LandingPageData = {
   stellarConquests: {
     title: "Tus Conquistas Estelares",
     description:
-      "Cada insignia que conseguirás, demostrará tu progreso y generará nuevas oportunidades",
+      "Cada insignia que consigas, demostrará tu progreso y generará nuevas oportunidades",
     items: [
       {
         id: "1",
-        title: "Explorador Cósmico.",
+        title: "Explorador Cósmico",
         description:
-          "Gana reconocimiento al completar misiones críticas y superar desafíos en diversas tecnologías. Cada aventura es un paso hacia tu legado tecnológico.",
+          "Gana reconocimiento al completar misiones críticas y superar desafíos en diversas tecnologías. Cada aventura es un paso hacia tu legado tecnológico",
         icon: "Star",
       },
       {
@@ -243,7 +243,7 @@ export const LANDING_CONFIG: LandingPageData = {
         avatar:
           "https://res.cloudinary.com/dcdevcd/image/upload/v1741673288/dc%20dev/Avata-info-10-removebg-preview_kxxlui.png",
         quote:
-          "StartPerks me ha dado las herramientas y habilidades tanto técnicas como blandas para mejorar mi carrera profesional.",
+          "StartPerks me ha dado las herramientas y habilidades tanto técnicas como blandas para mejorar mi carrera profesional",
       },
       {
         id: "2",
@@ -252,7 +252,7 @@ export const LANDING_CONFIG: LandingPageData = {
         avatar:
           "https://res.cloudinary.com/dcdevcd/image/upload/v1741706799/dc%20dev/1703885238963_xdwwil.jpg",
         quote:
-          "Las mentorias de StartPerks me han ayudado a mejorar mis habilidades de diseño y a crear un portafolio impresionante.",
+          "Las mentorías de StartPerks me han ayudado a mejorar mis habilidades de diseño y a crear un portafolio impresionante que me ha abierto muchas puertas",
       },
       {
         id: "3",
@@ -261,7 +261,7 @@ export const LANDING_CONFIG: LandingPageData = {
         avatar:
           "https://res.cloudinary.com/dcdevcd/image/upload/v1741707291/dc%20dev/1718213640869_hp8dx5.jpg",
         quote:
-          "La comunidad de StartPerks es increíble. He aprendido tanto de mis compañeros como de los mentores.",
+          "La comunidad de StartPerks es increíble. He aprendido tanto de mis compañeros como de los mentores y he hecho conexiones valiosas en el mundo tech",
       },
       {
         id: "4",
@@ -270,7 +270,7 @@ export const LANDING_CONFIG: LandingPageData = {
         avatar:
           "https://ca.slack-edge.com/T02KS88FB0E-U0803CH9LJC-2fba0364855e-512",
         quote:
-          "StartPerks me ha dado las herramientas y el apoyo que necesitaba para conseguir mi primer trabajo como desarrolladora.",
+          "StartPerks me ha dado las herramientas y el apoyo que necesitaba para conseguir mi primer trabajo como desarrolladora Front End",
       },
       {
         id: "5",
@@ -279,7 +279,7 @@ export const LANDING_CONFIG: LandingPageData = {
         avatar:
           "https://ca.slack-edge.com/T02KS88FB0E-U041L9PCUQ3-705b1f66b8ab-512",
         quote:
-          "Los desafíos técnicos y proyectos prácticos me ayudaron a consolidar mis conocimientos de manera efectiva.",
+          "Los desafíos técnicos y proyectos prácticos me ayudaron a consolidar mis conocimientos de manera efectiva y a prepararme para el mundo laboral",
       },
       {
         id: "6",
@@ -288,7 +288,7 @@ export const LANDING_CONFIG: LandingPageData = {
         avatar:
           "https://res.cloudinary.com/dcdevcd/image/upload/v1741706559/dc%20dev/1518502426283_nnhmny.jpg",
         quote:
-          "StartPerks me dio la confianza y las habilidades necesarias para liderar equipos técnicos exitosamente.",
+          "StartPerks me dio la confianza y las habilidades necesarias para liderar equipos técnicos exitosamente y me ayudó a conseguir mi primer trabajo como Product Manager",
       },
       {
         id: "7",
@@ -297,7 +297,7 @@ export const LANDING_CONFIG: LandingPageData = {
         avatar:
           "https://res.cloudinary.com/dcdevcd/image/upload/v1741707497/dc%20dev/1738773720336_ufhx3d.jpg",
         quote:
-          "Los desafíos técnicos y proyectos prácticos me ayudaron a consolidar mis conocimientos de manera efectiva.",
+          "Los desafíos técnicos y proyectos prácticos me ayudaron a consolidar mis conocimientos de manera efectiva y a prepararme para el mundo laboral",
       },
       {
         id: "8",
@@ -306,7 +306,7 @@ export const LANDING_CONFIG: LandingPageData = {
         avatar:
           "https://ca.slack-edge.com/T02KS88FB0E-U06GHUXGWMB-0e3dd8d5df7d-512",
         quote:
-          "StartPerks me dio la confianza y las habilidades necesarias para liderar equipos técnicos exitosamente.",
+          "StartPerks me dio la confianza y las habilidades necesarias para liderar equipos técnicos exitosamente y ser un líder en el mundo tech",
       },
     ],
   },
@@ -319,54 +319,54 @@ export const LANDING_CONFIG: LandingPageData = {
         id: "1",
         question: "¿Qué es StartPerks?",
         answer:
-          "StartPerks es una plataforma gamificada donde puedes validar tus habilidades, ganar puntos, desbloquear mentorías y conectarte con oportunidades en el universo tech. Nuestro objetivo es impulsar tu crecimiento profesional a través de misiones y logros reconocidos",
+          "StartPerks es una plataforma gamificada donde puedes validar tus habilidades, ganar puntos, desbloquear mentorías y conectarte con oportunidades en el universo tech. Nuestro objetivo es impulsar tu crecimiento profesional a través de misiones y logros reconocidos por la comunidad",
       },
       {
         id: "2",
         question: "¿Cómo puedo unirme?",
         answer:
-          "Simplemente haz clic en el botón ‘Únete a la Misión’ y completa el formulario.",
+          "Simplemente haz clic en el botón ‘Únete y empieza a ganar puntos’ y completa el formulario de registro. ¡Es gratis y solo te llevará unos minutos!",
       },
       {
         id: "3",
-        question: "¿Qué tipo de recursos ofrece StartPerks?",
+        question: "¿Qué tipo de ofrece StartPerks?",
         answer:
-          "Ofrecemos cursos, mentorías, insignias, certificaciones y una comunidad de profesionales apasionados por la tecnología",
+          "Ofrecemos cursos, mentorías, insignias, certificaciones y una comunidad de profesionales apasionados por la tecnología que te ayudarán a impulsar tu carrera profesional",
       },
       {
         id: "4",
-        question: "¿Qué tipo de recursos ofrece StartPerks?",
+        question: "¿Qué son las insignias?",
         answer:
-          "Cada vez que completes misiones, superás desafíos o recibís feedback positivo de mentores, sumás puntos. Al alcanzar ciertos hitos, desbloqueás insignias que reflejan tu dominio en distintas áreas",
+          "Las insignias son reconocimientos que obtienes al completar misiones, superar desafíos y alcanzar nuevos rangos en StartPerks. Cada insignia refleja tus logros y te acerca a nuevas oportunidades en el universo tech",
       },
       {
         id: "5",
         question: "¿Cómo funciona el sistema de puntos?",
         answer:
-          "Ganarás puntos al completar cursos, participar en desafíos, recibir evaluaciones positivas y colaborar con otros miembros de la comunidad",
+          "Ganarás puntos al completar cursos, participar en desafíos, recibir evaluaciones positivas y colaborar con otros miembros de la comunidad StartPerks. Cuantos más puntos acumules, más beneficios y oportunidades desbloquearás",
       },
       {
         id: "6",
         question: "¿Puedo acceder desde cualquier dispositivo?",
         answer:
-          "Sí, nuestra plataforma es completamente responsive y puedes acceder desde cualquier dispositivo con conexión a internet",
+          "Sí, nuestra plataforma es completamente responsive y puedes acceder desde cualquier dispositivo con conexión a internet para continuar tu viaje en cualquier momento y lugar",
       },
       {
         id: "7",
         question: "¿Necesito experiencia previa en tecnología?",
         answer:
-          "No necesariamente. StartPerks está diseñado para que tanto principiantes como profesionales en desarrollo puedan avanzar a su propio ritmo y aprender en el proceso",
+          "No necesariamente, StartPerks está diseñado para que tanto principiantes como profesionales en desarrollo puedan avanzar a su propio ritmo y aprender en el proceso de validación de habilidades",
       },
       {
         id: "8",
         question: "¿Puedo ser mentor y cadete a la vez?",
         answer:
-          "Sí, puedes registrarte con un rol principal y, más adelante, postularte como mentor si cumples los requisitos de experiencia. De esta forma, seguirás aprendiendo mientras compartes tus conocimientos",
+          "Sí, puedes registrarte con un rol principal y, más adelante, postularte como mentor si cumples los requisitos de experiencia. De esta forma, seguirás aprendiendo mientras compartes tus conocimientos con otros miembros de la comunidad",
       },
     ],
   },
   footer: {
-    description: "Transformando carreras en el universo tech.",
+    description: "Transformando carreras en el universo tech",
     social: [
       {
         id: "1",
@@ -378,7 +378,7 @@ export const LANDING_CONFIG: LandingPageData = {
         id: "2",
         platform: "Twitter",
         href: "https://x.com",
-        icon: "Twitter",
+        icon: "x",
       },
       {
         id: "3",
@@ -388,6 +388,12 @@ export const LANDING_CONFIG: LandingPageData = {
       },
       {
         id: "4",
+        platform: "Instagram",
+        href: "https://instagram.com",
+        icon: "Instagram",
+      },
+      {
+        id: "5",
         platform: "Discrod",
         href: "https://discord.com",
         icon: "Discord",

@@ -21,7 +21,7 @@ export function StreakCard() {
   const longestStreak = 22
   const streakShields = 2
   const maxShields = 3
-  const activeWeekDays = 5 // Días activos en la semana actual (0-7)
+  const activeWeekDays = 4 // Días activos en la semana actual (0-7)
 
   return (
     <div className="p-6 bg-[#0a0b1e]">

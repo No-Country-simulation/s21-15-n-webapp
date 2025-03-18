@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
+    domains:[
+      'cdn-icons-png.flaticon.com'
+    ],
     localPatterns: [
       {
         pathname: "/public/imag/**",

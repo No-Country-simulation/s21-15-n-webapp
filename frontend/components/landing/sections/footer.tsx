@@ -1,24 +1,30 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink} from "lucide-react"
 import { LANDING_CONFIG } from "@/config/constants/landing.config"
 import { AppLogo } from "@/components/common/ui/app-logo" // Import the AppLogo component
+import { GithubIcon } from "@/components/common/icons/github-icon"
+import { LinkedInIcon } from '../../common/icons/linkedIn-icon';
+import { DiscordIcon } from "@/components/common/icons/discord-icon"
+import { InstagramIcon } from "@/components/common/icons/instagram-icon"
+import { XIcon } from "@/components/common/icons/x-icon"
 
 export function Footer() {
   // Función para obtener el ícono correcto basado en el nombre
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case "Github":
-        return <ExternalLink className="h-5 w-5" />
-        break;
-      case "Twitter":
-        return <ExternalLink className="h-5 w-5" />
-        break;
+        return <GithubIcon className="h-30 w-30" />
+      case "x":
+        return <XIcon className="h-30 w-30" />
       case "Linkedin":
-        return <ExternalLink className="h-5 w-5" />
-        break;
+        return <LinkedInIcon className="h-30 w-30" />
+      case "Discord":
+        return <DiscordIcon className="h-30 w-30" />
+      case "Instagram":
+        return <InstagramIcon className="h-30 w-30" />
       default:
-        return <ExternalLink className="h-5 w-5" />
+        return <ExternalLink className="h-30 w-30" />
     }
   }
 

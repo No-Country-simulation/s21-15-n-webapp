@@ -8,7 +8,6 @@ import { ROUTES } from "@/config/constants/routes"
 import { LockOverlay } from "@/components/common/ui/lock-overlay"
 import { LoadingSpinner } from "@/components/common/ui/loading-spinner"
 import { StarsBackground } from "@/components/common/effects/stars-background"
-import { DashboardNav } from "@/components/dashboard/navigation/dashboard-nav"
 import { User } from "@/config/types"
 
 function DashboardLayoutInner({ children }: { readonly children: ReactNode }) {
@@ -44,6 +43,7 @@ function DashboardLayoutInner({ children }: { readonly children: ReactNode }) {
         pathname.startsWith("/dashboard/") &&
         !pathname.startsWith(correctPath) &&
         pathname !== "/dashboard/profile" &&
+        pathname !== "/dashboard/messager" &&
         pathname !== ROUTES.DASHBOARD
       )
     }
@@ -92,7 +92,6 @@ function DashboardLayoutInner({ children }: { readonly children: ReactNode }) {
   return (
     <div className="flex min-h-screen bg-background">
       {(!isVisible || wasHidden) && <LockOverlay onUnlock={handleUnlock} pinRequired={true} correctPin={userPin} />}
-      <DashboardNav isOpen={true} onClose={() => {}} />
       <div className="flex-1">
         <main className="h-full">{children}</main>
       </div>

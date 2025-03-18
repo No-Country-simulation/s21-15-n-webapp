@@ -1,5 +1,4 @@
 import { BadgeIcon, ThumbsUpIcon, MessageSquareIcon, ShirtIcon, AwardIcon, TrophyIcon } from "lucide-react"
-import { useAvatarMock } from "@/hooks/use-avatar-mock"
 import { useNameInitials } from "@/hooks/use-name-initials"
 import type { User } from "@/config/types"
 import { StreakCard } from "@/components/dashboard/junior/streak-card"
@@ -31,7 +30,6 @@ interface ProfileCardProps {
 
 export function ProfileCard({ user }: ProfileCardProps) {
   // Dentro de la función ProfileCard, añadir:
-  const avatarMock = useAvatarMock()
 
   const Initials = (name: string) => {
     const initialsName = useNameInitials(name)
@@ -47,13 +45,13 @@ export function ProfileCard({ user }: ProfileCardProps) {
             <div className="flex items-center gap-4 mb-6">
               <Avatar className="h-16 w-16 border-2 border-primary/30">
                 {/* Modificar la línea del AvatarImage para usar el avatarMock cuando no hay avatar: */}
-                <AvatarImage src={user.avatar ?? avatarMock} alt={`${user.name} ${user.lastName}`} />
+                <AvatarImage src="https://res.cloudinary.com/dcdevcd/image/upload/v1741673288/dc%20dev/Avata-info-10-removebg-preview_kxxlui.png" alt={`${user.name} ${user.lastName}`} />
                 <AvatarFallback className="bg-primary/20 text-primary">
-                  {Initials(`${user.name} ${user.lastName}`)}
+                  {Initials(`DAVID CAYCEDO`)}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h2 className="text-xl font-bold text-white">{`${user.name} ${user.lastName} ?? Sofia Hernández`}</h2>
+                <h2 className="text-xl font-bold text-white">DAVID CAYCEDO</h2>
                 <p className="text-sm text-gray-400">
                   {PROFILE_TEXT.nivel} {user.level || 3}
                 </p>

@@ -1,6 +1,6 @@
 import { User } from "../types"
 
-export const DEFAULT_USERS : User[] = [
+export const DEFAULT_USERS: User[] = [
   {
     id: "1",
     avatar: "",
@@ -48,12 +48,13 @@ export const DEFAULT_USERS : User[] = [
   },
   {
     id: "4",
-    avatar: "",
+    avatar:
+      "https://res.cloudinary.com/dcdevcd/image/upload/v1741673288/dc%20dev/Avata-info-10-removebg-preview_kxxlui.png",
     name: "Junior",
     lastName: "User",
     email: "junior@startperks.com",
     password: "junior123",
-    pin:"1234",
+    pin: "1234",
     role: "junior",
     level: 1,
     experience: 0,
@@ -61,7 +62,7 @@ export const DEFAULT_USERS : User[] = [
     badges: [],
     createdAt: new Date().toISOString(),
   },
-]
+];
 
 export const WEEK_DAYS = ["L", "M", "M", "J", "V", "S", "D"]
 

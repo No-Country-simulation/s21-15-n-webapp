@@ -8,10 +8,8 @@ import { MobileNav } from "@/components/dashboard/navigation/mobile-nav"
 interface DashboardLayoutProps {
   readonly children: ReactNode
 }
-
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen)
   }

@@ -7,6 +7,7 @@ import Image from "next/image"
 const COURSES_TEXT = {
   cursos: "Cursos",
   cursoAvanzadoDeFigma: "Curso avanzado de figma",
+  cursoAvanzadoDeNext: "Curso avanzado de Next",
   completadoAl: "Completado al",
   seguir: "Seguir",
 }
@@ -16,14 +17,14 @@ const COURSES_DATA = [
   {
     id: 1,
     title: COURSES_TEXT.cursoAvanzadoDeFigma,
-    progress: 55,
-    image: "/placeholder.svg?height=40&width=40",
+    progress: 65,
+    image: "https://res.cloudinary.com/dcdevcd/image/upload/v1741899187/startperks/FIGMA_kpc0zp.png",
   },
   {
     id: 2,
-    title: COURSES_TEXT.cursoAvanzadoDeFigma,
-    progress: 55,
-    image: "/placeholder.svg?height=40&width=40",
+    title: COURSES_TEXT.cursoAvanzadoDeNext,
+    progress: 76,
+    image: "https://res.cloudinary.com/dcdevcd/image/upload/v1741900782/startperks/Course_Icon_Container_r1ei5i.png",
   },
 ]
 
@@ -65,4 +66,3 @@ export function CoursesCard() {
     </Card>
   )
 }
-

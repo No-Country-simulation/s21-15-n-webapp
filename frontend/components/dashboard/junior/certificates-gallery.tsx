@@ -12,21 +12,21 @@ const CERTIFICATES = [
     title: "Frontend Development",
     issuer: "StartPerks Academy",
     date: "2024",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://res.cloudinary.com/dcdevcd/image/upload/v1741900136/startperks/CER-FRO_z95tbk.png",
   },
   {
     id: "2",
     title: "UX/UI Design",
     issuer: "StartPerks Academy",
     date: "2024",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://res.cloudinary.com/dcdevcd/image/upload/v1741900136/startperks/CER-UXD_neivbp.png",
   },
   {
     id: "3",
     title: "Backend Development",
     issuer: "StartPerks Academy",
     date: "2024",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://res.cloudinary.com/dcdevcd/image/upload/v1741900136/startperks/CER-BACK_sxh6gt.png",
   },
 ]
 

@@ -10,26 +10,27 @@ const RANKING_TEXT = {
 const RANKING_DATA = [
   {
     id: 1,
-    name: "Sofía Hernández",
-    role: "Diseñador UX/UI",
-    avatar: "/placeholder.svg?height=40&width=40",
-    points: 5000,
+    name: "Matias Badano",
+    role: "Team Leader",
+    avatar: "https://res.cloudinary.com/dcdevcd/image/upload/v1741736812/dc%20dev/T02KS88FB0E-U06GHUXGWMB-0e3dd8d5df7d-512_w9fxfc.jpg",
+    points: 894,
   },
   {
     id: 2,
-    name: "José Pérez",
-    role: "Product designer",
-    avatar: "/placeholder.svg?height=40&width=40",
-    points: 4000,
+    name: "Noemí Zalazar",
+    role: "Project Manager",
+    avatar: "https://res.cloudinary.com/dcdevcd/image/upload/v1741706559/dc%20dev/1518502426283_nnhmny.jpg",
+    points: 787,
   },
   {
     id: 3,
-    name: "Hecto Martínez",
+    name: "Sandro Borga",
     role: "Diseñador gráfico",
-    avatar: "/placeholder.svg?height=40&width=40",
-    points: 4000,
+    avatar: "https://res.cloudinary.com/dcdevcd/image/upload/v1741706799/dc%20dev/1703885238963_xdwwil.jpg",
+    points: 640,
   },
 ]
+
 
 export function RankingCard() {
   return (
@@ -60,4 +61,3 @@ export function RankingCard() {
     </Card>
   )
 }
-

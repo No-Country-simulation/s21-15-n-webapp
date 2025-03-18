@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { WorldIcon } from "@/components/common/icons/world-icon"
 
 export function AdventureSection() {
   return (
@@ -41,6 +42,7 @@ export function AdventureSection() {
                     <div
                       className={`w-16 h-16 rounded-full relative ${index <= 2 ? "bg-primary/20" : "bg-gray-800/50"}`}
                     >
+                      <WorldIcon size={"128"} className="w-16 min-h-16 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-primary" />
                       <Image
                         src="/placeholder.svg?height=64&width=64"
                         alt={`Planeta ${index + 1}`}
@@ -109,4 +111,3 @@ export function AdventureSection() {
     </section>
   )
 }
-

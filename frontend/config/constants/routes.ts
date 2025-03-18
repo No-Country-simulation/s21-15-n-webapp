@@ -16,8 +16,9 @@ export const ROUTES = {
   COMPANY: "/dashboard/company",
   JUNIOR: "/dashboard/junior",
   PROFILE: "/dashboard/profile",
+  MESSAGER: "/dashboard/messager",
   COURSE: "/dashboard/courses",
-  SETTINGS: "/dashboard",//settings",// -> cuando este la page
+  SETTINGS: "/dashboard", //settings",// -> cuando este la page
 
   // Secciones de la landing
   SECTIONS: {
@@ -28,4 +29,4 @@ export const ROUTES = {
     TESTIMONIALS: "testimonios",
     FAQ: "faq",
   },
-}
+};

@@ -15,7 +15,7 @@ const FEEDBACK_TEXT = {
 const FEEDBACK_DATA = {
   mentor: "Eduardo Romero",
   role: "Diseñador UI",
-  avatar: "/placeholder.svg?height=40&width=40",
+  avatar: "https://res.cloudinary.com/dcdevcd/image/upload/v1741899184/startperks/EDU_xupxhb.png",
   message:
     "Excelente progreso en el desarrollo del MVP. Las iteraciones basadas en feedback de usuarios muestran gran capacidad de adaptación.",
   daysAgo: 4,
@@ -56,4 +56,3 @@ export function FeedbackCard() {
     </Card>
   )
 }
-

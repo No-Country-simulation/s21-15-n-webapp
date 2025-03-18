@@ -56,7 +56,7 @@ export const RankingSection = memo(function RankingSection() {
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-muted-foreground">{user.role}</td>
                     <td className="whitespace-nowrap px-6 py-4 text-center">
-                      <Badge variant="outline" className="bg-primary/20 border-magenta/50 text-white">
+                      <Badge variant="outline" className="bg-primary/20 border-[#3A379E] text-white">
                         {user.level}
                       </Badge>
                     </td>
