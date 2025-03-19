@@ -2,13 +2,17 @@ package com.backend.s21.model.learningPath;
 
 import com.backend.s21.model.users.MentorUser;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "mentorships")
 public class Mentorship {
@@ -32,5 +36,11 @@ public class Mentorship {
 
     @Column(name = "experience_reward")
     private Integer experienceReward;
+
+    public Mentorship(MentorUser mentor, Mentorship mentorship) {
+        this.mentor = mentor;
+        this.title = mentorship.getTitle();
+        this.description = mentorship.getDescription();
+    }
 }
 
