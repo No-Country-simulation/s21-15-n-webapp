@@ -1,12 +1,11 @@
 package com.backend.s21.model.users;
 
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
-import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,10 +15,10 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED) // Usa JOINED para que cada tipo de usuario tenga su propia tabla
-@SQLDelete(sql = "UPDATE user SET deleted = true WHERE id = ?") // Borrado lógico automático
-@FilterDef(name = "deletedFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
-@Filter(name = "deletedFilter", condition = "deleted = :isDeleted") // Filtro dinámico
-
+//@SQLDelete(sql = "UPDATE user SET deleted = true WHERE id = ?") // Borrado lógico automático
+//@FilterDef(name = "deletedFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
+//@Filter(name = "deletedFilter", condition = "deleted = :isDeleted") // Filtro dinámico
+@SQLRestriction("deleted = false")
 public abstract class User {
 
     @Id
@@ -42,6 +41,9 @@ public abstract class User {
 
     @Column(name = "deleted", nullable = false)
     private boolean deleted = false;
+
+    @Column(name = "pin")
+    private String pin;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SocialNetwork> socialNetworks;

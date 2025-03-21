@@ -1,0 +1,29 @@
+
+services:
+  s21-15:
+    build: s21-15/.
+    image: 0303w/s21-15:latest
+    ports:
+      - "8082:8082"
+    environment:
+      - DB_URL=jdbc:mysql://mysql:3306/s2115n?createDatabaseIfNotExist=true&serverTimezone=UTC
+      - DB_USERNAME=root
+      - DB_PASSWORD=123456
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:9.1.0
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_PASSWORD=123456
+      - MYSQL_DATABASE=s2115n
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10

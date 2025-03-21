@@ -10,4 +10,10 @@ class S2115ApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void getArra(){
+		System.out.println();
+	}
+
+
 }
