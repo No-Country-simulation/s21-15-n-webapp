@@ -287,8 +287,6 @@ Redefinir cómo las empresas encuentran y desarrollan talento, haciendo que el p
 https://github.com/user-attachments/assets/31467dbf-37f6-4fab-ba6d-925216aa0944
 
 
----
-
 ## 🖼 Capturas de Pantalla <a id="capturas-de-pantalla"></a>
 
 
@@ -320,6 +318,7 @@ https://github.com/user-attachments/assets/31467dbf-37f6-4fab-ba6d-925216aa0944
 ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
 
 ### 🖌️ UX/UI
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
@@ -378,10 +377,11 @@ https://github.com/user-attachments/assets/31467dbf-37f6-4fab-ba6d-925216aa0944
 
 ---
 
+
 ## 🔎 Documentación <a id="documentación"></a>
 
-- 🎨**Frontend**: 
-- ⚙️**Backend**: [Swagger](#)
+- 🎨**Frontend**: [Deploy](https://startperks.vercel.app/)
+- ⚙️**Backend**: [Swagger](https://s21-15-production.up.railway.app/swagger-ui/index.html)
 - 🖌️**UX/UI**: 
   - [Figma - Diseño](https://www.figma.com/design/aRpAdn6dw8qNyvXvCEIKvz/StartPerks?node-id=236-2212&t=guEp5gj95YGPYd9h-1)
 - 📋**Gestión de proyecto**: 
@@ -426,10 +426,3 @@ Este proyecto está bajo la licencia MIT. Ver el archivo [LICENSE](#) para más 
 ---
 
 ## 🏗️ Estado del Proyecto <a id="estado-del-proyecto"></a>
-
-En construcción.
-
----
-
-## 💡 ¿Interesado en colaborar o invertir? Escribí para conocer más sobre nuestro proyecto y visión.
-
